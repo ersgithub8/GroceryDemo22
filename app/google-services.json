@@ -1,39 +1,45 @@
 {
   "project_info": {
-    "project_number": "832635683085",
-    "firebase_url": "https://gogrocer-b5d2c.firebaseio.com",
-    "project_id": "gogrocer-b5d2c",
-    "storage_bucket": "gogrocer-b5d2c.appspot.com"
+    "project_number": "462174455580",
+    "firebase_url": "https://menumine-da791.firebaseio.com",
+    "project_id": "menumine-da791",
+    "storage_bucket": "menumine-da791.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:832635683085:android:cb712af5f302b806",
+        "mobilesdk_app_id": "1:462174455580:android:78e9718a8a5fbe1a6edcd9",
         "android_client_info": {
-          "package_name": "com.gogrocer.tcc"
+          "package_name": "com.gofreshuser.ers"
         }
       },
       "oauth_client": [
         {
-          "client_id": "832635683085-o8ep1kdrritjkpdt3fqtdvnltssprpqe.apps.googleusercontent.com",
+          "client_id": "462174455580-jkj9m4lg72i50jtcm2qscc7gtlk20tb1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gofreshuser.ers",
+            "certificate_hash": "cfacc09b8ce26bfa5a14695eb7c006b14ea86e8e"
+          }
+        },
+        {
+          "client_id": "462174455580-99ounlecuf342bc5b9c038v4cp8c6jiv.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBOgel24k5UrP3iFKbMX6EQoUZ2muXpUFY"
+          "current_key": "AIzaSyCXzs1gYfuj70agWTqMKB8YnCWCjABjhLg"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
+          "other_platform_oauth_client": [
+            {
+              "client_id": "462174455580-99ounlecuf342bc5b9c038v4cp8c6jiv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
