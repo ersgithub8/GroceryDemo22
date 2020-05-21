@@ -7,14 +7,14 @@
     tools:context="gogrocer.tcc.ForgotActivity">
 
 
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay"
         app:elevation="0dp">
 
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -23,9 +23,9 @@
             app:titleTextAppearance="@style/RobotoBoldTextAppearance">
 
 
-        </android.support.v7.widget.Toolbar>
+        </androidx.appcompat.widget.Toolbar>
 
-    </android.support.design.widget.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
 
 

@@ -121,7 +121,7 @@
             android:layout_height="45dp"
             android:layout_margin="12dp"
             android:background="@drawable/bg_rounded_button"
-            android:padding="12dp">
+            >
 
             <Fonts.LatoBLack
                 android:layout_width="match_parent"
@@ -140,8 +140,7 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_margin="12dp"
-            android:background="@drawable/bg_rounded_button"
-            android:padding="12dp">
+            android:background="@drawable/bg_rounded_button">
 
             <Fonts.LatoBLack
                 android:layout_width="match_parent"
@@ -164,6 +163,53 @@
             android:text="@string/forgot"
             android:textColor="@color/green"
             android:textSize="13sp" />
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="80dp">
+
+                <com.facebook.login.widget.LoginButton
+                    xmlns:facebook="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/loginfb"
+                    android:layout_marginTop="10dp"
+                    android:paddingTop="11dp"
+                    android:layout_alignParentRight="true"
+                    facebook:com_facebook_login_text="Facebook"
+                    android:paddingBottom="12dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight="1">
+                <com.google.android.gms.common.SignInButton
+                    android:id="@+id/gsignin"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_marginBottom="10dp"/>
+            </RelativeLayout>
+        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>

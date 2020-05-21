@@ -5,6 +5,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class BaseURL {
+
+
+
+    public  static final String fixpass="Abvf435@ee";
     static final String APP_NAME = "GoGrocer";
     public static final String PREFS_NAME = "GroceryLoginPrefs";
     public static final String PREFS_NAME2 = "GroceryLoginPrefs2";
@@ -46,7 +50,7 @@ public class BaseURL {
     public static final String CITY_ID = "CITY_ID";
     public static final String STORE_ID = "STORE_ID";
 
-    public static String BASE_URL = "https://thecodecafe.in/gogrocer/";
+    public static String BASE_URL = "https://freedomchat.finalyearprojects.website/";
 
     public static String IMG_SLIDER_URL = BASE_URL + "uploads/sliders/";
     public static String IMG_CATEGORY_URL = BASE_URL + "uploads/category/";

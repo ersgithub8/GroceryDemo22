@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "462174455580-9jmdslc0ui2tp17t1ska0lf6rm494nsm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gofreshuser.ers",
+            "certificate_hash": "e70b4a599e1214c348f4e198e13dbf8370bfcf28"
+          }
+        },
+        {
           "client_id": "462174455580-jkj9m4lg72i50jtcm2qscc7gtlk20tb1.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

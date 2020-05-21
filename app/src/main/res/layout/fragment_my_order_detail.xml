@@ -5,14 +5,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:orientation="vertical">
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay"
         app:elevation="0dp">
 
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -40,12 +40,12 @@
 
             <!--</RelativeLayout>-->
 
-        </android.support.v7.widget.Toolbar>
+        </androidx.appcompat.widget.Toolbar>
 
-    </android.support.design.widget.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_order_detail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

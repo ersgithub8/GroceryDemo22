@@ -1,8 +1,8 @@
 package Adapter;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import Fragment.My_Pending_Order;
 import Fragment.My_Past_Order;
