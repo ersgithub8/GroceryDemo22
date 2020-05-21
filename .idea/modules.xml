@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/FORTSDKv1.5/FORTSDKv1.5.iml" filepath="$PROJECT_DIR$/FORTSDKv1.5/FORTSDKv1.5.iml" group="GroceryDemo/FORTSDKv1.5" />
+      <module fileurl="file://$PROJECT_DIR$/GroceryDemo.iml" filepath="$PROJECT_DIR$/GroceryDemo.iml" group="GroceryDemo" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="GroceryDemo/app" />
+    </modules>
+  </component>
+</project>
