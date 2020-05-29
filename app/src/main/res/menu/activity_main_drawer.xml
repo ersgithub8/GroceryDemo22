@@ -30,7 +30,8 @@
         <item
             android:id="@+id/nav_review"
             android:icon="@drawable/ic_nav_review"
-            android:title="@string/nav_review" />
+            android:title="@string/nav_review"
+            android:visible="false" />
         <item
             android:id="@+id/nav_share"
             android:icon="@drawable/ic_nav_share"
@@ -44,7 +45,8 @@
         <item
             android:id="@+id/nav_powerd"
             android:icon="@drawable/copy"
-            android:title="@string/status_stop" />
+            android:title="@string/status_stop"
+            android:visible="false" />
 
     </group>
 </menu>

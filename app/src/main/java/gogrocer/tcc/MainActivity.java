@@ -550,7 +550,14 @@ SharedPreferences sharedPreferences;
         if (id == R.id.nav_shop_now) {
             fm = new Shop_Now_fragment();
         } else if (id == R.id.nav_my_profile) {
-            fm = new Edit_profile_fragment();
+            if (sessionManagement.isLoggedIn()) {
+                 fm = new Edit_profile_fragment();
+            } else {
+                Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(i);
+                overridePendingTransition(0, 0);
+            }
+//            fm = new Edit_profile_fragment();
         } else if (id == R.id.nav_support) {
             String smsNumber = "9889887711";
             Intent sendIntent = new Intent("android.intent.action.MAIN");
