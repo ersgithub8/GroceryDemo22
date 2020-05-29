@@ -5,19 +5,19 @@
     android:layout_width="match_parent"
     android:layout_margin="@dimen/space_6"
     android:layout_height="wrap_content"
-    android:elevation="@dimen/space_4"
-    card_view:cardCornerRadius="12dp"
-    card_view:cardPreventCornerOverlap="false"
-    card_view:cardUseCompatPadding="true">
+    app:cardCornerRadius="15dp"
+    app:cardPreventCornerOverlap="false"
+    app:cardUseCompatPadding="true">
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="190dp"
+        android:layout_height="wrap_content"
         android:id="@+id/showproduct"
         android:orientation="vertical">
 
         <LinearLayout
+            android:layout_marginTop="3dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -30,10 +30,12 @@
                 android:orientation="horizontal">
 
                 <Fonts.LatoBLack
+                    android:layout_marginLeft="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/start_time"
+                    android:layout_gravity="center"
+                    android:gravity="left"
+                    android:text="Start Time : "
                     android:textColor="#837e7e"
                     android:textSize="8sp" />
 
@@ -42,35 +44,37 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text=""
+                    android:text="dd"
                     android:textColor="#000"
-                    android:textSize="@dimen/text_size_small" />
+                    android:textSize="10sp" />
 
             </LinearLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
 
                 <Fonts.LatoBLack
+                    android:layout_centerVertical="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/end_time"
+                    android:text="End Time : "
+                    android:layout_toLeftOf="@id/end_time"
                     android:textColor="#837e7e"
                     android:textSize="8sp" />
 
                 <Fonts.LatoBLack
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="5dp"
                     android:id="@+id/end_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text=""
+                    android:text="dd"
                     android:textColor="#000"
-                    android:textSize="@dimen/text_size_small" />
+                    android:textSize="10sp" />
 
-            </LinearLayout>
+            </RelativeLayout>
 
 
         </LinearLayout>
@@ -82,22 +86,21 @@
             android:gravity="top|center"
             android:orientation="vertical">
 
-
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iv_icon"
-                android:layout_width="80dp"
-                android:layout_height="90dp"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
                 android:src="@mipmap/ic_launcher" />
 
-
             <Fonts.LatoBLack
+                android:maxLines="1"
                 android:id="@+id/product_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Product Name"
                 android:textColor="#837e7e"
-                android:textSize="@dimen/text_size_normal" />
+                android:textSize="16sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -118,7 +121,7 @@
                         android:paddingRight="@dimen/space_8"
                         android:text="@string/tv_toolbar_price"
                         android:textColor="@color/dark_gray"
-                        android:textSize="@dimen/text_size_normal" />
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
@@ -136,7 +139,8 @@
                         android:paddingRight="@dimen/space_8"
                         android:text="@string/tv_toolbar_price"
                         android:textColor="@color/dark_gray"
-                        android:textSize="@dimen/text_size_normal" />
+                        android:textSize="16sp"
+                        />
 
                 </LinearLayout>
 
@@ -150,6 +154,7 @@
                 android:weightSum="2">
 
                 <LinearLayout
+                    android:layout_marginBottom="5dp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
@@ -160,9 +165,10 @@
                         android:layout_height="wrap_content"
                         android:gravity="right"
                         android:paddingRight="@dimen/space_8"
-                        android:text="@string/offer"
+                        android:text="Offer :"
                         android:textColor="@color/color_1"
-                        android:textSize="@dimen/text_size_normal" />
+                        android:textSize="16sp"
+                        />
 
                 </LinearLayout>
 
@@ -178,9 +184,9 @@
                         android:paddingLeft="@dimen/space_8"
                         android:paddingRight="@dimen/space_8"
                         android:text="@string/tv_toolbar_price"
-                        android:textColor="@color/color_1"
-                        android:textSize="@dimen/text_size_normal" />
-
+                        android:textColor="@color/dark_gray"
+                        android:textSize="16sp"
+                        />
                 </LinearLayout>
 
 

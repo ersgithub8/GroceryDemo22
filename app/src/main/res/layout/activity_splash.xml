@@ -1,26 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:gravity="center_vertical"
-    android:orientation="vertical"
-    android:padding="@dimen/space_10"
     tools:context="gogrocer.tcc.SplashActivity">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_centerInParent="true"
         android:id="@+id/imageView2"
-        android:layout_width="match_parent"
-        android:layout_height="90dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/icon" />
+        android:layout_width="230dp"
+        android:layout_height="230dp"
+        android:src="@drawable/icon"
+        />
 
     <Fonts.LatoBLack
+        android:visibility="gone"
         android:layout_width="348dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -36,4 +32,4 @@
         tools:layout_editor_absoluteY="326dp" />
 
 
-</LinearLayout>
+</RelativeLayout>
