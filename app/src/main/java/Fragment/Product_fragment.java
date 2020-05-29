@@ -4,6 +4,8 @@ import android.app.Fragment;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.tabs.TabLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -57,6 +59,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class Product_fragment extends Fragment {
     private static String TAG = Product_fragment.class.getSimpleName();
     private RecyclerView rv_cat;
+    private ShimmerFrameLayout mShimmerViewContainer;
     private TabLayout tab_cat;
     private List<Category_model> category_modelList = new ArrayList<>();
     private List<Slider_subcat_model> slider_subcat_models = new ArrayList<>();
@@ -85,6 +88,7 @@ public class Product_fragment extends Fragment {
         banner_slider = (SliderLayout) view.findViewById(R.id.relative_banner);
         rv_cat = (RecyclerView) view.findViewById(R.id.rv_subcategory);
         rv_cat.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
         String getcat_id = getArguments().getString("cat_id");
         String id = getArguments().getString("id");
         String get_deal_id = getArguments().getString("cat_deal");
@@ -228,6 +232,8 @@ public class Product_fragment extends Fragment {
                     loading.dismiss();
                     Boolean status = response.getBoolean("responce");
                     if (status) {
+                        mShimmerViewContainer.stopShimmerAnimation();
+                        mShimmerViewContainer.setVisibility(View.GONE);
                         Gson gson = new Gson();
                         Type listType = new TypeToken<List<Product_model>>() {
                         }.getType();
@@ -253,6 +259,8 @@ public class Product_fragment extends Fragment {
                         }
 
                     }else{
+                        mShimmerViewContainer.stopShimmerAnimation();
+                        mShimmerViewContainer.setVisibility(View.GONE);
                         SweetAlertDialog error=
                         new SweetAlertDialog(getActivity(),SweetAlertDialog.ERROR_TYPE)
                                 .setTitleText("No Data Found")
@@ -513,6 +521,17 @@ public class Product_fragment extends Fragment {
         });
         AppController.getInstance().addToRequestQueue(req);
 
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        mShimmerViewContainer.startShimmerAnimation();
+    }
+
+    @Override
+    public void onPause() {
+        mShimmerViewContainer.stopShimmerAnimation();
+        super.onPause();
     }
 
 

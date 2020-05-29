@@ -21,6 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -47,6 +48,7 @@ import util.RecyclerTouchListener;
 public class Shop_Now_fragment extends Fragment {
     private static String TAG = Shop_Now_fragment.class.getSimpleName();
     private RecyclerView rv_items;
+    private ShimmerFrameLayout mShimmerViewContainer;
     private List<ShopNow_model> category_modelList = new ArrayList<>();
     private Shop_Now_adapter adapter;
     private boolean isSubcat = false;
@@ -75,7 +77,7 @@ public class Shop_Now_fragment extends Fragment {
             makeGetCategoryRequest();
 
         }
-
+        mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
         rv_items = (RecyclerView) view.findViewById(R.id.rv_home);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
         rv_items.setLayoutManager(gridLayoutManager);
@@ -135,6 +137,8 @@ public class Shop_Now_fragment extends Fragment {
                     if (response != null && response.length() > 0) {
                         Boolean status = response.getBoolean("responce");
                         if (status) {
+                            mShimmerViewContainer.stopShimmerAnimation();
+                            mShimmerViewContainer.setVisibility(View.GONE);
                             Gson gson = new Gson();
                             Type listType = new TypeToken<List<ShopNow_model>>() {
                             }.getType();
@@ -206,6 +210,17 @@ public class Shop_Now_fragment extends Fragment {
     private int dpToPx(int dp) {
         Resources r = getResources();
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        mShimmerViewContainer.startShimmerAnimation();
+    }
+
+    @Override
+    public void onPause() {
+        mShimmerViewContainer.stopShimmerAnimation();
+        super.onPause();
     }
 
 
