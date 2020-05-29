@@ -112,22 +112,6 @@
                 <!--android:gravity="center" />-->
             </RelativeLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/slider_two_height"
-                android:background="@color/white">
-
-                <com.daimajia.slider.library.SliderLayout
-                    android:id="@+id/relative_banner"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="@dimen/space_5"
-                    android:layout_marginLeft="@dimen/space_5"
-                    android:layout_marginRight="@dimen/space_5"
-                    android:layout_marginTop="@dimen/space_5">
-
-                </com.daimajia.slider.library.SliderLayout>
-            </LinearLayout>
 
 
             <FrameLayout
@@ -213,6 +197,22 @@
 
             </FrameLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/slider_two_height"
+                android:background="@color/white">
+
+                <com.daimajia.slider.library.SliderLayout
+                    android:id="@+id/relative_banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/space_5"
+                    android:layout_marginLeft="@dimen/space_5"
+                    android:layout_marginRight="@dimen/space_5"
+                    android:layout_marginTop="@dimen/space_5">
+
+                </com.daimajia.slider.library.SliderLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/deal_linear_layout"
