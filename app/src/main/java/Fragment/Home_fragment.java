@@ -205,7 +205,8 @@ public class Home_fragment extends Fragment {
         //Top Selling Products
         rv_top_selling = (RecyclerView) view.findViewById(R.id.top_selling_recycler);
         GridLayoutManager gridLayoutManager2 = new GridLayoutManager(getActivity(), 2);
-        rv_top_selling.setLayoutManager(gridLayoutManager2);
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
+        rv_top_selling.setLayoutManager(linearLayoutManager);
         rv_top_selling.setItemAnimator(new DefaultItemAnimator());
         rv_top_selling.setNestedScrollingEnabled(false);
         rv_top_selling.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(1), true));

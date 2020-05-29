@@ -211,7 +211,7 @@ public class Product_fragment extends Fragment {
 
         loading.getProgressHelper().setBarColor(getResources().getColor(R.color.green));
 
-        loading.show();
+//        loading.show();
 
         String tag_json_obj = "json_product_req";
         Map<String, String> params = new HashMap<String, String>();
@@ -417,7 +417,7 @@ public class Product_fragment extends Fragment {
 
                 try {
                     loading.dismiss();
-                    Toast.makeText(getActivity(), "aaaa", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), "aaaa", Toast.LENGTH_SHORT).show();
                     Boolean status = response.getBoolean("responce");
                     if (status) {
                         Gson gson = new Gson();
