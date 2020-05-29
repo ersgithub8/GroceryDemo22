@@ -54,7 +54,8 @@
                     android:id="@+id/iv_subcat_minus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/minus" />
+                    android:background="@color/green"
+                    app:srcCompat="@drawable/subtract" />
 
                 <TextView
                     android:id="@+id/tv_subcat_contetiy"
@@ -67,7 +68,8 @@
                     android:id="@+id/iv_subcat_plus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/plus" />
+                    app:srcCompat="@drawable/add"
+                    android:background="@color/green"/>
 
             </LinearLayout>
 

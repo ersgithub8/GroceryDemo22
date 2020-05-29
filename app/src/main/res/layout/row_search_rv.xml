@@ -131,7 +131,8 @@
             android:layout_marginTop="8dp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/plus" />
+            app:srcCompat="@drawable/add"
+            android:background="@color/green"/>
 
         <TextView
             android:id="@+id/tv_subcat_contetiy"
@@ -155,7 +156,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/iv_subcat_plus"
             app:layout_constraintRight_toLeftOf="@+id/tv_subcat_contetiy"
             app:layout_constraintTop_toTopOf="@+id/iv_subcat_plus"
-            app:srcCompat="@drawable/minus" />
+            app:srcCompat="@drawable/subtract"
+            android:background="@color/green"/>
 
         <Fonts.LatoBLack
             android:id="@+id/tv_subcat_add"
