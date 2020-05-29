@@ -6,6 +6,8 @@ import android.net.Uri;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -27,6 +29,8 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -45,6 +49,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import Config.BaseURL;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import fcm.MyFirebaseRegister;
 import util.ConnectivityReceiver;
 import util.CustomVolleyJsonRequest;
@@ -64,6 +69,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     LoginButton loginButton;
     GoogleSignInClient googleSignInClient;
     CallbackManager callbackManager;
+
 
 
 
@@ -100,6 +106,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
 
+        disconnectFromFacebook();
         //-----------------------------------------------------------------------
         signInButton=findViewById(R.id.gsignin);
         loginButton=findViewById(R.id.loginfb);
@@ -122,7 +129,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onSuccess(LoginResult loginResult) {
 
-                Toast.makeText(LoginActivity.this, loginResult+"", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(LoginActivity.this, loginResult+"", Toast.LENGTH_SHORT).show();
 
             }
 
@@ -153,6 +160,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         googleSignInClient = GoogleSignIn.getClient(this, gso);
 
 
+//        disconnectFromFacebook();
 
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -242,6 +250,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
      */
     private void makeLoginRequest(String email, final String password) {
 
+        final SweetAlertDialog loading=new SweetAlertDialog(LoginActivity.this,SweetAlertDialog.PROGRESS_TYPE);
+        loading.setCancelable(false);
+        loading.setTitleText("Loading...");
+
+        loading.getProgressHelper().setBarColor(getResources().getColor(R.color.green));
+
+        try {
+            loading.show();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         // Tag used to cancel the request
         String tag_json_obj = "json_login_req";
         Map<String, String> params = new HashMap<String, String>();
@@ -256,6 +276,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Log.d(TAG, response.toString());
 
                 try {
+                    loading.dismiss();
                     Boolean status = response.getBoolean("responce");
                     if (status) {
                         JSONObject obj = response.getJSONObject("data");
@@ -270,7 +291,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         sessionManagement.createLoginSession(user_id, user_email, user_fullname, user_phone, user_image, wallet_ammount, reward_points, "", "", "", "", password);
                         Intent i = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(i);
-                        finish();
+                        finishAffinity();
                         MyFirebaseRegister myFirebaseRegister=new MyFirebaseRegister(LoginActivity.this);
                         myFirebaseRegister.RegisterUser(user_id);
 
@@ -284,7 +305,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+
+                    loading.dismiss();
+
                 }
+
             }
         }, new Response.ErrorListener() {
 
@@ -293,6 +318,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(LoginActivity.this, getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    loading.dismiss();
                 }
             }
         });
@@ -407,10 +433,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    public void disconnectFromFacebook() {
 
+        if (AccessToken.getCurrentAccessToken() == null) {
+            return; // already logged out
+        }
+
+        new GraphRequest(AccessToken.getCurrentAccessToken(), "/me/permissions/", null, HttpMethod.DELETE, new GraphRequest
+                .Callback() {
+            @Override
+            public void onCompleted(GraphResponse graphResponse) {
+
+                LoginManager.getInstance().logOut();
+
+            }
+        }).executeAsync();
+    }
     //--------------------------------------------------------------------------------------
 
 
-
-
+    @Override
+    public void onBackPressed() {
+        finishAffinity();
+    }
 }

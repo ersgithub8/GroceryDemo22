@@ -28,6 +28,8 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -61,6 +63,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
+
     //-------------------------------------------------
     SignInButton signInButton;
     LoginButton loginButton;
@@ -68,6 +71,7 @@ public class RegisterActivity extends AppCompatActivity {
     CallbackManager callbackManager;
 
 
+    Boolean f;
     String first_names="",last_names="",email="",id="",imgurl="",phone="";
     //-------------------------------------------------
     @Override
@@ -103,6 +107,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+        f=false;
 
 
         //-----------------------------------------------------------------------
@@ -127,7 +132,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onSuccess(LoginResult loginResult) {
 
-                Toast.makeText(RegisterActivity.this, loginResult+"", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(RegisterActivity.this, loginResult+"", Toast.LENGTH_SHORT).show();
 
             }
 
@@ -146,6 +151,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
+//        disconnectFromFacebook();
 
 
         // Configure sign-in to request the user's ID, email address, and basic
@@ -264,6 +270,15 @@ public class RegisterActivity extends AppCompatActivity {
     private void makeRegisterRequest(String name, String mobile,
                                      String email, String password) {
 
+        final SweetAlertDialog loading=new SweetAlertDialog(RegisterActivity.this,SweetAlertDialog.PROGRESS_TYPE);
+        loading.setCancelable(false);
+        loading.setTitleText("Loading...");
+
+        loading.getProgressHelper().setBarColor(getResources().getColor(R.color.green));
+
+        loading.show();
+
+
         // Tag used to cancel the request
         String tag_json_obj = "json_register_req";
 
@@ -281,6 +296,7 @@ public class RegisterActivity extends AppCompatActivity {
                 Log.d(TAG, response.toString());
 
                 try {
+                    loading.dismiss();
                     Boolean status = response.getBoolean("responce");
                     if (status) {
 
@@ -289,7 +305,11 @@ public class RegisterActivity extends AppCompatActivity {
 
                         Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
                         startActivity(i);
-                        finish();
+
+                        if(!f)
+                        {
+                            finish();
+                        }
                         btn_register.setEnabled(false);
 
                     } else {
@@ -299,6 +319,7 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    loading.dismiss();
                 }
             }
         }, new Response.ErrorListener() {
@@ -308,6 +329,7 @@ public class RegisterActivity extends AppCompatActivity {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(RegisterActivity.this, getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    loading.dismiss();
                 }
             }
         });
@@ -344,9 +366,10 @@ public class RegisterActivity extends AppCompatActivity {
                     imgurl="https://graph.facebook.com/"+id+"/picture?type=normal";
 
 
-                    makeRegisterRequest(first_names+last_names,"",email,BaseURL.fixpass);
+                    makeRegisterRequest(first_names+" "+last_names,"",email,BaseURL.fixpass);
 
 
+                    f=true;
 //                    makeRegisterRequest(first_names+last_names,"",email,Baseurl.fixpassword);
 
 
@@ -418,6 +441,24 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 
+
+
+    public void disconnectFromFacebook() {
+
+        if (AccessToken.getCurrentAccessToken() == null) {
+            return; // already logged out
+        }
+
+        new GraphRequest(AccessToken.getCurrentAccessToken(), "/me/permissions/", null, HttpMethod.DELETE, new GraphRequest
+                .Callback() {
+            @Override
+            public void onCompleted(GraphResponse graphResponse) {
+
+                LoginManager.getInstance().logOut();
+
+            }
+        }).executeAsync();
+    }
     //--------------------------------------------------------------------------------------
 
 

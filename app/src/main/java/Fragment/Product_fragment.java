@@ -2,6 +2,7 @@ package Fragment;
 
 import android.app.Fragment;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import com.google.android.material.tabs.TabLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -39,6 +40,7 @@ import Config.BaseURL;
 import Model.Category_model;
 import Model.Product_model;
 import Model.Slider_subcat_model;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.CustomSlider;
 import gogrocer.tcc.MainActivity;
@@ -90,6 +92,7 @@ public class Product_fragment extends Fragment {
         String getcat_title = getArguments().getString("cat_title");
         ((MainActivity) getActivity()).setTitle(getResources().getString(R.string.tv_product_name));
 
+//        Toast.makeText(getActivity(), "abvc", Toast.LENGTH_SHORT).show();
         // check internet connection
         if (ConnectivityReceiver.isConnected()) {
             //Shop by Catogary
@@ -137,9 +140,11 @@ public class Product_fragment extends Fragment {
 
 
 
-    /**
+    /*
      * Method to make json object request where json response starts wtih
      */
+
+
     //Get Shop By Catogary
     private void makeGetCategoryRequest(final String parent_id) {
         String tag_json_obj = "json_category_req";
@@ -196,8 +201,18 @@ public class Product_fragment extends Fragment {
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
 
+
     //Get Shop By Catogary Products
     private void makeGetProductRequest(String cat_id) {
+
+        final SweetAlertDialog loading=new SweetAlertDialog(getActivity(),SweetAlertDialog.PROGRESS_TYPE);
+        loading.setCancelable(false);
+        loading.setTitleText("Loading...");
+
+        loading.getProgressHelper().setBarColor(getResources().getColor(R.color.green));
+
+        loading.show();
+
         String tag_json_obj = "json_product_req";
         Map<String, String> params = new HashMap<String, String>();
         params.put("cat_id", cat_id);
@@ -210,6 +225,7 @@ public class Product_fragment extends Fragment {
                 Log.d(TAG, response.toString());
 
                 try {
+                    loading.dismiss();
                     Boolean status = response.getBoolean("responce");
                     if (status) {
                         Gson gson = new Gson();
@@ -222,11 +238,35 @@ public class Product_fragment extends Fragment {
                         if (getActivity() != null) {
                             if (product_modelList.isEmpty()) {
                                 //  Toast.makeText(getActivity(), getResources().getString(R.string.no_rcord_found), Toast.LENGTH_SHORT).show();
+                                SweetAlertDialog error=
+                                        new SweetAlertDialog(getActivity(),SweetAlertDialog.ERROR_TYPE)
+                                                .setTitleText("No Data Found")
+                                                .setConfirmButtonBackgroundColor(Color.RED)
+                                                .setConfirmButton("OK", new SweetAlertDialog.OnSweetClickListener() {
+                                                    @Override
+                                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                                        getActivity().onBackPressed();
+                                                    }
+                                                });
+                                error.show();
                             }
                         }
 
+                    }else{
+                        SweetAlertDialog error=
+                        new SweetAlertDialog(getActivity(),SweetAlertDialog.ERROR_TYPE)
+                                .setTitleText("No Data Found")
+                                .setConfirmButtonBackgroundColor(Color.RED)
+                                .setConfirmButton("OK", new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                        getActivity().onBackPressed();
+                                    }
+                                });
+                        error.show();
                     }
                 } catch (JSONException e) {
+                    loading.dismiss();
                     e.printStackTrace();
                 }
             }
@@ -237,6 +277,7 @@ public class Product_fragment extends Fragment {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    loading.dismiss();
                 }
             }
         });
@@ -301,9 +342,7 @@ public class Product_fragment extends Fragment {
     }
 
 
-
-
-    ////Get DEal Products
+    //Get DEal Products
     private void makedealIconProductRequest(String cat_id) {
         String tag_json_obj = "json_product_req";
         Map<String, String> params = new HashMap<String, String>();
@@ -355,6 +394,16 @@ public class Product_fragment extends Fragment {
 
     ////Get Top Sale Products
     private void maketopsaleProductRequest(String cat_id) {
+
+
+        final SweetAlertDialog loading=new SweetAlertDialog(getActivity(),SweetAlertDialog.PROGRESS_TYPE);
+        loading.setCancelable(false);
+        loading.setTitleText("Loading...");
+
+        loading.getProgressHelper().setBarColor(getResources().getColor(R.color.green));
+
+//        loading.show();
+
         String tag_json_obj = "json_product_req";
         Map<String, String> params = new HashMap<String, String>();
         params.put("top_selling_product", cat_id);
@@ -367,6 +416,8 @@ public class Product_fragment extends Fragment {
                 Log.d(TAG, response.toString());
 
                 try {
+                    loading.dismiss();
+                    Toast.makeText(getActivity(), "aaaa", Toast.LENGTH_SHORT).show();
                     Boolean status = response.getBoolean("responce");
                     if (status) {
                         Gson gson = new Gson();
@@ -385,6 +436,7 @@ public class Product_fragment extends Fragment {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    loading.dismiss();
                 }
             }
         }, new Response.ErrorListener() {
@@ -394,6 +446,7 @@ public class Product_fragment extends Fragment {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    loading.dismiss();
                 }
             }
         });

@@ -3,6 +3,7 @@
     android:id="@+id/card_view_top"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="@dimen/space_5"
     card_view:cardCornerRadius="12dp"
     card_view:cardPreventCornerOverlap="false"
     android:elevation="@dimen/space_4"
@@ -45,7 +46,7 @@
                 android:gravity="center"
                 android:layout_marginTop="@dimen/space_4"
                 android:text="Product Price"
-                android:textColor="@color/color_1"
+                android:textColor="@color/green"
                 android:textSize="@dimen/text_size_large" />
 
         </LinearLayout>

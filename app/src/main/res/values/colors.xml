@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FB5400</color>
-    <color name="colorPrimaryDark">#FB5400</color>
-    <color name="colorAccent">#FB5400</color>
+    <color name="colorPrimary">#7ebbbc</color>
+    <color name="colorPrimaryDark">#7ebbbc</color>
+    <color name="colorAccent">#7ebbbc</color>
     <color name="white">#ffffff</color>
     <color name="gray">#E3E3E3</color>
     <color name="black">#000000</color>
@@ -15,7 +15,7 @@
     <color name="yelow">#ffee05</color>
     <color name="purple">#ed0bc0</color>
 
-    <color name="green">#FB5400</color>
+    <color name="green">#7ebbbc</color>
     <color name="light_gray">#faf5f5</color>
     <color name="contact_name">#333333</color>
     <color name="contact_number">#8c8c8c</color>

@@ -32,6 +32,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.SubMenu;
 import android.view.View;
+
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
+import com.facebook.login.LoginManager;
 import com.google.android.material.navigation.NavigationView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -574,6 +580,7 @@ SharedPreferences sharedPreferences;
             shareApp();
         } else if (id == R.id.nav_logout) {
             sessionManagement.logoutSession();
+            disconnectFromFacebook();
             finish();
 
         } else if (id == R.id.nav_powerd) {
@@ -720,6 +727,21 @@ SharedPreferences sharedPreferences;
         // register reciver
 
     }
+    public void disconnectFromFacebook() {
 
+        if (AccessToken.getCurrentAccessToken() == null) {
+            return; // already logged out
+        }
+
+        new GraphRequest(AccessToken.getCurrentAccessToken(), "/me/permissions/", null, HttpMethod.DELETE, new GraphRequest
+                .Callback() {
+            @Override
+            public void onCompleted(GraphResponse graphResponse) {
+
+                LoginManager.getInstance().logOut();
+
+            }
+        }).executeAsync();
+    }
 
 }
