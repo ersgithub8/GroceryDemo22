@@ -146,6 +146,7 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:textStyle="bold"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center_vertical"
@@ -199,7 +200,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/slider_two_height"
+                android:layout_height="@dimen/slider_one_height"
                 android:background="@color/white">
 
                 <com.daimajia.slider.library.SliderLayout
@@ -215,6 +216,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:visibility="gone"
                 android:id="@+id/deal_linear_layout"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
@@ -223,6 +225,7 @@
                 android:gravity="center">
 
                 <Fonts.LatoBLack
+                    android:textStyle="bold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -240,17 +243,16 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-
                 <ImageView
                     android:id="@+id/deal_of_day_imageview"
                     android:layout_width="match_parent"
-                    android:layout_height="430dp"
+                    android:layout_height="match_parent"
                     android:background="@drawable/back" />
 
                 <FrameLayout
                     android:id="@+id/deal_frame_layout1"
                     android:layout_width="match_parent"
-                    android:layout_height="440dp"
+                    android:layout_height="450dp"
                     android:layout_marginTop="12dp">
 
                     <LinearLayout
@@ -266,6 +268,7 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:textStyle="bold"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="@string/deals"
@@ -283,6 +286,7 @@
                             android:gravity="center|end">
 
                             <Button
+                                android:layout_gravity="top"
                                 android:id="@+id/view_all_deals"
                                 android:layout_width="70dp"
                                 android:layout_height="35dp"
@@ -304,9 +308,10 @@
                         android:layout_height="match_parent"
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="8dp"
-                        android:layout_marginTop="40dp"
-                        android:background="@color/light_gray"
-                        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+                        android:layout_marginTop="42dp"
+                        android:background="@android:color/transparent"
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                        />
 
 
                 </FrameLayout>
@@ -326,6 +331,7 @@
                     android:orientation="vertical">
 
                     <Fonts.LatoBLack
+                        android:textStyle="bold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/space_12"
@@ -346,7 +352,7 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/slider_three_height"
+                        android:layout_height="@dimen/slider_one_height"
                         android:elevation="0dp">
 
                         <com.daimajia.slider.library.SliderLayout

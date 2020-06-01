@@ -112,7 +112,6 @@
                 android:ems="10"
                 android:hint="12345"
                 android:textColor="#000"
-                android:textColorHint="#000"
                 android:textSize="@dimen/space_14" />
             <LinearLayout
                 android:layout_width="match_parent"

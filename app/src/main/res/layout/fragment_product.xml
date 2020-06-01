@@ -21,7 +21,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/slider_two_height"
+        android:layout_height="@dimen/slider_one_height"
         android:background="@color/white">
         <com.daimajia.slider.library.SliderLayout
             android:id="@+id/relative_banner"

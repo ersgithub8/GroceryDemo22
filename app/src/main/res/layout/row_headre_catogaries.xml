@@ -22,7 +22,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/service_image"
                 android:layout_width="35dp"
                 android:layout_height="35dp"

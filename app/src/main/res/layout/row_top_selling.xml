@@ -22,7 +22,7 @@
 
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:id="@+id/iv_icon"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
@@ -36,7 +36,8 @@
                 android:text="Product Name"
                 android:layout_marginTop="@dimen/space_12"
                 android:textColor="#000000"
-                android:textSize="@dimen/text_size_normal" />
+                android:maxLines="1"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/product_prize"
@@ -46,8 +47,8 @@
                 android:layout_marginTop="@dimen/space_4"
                 android:text="Product Price"
                 android:textColor="@color/green"
-                android:textSize="@dimen/text_size_large"
-                android:layout_marginBottom="10dp"
+                android:textSize="20sp"
+                android:layout_marginBottom="15dp"
                 />
 
         </LinearLayout>
@@ -55,5 +56,3 @@
 
 
 </androidx.cardview.widget.CardView>
-
-

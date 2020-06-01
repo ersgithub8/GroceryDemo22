@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bottom_sheet_layout"
+    android:layout_width="40dp"
+    android:layout_height="match_parent"
+    android:background="@color/green"
+    android:clickable="true"
+    android:gravity="bottom|left"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="@dimen/space_5"
+        android:gravity="bottom">
+
+        <ImageView
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/hotlist_bell"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="0dp"
+            android:contentDescription="bell"
+            android:gravity="bottom"
+            android:background="@drawable/lang2"
+            />
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>

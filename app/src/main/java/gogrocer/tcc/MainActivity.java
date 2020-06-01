@@ -417,7 +417,7 @@ SharedPreferences sharedPreferences;
         if (sessionManagement.isLoggedIn()) {
             //  tv_number.setVisibility(View.VISIBLE);
             nav_menu.findItem(R.id.nav_logout).setVisible(true);
-            nav_menu.findItem(R.id.nav_powerd).setVisible(true);
+//            nav_menu.findItem(R.id.nav_powerd).setVisible(true);
 
 //            nav_menu.findItem(R.id.nav_user).setVisible(true);
         } else {
