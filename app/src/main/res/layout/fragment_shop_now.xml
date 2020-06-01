@@ -73,7 +73,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="15dp"
                     android:orientation="vertical"
-                    shimmer:duration="800">
+                    shimmer:duration="500">
 
                     <!-- Adding 7 rows of placeholders -->
                     <LinearLayout
