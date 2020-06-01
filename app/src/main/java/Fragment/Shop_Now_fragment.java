@@ -59,6 +59,17 @@ public class Shop_Now_fragment extends Fragment {
     public Shop_Now_fragment() {
 
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        mShimmerViewContainer.startShimmerAnimation();
+    }
+
+    @Override
+    public void onPause() {
+        mShimmerViewContainer.stopShimmerAnimation();
+        super.onPause();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -210,17 +221,6 @@ public class Shop_Now_fragment extends Fragment {
     private int dpToPx(int dp) {
         Resources r = getResources();
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
-    }
-    @Override
-    public void onResume() {
-        super.onResume();
-        mShimmerViewContainer.startShimmerAnimation();
-    }
-
-    @Override
-    public void onPause() {
-        mShimmerViewContainer.stopShimmerAnimation();
-        super.onPause();
     }
 
 
