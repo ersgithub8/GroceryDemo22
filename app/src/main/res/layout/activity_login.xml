@@ -167,7 +167,7 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_margin="12dp"
-            android:background="@drawable/bg_rounded_button"
+            android:background="@drawable/bac1"
             >
 
             <Fonts.LatoBLack
@@ -188,7 +188,7 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_margin="12dp"
-            android:background="@drawable/bg_rounded_button">
+            android:background="@drawable/bac1">
 
             <Fonts.LatoBLack
                 android:layout_width="match_parent"
@@ -206,9 +206,10 @@
             android:id="@+id/btnForgot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
+            android:layout_gravity="end"
             android:gravity="center"
+            android:layout_marginTop="-2dp"
+            android:layout_marginRight="20dp"
             android:text="@string/forgot"
             android:textColor="@color/green"
             android:textSize="13sp" />
@@ -242,6 +243,7 @@
                     />
 
             </RelativeLayout>
+
 
             <RelativeLayout
                 android:layout_width="0dp"

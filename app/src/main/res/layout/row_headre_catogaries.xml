@@ -9,12 +9,13 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/icon_card_view"
-        android:layout_width="78dp"
+        android:layout_width="85dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="10dp"
-        app:cardBackgroundColor="@android:color/transparent"
-        card_view:cardElevation="5dp">
+        app:contentPadding="@dimen/space_7"
+
+        android:elevation="@dimen/space_4">
 
 
         <LinearLayout
@@ -36,6 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Ram"
+                android:maxLines="1"
                 android:gravity="center"
                 android:textColor="#000"
                 android:textSize="@dimen/text_size_XX_small" />
