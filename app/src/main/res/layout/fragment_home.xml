@@ -200,7 +200,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/slider_two_height"
+                android:layout_height="@dimen/slider_one_height"
                 android:background="@color/white">
 
                 <com.daimajia.slider.library.SliderLayout
@@ -352,7 +352,7 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/slider_three_height"
+                        android:layout_height="@dimen/slider_one_height"
                         android:elevation="0dp">
 
                         <com.daimajia.slider.library.SliderLayout

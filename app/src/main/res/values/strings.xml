@@ -38,7 +38,7 @@
     <string name="nav_contact" translatable="false">Contact Us</string>
     <string name="nav_share" translatable="false">Share with Friends</string>
     <string name="nav_logout" translatable="false">Logout</string>
-    <string name="btn_continue" translatable="false">Continue</string>
+    <string name="btn_continue" translatable="false">Sign In</string>
     <string name="btn_Register" translatable="false">Register</string>
     <string name="rewards_points" translatable="false">Rewards Points</string>
     <string name="rech_wallet" translatable="false">Recharge Wallet</string>
