@@ -31,6 +31,7 @@ public class BaseURL {
     public static final String KEY_HOUSE = "house_no";
     public static final String KEY_DATE = "date";
     public static final String KEY_TIME = "time";
+    public static final String KEY_REFERID="refer_id";
 
     //Store Selection
 

@@ -20,6 +20,7 @@ import static Config.BaseURL.KEY_NAME;
 import static Config.BaseURL.KEY_PASSWORD;
 import static Config.BaseURL.KEY_PAYMENT_METHOD;
 import static Config.BaseURL.KEY_PINCODE;
+import static Config.BaseURL.KEY_REFERID;
 import static Config.BaseURL.KEY_REWARDS_POINTS;
 import static Config.BaseURL.KEY_SOCITY_ID;
 import static Config.BaseURL.KEY_SOCITY_NAME;
@@ -73,6 +74,8 @@ public class Session_management {
         editor.putString(KEY_SOCITY_NAME, socity_name);
         editor.putString(KEY_HOUSE, house);
         editor.putString(KEY_PASSWORD, password);
+
+//        editor.putString(KEY_REFERID,referid);
 
         editor.commit();
     }
