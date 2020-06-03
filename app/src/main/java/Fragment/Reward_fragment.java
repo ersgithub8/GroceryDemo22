@@ -1,7 +1,9 @@
 package Fragment;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -35,6 +37,9 @@ import gogrocer.tcc.R;
 import util.ConnectivityReceiver;
 import util.Session_management;
 
+import static Config.BaseURL.KEY_REFERID;
+import static Config.BaseURL.PREFS_NAME;
+
 /**
  * Created by Rajesh Dabhi on 29/6/2017.
  */
@@ -42,7 +47,7 @@ import util.Session_management;
 public class Reward_fragment extends Fragment {
     private GifImageView gifImageView;
     private static String TAG = Reward_fragment.class.getSimpleName();
-    RelativeLayout Reedeem_Points;
+    RelativeLayout Reedeem_Points,Sharing;
     TextView Rewards_Points;
     private Session_management sessionManagement;
 
@@ -62,6 +67,7 @@ public class Reward_fragment extends Fragment {
 
         String getrewards = sessionManagement.getUserDetails().get(BaseURL.KEY_REWARDS_POINTS);
         Rewards_Points = (TextView) view.findViewById(R.id.reward_points);
+        Sharing = view.findViewById(R.id.share);
         //  Rewards_Points.setText(getrewards);
         gifImageView = (GifImageView) view.findViewById(R.id.gif_image);
         gifImageView.setGifImageResource(R.drawable.pay);
@@ -78,6 +84,23 @@ public class Reward_fragment extends Fragment {
                         myview.setVisibility(View.GONE);
                     }
                 }, 5000);
+            }
+        });
+
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        final String ref_code = sharedPreferences.getString(KEY_REFERID,null);
+
+        Sharing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT,
+                        "Hey check out this app at: https://play.google.com/store/apps/details?id="+getActivity().getPackageName()
+                        +" .And enter my referral code "+ref_code+"  for reward."
+                );
+                sendIntent.setType("text/plain");
+                startActivity(sendIntent);
             }
         });
 
