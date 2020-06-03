@@ -38,7 +38,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/space_8"
             android:gravity="center"
             android:text="0"
             android:textColor="#000"

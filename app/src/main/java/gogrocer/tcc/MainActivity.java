@@ -751,4 +751,8 @@ SharedPreferences sharedPreferences;
         }).executeAsync();
     }
 
+    @Override
+    public void onBackPressed() {
+        finishAffinity();
+    }
 }
