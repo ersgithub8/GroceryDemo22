@@ -286,6 +286,30 @@
                 android:maxLength="10"
                 android:ems="10"/>
             </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_10"
+                app:cardCornerRadius="@dimen/space_20"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardElevation="4dp">
+                <EditText
+                    android:id="@+id/et_reg_referal"
+                    android:layout_width="match_parent"
+                    android:padding="@dimen/space_10"
+                    android:textSize="14sp"
+                    android:drawableLeft="@drawable/referal"
+                    android:drawablePadding="@dimen/space_10"
+                    android:hint="Referal Code"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg2"
+                    android:ems="10"
+                    android:inputType="text" />
+            </androidx.cardview.widget.CardView>
+
             <RelativeLayout
                 android:id="@+id/btnRegister"
                 android:layout_width="match_parent"
