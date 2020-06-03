@@ -54,7 +54,6 @@
         android:gravity="center"
         android:orientation="vertical">
 
-
         <gogrocer.tcc.GifImageView
             android:id="@+id/gif_image"
             android:layout_width="match_parent"
