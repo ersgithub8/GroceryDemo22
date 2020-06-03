@@ -71,8 +71,7 @@
         android:layout_marginLeft="@dimen/space_12"
         android:layout_marginRight="@dimen/space_12"
         android:layout_marginTop="@dimen/space_12"
-        android:background="@drawable/bg_rounded_button"
-        android:padding="12dp">
+        android:background="@drawable/bg_rounded_button">
 
         <Fonts.LatoBLack
             android:layout_width="match_parent"
@@ -80,7 +79,7 @@
             android:gravity="center"
             android:text="@string/tv_toolbar_redeem"
             android:textColor="#fff"
-            android:textSize="@dimen/text_size_small" />
+            android:textSize="14dp" />
 
 
     </RelativeLayout>
