@@ -59,7 +59,7 @@ public class Session_management {
 
     public void createLoginSession(String id, String email, String name
             , String mobile, String image, String wallet_ammount, String reward_point, String pincode, String socity_id,
-                                   String socity_name, String house, String password) {
+                                   String socity_name, String house, String password,String referid) {
 
         editor.putBoolean(IS_LOGIN, true);
         editor.putString(KEY_ID, id);
@@ -75,7 +75,7 @@ public class Session_management {
         editor.putString(KEY_HOUSE, house);
         editor.putString(KEY_PASSWORD, password);
 
-//        editor.putString(KEY_REFERID,referid);
+        editor.putString(KEY_REFERID,referid);
 
         editor.commit();
     }
