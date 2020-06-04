@@ -542,19 +542,19 @@ public class Home_fragment extends Fragment {
                                 textSliderView.getBundle().putString("extra", name.get("sub_cat"));
                                 featuredslider.addSlider(textSliderView);
                                 final String sub_cat = (String) textSliderView.getBundle().get("extra");
-                                textSliderView.setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
-                                    @Override
-                                    public void onSliderClick(BaseSliderView slider) {
-                                        //   Toast.makeText(getActivity(), "" + sub_cat, Toast.LENGTH_SHORT).show();
-                                        Bundle args = new Bundle();
-                                        Fragment fm = new Product_fragment();
-                                        args.putString("id", sub_cat);
-                                        fm.setArguments(args);
-                                        FragmentManager fragmentManager = getFragmentManager();
-                                        fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-                                                .addToBackStack(null).commit();
-                                    }
-                                });
+//                                textSliderView.setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
+//                                    @Override
+//                                    public void onSliderClick(BaseSliderView slider) {
+//                                        //   Toast.makeText(getActivity(), "" + sub_cat, Toast.LENGTH_SHORT).show();
+//                                        Bundle args = new Bundle();
+//                                        Fragment fm = new Product_fragment();
+//                                        args.putString("id", sub_cat);
+//                                        fm.setArguments(args);
+//                                        FragmentManager fragmentManager = getFragmentManager();
+//                                        fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+//                                                .addToBackStack(null).commit();
+//                                    }
+//                                });
 
                             }
 
@@ -568,7 +568,7 @@ public class Home_fragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 }
             }
         });

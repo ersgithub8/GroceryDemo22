@@ -52,9 +52,7 @@ import util.CustomVolleyJsonRequest;
 
 import static android.content.Context.MODE_PRIVATE;
 
-/**
- * Created by Rajesh Dabhi on 26/6/2017.
- */
+
 
 public class Product_fragment extends Fragment {
     private static String TAG = Product_fragment.class.getSimpleName();
@@ -68,6 +66,7 @@ public class Product_fragment extends Fragment {
     private Product_adapter adapter_product;
     private SliderLayout  banner_slider;
     String language;
+    String storeid;
     SharedPreferences preferences;
     public Product_fragment() {
     }
@@ -92,6 +91,7 @@ public class Product_fragment extends Fragment {
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
         String getcat_id = getArguments().getString("cat_id");
         String id = getArguments().getString("id");
+        storeid=getArguments().getString("storeid");
         String get_deal_id = getArguments().getString("cat_deal");
         String get_top_sale_id = getArguments().getString("cat_top_selling");
         String getcat_title = getArguments().getString("cat_title");
@@ -101,8 +101,14 @@ public class Product_fragment extends Fragment {
         // check internet connection
         if (ConnectivityReceiver.isConnected()) {
             //Shop by Catogary
-            makeGetCategoryRequest(getcat_id);
+//            makeGetCategoryRequest(getcat_id);
 
+            //
+            if(storeid !=null){
+                makeGetCategoryRequest(storeid);
+            }else{
+                makeGetCategoryRequest(getcat_id);
+            }
             //Deal Of The Day Products
             makedealIconProductRequest(get_deal_id);
             //Top Sale Products
@@ -218,9 +224,15 @@ public class Product_fragment extends Fragment {
 
 //        loading.show();
 
+
         String tag_json_obj = "json_product_req";
         Map<String, String> params = new HashMap<String, String>();
-        params.put("cat_id", cat_id);
+
+        if(storeid !=null){
+            params.put("store_id", cat_id);
+        }else{
+            params.put("cat_id", cat_id);
+        }
 
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
                 BaseURL.GET_PRODUCT_URL, params, new Response.Listener<JSONObject>() {

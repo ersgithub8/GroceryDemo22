@@ -1,6 +1,7 @@
 package Fragment;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -42,6 +43,7 @@ import gogrocer.tcc.AppController;
 import gogrocer.tcc.CustomSlider;
 import gogrocer.tcc.R;
 import util.CustomVolleyJsonRequest;
+import util.RecyclerTouchListener;
 
 import static gogrocer.tcc.AppController.TAG;
 
@@ -49,6 +51,7 @@ public class StoreFragment extends Fragment {
 
     private SliderLayout banner_slider;
     RecyclerView stores;
+    String storeid;
     List<Store_Model> store_models=new ArrayList<>();
     Store_Adapter store_adapter;
     @Nullable
@@ -62,6 +65,29 @@ public class StoreFragment extends Fragment {
         makeGetBannerSliderRequest();
 
         getstores();
+
+
+        stores.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), stores, new RecyclerTouchListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+
+                storeid = store_models.get(position).getUser_id();
+                Bundle args = new Bundle();
+                Fragment fm = new Product_fragment();
+                args.putString("storeid", storeid);
+                fm.setArguments(args);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                        .addToBackStack(null).commit();
+
+
+            }
+
+            @Override
+            public void onLongItemClick(View view, int position) {
+
+            }
+        }));
         return view;
     }
 
@@ -92,8 +118,8 @@ public class StoreFragment extends Fragment {
                             }.getType();
 
                             store_models=gson.fromJson(response.getString("data"),listtype);
-                            store_adapter=new Store_Adapter(store_models);
-                            stores.setLayoutManager(new GridLayoutManager(getActivity(),3));
+                            store_adapter=new Store_Adapter(getActivity(),store_models);
+                            stores.setLayoutManager(new GridLayoutManager(getActivity(),2));
                             stores.setAdapter(store_adapter);
                             store_adapter.notifyDataSetChanged();
 

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,8 +24,9 @@ public class Store_Adapter extends RecyclerView.Adapter<Store_Adapter.Store_VH> 
     List<Store_Model> store_models;
     Context context;
 
-    public Store_Adapter(List<Store_Model> store_models) {
+    public Store_Adapter(Context context,List<Store_Model> store_models) {
         this.store_models = store_models;
+        this.context=context;
 //        this.context = context;
     }
 
@@ -35,9 +37,7 @@ public class Store_Adapter extends RecyclerView.Adapter<Store_Adapter.Store_VH> 
         View view= LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.row_store,parent,false);
 
-
-        context=parent.getContext();
-        return new Store_VH(view);
+        return new Store_Adapter.Store_VH(view);
     }
 
     @Override
@@ -45,10 +45,8 @@ public class Store_Adapter extends RecyclerView.Adapter<Store_Adapter.Store_VH> 
 
         Store_Model modellist=store_models.get(position);
 
-        Glide.with(context).load(modellist.getUser_image()).placeholder(R.drawable.icon).into(holder.storeimage);
+        Glide.with(context).load(modellist.getUser_image()).into(holder.storeimage);
         holder.storename.setText(modellist.getUser_name());
-
-
 
     }
 
@@ -59,11 +57,10 @@ public class Store_Adapter extends RecyclerView.Adapter<Store_Adapter.Store_VH> 
 
     public class Store_VH extends RecyclerView.ViewHolder{
 
-        CircleImageView storeimage;
+        ImageView storeimage;
         TextView storename;
         public Store_VH(@NonNull View itemView) {
             super(itemView);
-
 
             storename=itemView.findViewById(R.id.store_name);
             storeimage=itemView.findViewById(R.id.store_image);
