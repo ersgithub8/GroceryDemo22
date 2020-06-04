@@ -10,9 +10,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.NoConnectionError;
+import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
@@ -20,14 +22,18 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import Adapter.Store_Adapter;
 import Config.BaseURL;
@@ -35,6 +41,7 @@ import Model.Store_Model;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.CustomSlider;
 import gogrocer.tcc.R;
+import util.CustomVolleyJsonRequest;
 
 import static gogrocer.tcc.AppController.TAG;
 
@@ -54,11 +61,67 @@ public class StoreFragment extends Fragment {
 
         makeGetBannerSliderRequest();
 
+        getstores();
         return view;
     }
 
 
 
+    public void getstores(){
+
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("city_id", "");
+
+
+        CustomVolleyJsonRequest jsonRequest=new CustomVolleyJsonRequest(Request.Method.POST,
+                BaseURL.getStores, params, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+
+
+                try {
+                    if(response !=null && response.length()>0){
+
+                        Boolean status=response.getBoolean("response");
+                        if(status)
+                        {
+                            Gson gson=new Gson();
+                            Type listtype=new TypeToken<List<Store_Model>>(){
+
+                            }.getType();
+
+                            store_models=gson.fromJson(response.getString("data"),listtype);
+                            store_adapter=new Store_Adapter(store_models);
+                            stores.setLayoutManager(new GridLayoutManager(getActivity(),3));
+                            stores.setAdapter(store_adapter);
+                            store_adapter.notifyDataSetChanged();
+
+
+
+
+                        }
+
+
+
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonRequest, "json_stores_req");
+    }
 
 
 
