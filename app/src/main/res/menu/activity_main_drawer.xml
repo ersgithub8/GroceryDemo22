@@ -8,6 +8,10 @@
             android:icon="@drawable/ic_nav_home"
             android:title="@string/nav_home" />
         <item
+            android:id="@+id/nav_stores"
+            android:icon="@drawable/ic_nav_home"
+            android:title="@string/nav_stores" />
+        <item
             android:id="@+id/nav_my_profile"
             android:icon="@drawable/ic_nav_profile"
             android:title="@string/nav_profile" />

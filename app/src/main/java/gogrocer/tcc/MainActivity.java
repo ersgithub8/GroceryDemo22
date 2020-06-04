@@ -64,6 +64,7 @@ import Fragment.Empty_cart_fragment;
 import Fragment.Home_fragment;
 import Fragment.Cart_fragment;
 import Fragment.Reward_fragment;
+import Fragment.StoreFragment;
 import Fragment.Edit_profile_fragment;
 import Fragment.Shop_Now_fragment;
 import Fragment.Terms_and_Condition_fragment;
@@ -597,6 +598,9 @@ SharedPreferences sharedPreferences;
             i.setData(Uri.parse(url));
             startActivity(i);
             finish();
+        }else if(id==R.id.nav_stores){
+
+            fm = new StoreFragment();
         }
 
         if (fm != null) {

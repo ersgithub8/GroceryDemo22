@@ -127,6 +127,7 @@ public class BaseURL {
     public static String EDIT_ADDRESS_URL = BASE_URL + "index.php/api/edit_address";
 
 
+    public static  String getStores=BASE_URL+"index.php/Api/get_store";
     // global topic to receive app wide push notifications
 
     // broadcast receiver intent filters

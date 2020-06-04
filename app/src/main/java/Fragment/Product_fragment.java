@@ -84,6 +84,7 @@ public class Product_fragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_product, container, false);
 
 
+        new StoreFragment();
         tab_cat = (TabLayout) view.findViewById(R.id.tab_cat);
         banner_slider = (SliderLayout) view.findViewById(R.id.relative_banner);
         rv_cat = (RecyclerView) view.findViewById(R.id.rv_subcategory);
