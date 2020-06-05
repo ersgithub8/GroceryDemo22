@@ -1,5 +1,6 @@
 package gogrocer.tcc;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -58,18 +59,25 @@ public class SplashActivity extends AppCompatActivity {
                         != PackageManager.PERMISSION_GRANTED ||
                 ContextCompat.checkSelfPermission(this,
                         android.Manifest.permission.ACCESS_NETWORK_STATE)
-                        != PackageManager.PERMISSION_GRANTED
+                        != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(this,
+                        Manifest.permission.ACCESS_COARSE_LOCATION)!=PackageManager.PERMISSION_GRANTED
                 ) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     android.Manifest.permission.READ_EXTERNAL_STORAGE) && ActivityCompat.shouldShowRequestPermissionRationale(this,
                     android.Manifest.permission.INTERNET) && ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    android.Manifest.permission.ACCESS_NETWORK_STATE)) {
+                    android.Manifest.permission.ACCESS_NETWORK_STATE )&&
+                    ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest
+                    .permission.ACCESS_COARSE_LOCATION)
+
+            ) {
                 go_next();
             } else {
                 ActivityCompat.requestPermissions(this,
                         new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE,
                                 android.Manifest.permission.INTERNET,
-                                android.Manifest.permission.ACCESS_NETWORK_STATE
+                                android.Manifest.permission.ACCESS_NETWORK_STATE,
+                                Manifest.permission.ACCESS_COARSE_LOCATION
                         },
                         MY_PERMISSIONS_REQUEST_WRITE_FIELS);
             }
