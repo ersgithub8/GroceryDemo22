@@ -28,7 +28,7 @@ public class Delivery_payment_detail_fragment extends Fragment {
 
     private static String TAG = Delivery_payment_detail_fragment.class.getSimpleName();
 
-    private TextView tv_timeslot, tv_address, tv_total;
+    private TextView tv_timeslot, tv_address, tv_total,note;
     private LinearLayout btn_order;
 
     private String getlocation_id = "";
@@ -62,6 +62,8 @@ SharedPreferences preferences;
 
         db_cart = new DatabaseHandler(getActivity());
         sessionManagement = new Session_management(getActivity());
+
+        note = (TextView) view.findViewById(R.id.note_id);
 
         tv_timeslot = (TextView) view.findViewById(R.id.textTimeSlot);
         tv_address = (TextView) view.findViewById(R.id.txtAddress);
