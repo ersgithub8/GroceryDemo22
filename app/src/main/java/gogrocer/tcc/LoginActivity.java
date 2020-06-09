@@ -287,8 +287,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         String user_image = obj.getString("user_image");
                         String wallet_ammount = obj.getString("wallet");
                         String reward_points = obj.getString("rewards");
+                        String referalcode=obj.getString("referal_code");
+
                         Session_management sessionManagement = new Session_management(LoginActivity.this);
-                        sessionManagement.createLoginSession(user_id, user_email, user_fullname, user_phone, user_image, wallet_ammount, reward_points, "", "", "", "", password);
+                        sessionManagement.createLoginSession(user_id, user_email, user_fullname,
+                                user_phone, user_image, wallet_ammount, reward_points,
+                                "", "", "", "", password,referalcode);
+
                         Intent i = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(i);
                         finishAffinity();

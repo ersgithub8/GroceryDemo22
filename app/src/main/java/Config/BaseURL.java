@@ -31,6 +31,7 @@ public class BaseURL {
     public static final String KEY_HOUSE = "house_no";
     public static final String KEY_DATE = "date";
     public static final String KEY_TIME = "time";
+    public static final String KEY_REFERID="refer_id";
 
     //Store Selection
 
@@ -126,11 +127,14 @@ public class BaseURL {
     public static String EDIT_ADDRESS_URL = BASE_URL + "index.php/api/edit_address";
 
 
+    public static  String getStores=BASE_URL+"index.php/Api/get_store";
     // global topic to receive app wide push notifications
 
     // broadcast receiver intent filters
     public static final String REGISTRATION_COMPLETE = "registrationComplete";
 
     public static final String PUSH_NOTIFICATION = "pushNotification";
+
+
 
 }

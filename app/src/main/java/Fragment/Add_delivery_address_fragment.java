@@ -2,6 +2,8 @@ package Fragment;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -124,6 +126,12 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
         btn_update.setOnClickListener(this);
         btn_socity.setOnClickListener(this);
 
+        SharedPreferences sharedPreferences=getActivity().getSharedPreferences("location", Context.MODE_PRIVATE);
+        String lat, longi;
+        lat=sharedPreferences.getString("lat",null);
+        longi=sharedPreferences.getString("long",null);
+
+        Toast.makeText(getActivity(), lat+longi, Toast.LENGTH_SHORT).show();
         return view;
     }
 

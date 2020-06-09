@@ -1,6 +1,8 @@
 package gogrocer.tcc;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -15,6 +17,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -22,6 +26,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.appcompat.app.AlertDialog;
+
+import android.provider.Settings;
 import android.telephony.PhoneNumberUtils;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -38,6 +44,9 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
 import com.facebook.login.LoginManager;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -64,6 +73,7 @@ import Fragment.Empty_cart_fragment;
 import Fragment.Home_fragment;
 import Fragment.Cart_fragment;
 import Fragment.Reward_fragment;
+import Fragment.StoreFragment;
 import Fragment.Edit_profile_fragment;
 import Fragment.Shop_Now_fragment;
 import Fragment.Terms_and_Condition_fragment;
@@ -378,8 +388,68 @@ SharedPreferences sharedPreferences;
 //            fireReg.RegisterUser(sessionManagement.getUserDetails().get(BaseURL.KEY_ID));
 //        }
 
+
+
+        getLocation();
     }
 
+    public void getLocation(){
+
+
+
+        final SharedPreferences locationss=getSharedPreferences("location",MODE_PRIVATE);
+        final SharedPreferences.Editor leditor=locationss.edit();
+
+        FusedLocationProviderClient fusedLocationClient;
+        LocationManager locationManager;
+
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(MainActivity.this);
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        if(ActivityCompat.checkSelfPermission(MainActivity.this,
+                Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(MainActivity.this,
+                Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED
+        ){
+
+            ActivityCompat.requestPermissions(this,new String[]{
+                    Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION
+            },2);
+        }else {
+
+            fusedLocationClient.getLastLocation()
+                    .addOnSuccessListener( new OnSuccessListener<Location>() {
+                        @Override
+                        public void onSuccess(android.location.Location location) {
+
+                            // Got last known location. In some rare situations this can be null.
+                            if (location != null) {
+                                // Logic to handle location object
+
+                                Double latitude=location.getLatitude();
+                                Double longitude=location.getLongitude();
+
+                                Toast.makeText(MainActivity.this, latitude+longitude+"", Toast.LENGTH_SHORT).show();
+
+                                leditor.putString("lat",latitude.toString());
+                                leditor.putString("long",longitude.toString());
+                                leditor.apply();
+
+
+                                location.reset();
+
+                            }else{
+//                                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+//                                startActivity(intent);
+                            }
+
+                        }
+
+                    });
+
+        }
+    }
 
     public void updateHeader() {
         if (sessionManagement.isLoggedIn()) {
@@ -597,6 +667,9 @@ SharedPreferences sharedPreferences;
             i.setData(Uri.parse(url));
             startActivity(i);
             finish();
+        }else if(id==R.id.nav_stores){
+
+            fm = new StoreFragment();
         }
 
         if (fm != null) {
@@ -722,6 +795,7 @@ SharedPreferences sharedPreferences;
 //    }
 
 
+
     @Override
     protected void onPause() {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
@@ -731,6 +805,7 @@ SharedPreferences sharedPreferences;
     @Override
     public void onResume() {
         super.onResume();
+        getLocation();
         // register reciver
 
     }
@@ -750,5 +825,6 @@ SharedPreferences sharedPreferences;
             }
         }).executeAsync();
     }
+
 
 }

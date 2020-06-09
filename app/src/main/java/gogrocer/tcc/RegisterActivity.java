@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -46,6 +47,7 @@ import org.json.JSONObject;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import Config.BaseURL;
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -56,7 +58,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private static String TAG = RegisterActivity.class.getSimpleName();
 
-    private EditText et_phone, et_name, et_password, et_email;
+    private EditText et_phone, et_name, et_password, et_email,et_refer;
     private RelativeLayout btn_register;
     private TextView tv_phone, tv_name, tv_password, tv_email;
 
@@ -94,6 +96,9 @@ public class RegisterActivity extends AppCompatActivity {
         et_name = (EditText) findViewById(R.id.et_reg_name);
         et_password = (EditText) findViewById(R.id.et_reg_password);
         et_email = (EditText) findViewById(R.id.et_reg_email);
+        et_refer =(EditText)findViewById(R.id.et_reg_referal);
+
+
         tv_password = (TextView) findViewById(R.id.tv_reg_password);
         tv_phone = (TextView) findViewById(R.id.tv_reg_phone);
         tv_name = (TextView) findViewById(R.id.tv_reg_name);
@@ -195,38 +200,48 @@ public class RegisterActivity extends AppCompatActivity {
         View focusView = null;
 
         if (TextUtils.isEmpty(getphone)) {
+            et_phone.setError(getResources().getString(R.string.phone_too_short));
             tv_phone.setTextColor(getResources().getColor(R.color.black));
             focusView = et_phone;
             cancel = true;
         } else if (!isPhoneValid(getphone)) {
             tv_phone.setText(getResources().getString(R.string.phone_too_short));
-            tv_phone.setTextColor(getResources().getColor(R.color.black));
+            et_phone.setError(getResources().getString(R.string.phone_too_short));
+        tv_phone.setTextColor(getResources().getColor(R.color.black));
             focusView = et_phone;
             cancel = true;
         }
 
         if (TextUtils.isEmpty(getname)) {
             tv_name.setTextColor(getResources().getColor(R.color.black));
+            et_name.setError("Invalid Name");
             focusView = et_name;
             cancel = true;
         }
 
         if (TextUtils.isEmpty(getpassword)) {
             tv_password.setTextColor(getResources().getColor(R.color.black));
+            et_password.setError("Invalid Password");
             focusView = et_password;
+
             cancel = true;
         } else if (!isPasswordValid(getpassword)) {
             tv_password.setText(getResources().getString(R.string.password_too_short));
+            et_password.setError(getResources().getString(R.string.password_too_short));
+
             tv_password.setTextColor(getResources().getColor(R.color.black));
             focusView = et_password;
             cancel = true;
         }
 
         if (TextUtils.isEmpty(getemail)) {
+            et_email.setError("Invalid Email");
             focusView = et_email;
             cancel = true;
         } else if (!isEmailValid(getemail)) {
             tv_email.setText(getResources().getString(R.string.invalide_email_address));
+            et_email.setError(getResources().getString(R.string.invalide_email_address));
+
             tv_email.setTextColor(getResources().getColor(R.color.black));
             focusView = et_email;
             cancel = true;
@@ -251,7 +266,13 @@ public class RegisterActivity extends AppCompatActivity {
 
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
-        return email.contains("@");
+        if(Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+
+            return true;
+        }else {
+            return false;
+        }
+//        return email.contains("@");
     }
 
     private boolean isPasswordValid(String password) {
@@ -278,16 +299,20 @@ public class RegisterActivity extends AppCompatActivity {
 
         loading.show();
 
+        String refercode=et_refer.getText().toString();
 
         // Tag used to cancel the request
         String tag_json_obj = "json_register_req";
 
         Map<String, String> params = new HashMap<String, String>();
+
         params.put("user_name", name);
         params.put("user_mobile", mobile);
         params.put("user_email", email);
         params.put("password", password);
-
+        if(!refercode.isEmpty()){
+            params.put("referal_code",refercode);
+        }
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
                 BaseURL.REGISTER_URL, params, new Response.Listener<JSONObject>() {
 
