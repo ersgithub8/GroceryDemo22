@@ -72,6 +72,8 @@ import Fragment.Contact_Us_fragment;
 import Fragment.Empty_cart_fragment;
 import Fragment.Home_fragment;
 import Fragment.Cart_fragment;
+import Fragment.Category_Fragment;
+
 import Fragment.Reward_fragment;
 import Fragment.StoreFragment;
 import Fragment.Edit_profile_fragment;
@@ -92,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Session_management sessionManagement;
     private Menu nav_menu;
     ImageView imageView;
-    TextView mTitle;
+    TextView bot_store,bot_cat,bot_fav,bot_cart,bot_profile;
     LinearLayout viewpa;
     Toolbar toolbar;
     String language="";
@@ -131,6 +133,54 @@ SharedPreferences sharedPreferences;
          editor.putString("language", "english");
 
 
+         bot_cat=findViewById(R.id.bot_categories);
+        bot_cart=findViewById(R.id.bot_cart);
+        bot_store=findViewById(R.id.bot_store);
+        bot_profile=findViewById(R.id.bot_profile);
+         bot_cart.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 if (dbcart.getCartCount() > 0) {
+                     Fragment fm = new Cart_fragment();
+                     FragmentManager fragmentManager = getFragmentManager();
+                     fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                             .addToBackStack(null).commit();
+                 }
+                 else {
+                     Fragment fm = new Empty_cart_fragment();
+                     FragmentManager fragmentManager = getFragmentManager();
+                     fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                             .addToBackStack(null).commit();
+                 }
+             }
+         });
+         bot_cat.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 Fragment fm = new Category_Fragment();
+                 FragmentManager fragmentManager = getFragmentManager();
+                 fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                         .addToBackStack(null).commit();
+             }
+         });
+        bot_store.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fm = new StoreFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                        .addToBackStack(null).commit();
+            }
+        });
+        bot_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fm = new Edit_profile_fragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                        .addToBackStack(null).commit();
+            }
+        });
 
               if (getIntent().getExtras() != null) {
 
@@ -313,10 +363,10 @@ SharedPreferences sharedPreferences;
 
 
         if (savedInstanceState == null) {
-            Fragment fm = new Home_fragment();
+            Fragment fm = new StoreFragment();
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction()
-                    .replace(R.id.contentPanel, fm, "Home_fragment")
+                    .replace(R.id.contentPanel, fm, "Store_fragment")
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     .commit();
         }
@@ -332,7 +382,7 @@ SharedPreferences sharedPreferences;
 
                             final String fm_name = fr.getClass().getSimpleName();
                             Log.e("backstack: ", ": " + fm_name);
-                            if (fm_name.contentEquals("Home_fragment")) {
+                            if (fm_name.contentEquals("Store_fragment")) {
                                 drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
                                 toggle.setDrawerIndicatorEnabled(true);
                                 getSupportActionBar().setDisplayHomeAsUpEnabled(false);
@@ -349,7 +399,7 @@ SharedPreferences sharedPreferences;
                                 toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-                                        Fragment fm = new Home_fragment();
+                                        Fragment fm = new StoreFragment();
                                         FragmentManager fragmentManager = getFragmentManager();
                                         fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
                                                 .addToBackStack(null).commit();
@@ -430,7 +480,7 @@ SharedPreferences sharedPreferences;
                                 Double latitude=location.getLatitude();
                                 Double longitude=location.getLongitude();
 
-                                Toast.makeText(MainActivity.this, latitude+longitude+"", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(MainActivity.this, latitude+longitude+"", Toast.LENGTH_SHORT).show();
 
                                 leditor.putString("lat",latitude.toString());
                                 leditor.putString("long",longitude.toString());
@@ -540,7 +590,7 @@ SharedPreferences sharedPreferences;
             }
         });
 
-        totalBudgetCount = (TextView) count.findViewById(R.id.actionbar_notifcation_textview);
+        totalBudgetCount = findViewById(R.id.actionbar_notifcation_textview);
         totalBudgetCount.setText("" + dbcart.getCartCount());
         return true;
     }
