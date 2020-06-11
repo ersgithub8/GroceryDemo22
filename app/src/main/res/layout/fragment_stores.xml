@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:layout_toRightOf="@+id/search_layout"
-            android:background="@drawable/icon"/>
+            android:background="@drawable/icon2"/>
 
 
     </RelativeLayout>

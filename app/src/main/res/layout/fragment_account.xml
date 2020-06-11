@@ -1,0 +1,97 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="Fragment.Account_Fragment">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/my_orders"
+        android:text="My Orders"
+        android:textSize="20sp"
+        android:drawableLeft="@drawable/order"
+        android:textColor="@color/black"
+
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/my_wallet"
+        android:layout_below="@id/my_orders"
+        android:text="My Wallet"
+        android:textSize="20sp"
+        android:drawableLeft="@drawable/ic_account_balance_wallet_black_24dp"
+        android:textColor="@color/black"
+
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/J6points"
+        android:text="J6 Points"
+        android:layout_below="@id/my_wallet"
+        android:textSize="20sp"
+        android:drawableLeft="@drawable/points"
+        android:textColor="@color/black"
+
+        />
+    <view
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:id="@+id/v1"
+        android:layout_below="@id/J6points"
+        android:background="@color/black"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/v1"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rate App"
+            android:textAlignment="center"
+            android:textSize="20sp"
+
+            android:textColor="@color/black"
+            android:drawableTop="@drawable/rate"
+            android:layout_weight="1"
+            />
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Share App"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+            android:textAlignment="center"
+        android:drawableTop="@drawable/share"
+        android:layout_weight="1"
+        />
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rate App"
+            android:textAlignment="center"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:drawableTop="@drawable/feedback"
+        android:layout_weight="1"
+        />
+
+    </LinearLayout>
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>

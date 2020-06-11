@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/green"
+        android:text="  Account"
+        android:textColor="@color/white"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:textSize="30sp"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/my_orders"
+            android:text="My Orders"
+            android:layout_margin="10dp"
+            android:textSize="18sp"
+            android:drawableLeft="@drawable/order"
+            android:textColor="@color/black"
+
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/my_wallet"
+            android:layout_below="@id/my_orders"
+            android:text="My Wallet"
+            android:textSize="18sp"
+            android:layout_margin="10dp"
+            android:drawableLeft="@drawable/ic_account_balance_wallet_black_24dp"
+            android:textColor="@color/black"
+
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:id="@+id/J6points"
+            android:text="J6 Points"
+            android:layout_below="@id/my_wallet"
+            android:textSize="18sp"
+            android:drawableLeft="@drawable/points"
+            android:textColor="@color/black"
+
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:id="@+id/nav_my_profile"
+            android:text="Profile"
+            android:layout_below="@id/J6points"
+            android:textSize="18sp"
+            android:drawableLeft="@drawable/ic_nav_profile"
+            android:textColor="@color/black"
+
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:id="@+id/nav_logout"
+            android:text="Logout"
+            android:layout_below="@id/nav_my_profile"
+            android:textSize="18sp"
+            android:visibility="gone"
+            android:drawableLeft="@drawable/ic_exit"
+            android:textColor="@color/black"
+
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:id="@+id/nav_login"
+            android:text="Login"
+            android:visibility="gone"
+            android:layout_below="@id/nav_logout"
+            android:textSize="18sp"
+            android:drawableLeft="@drawable/ic_exit"
+            android:textColor="@color/black"
+
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            android:id="@+id/v1"
+            android:layout_below="@id/nav_login"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:layout_below="@id/v1"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rate App"
+                android:id="@+id/rate"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:drawableTop="@drawable/rate"
+                android:layout_weight="1"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Share App"
+                android:id="@+id/share"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:textAlignment="center"
+                android:drawableTop="@drawable/share"
+                android:layout_weight="1"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rate App"
+                android:id="@+id/feedback"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:drawableTop="@drawable/feedback"
+                android:layout_weight="1"
+                />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -93,6 +93,7 @@ dependencies {
     implementation 'org.bouncycastle:bcprov-jdk16:1.46'
     implementation 'com.razorpay:checkout:1.5.2'
 
+    implementation 'com.github.varunest:sparkbutton:1.0.6'
 
 
     implementation 'com.github.f0ris.sweetalert:library:1.6.2'

@@ -72,6 +72,7 @@ import Fragment.Contact_Us_fragment;
 import Fragment.Empty_cart_fragment;
 import Fragment.Home_fragment;
 import Fragment.Cart_fragment;
+import Fragment.Account_Fragment;
 import Fragment.Category_Fragment;
 
 import Fragment.Reward_fragment;
@@ -175,7 +176,7 @@ SharedPreferences sharedPreferences;
         bot_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment fm = new Edit_profile_fragment();
+                Fragment fm = new Account_Fragment();
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
                         .addToBackStack(null).commit();
