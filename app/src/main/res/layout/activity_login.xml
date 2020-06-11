@@ -137,7 +137,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
-            android:layout_marginBottom="39dp"
             app:cardCornerRadius="25dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
@@ -173,7 +172,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginTop="-36dp"
+            android:layout_marginTop="3dp"
             android:layout_marginRight="20dp"
             android:text="@string/forgot"
             android:textColor="@color/green"
@@ -184,7 +183,10 @@
             android:id="@+id/btnContinue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginBottom="12dp"
             android:background="@drawable/bac1"
             >
 
