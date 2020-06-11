@@ -4,10 +4,17 @@
     <string name="currency" translatable="false">\u20B9</string>
     <string name="title_activity_main" translatable="false">MainActivity</string>
     <string name="txtCredits" translatable="false"><a href="http://www.google.com">Google</a></string>
+    <string name="uname">Name</string>
+    <string name="uphone">Phone</string>
+    <string name="urefrel">Referal Code</string>
 
-    <string name="sign_up" translatable="false"><u>Sign Up</u></string>
+    <string name="create">Create an Account?</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="sign_up"><u>Sign Up</u></string>
 
-    <string name="guest" translatable="false">Guest</string>
+    <string name="guest">Guest</string>
+    <string name="or_sign">Or Sign In as a</string>
 
     <string name="facebook_app_id" translatable="false">964749680607230</string>
     <string name="fb_login_protocol_scheme" translatable="false">fb964749680607230</string>

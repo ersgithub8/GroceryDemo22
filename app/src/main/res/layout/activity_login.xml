@@ -10,10 +10,39 @@
 
     <RelativeLayout
         android:background="@color/white"
-        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
+        <LinearLayout
+            android:id="@+id/laddan"
+            android:layout_margin="10dp"
+            android:background="@color/green"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:background="@color/white"
+                android:layout_margin="1dp"
+                android:id="@+id/eng"
+                android:padding="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Eng"
+                android:textColor="@color/green"
+                />
+            <TextView
+                android:background="@color/white"
+                android:layout_margin="1dp"
+                android:id="@+id/arab"
+                android:padding="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="عربى"
+                android:textColor="@color/green"
+                />
+        </LinearLayout>
+
         <TextView
             android:visibility="gone"
             android:layout_marginTop="20dp"
@@ -24,6 +53,7 @@
             android:background="@drawable/pinky"
             />
         <LinearLayout
+            android:layout_below="@id/laddan"
             android:id="@+id/rr1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,7 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/summervibes"
-                android:text="Sign In"
+                android:text="@string/btn_continue"
                 android:layout_gravity="center"
                 android:textSize="35dp"
                 android:textColor="@color/black"
@@ -95,17 +125,18 @@
             android:layout_marginRight="15dp"
             app:cardBackgroundColor="@color/white"
             app:cardElevation="4dp">
-        <EditText
+
+            <EditText
             android:id="@+id/et_login_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg2"
             android:drawablePadding="@dimen/space_10"
-            android:drawableLeft="@drawable/email"
+            android:drawableStart="@drawable/email"
             android:inputType="textEmailAddress"
             android:padding="@dimen/space_10"
             android:textColor="#000"
-            android:hint="Email"
+            android:hint="@string/email"
             android:textColorHint="@color/dark_gray"
             android:textSize="14sp" />
         </androidx.cardview.widget.CardView>
@@ -148,7 +179,7 @@
                 app:hintAnimationEnabled="false"
                 app:hintEnabled="false"
                 app:passwordToggleEnabled="true">
-        <EditText
+                <EditText
             android:id="@+id/et_login_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -158,10 +189,9 @@
             android:maxLength="10"
             android:padding="@dimen/space_10"
             android:textColor="#000"
-            android:hint="Password"
+            android:hint="@string/password"
             android:drawablePadding="@dimen/space_10"
             android:drawableStart="@drawable/password"
-            android:drawableLeft="@drawable/password"
             android:textColorHint="@color/dark_gray"
             android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -174,6 +204,7 @@
             android:layout_gravity="end"
             android:layout_marginTop="3dp"
             android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
             android:text="@string/forgot"
             android:textColor="@color/green"
             android:textSize="13sp"
@@ -289,6 +320,7 @@
             <TextView
                 android:backgroundTint="@color/green"
                 android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:layout_gravity="center"
                 android:layout_width="12dp"
                 android:layout_height="12dp"
@@ -296,18 +328,18 @@
                 />
             <TextView
                 android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:text="Create an Account?"
+                android:text="@string/create"
                 android:fontFamily="@font/bold"
                 android:textColor="@color/black"
                 />
             <TextView
                 android:id="@+id/btnRegister"
                 android:layout_gravity="center"
-                android:layout_marginLeft="7dp"
+                android:layout_marginStart="7dp"
+                android:layout_marginEnd="7dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
@@ -326,6 +358,7 @@
             android:orientation="horizontal"
             >
             <TextView
+                android:layout_marginEnd="20dp"
                 android:backgroundTint="@color/green"
                 android:layout_marginStart="20dp"
                 android:layout_gravity="center"
@@ -335,11 +368,10 @@
                 />
             <TextView
                 android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:text="Or Sign In as a "
+                android:text="@string/or_sign"
                 android:fontFamily="@font/bold"
                 android:textColor="@color/black"
                 />
@@ -348,7 +380,8 @@
                 android:padding="8dp"
                 android:background="@drawable/back_fb"
                 android:layout_gravity="center"
-                android:layout_marginLeft="7dp"
+                android:layout_marginStart="7dp"
+                android:layout_marginEnd="7dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"

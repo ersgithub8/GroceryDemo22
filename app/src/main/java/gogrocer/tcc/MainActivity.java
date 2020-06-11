@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     NavigationView navigationView;
     LinearLayout Change_Store;
     String Store_Count;
-SharedPreferences sharedPreferences;
+    SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -127,7 +127,6 @@ SharedPreferences sharedPreferences;
         Log.d("MYTAG", "This is your Firebase token" + token);
 
         sharedPreferences= getSharedPreferences("lan", Context.MODE_PRIVATE);
-
 
          editor = sharedPreferences.edit();
 
@@ -637,7 +636,6 @@ SharedPreferences sharedPreferences;
                 editor.putString("language", "english");
                 editor.apply();
 
-
                 recreate();
                 dialog.dismiss();
             }
@@ -651,8 +649,6 @@ SharedPreferences sharedPreferences;
 
                 editor.putString("language", "spanish");
                 editor.apply();
-
-
 
                 recreate();
                 dialog.dismiss();

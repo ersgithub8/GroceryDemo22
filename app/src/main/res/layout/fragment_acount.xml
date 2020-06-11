@@ -3,16 +3,37 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
+
+    <LinearLayout
+        android:id="@+id/laddan"
+        android:layout_margin="20dp"
         android:background="@color/green"
-        android:text="  Account"
-        android:textColor="@color/white"
-        android:layout_gravity="center_vertical"
-        android:gravity="center_vertical"
-        android:textSize="30sp"
-        />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:background="@color/white"
+            android:layout_margin="1dp"
+            android:id="@+id/eng"
+            android:padding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Eng"
+            android:textColor="@color/green"
+            />
+        <TextView
+            android:background="@color/white"
+            android:layout_margin="1dp"
+            android:id="@+id/arab"
+            android:padding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="عربى"
+            android:textColor="@color/green"
+            />
+    </LinearLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

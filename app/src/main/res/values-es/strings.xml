@@ -4,9 +4,22 @@
     <string name="currency"> ر.س</string>
     <string name="title_activity_main">Actividad principal</string>
     <string name="txtCredits"><a href="http://www.google.com">Google</a></string>
+    <string name="guest">Guest</string>
+    <string name="or_sign">Or Sign In as a</string>
+
+    <string name="create">Create an Account?</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="password">Password</string>
+    <string name="sign_up"><u>Sign Up</u></string>
+
+    <string name="uname">Name</string>
+    <string name="uphone">Phone</string>
+    <string name="urefrel">Referal Code</string>
+
+    <string name="email">Email</string>
+
 
     <string name="action_settings">Configuraciones</string>
 

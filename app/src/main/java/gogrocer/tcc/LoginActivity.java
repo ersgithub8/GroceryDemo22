@@ -2,6 +2,8 @@ package gogrocer.tcc;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -60,8 +62,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private static String TAG = LoginActivity.class.getSimpleName();
     private RelativeLayout btn_continue;
     private EditText et_password, et_email;
-    private TextView tv_password, tv_email,btn_register, btn_forgot;
+    private TextView tv_password, tv_email,btn_register, btn_forgot,lEnglish,lSpanish;
     private Session_management sessionManagement;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
 
     //-------------------------------------------------
@@ -91,6 +95,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // remove title
         setContentView(R.layout.activity_login);
 
+        lEnglish = findViewById(R.id.eng);
+        lSpanish = findViewById(R.id.arab);
         et_password = (EditText) findViewById(R.id.et_login_pass);
         et_email = (EditText) findViewById(R.id.et_login_email);
         tv_password = (TextView) findViewById(R.id.tv_login_password);
@@ -118,6 +124,53 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         textView.setText("Sign In with Google");
 
         callbackManager=CallbackManager.Factory.create();
+
+
+        sharedPreferences= getSharedPreferences("lan", Context.MODE_PRIVATE);
+
+        String current_lan = sharedPreferences.getString("language",null);
+
+        if (current_lan.equals("english")){
+            lEnglish.setBackgroundColor(Color.parseColor("#7abcbc"));
+            lEnglish.setTextColor(Color.parseColor("#ffffff"));
+        }
+        else if (current_lan.equals("spanish")){
+            lSpanish.setBackgroundColor(Color.parseColor("#7abcbc"));
+            lSpanish.setTextColor(Color.parseColor("#ffffff"));
+        }
+        else {
+            lEnglish.setBackgroundColor(Color.parseColor("#7abcbc"));
+            lEnglish.setTextColor(Color.parseColor("#ffffff"));
+        }
+
+        editor = sharedPreferences.edit();
+
+        lEnglish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LocaleHelper.setLocale(getApplication(),"en");
+                getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+
+                editor.putString("language", "english");
+                editor.apply();
+
+                recreate();
+            }
+        });
+        lSpanish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LocaleHelper.setLocale(getApplication(),"ar");
+                getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                editor.putString("language", "spanish");
+                editor.apply();
+
+                recreate();
+
+            }
+        });
 
 
         loginButton.setReadPermissions(Arrays.asList("email","public_profile"));
