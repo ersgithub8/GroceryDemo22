@@ -125,7 +125,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         TextView textView = (TextView) signInButton.getChildAt(0);
-        textView.setText("Google");
+        textView.setText("Sign In with Google");
 
 
         callbackManager=CallbackManager.Factory.create();
