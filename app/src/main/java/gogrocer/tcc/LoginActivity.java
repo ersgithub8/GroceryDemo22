@@ -58,9 +58,9 @@ import util.Session_management;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static String TAG = LoginActivity.class.getSimpleName();
-    private RelativeLayout btn_continue, btn_register;
+    private RelativeLayout btn_continue;
     private EditText et_password, et_email;
-    private TextView tv_password, tv_email, btn_forgot;
+    private TextView tv_password, tv_email,btn_register, btn_forgot;
     private Session_management sessionManagement;
 
 
@@ -96,7 +96,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         tv_password = (TextView) findViewById(R.id.tv_login_password);
         tv_email = (TextView) findViewById(R.id.tv_login_email);
         btn_continue = (RelativeLayout) findViewById(R.id.btnContinue);
-        btn_register = (RelativeLayout) findViewById(R.id.btnRegister);
+        btn_register = (TextView) findViewById(R.id.btnRegister);
         btn_forgot = (TextView) findViewById(R.id.btnForgot);
 
         btn_continue.setOnClickListener(this);
@@ -111,14 +111,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         signInButton=findViewById(R.id.gsignin);
         loginButton=findViewById(R.id.loginfb);
 
-
 //        auth=FirebaseAuth.getInstance();
 //        reference= FirebaseDatabase.getInstance().getReference();
 
-
         TextView textView = (TextView) signInButton.getChildAt(0);
-        textView.setText("Google");
-
+        textView.setText("Sign In with Google");
 
         callbackManager=CallbackManager.Factory.create();
 
@@ -460,5 +457,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onBackPressed() {
         finishAffinity();
+    }
+
+    public void guest(View view) {
+
     }
 }

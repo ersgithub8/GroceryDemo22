@@ -5,6 +5,9 @@
     <string name="title_activity_main" translatable="false">MainActivity</string>
     <string name="txtCredits" translatable="false"><a href="http://www.google.com">Google</a></string>
 
+    <string name="sign_up" translatable="false"><u>Sign Up</u></string>
+
+    <string name="guest" translatable="false">Guest</string>
 
     <string name="facebook_app_id" translatable="false">964749680607230</string>
     <string name="fb_login_protocol_scheme" translatable="false">fb964749680607230</string>
@@ -38,7 +41,7 @@
     <string name="nav_contact" translatable="false">Contact Us</string>
     <string name="nav_share" translatable="false">Share with Friends</string>
     <string name="nav_logout" translatable="false">Logout</string>
-    <string name="btn_continue" translatable="false">Sign In</string>
+    <string name="btn_continue" translatable="false"><b>Sign In</b></string>
     <string name="btn_Register" translatable="false">Sign Up</string>
     <string name="rewards_points" translatable="false">Rewards Points</string>
     <string name="rech_wallet" translatable="false">Recharge Wallet</string>
@@ -147,7 +150,7 @@
     <string name="thanks" translatable="false">Thanks Order</string>
     <string name="paytm" translatable="false">Paytm</string>
     <!-- Forgot password -->
-    <string name="forgot">Forgot Password ?</string>
+    <string name="forgot" ><i>Forgot Password ? </i></string>
 
     <!-- Code message and concat  string -->
     <string name="my_order" translatable="false">My Order</string>
