@@ -154,8 +154,6 @@ public class Product_fragment extends Fragment {
     /*
      * Method to make json object request where json response starts wtih
      */
-
-
     //Get Shop By Catogary
     private void makeGetCategoryRequest(final String parent_id) {
         String tag_json_obj = "json_category_req";
@@ -223,7 +221,6 @@ public class Product_fragment extends Fragment {
         loading.getProgressHelper().setBarColor(getResources().getColor(R.color.green));
 
 //        loading.show();
-
 
         String tag_json_obj = "json_product_req";
         Map<String, String> params = new HashMap<String, String>();

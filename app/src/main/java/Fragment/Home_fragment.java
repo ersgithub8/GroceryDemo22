@@ -71,7 +71,6 @@ import util.ConnectivityReceiver;
 import util.CustomVolleyJsonRequest;
 import util.RecyclerTouchListener;
 
-
 public class Home_fragment extends Fragment {
     private static String TAG = Home_fragment.class.getSimpleName();
     private SliderLayout imgSlider, banner_slider, featuredslider;

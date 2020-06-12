@@ -3,6 +3,7 @@ package Fragment;
 import android.app.Fragment;
 import android.os.Bundle;
 
+import Adapter.Category_adapter;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSmoothScroller;
@@ -38,21 +39,26 @@ import Adapter.Home_Icon_Adapter;
 import Config.BaseURL;
 import Model.Home_Icon_model;
 import gogrocer.tcc.AppController;
+import gogrocer.tcc.Inerface;
 import gogrocer.tcc.R;
 import util.CustomVolleyJsonRequest;
 
 import static gogrocer.tcc.AppController.TAG;
 
-public class Category_Fragment extends Fragment {
-    private Home_Icon_Adapter menu_adapter;
+public class Category_Fragment extends Fragment implements Inerface {
+    private Category_adapter menu_adapter;
     private ShimmerFrameLayout mShimmerViewContainer;
     private List<Home_Icon_model> menu_models = new ArrayList<>();
     private RecyclerView rv_headre_icons;
+    RecyclerView recyclerView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view= inflater.inflate(R.layout.fragment_category, container, false);
+        View view = inflater.inflate(R.layout.fragment_category, container, false);
+
+        recyclerView = (RecyclerView) view.findViewById(R.id.rect);
 
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
 
@@ -74,7 +80,7 @@ public class Category_Fragment extends Fragment {
             }
         };
 
-        rv_headre_icons.setLayoutManager((new GridLayoutManager(getActivity(),1)));
+        rv_headre_icons.setLayoutManager((new GridLayoutManager(getActivity(), 1)));
 
 //        rv_headre_icons.setHasFixedSize(true);
 //        rv_headre_icons.setItemViewCacheSize(10);
@@ -86,6 +92,7 @@ public class Category_Fragment extends Fragment {
 
         return view;
     }
+
     private void make_menu_items() {
         String tag_json_obj = "json_category_req";
 
@@ -113,7 +120,7 @@ public class Category_Fragment extends Fragment {
                             Type listType = new TypeToken<List<Home_Icon_model>>() {
                             }.getType();
                             menu_models = gson.fromJson(response.getString("data"), listType);
-                            menu_adapter = new Home_Icon_Adapter(menu_models);
+                            menu_adapter = new Category_adapter(menu_models, Category_Fragment.this);
                             rv_headre_icons.setAdapter(menu_adapter);
                             menu_adapter.notifyDataSetChanged();
                         }
@@ -148,5 +155,10 @@ public class Category_Fragment extends Fragment {
     public void onPause() {
         super.onPause();
         mShimmerViewContainer.stopShimmerAnimation();
+    }
+
+    @Override
+    public void onclick(String cat_id) {
+        Toast.makeText(getActivity(),cat_id,Toast.LENGTH_SHORT).show();
     }
 }

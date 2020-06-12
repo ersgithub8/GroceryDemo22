@@ -58,6 +58,7 @@ import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -95,8 +96,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Session_management sessionManagement;
     private Menu nav_menu;
     ImageView imageView;
-    TextView bot_store,bot_cat,bot_fav,bot_cart,bot_profile;
+    LinearLayout bot_store,bot_cat,bot_fav,bot_profile;
     LinearLayout viewpa;
+    RelativeLayout bot_cart;
     Toolbar toolbar;
     String language="";
     LinearLayout My_Order, My_Reward, My_Walllet, My_Cart;
@@ -134,7 +136,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
          bot_cat=findViewById(R.id.bot_categories);
-        bot_cart=findViewById(R.id.bot_cart);
+         bot_fav = findViewById(R.id.bot_fav);
+         bot_cart= (RelativeLayout) findViewById(R.id.bot_cart);
         bot_store=findViewById(R.id.bot_store);
         bot_profile=findViewById(R.id.bot_profile);
          bot_cart.setOnClickListener(new View.OnClickListener() {
@@ -872,6 +875,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }).executeAsync();
     }
+
 
 
 }

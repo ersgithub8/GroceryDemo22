@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:shimmer="http://schemas.android.com/tools"
     android:background="@color/white"
-    android:orientation="vertical">
+    >
 
     <LinearLayout
+        android:id="@+id/tempy"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="57dp"
@@ -68,23 +69,33 @@
             android:textSize="25sp"
             />
 
-
     </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_mail_outline_black_24dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="20dp"
+        />
+
     <ScrollView
+        android:layout_below="@id/tempy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/light_gray"
         android:fillViewport="true"
         android:scrollbars="vertical">
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/light_gray"
             android:orientation="vertical">
 
 
-
-        <LinearLayout
+            <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/light_gray"
@@ -144,6 +155,7 @@
                 </androidx.recyclerview.widget.RecyclerView>
             </LinearLayout>
             <com.facebook.shimmer.ShimmerFrameLayout
+
                 android:id="@+id/shimmer_view_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -166,17 +178,11 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:background="#ffffff"
                 android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="#ffffff"
-                    android:orientation="vertical">
-
-                    <androidx.recyclerview.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                         android:layout_marginTop="20dp"
                         android:layout_marginBottom="50dp"
                         android:id="@+id/rv_stores"
@@ -185,12 +191,10 @@
                         android:scrollbars="none"
                         app:layout_behavior="@string/appbar_scrolling_view_behavior"
                         />
-
-
-                </LinearLayout>
             </LinearLayout>
             </LinearLayout>
 
-        </LinearLayout>
+        </RelativeLayout>
+
     </ScrollView>
-</LinearLayout>
+</RelativeLayout>

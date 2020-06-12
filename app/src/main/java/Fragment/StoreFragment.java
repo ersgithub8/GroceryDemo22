@@ -28,6 +28,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -65,6 +66,7 @@ public class StoreFragment extends Fragment {
     private RecyclerView rv_headre_icons;
     List<Store_Model> store_models=new ArrayList<>();
     Store_Adapter store_adapter;
+    FloatingActionButton floatingActionButton;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -76,6 +78,15 @@ public class StoreFragment extends Fragment {
         shimmy = view.findViewById(R.id.shimmer_view_container2);
 
         makeGetBannerSliderRequest();
+
+        floatingActionButton = view.findViewById(R.id.fab_id);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(),"Still Working",Toast.LENGTH_SHORT).show();
+            }
+        });
+
         Search_layout = (LinearLayout) view.findViewById(R.id.search_layout);
         Search_layout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -343,4 +354,5 @@ public class StoreFragment extends Fragment {
         mShimmerViewContainer.stopShimmerAnimation();
         shimmy.startShimmerAnimation();
     }
+
 }
