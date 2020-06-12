@@ -21,6 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -44,6 +45,7 @@ import static gogrocer.tcc.AppController.TAG;
 
 public class Category_Fragment extends Fragment {
     private Home_Icon_Adapter menu_adapter;
+    private ShimmerFrameLayout mShimmerViewContainer;
     private List<Home_Icon_model> menu_models = new ArrayList<>();
     private RecyclerView rv_headre_icons;
     @Override
@@ -51,6 +53,8 @@ public class Category_Fragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view= inflater.inflate(R.layout.fragment_category, container, false);
+
+        mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
 
         rv_headre_icons = (RecyclerView) view.findViewById(R.id.collapsing_recycler);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity()) {
@@ -102,6 +106,9 @@ public class Category_Fragment extends Fragment {
                     if (response != null && response.length() > 0) {
                         Boolean status = response.getBoolean("responce");
                         if (status) {
+                            mShimmerViewContainer.stopShimmerAnimation();
+                            mShimmerViewContainer.setVisibility(View.GONE);
+
                             Gson gson = new Gson();
                             Type listType = new TypeToken<List<Home_Icon_model>>() {
                             }.getType();
@@ -129,5 +136,17 @@ public class Category_Fragment extends Fragment {
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mShimmerViewContainer.startShimmerAnimation();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mShimmerViewContainer.stopShimmerAnimation();
     }
 }

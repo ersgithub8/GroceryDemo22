@@ -513,6 +513,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void guest(View view) {
-
+        Intent startmain = new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(startmain);
     }
 }

@@ -13,7 +13,8 @@
         android:layout_height="57dp"
         android:layout_gravity="bottom"
         android:background="@color/green"
-        android:gravity="bottom">
+        android:gravity="bottom"
+        >
 
         <LinearLayout
             android:id="@+id/search_layout"
@@ -101,6 +102,27 @@
                 </com.daimajia.slider.library.SliderLayout>
             </LinearLayout>
 
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmer_view_container2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                shimmer:duration="500">
+
+                <!-- Adding 7 rows of placeholders -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <include layout="@layout/data_holder2" />
+                    <include layout="@layout/data_holder2" />
+                    <include layout="@layout/data_holder2" />
+                    <include layout="@layout/data_holder2" />
+                </LinearLayout>
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -134,9 +156,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-                    <include layout="@layout/data_holder" />
-                    <include layout="@layout/data_holder" />
-                    <include layout="@layout/data_holder" />
+                    <include layout="@layout/data_holder1" />
+                    <include layout="@layout/data_holder1" />
+                    <include layout="@layout/data_holder1" />
 
                 </LinearLayout>
 

@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:shimmer="http://schemas.android.com/tools"
     android:orientation="vertical"
     tools:context="Fragment.Category_Fragment">
 
@@ -15,30 +16,55 @@
         android:textStyle="bold"
         android:padding="7dp"
         />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-    <androidx.recyclerview.widget.RecyclerView
+        <com.facebook.shimmer.ShimmerFrameLayout
+
+            android:id="@+id/shimmer_view_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            shimmer:duration="500"
+            >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <include layout="@layout/data_holder2" />
+                <include layout="@layout/data_holder2" />
+                <include layout="@layout/data_holder2" />
+                <include layout="@layout/data_holder2" />
+                <include layout="@layout/data_holder2" />
+            </LinearLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/collapsing_recycler"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-
-        android:layout_marginLeft="5dp"
-        >
-
-    </androidx.recyclerview.widget.RecyclerView>
+        android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+        />
 
         <View
             android:id="@+id/view"
-            android:layout_width="1dp"
+            android:layout_width="0.6dp"
             android:layout_height="match_parent"
             android:background="@color/black"
              />
 
+<!--        <fragment-->
+<!--            -->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_margin="8dp"-->
+<!--            />-->
 
 
     </LinearLayout>

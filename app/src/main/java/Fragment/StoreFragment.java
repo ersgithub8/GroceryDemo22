@@ -61,7 +61,7 @@ public class StoreFragment extends Fragment {
     RecyclerView stores;
     LinearLayout Search_layout;
     String storeid,getid;
-    private ShimmerFrameLayout mShimmerViewContainer;
+    private ShimmerFrameLayout mShimmerViewContainer,shimmy;
     private RecyclerView rv_headre_icons;
     List<Store_Model> store_models=new ArrayList<>();
     Store_Adapter store_adapter;
@@ -73,6 +73,8 @@ public class StoreFragment extends Fragment {
         banner_slider = (SliderLayout) view.findViewById(R.id.relative_banner);
         stores=(RecyclerView)view.findViewById(R.id.rv_stores);
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
+        shimmy = view.findViewById(R.id.shimmer_view_container2);
+
         makeGetBannerSliderRequest();
         Search_layout = (LinearLayout) view.findViewById(R.id.search_layout);
         Search_layout.setOnClickListener(new View.OnClickListener() {
@@ -167,8 +169,6 @@ public class StoreFragment extends Fragment {
                 BaseURL.getStores, params, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-
-
 
                 try {
                     mShimmerViewContainer.stopShimmerAnimation();
@@ -294,9 +294,13 @@ public class StoreFragment extends Fragment {
                 Log.d(TAG, response.toString());
 
                 try {
+
                     if (response != null && response.length() > 0) {
                         Boolean status = response.getBoolean("responce");
                         if (status) {
+                            shimmy.stopShimmerAnimation();
+                            shimmy.setVisibility(View.GONE);
+
                             Gson gson = new Gson();
                             Type listType = new TypeToken<List<Home_Icon_model>>() {
                             }.getType();
@@ -325,15 +329,18 @@ public class StoreFragment extends Fragment {
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 
     }
+
     @Override
     public void onResume() {
         super.onResume();
         mShimmerViewContainer.startShimmerAnimation();
+        shimmy.startShimmerAnimation();
     }
 
     @Override
     public void onPause() {
-        mShimmerViewContainer.stopShimmerAnimation();
         super.onPause();
+        mShimmerViewContainer.stopShimmerAnimation();
+        shimmy.startShimmerAnimation();
     }
 }

@@ -114,16 +114,15 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     public void go_next() {
-        /*if(sessionManagement.isLoggedIn()) {*/
+        if(sessionManagement.isLoggedIn()) {
         Intent startmain = new Intent(SplashActivity.this, MainActivity.class);
         startActivity(startmain);
-        /*}else{
+        }else{
             Intent startmain = new Intent(SplashActivity.this, LoginActivity.class);
             startActivity(startmain);
-        }*/
+        }
         finish();
     }
-
 
     public void openPermissionScreen() {
         // startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
