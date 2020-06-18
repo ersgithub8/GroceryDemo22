@@ -10,7 +10,7 @@
     app:cardUseCompatPadding="true"
     card_view:cardCornerRadius="4dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -24,35 +24,39 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             app:civ_border_color="@color/gray"
+            android:layout_centerHorizontal="true"
             app:civ_border_width="1dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/icon" />
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_below="@id/iv_subcat_img"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:orientation="vertical"
+            android:gravity="center_horizontal"
             app:layout_constraintLeft_toRightOf="@+id/iv_subcat_img"
             app:layout_constraintRight_toLeftOf="@+id/iv_subcat_minus"
             app:layout_constraintTop_toTopOf="@+id/iv_subcat_img">
 
             <Fonts.LatoBLack
                 android:id="@+id/tv_subcat_title"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text=""
+                android:text="Name"
+
                 android:textColor="#000"
                 android:textSize="@dimen/text_size_small" />
 
             <Fonts.LatoBLack
                 android:id="@+id/tv_subcat_price"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
+                android:text="Price"
                 android:textColor="#000"
                 android:textSize="@dimen/text_size_X_small" />
 
@@ -61,6 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/space_3"
                 android:layout_marginTop="2dp"
+                android:visibility="gone"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -94,7 +99,7 @@
                 android:layout_width="130dp"
                 android:layout_height="25dp"
                 android:layout_marginBottom="@dimen/space_3"
-
+                android:visibility="gone"
                 android:layout_marginTop="@dimen/space_4"
                 android:background="@drawable/slider_shape"
                 android:gravity="center_vertical">
@@ -131,6 +136,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="8dp"
+            android:visibility="gone"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/add"
@@ -142,6 +148,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/space_8"
             android:layout_marginEnd="@dimen/space_8"
+            android:visibility="gone"
             android:layout_marginRight="@dimen/space_8"
             android:layout_marginTop="@dimen/space_8"
             android:text="0"
@@ -155,6 +162,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/space_8"
             android:layout_marginRight="@dimen/space_8"
+            android:visibility="gone"
             android:background="@color/green"
             app:layout_constraintBottom_toBottomOf="@+id/iv_subcat_plus"
             app:layout_constraintRight_toLeftOf="@+id/tv_subcat_contetiy"
@@ -164,6 +172,7 @@
         <Fonts.LatoBLack
             android:id="@+id/tv_subcat_add"
             android:layout_width="0dp"
+            android:visibility="gone"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_8"
             android:background="@drawable/bg_rounded_button"
@@ -179,11 +188,12 @@
         <ImageView
             android:id="@+id/iv_subcat_remove"
             android:layout_width="25dp"
+            android:visibility="gone"
             android:layout_height="25dp"
             android:layout_marginStart="4dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_close" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
 </androidx.cardview.widget.CardView>
