@@ -404,6 +404,7 @@ SharedPreferences preferences;
     public void removefromfav(String userid, String productid, final ImageView imageView){
         final SweetAlertDialog loading=new SweetAlertDialog(context,SweetAlertDialog.PROGRESS_TYPE)
                 .setTitleText("Removing From Favourate");
+        loading.setCancelable(false);
         loading.show();
         String tag_json_obj = "json_category_req";
         Map<String, String> params = new HashMap<String, String>();
@@ -456,6 +457,7 @@ SharedPreferences preferences;
     public void addinfav(String userid, final String productid, final ImageView imageView){
         final SweetAlertDialog loading=new SweetAlertDialog(context,SweetAlertDialog.PROGRESS_TYPE)
                 .setTitleText("Adding in Favourate");
+        loading.setCancelable(false);
         loading.show();
 
 
