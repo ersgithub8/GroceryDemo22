@@ -136,6 +136,8 @@ public class BaseURL {
 
     public static final String PUSH_NOTIFICATION = "pushNotification";
 
+    public static final String addfavourate=BASE_URL+"index.php/Api/save_f_products";
+    public static final String removefavourate=BASE_URL+"index.php/Api/delete_f_products";
 
 
 }

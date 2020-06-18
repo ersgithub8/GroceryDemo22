@@ -13,17 +13,35 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.NoConnectionError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.TimeoutError;
+import com.android.volley.VolleyError;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import Config.BaseURL;
+import Model.Home_Icon_model;
 import Model.Product_model;
+import cn.pedant.SweetAlert.SweetAlertDialog;
+import gogrocer.tcc.AppController;
 import gogrocer.tcc.MainActivity;
 import gogrocer.tcc.R;
+import util.CustomVolleyJsonRequest;
 import util.DatabaseHandler;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -35,6 +53,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
     private Context context;
     private DatabaseHandler dbcart;
     String language;
+    boolean favcheckk=false;
 SharedPreferences preferences;
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView tv_title, tv_price, tv_reward, tv_total, tv_contetiy, tv_add;
@@ -141,13 +160,15 @@ SharedPreferences preferences;
                             modelList.get(position).getProduct_name(),
                             modelList.get(position).getProduct_description(),
                             "",
-                            position, tv_contetiy.getText().toString());
+                            position, tv_contetiy.getText().toString()
+                            ,modelList.get(position).getProduct_id());
                 }else {
                     showProductDetail(modelList.get(position).getProduct_image(),
                             modelList.get(position).getProduct_name_arb(),
                             modelList.get(position).getProduct_description_arb(),
                             "",
-                            position, tv_contetiy.getText().toString());
+                            position, tv_contetiy.getText().toString()
+                    ,modelList.get(position).getProduct_id());
                 }
             }
 
@@ -246,7 +267,9 @@ SharedPreferences preferences;
 
     }
 
-    private void showProductDetail(String image, String title, String description, String detail, final int position, String qty) {
+    private void showProductDetail(String image, String title, String description, String detail, final int position, String qty
+    , final String productid) {
+
 
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -255,6 +278,7 @@ SharedPreferences preferences;
         dialog.show();
 
         ImageView iv_image = (ImageView) dialog.findViewById(R.id.iv_product_detail_img);
+        final ImageView iv_fav_image = (ImageView) dialog.findViewById(R.id.fav_product);
         final ImageView iv_minus = (ImageView) dialog.findViewById(R.id.iv_subcat_minus);
         final ImageView iv_plus = (ImageView) dialog.findViewById(R.id.iv_subcat_plus);
         TextView tv_title = (TextView) dialog.findViewById(R.id.tv_product_detail_title);
@@ -362,6 +386,173 @@ SharedPreferences preferences;
             }
         });
 
+        checkfavourate("23",productid,iv_fav_image);
+        iv_fav_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(favcheckk){
+                    removefromfav("23",productid,iv_fav_image);
+                }else{
+                    addinfav("23",productid,iv_fav_image);
+                }
+//                Toast.makeText(context, "abc", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
+    public void removefromfav(String userid, String productid, final ImageView imageView){
+        final SweetAlertDialog loading=new SweetAlertDialog(context,SweetAlertDialog.PROGRESS_TYPE)
+                .setTitleText("Removing From Favourate");
+        loading.show();
+        String tag_json_obj = "json_category_req";
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("user_id", userid);
+        params.put("prod_id",productid);
+
+        CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
+                BaseURL.removefavourate, params, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+
+
+                try {
+                    loading.dismiss();
+//                    if (response != null && response.length() > 0) {
+                        Boolean status = response.getBoolean("response");
+                        if (status) {
+
+                            loading.dismiss();
+                            favcheckk=false;
+                            imageView.setImageResource(R.drawable.heartnf);
+
+                        }
+//                    }
+                } catch (JSONException e) {
+                    loading.dismiss();
+                    e.printStackTrace();
+                    Toast.makeText(context, e+"", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Toast.makeText(context.getApplicationContext(), context.getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                loading.dismiss();
+                }
+            }
+        });
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+
+
+    }
+    public void addinfav(String userid, final String productid, final ImageView imageView){
+        final SweetAlertDialog loading=new SweetAlertDialog(context,SweetAlertDialog.PROGRESS_TYPE)
+                .setTitleText("Adding in Favourate");
+        loading.show();
+
+
+        String tag_json_obj = "json_category_req";
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("user_id", userid);
+        params.put("prod_id",productid);
+
+        CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
+                BaseURL.addfavourate, params, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+
+
+                try {
+                    loading.dismiss();
+//                    if (response != null && response.length() > 0) {
+                        Boolean status = response.getBoolean("response");
+                        if (status) {
+                            favcheckk=true;
+//                            Toast.makeText(context, "ADD", Toast.LENGTH_SHORT).show();
+                            imageView.setImageResource(R.drawable.heartf);
+
+                        }
+//                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, e+"", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Toast.makeText(context.getApplicationContext(), context.getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+
+                    loading.dismiss();
+                }
+            }
+        });
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
+    public void checkfavourate(String userid, final String productid, final ImageView fav){
+        String tag_json_obj = "json_category_req";
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("user_id", userid);
+
+        CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
+                BaseURL.GET_FAVOURITE, params, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+
+
+                try {
+                    if (response != null && response.length() > 0) {
+                        Boolean status = response.getBoolean("responce");
+                        if (status) {
+                            JSONArray array=response.getJSONArray("data");
+                           for (int i =0 ;i<array.length();i++){
+                               JSONObject object=array.getJSONObject(i);
+                               if(productid.equals(object.getString("product_id"))){
+                                   fav.setVisibility(View.VISIBLE);
+                                   fav.setImageResource(R.drawable.heartf);
+                                   favcheckk=true;
+                                   return;
+                               }else{
+                                   fav.setVisibility(View.VISIBLE);
+                                   fav.setImageResource(R.drawable.heartnf);
+                                    favcheckk=false;
+                               }
+                           }
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Toast.makeText(context.getApplicationContext(), context.getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
 }
