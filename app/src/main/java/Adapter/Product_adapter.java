@@ -278,6 +278,8 @@ SharedPreferences preferences;
         dialog.setContentView(R.layout.dialog_product_detail);
         dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
         dialog.show();
+        final TextView  tv_price, tv_reward, tv_total;
+        ImageView iv_logo, iv_remove;
 
         ImageView iv_image = (ImageView) dialog.findViewById(R.id.iv_product_detail_img);
         final ImageView iv_fav_image = (ImageView) dialog.findViewById(R.id.fav_product);
@@ -287,6 +289,18 @@ SharedPreferences preferences;
         TextView tv_detail = (TextView) dialog.findViewById(R.id.tv_product_detail);
         final TextView tv_contetiy = (TextView) dialog.findViewById(R.id.tv_subcat_contetiy);
         final TextView tv_add = (TextView) dialog.findViewById(R.id.tv_subcat_add);
+
+
+        Double price = Double.parseDouble(modelList.get(position).getPrice());
+        Double reward = Double.parseDouble(modelList.get(position).getRewards());
+        Double items = Double.parseDouble(dbcart.getInCartItemQty(modelList.get(position).getProduct_id()));
+
+
+        tv_price = (TextView) dialog.findViewById(R.id.tv_subcat_price);
+        tv_reward = (TextView) dialog.findViewById(R.id.tv_reward_point);
+        tv_total = (TextView) dialog.findViewById(R.id.tv_subcat_total);
+        iv_logo = (ImageView) dialog.findViewById(R.id.iv_subcat_img);
+        iv_remove = (ImageView) dialog.findViewById(R.id.iv_subcat_remove);
 
         tv_title.setText(title);
         tv_detail.setText(detail);
@@ -298,6 +312,27 @@ SharedPreferences preferences;
                 .centerCrop()
                 .crossFade()
                 .into(iv_image);
+       tv_reward.setText(modelList.get(position).getRewards());
+       tv_price.setText(context.getResources().getString(R.string.tv_pro_price) + modelList.get(position).getUnit_value() + " " +
+              modelList.get(position).getUnit() + modelList.get(position).getPrice()+ context.getResources().getString(R.string.currency));
+        if (Integer.valueOf(modelList.get(position).getStock())<=0){
+           tv_add.setText(R.string.tv_out);
+           tv_add.setTextColor(context.getResources().getColor(R.color.black));
+           tv_add.setBackgroundColor(context.getResources().getColor(R.color.gray));
+           tv_add.setEnabled(false);
+           iv_minus.setEnabled(false);
+           iv_plus.setEnabled(false);
+        }
+
+        else  if (dbcart.isInCart(modelList.get(position).getProduct_id())) {
+           tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
+            tv_contetiy.setText(dbcart.getCartItemQty(modelList.get(position).getProduct_id()));
+        } else {
+            tv_add.setText(context.getResources().getString(R.string.tv_pro_add));
+        }
+
+        tv_total.setText("" + price * items);
+        tv_reward.setText("" + reward * items);
         if (Integer.valueOf(modelList.get(position).getStock())<=0){
             tv_add.setText(R.string.tv_out);
             tv_add.setTextColor(context.getResources().getColor(R.color.black));
@@ -357,6 +392,7 @@ SharedPreferences preferences;
 
                 Double items = Double.parseDouble(dbcart.getInCartItemQty(map.get("product_id")));
                 Double price = Double.parseDouble(map.get("price"));
+                tv_total.setText("" + price * items);
                 ((MainActivity) context).setCartCounter("" + dbcart.getCartCount());
 
                 notifyItemChanged(position);

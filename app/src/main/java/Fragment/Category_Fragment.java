@@ -36,11 +36,8 @@ import java.util.List;
 import java.util.Map;
 
 import Adapter.Home_Icon_Adapter;
-import Adapter.Product_adapter;
 import Config.BaseURL;
 import Model.Home_Icon_model;
-import Model.Product_model;
-import cn.pedant.SweetAlert.SweetAlertDialog;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.Inerface;
 import gogrocer.tcc.R;
@@ -48,15 +45,13 @@ import util.CustomVolleyJsonRequest;
 
 import static gogrocer.tcc.AppController.TAG;
 
-public class Category_Fragment extends Fragment  {
+public class Category_Fragment extends Fragment implements Inerface {
     private Category_adapter menu_adapter;
     private ShimmerFrameLayout mShimmerViewContainer;
     private List<Home_Icon_model> menu_models = new ArrayList<>();
     private RecyclerView rv_headre_icons;
     RecyclerView recyclerView;
 
-    Product_adapter product_adapter;
-    List<Product_model> product_models=new ArrayList<>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -68,8 +63,6 @@ public class Category_Fragment extends Fragment  {
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
 
         rv_headre_icons = (RecyclerView) view.findViewById(R.id.collapsing_recycler);
-
-
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity()) {
 
             @Override
@@ -88,8 +81,6 @@ public class Category_Fragment extends Fragment  {
         };
 
         rv_headre_icons.setLayoutManager((new GridLayoutManager(getActivity(), 1)));
-        recyclerView.setLayoutManager((new GridLayoutManager(getActivity(),3)));
-
 
 //        rv_headre_icons.setHasFixedSize(true);
 //        rv_headre_icons.setItemViewCacheSize(10);
@@ -129,11 +120,9 @@ public class Category_Fragment extends Fragment  {
                             Type listType = new TypeToken<List<Home_Icon_model>>() {
                             }.getType();
                             menu_models = gson.fromJson(response.getString("data"), listType);
-                            menu_adapter = new Category_adapter(menu_models );
+                            menu_adapter = new Category_adapter(menu_models, Category_Fragment.this);
                             rv_headre_icons.setAdapter(menu_adapter);
                             menu_adapter.notifyDataSetChanged();
-
-                            getProducts(menu_models.get(0).getId());
                         }
                     }
                 } catch (JSONException e) {
@@ -155,63 +144,6 @@ public class Category_Fragment extends Fragment  {
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 
     }
-
-
-    public void getProducts(String cat_id){
-
-
-
-        String tag_json_obj = "json_category_req";
-
-        Map<String, String> params = new HashMap<String, String>();
-        params.put("cat_id", cat_id);
-
-       /* if (parent_id != null && parent_id != "") {
-        }*/
-
-        CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
-                BaseURL.GET_PRODUCT_URL, params, new Response.Listener<JSONObject>() {
-
-            @Override
-            public void onResponse(JSONObject response) {
-                Log.d(TAG, response.toString());
-
-                try {
-                    if (response != null && response.length() > 0) {
-                        Boolean status = response.getBoolean("responce");
-                        if (status) {
-//                            mShimmerViewContainer.stopShimmerAnimation();
-//                            mShimmerViewContainer.setVisibility(View.GONE);
-
-                            Gson gson = new Gson();
-                            Type listType = new TypeToken<List<Product_model>>() {
-                            }.getType();
-                            product_models = gson.fromJson(response.getString("data"), listType);
-                            product_adapter = new Product_adapter(product_models,getActivity());
-                            recyclerView.setAdapter(product_adapter);
-                            product_adapter.notifyDataSetChanged();
-                        }
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.d(TAG, "Error: " + error.getMessage());
-                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
-
-    }
-
 
     @Override
     public void onResume() {
@@ -225,8 +157,8 @@ public class Category_Fragment extends Fragment  {
         mShimmerViewContainer.stopShimmerAnimation();
     }
 
-//    @Override
-//    public void onclick(String cat_id) {
-//        Toast.makeText(getActivity(),cat_id,Toast.LENGTH_SHORT).show();
-//    }
+    @Override
+    public void onclick(String cat_id) {
+        Toast.makeText(getActivity(),cat_id,Toast.LENGTH_SHORT).show();
+    }
 }
