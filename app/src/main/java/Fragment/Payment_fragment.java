@@ -44,6 +44,7 @@ import Config.SharedPref;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.MainActivity;
 import gogrocer.tcc.PaymentGatWay;
+import gogrocer.tcc.ThanksActivity;
 import gogrocer.tcc.networkconnectivity.NetworkConnection;
 import gogrocer.tcc.networkconnectivity.NetworkError;
 
@@ -345,15 +346,21 @@ public class Payment_fragment extends Fragment {
                         String msg = response.getString("data");
                         String msg_arb=response.getString("data_arb");
                         db_cart.clearCart();
-                        Bundle args = new Bundle();
-                        Fragment fm = new Thanks_fragment();
-                        args.putString("msg", msg);
-                        args.putString("msgarb",msg_arb);
-                        fm.setArguments(args);
-                        FragmentManager fragmentManager = getFragmentManager();
-                        fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-                                .addToBackStack(null).commit();
+                        Intent myIntent = new Intent(getActivity(), ThanksActivity.class);
+                        myIntent.putExtra("msg", msg);
+                        myIntent.putExtra("msgarb",msg_arb);
+                        startActivity(myIntent);
+                        getActivity().finish();
 
+//                        Bundle args = new Bundle();
+//                        Fragment fm = new Thanks_fragment();
+//                        args.putString("msg", msg);
+//                        args.putString("msgarb",msg_arb);
+//                        fm.setArguments(args);
+//                        FragmentManager fragmentManager = getFragmentManager();
+//                        fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+//                                .addToBackStack(null).commit();
+//
 
                     }
 

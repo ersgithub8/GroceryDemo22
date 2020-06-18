@@ -35,7 +35,7 @@ public class Empty_cart_fragment extends Fragment {
         Shop_now.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fm = new Home_fragment();
+                Fragment fm = new StoreFragment();
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
                         .addToBackStack(null).commit();

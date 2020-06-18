@@ -88,7 +88,7 @@ public class Thanks_fragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         int id = view.getId();
         if (id == R.id.btn_thank_home) {
-            Fragment fm = new Home_fragment();
+            Fragment fm = new StoreFragment();
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
                     .addToBackStack(null).commit();
