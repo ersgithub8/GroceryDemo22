@@ -73,6 +73,8 @@
     <string name="btn_reg_update">تحديث الملف الشخصي</string>
     <string name="et_reg_search"> البحث في المناطق</string>
     <string name="et_sea">اكتب للبحث</string>
+    <string name="rate" translatable="false">تطبيق معدل</string>
+    <string name="feedback" translatable="false">ردود الفعل</string>
     <string name="tv_reg_note">ملاحظة: الخدمة متاحة فقط لـ RAJKOT</string>
     <string name="tv_reg_address">العنوان (مطلوب)</string>
     <string name="et_reg_address">أكمل عنوانك</string>

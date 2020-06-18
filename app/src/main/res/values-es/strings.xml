@@ -8,6 +8,8 @@
     <string name="or_sign">Or Sign In as a</string>
 
     <string name="create">Create an Account?</string>
+    <string name="rate" translatable="false">Rate</string>
+    <string name="feedback" translatable="false">Feedback</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

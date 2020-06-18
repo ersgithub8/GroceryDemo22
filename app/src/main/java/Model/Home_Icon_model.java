@@ -18,6 +18,34 @@ public class Home_Icon_model {
     String description;
     String arb_title;
     String image;
+    String product_name;
+    String product_arb_name;
+
+    public String getProduct_arb_name() {
+        return product_arb_name;
+    }
+
+    public void setProduct_arb_name(String product_arb_name) {
+        this.product_arb_name = product_arb_name;
+    }
+
+    public String getProduct_name() {
+        return product_name;
+    }
+
+    public void setProduct_name(String product_name) {
+        this.product_name = product_name;
+    }
+
+    public String getProduct_image() {
+        return product_image;
+    }
+
+    public void setProduct_image(String product_image) {
+        this.product_image = product_image;
+    }
+
+    String product_image;
     String status;
     String Count;
     String PCount;

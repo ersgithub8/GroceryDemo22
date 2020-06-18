@@ -1,0 +1,74 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="3"
+    android:orientation="vertical"
+    tools:context="Fragment.Favourite">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/green"
+        android:text="  Favourites"
+        android:textColor="@color/white"
+        android:textSize="23sp"
+        android:gravity="center_vertical"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.7"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textAlignment="center"
+            android:text="Favourite Products"
+            android:textSize="17sp"
+            android:textColor="@color/black"
+            android:drawableTop="@drawable/fav_prod"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textAlignment="center"
+            android:text="Favourite\n Stores"
+            android:textSize="17sp"
+            android:textColor="@color/black"
+            android:drawableTop="@drawable/ic_nav_home"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textAlignment="center"
+            android:text="Favourite Categories"
+            android:textSize="17sp"
+            android:textColor="@color/black"
+            android:drawableTop="@drawable/category"/>
+
+
+
+    </LinearLayout>
+    <View
+        android:layout_width="1dp"
+
+        android:layout_height="match_parent"
+        android:id="@+id/v_fav"
+        android:background="@color/black"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:layout_margin="5dp"
+        android:id="@+id/rv_fav"/>
+
+
+        </LinearLayout>
+</LinearLayout>

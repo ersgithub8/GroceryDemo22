@@ -60,6 +60,7 @@ public class BaseURL {
     public static String IMG_PROFILE_URL = BASE_URL + "uploads/profile/";
     public static String GET_SLIDER_URL = BASE_URL + "index.php/api/get_sliders";
     public static String GET_FEAATURED_SLIDER_URL = BASE_URL + "index.php/api/get_feature_banner";
+    public static String GET_FAVOURITE = BASE_URL + "index.php/api/get_favourite_list";
     public static String GET_BANNER_URL = BASE_URL + "index.php/api/get_banner";
 
     public static String WALLET_REFRESH = BASE_URL + "index.php/api/wallet?user_id=";

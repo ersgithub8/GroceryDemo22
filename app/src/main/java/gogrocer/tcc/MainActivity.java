@@ -74,6 +74,7 @@ import Fragment.Empty_cart_fragment;
 import Fragment.Home_fragment;
 import Fragment.Cart_fragment;
 import Fragment.Account_Fragment;
+import Fragment.Favourite;
 import Fragment.Category_Fragment;
 
 import Fragment.Reward_fragment;
@@ -138,6 +139,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
          bot_cat=findViewById(R.id.bot_categories);
          bot_fav = findViewById(R.id.bot_fav);
          bot_cart= (RelativeLayout) findViewById(R.id.bot_cart);
+        bot_fav=  findViewById(R.id.bot_fav);
         bot_store=findViewById(R.id.bot_store);
         bot_profile=findViewById(R.id.bot_profile);
          bot_cart.setOnClickListener(new View.OnClickListener() {
@@ -185,6 +187,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
+        bot_fav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (sessionManagement.isLoggedIn()){
+                    Fragment fm = new Favourite();
+                    FragmentManager fragmentManager = getFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                            .addToBackStack(null).commit();
+                }
+                else {
+                    Intent i=new Intent(MainActivity.this,LoginActivity.class);
+                    startActivity(i);
+                }
+            }
+        });
               if (getIntent().getExtras() != null) {
 
             for (String key : getIntent().getExtras().keySet()) {
