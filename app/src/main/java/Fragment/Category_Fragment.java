@@ -42,6 +42,7 @@ import gogrocer.tcc.AppController;
 import gogrocer.tcc.Inerface;
 import gogrocer.tcc.R;
 import util.CustomVolleyJsonRequest;
+import util.RecyclerTouchListener;
 
 import static gogrocer.tcc.AppController.TAG;
 
@@ -89,7 +90,17 @@ public class Category_Fragment extends Fragment implements Inerface {
 
         make_menu_items();
 
+rv_headre_icons.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), rv_headre_icons, new RecyclerTouchListener.OnItemClickListener() {
+    @Override
+    public void onItemClick(View view, int position) {
 
+    }
+
+    @Override
+    public void onLongItemClick(View view, int position) {
+
+    }
+}));
         return view;
     }
 
@@ -120,7 +131,7 @@ public class Category_Fragment extends Fragment implements Inerface {
                             Type listType = new TypeToken<List<Home_Icon_model>>() {
                             }.getType();
                             menu_models = gson.fromJson(response.getString("data"), listType);
-                            menu_adapter = new Category_adapter(menu_models, Category_Fragment.this);
+                            menu_adapter = new Category_adapter(menu_models);
                             rv_headre_icons.setAdapter(menu_adapter);
                             menu_adapter.notifyDataSetChanged();
                         }
