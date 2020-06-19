@@ -172,6 +172,7 @@ public class Category_Fragment extends Fragment {
     public void getProducts( String cat_id){
         String tag_json_obj = "json_category_req";
 
+        mShimmerViewContainer1.setVisibility(View.VISIBLE);
         mShimmerViewContainer1.startShimmerAnimation();
 
 //        Toast.makeText(getActivity(), cat_id+"", Toast.LENGTH_SHORT).show();
