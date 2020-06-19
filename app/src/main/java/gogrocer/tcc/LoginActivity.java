@@ -42,6 +42,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -76,6 +77,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
 
+    String token;
 
     String first_names="",last_names="",email="",id="",imgurl="",phone="";
     //---------------------------------------
@@ -95,6 +97,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // remove title
         setContentView(R.layout.activity_login);
 
+
+
+        token = FirebaseInstanceId.getInstance().getToken();
+
+        
         lEnglish = findViewById(R.id.eng);
         lSpanish = findViewById(R.id.arab);
         et_password = (EditText) findViewById(R.id.et_login_pass);
@@ -350,6 +357,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         MyFirebaseRegister myFirebaseRegister=new MyFirebaseRegister(LoginActivity.this);
                         myFirebaseRegister.RegisterUser(user_id);
 
+                        token=FirebaseInstanceId.getInstance().getToken();
+                        checkLogin(user_id,token);
+
                         btn_continue.setEnabled(false);
 
                     } else {
@@ -516,4 +526,59 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Intent startmain = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(startmain);
     }
+
+
+
+    private void checkLogin(String user_id, String token) {
+        // Tag used to cancel the request
+        String tag_json_obj = "json_obj_login_req";
+
+        //showpDialog();
+
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("user_id", user_id);
+        params.put("token", token);
+        params.put("device","android");
+
+        CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
+                BaseURL.JSON_RIGISTER_FCM, params, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+
+
+                try {
+                    Boolean status = response.getBoolean("responce");
+                    if (status) {
+
+                        JSONObject obj = new JSONObject();
+
+
+
+                        //onBackPressed();
+
+
+                    }else{
+                        String error = response.getString("error");
+                        Toast.makeText(LoginActivity.this, ""+error, Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                //hidepDialog();
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(LoginActivity.this,
+                        error.getMessage(), Toast.LENGTH_SHORT).show();
+                //hidepDialog();
+            }
+        });
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
+
 }

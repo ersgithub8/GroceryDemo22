@@ -68,6 +68,7 @@ public class Favourite_Adappter extends RecyclerView.Adapter<Favourite_Adappter.
                 .into(holder.image);
         preferences = context.getSharedPreferences("lan", MODE_PRIVATE);
         language=preferences.getString("language","");
+
         if (language.contains("english")) {
             holder.title.setText(mList.getProduct_name());
         }
