@@ -7,6 +7,8 @@ import android.os.Bundle;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.tabs.TabLayout;
+
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
@@ -87,7 +89,7 @@ public class Product_fragment extends Fragment {
         tab_cat = (TabLayout) view.findViewById(R.id.tab_cat);
         banner_slider = (SliderLayout) view.findViewById(R.id.relative_banner);
         rv_cat = (RecyclerView) view.findViewById(R.id.rv_subcategory);
-        rv_cat.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rv_cat.setLayoutManager((new GridLayoutManager(getActivity(),3)));
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
         String getcat_id = getArguments().getString("cat_id");
         String id = getArguments().getString("id");

@@ -50,7 +50,7 @@ import static gogrocer.tcc.AppController.TAG;
 
 public class Category_Fragment extends Fragment {
     private Category_adapter menu_adapter;
-    private ShimmerFrameLayout mShimmerViewContainer;
+    private ShimmerFrameLayout mShimmerViewContainer,mShimmerViewContainer1;
     private List<Home_Icon_model> menu_models = new ArrayList<>();
     private RecyclerView rv_headre_icons;
 
@@ -67,6 +67,7 @@ public class Category_Fragment extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.rect);
 
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
+        mShimmerViewContainer1 = view.findViewById(R.id.shimmer_view_container1);
 
         rv_headre_icons = (RecyclerView) view.findViewById(R.id.collapsing_recycler);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity()) {
@@ -87,7 +88,7 @@ public class Category_Fragment extends Fragment {
         };
 
         rv_headre_icons.setLayoutManager((new GridLayoutManager(getActivity(), 1)));
-        recyclerView.setLayoutManager((new GridLayoutManager(getActivity(),3)));
+        recyclerView.setLayoutManager((new GridLayoutManager(getActivity(),2)));
 //        rv_headre_icons.setHasFixedSize(true);
 //        rv_headre_icons.setItemViewCacheSize(10);
 //        rv_headre_icons.setDrawingCacheEnabled(true);
@@ -100,6 +101,7 @@ public class Category_Fragment extends Fragment {
             public void onItemClick(View view, int position) {
                 product_models.clear();
                 product_adapter.notifyDataSetChanged();
+
                 getProducts(menu_models.get(position).getId());
 //                Toast.makeText(getActivity(), menu_models.get(position).getId(), Toast.LENGTH_SHORT).show();
             }
@@ -170,7 +172,7 @@ public class Category_Fragment extends Fragment {
     public void getProducts( String cat_id){
         String tag_json_obj = "json_category_req";
 
-
+        mShimmerViewContainer1.startShimmerAnimation();
 
 //        Toast.makeText(getActivity(), cat_id+"", Toast.LENGTH_SHORT).show();
         Map<String, String> params = new HashMap<String, String>();
@@ -190,8 +192,8 @@ public class Category_Fragment extends Fragment {
                     if (response != null && response.length() > 0) {
                         Boolean status = response.getBoolean("responce");
                         if (status) {
-//                            mShimmerViewContainer.stopShimmerAnimation();
-//                            mShimmerViewContainer.setVisibility(View.GONE);
+                            mShimmerViewContainer1.stopShimmerAnimation();
+                            mShimmerViewContainer1.setVisibility(View.GONE);
 
                             Gson gson = new Gson();
                             Type listType = new TypeToken<List<Product_model>>() {
@@ -225,12 +227,14 @@ public class Category_Fragment extends Fragment {
     public void onResume() {
         super.onResume();
         mShimmerViewContainer.startShimmerAnimation();
+        mShimmerViewContainer1.startShimmerAnimation();
     }
 
     @Override
     public void onPause() {
         super.onPause();
         mShimmerViewContainer.stopShimmerAnimation();
+        mShimmerViewContainer1.stopShimmerAnimation();
     }
 
 

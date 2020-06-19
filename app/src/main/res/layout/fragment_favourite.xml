@@ -61,11 +61,11 @@
 
         android:layout_height="match_parent"
         android:id="@+id/v_fav"
-        android:background="@color/black"/>
+        android:background="@color/green"/>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="3"
+        android:layout_weight="2.3"
         android:layout_margin="5dp"
         android:id="@+id/rv_fav"/>
 
