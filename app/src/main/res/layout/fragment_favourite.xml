@@ -2,7 +2,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
     android:weightSum="3"
     android:orientation="vertical"
     tools:context="Fragment.Favourite">
@@ -66,26 +65,7 @@
         android:layout_height="match_parent"
         android:id="@+id/v_fav"
         android:background="@color/green"/>
-            <com.facebook.shimmer.ShimmerFrameLayout
 
-                android:id="@+id/shimmer_view_container1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                shimmer:duration="500"
-                >
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <include layout="@layout/dataholder3" />
-                    <include layout="@layout/dataholder3" />
-                    <include layout="@layout/dataholder3" />
-                    <include layout="@layout/dataholder3" />
-                    <include layout="@layout/dataholder3" />
-                </LinearLayout>
-
-            </com.facebook.shimmer.ShimmerFrameLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="0dp"
         android:layout_height="match_parent"
