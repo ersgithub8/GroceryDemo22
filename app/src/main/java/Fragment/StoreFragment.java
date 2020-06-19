@@ -132,6 +132,7 @@ public class StoreFragment extends Fragment {
                 Bundle args = new Bundle();
                 Fragment fm = new Product_fragment();
                 args.putString("cat_id", getid);
+                args.putString("name",menu_models.get(position).getTitle());
                 fm.setArguments(args);
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
@@ -152,6 +153,7 @@ public class StoreFragment extends Fragment {
                 Bundle args = new Bundle();
                 Fragment fm = new Product_fragment();
                 args.putString("storeid", storeid);
+                args.putString("name",store_models.get(position).getUser_name());
                 fm.setArguments(args);
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)

@@ -574,6 +574,10 @@ SharedPreferences preferences;
                                     favcheckk=false;
                                }
                            }
+                        }else{
+                            fav.setVisibility(View.VISIBLE);
+                            fav.setImageResource(R.drawable.heartnf);
+                            favcheckk=false;
                         }
                     }
                 } catch (JSONException e) {

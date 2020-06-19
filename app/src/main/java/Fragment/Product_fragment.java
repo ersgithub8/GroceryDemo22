@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.NoConnectionError;
@@ -33,6 +34,7 @@ import com.google.gson.reflect.TypeToken;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -71,6 +73,8 @@ public class Product_fragment extends Fragment {
     String language;
     String storeid;
     boolean favcheckk;
+    ImageView fav;
+    TextView name;
     SharedPreferences preferences;
     public Product_fragment() {
     }
@@ -89,18 +93,23 @@ public class Product_fragment extends Fragment {
 
         new StoreFragment();
         tab_cat = (TabLayout) view.findViewById(R.id.tab_cat);
+        fav=view.findViewById(R.id.imagefav);
         banner_slider = (SliderLayout) view.findViewById(R.id.relative_banner);
         rv_cat = (RecyclerView) view.findViewById(R.id.rv_subcategory);
         rv_cat.setLayoutManager((new GridLayoutManager(getActivity(),3)));
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
-        String getcat_id = getArguments().getString("cat_id");
+        final String getcat_id = getArguments().getString("cat_id");
+
+        name=view.findViewById(R.id.name);
         String id = getArguments().getString("id");
         storeid=getArguments().getString("storeid");
+        String names=getArguments().getString("name");
         String get_deal_id = getArguments().getString("cat_deal");
         String get_top_sale_id = getArguments().getString("cat_top_selling");
         String getcat_title = getArguments().getString("cat_title");
         ((MainActivity) getActivity()).setTitle(getResources().getString(R.string.tv_product_name));
 
+        name.setText(names);
 //        Toast.makeText(getActivity(), "abvc", Toast.LENGTH_SHORT).show();
         // check internet connection
         if (ConnectivityReceiver.isConnected()) {
@@ -110,9 +119,10 @@ public class Product_fragment extends Fragment {
             //
             if(storeid !=null){
                 makeGetCategoryRequest(storeid);
-
+                checkfavouratestore("23",storeid,fav);
             }else{
                 makeGetCategoryRequest(getcat_id);
+                checkfavouratecat("23",getcat_id,fav);
             }
             //Deal Of The Day Products
             makedealIconProductRequest(get_deal_id);
@@ -125,6 +135,26 @@ public class Product_fragment extends Fragment {
 
         }
 
+        fav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(storeid!=null)
+                {
+                    if(favcheckk){
+                        removefromfavstore("23",storeid,fav);
+                    }else {
+                        addinfavstore("23",storeid,fav);
+                    }
+                }else{
+                    if(favcheckk){
+                        removefromfavcat("23",getcat_id,fav);
+                    }else {
+                        addinfavcat("23",getcat_id,fav);
+                    }
+                }
+            }
+        });
         tab_cat.setVisibility(View.GONE);
         tab_cat.setSelectedTabIndicatorColor(getActivity().getResources().getColor(R.color.white));
 
@@ -561,7 +591,7 @@ public class Product_fragment extends Fragment {
         params.put("cat_id",productid);
 
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
-                BaseURL.removefavourate, params, new Response.Listener<JSONObject>() {
+                BaseURL.removefavouratecat, params, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
@@ -575,7 +605,7 @@ public class Product_fragment extends Fragment {
 
                         loading.dismiss();
                         favcheckk=false;
-                        imageView.setImageResource(R.drawable.heartnf);
+                        imageView.setImageResource(R.drawable.heartnfw);
 
                     }
 //                    }
@@ -616,7 +646,7 @@ public class Product_fragment extends Fragment {
         params.put("cat_id",productid);
 
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
-                BaseURL.addfavourate, params, new Response.Listener<JSONObject>() {
+                BaseURL.addfavouratecat, params, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
@@ -661,11 +691,13 @@ public class Product_fragment extends Fragment {
         params.put("user_id", userid);
 
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
-                BaseURL.GET_FAVOURITE, params, new Response.Listener<JSONObject>() {
+                BaseURL.getfavouratecat, params, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
 
+
+                Toast.makeText(getActivity(), "abg", Toast.LENGTH_SHORT).show();
 
                 try {
                     if (response != null && response.length() > 0) {
@@ -674,21 +706,25 @@ public class Product_fragment extends Fragment {
                             JSONArray array=response.getJSONArray("data");
                             for (int i =0 ;i<array.length();i++){
                                 JSONObject object=array.getJSONObject(i);
-                                if(productid.equals(object.getString("product_id"))){
+                                if(productid.equals(object.getString("cat_id"))){
                                     fav.setVisibility(View.VISIBLE);
                                     fav.setImageResource(R.drawable.heartf);
                                     favcheckk=true;
                                     return;
                                 }else{
                                     fav.setVisibility(View.VISIBLE);
-                                    fav.setImageResource(R.drawable.heartnf);
+                                    fav.setImageResource(R.drawable.heartnfw);
                                     favcheckk=false;
                                 }
                             }
-                        }
+                        }else
+                            {fav.setVisibility(View.VISIBLE);
+                        fav.setImageResource(R.drawable.heartnfw);
+                        favcheckk=false;}
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Toast.makeText(getActivity(),e+ "", Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {
@@ -717,7 +753,7 @@ public class Product_fragment extends Fragment {
         params.put("store_id",productid);
 
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
-                BaseURL.removefavourate, params, new Response.Listener<JSONObject>() {
+                BaseURL.removefavouratestore, params, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
@@ -731,7 +767,7 @@ public class Product_fragment extends Fragment {
 
                         loading.dismiss();
                         favcheckk=false;
-                        imageView.setImageResource(R.drawable.heartnf);
+                        imageView.setImageResource(R.drawable.heartnfw);
 
                     }
 //                    }
@@ -772,7 +808,7 @@ public class Product_fragment extends Fragment {
         params.put("store_id",productid);
 
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
-                BaseURL.addfavourate, params, new Response.Listener<JSONObject>() {
+                BaseURL.addfavouratestore, params, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
@@ -817,7 +853,7 @@ public class Product_fragment extends Fragment {
         params.put("user_id", userid);
 
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
-                BaseURL.GET_FAVOURITE, params, new Response.Listener<JSONObject>() {
+                BaseURL.getfavouratestore, params, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
@@ -827,24 +863,31 @@ public class Product_fragment extends Fragment {
                     if (response != null && response.length() > 0) {
                         Boolean status = response.getBoolean("responce");
                         if (status) {
+
+                            Toast.makeText(getActivity(), "abc", Toast.LENGTH_SHORT).show();
                             JSONArray array=response.getJSONArray("data");
                             for (int i =0 ;i<array.length();i++){
                                 JSONObject object=array.getJSONObject(i);
-                                if(productid.equals(object.getString("product_id"))){
+                                if(productid.equals(object.getString("store_id"))){
                                     fav.setVisibility(View.VISIBLE);
                                     fav.setImageResource(R.drawable.heartf);
                                     favcheckk=true;
                                     return;
                                 }else{
                                     fav.setVisibility(View.VISIBLE);
-                                    fav.setImageResource(R.drawable.heartnf);
+                                    fav.setImageResource(R.drawable.heartnfw);
                                     favcheckk=false;
                                 }
                             }
+                        }else {
+                            fav.setVisibility(View.VISIBLE);
+                            fav.setImageResource(R.drawable.heartnfw);
+                            favcheckk=false;
                         }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Toast.makeText(getActivity(), e+"", Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {
