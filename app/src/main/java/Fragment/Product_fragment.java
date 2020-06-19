@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.NoConnectionError;
@@ -69,6 +70,7 @@ public class Product_fragment extends Fragment {
     private SliderLayout  banner_slider;
     String language;
     String storeid;
+    boolean favcheckk;
     SharedPreferences preferences;
     public Product_fragment() {
     }
@@ -108,6 +110,7 @@ public class Product_fragment extends Fragment {
             //
             if(storeid !=null){
                 makeGetCategoryRequest(storeid);
+
             }else{
                 makeGetCategoryRequest(getcat_id);
             }
@@ -547,7 +550,318 @@ public class Product_fragment extends Fragment {
     }
 
 
+    public void removefromfavcat(String userid, String productid, final ImageView imageView){
+        final SweetAlertDialog loading=new SweetAlertDialog(getActivity(),SweetAlertDialog.PROGRESS_TYPE)
+                .setTitleText("Removing From Favourate");
+        loading.setCancelable(false);
+        loading.show();
+        String tag_json_obj = "json_category_req";
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("user_id", userid);
+        params.put("cat_id",productid);
 
+        CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
+                BaseURL.removefavourate, params, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+
+
+                try {
+                    loading.dismiss();
+//                    if (response != null && response.length() > 0) {
+                    Boolean status = response.getBoolean("response");
+                    if (status) {
+
+                        loading.dismiss();
+                        favcheckk=false;
+                        imageView.setImageResource(R.drawable.heartnf);
+
+                    }
+//                    }
+                } catch (JSONException e) {
+                    loading.dismiss();
+                    e.printStackTrace();
+                    Toast.makeText(getActivity(), e+"", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    loading.dismiss();
+                }
+            }
+        });
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+
+
+    }
+    public void addinfavcat(String userid, final String productid, final ImageView imageView){
+        final SweetAlertDialog loading=new SweetAlertDialog(getActivity(),SweetAlertDialog.PROGRESS_TYPE)
+                .setTitleText("Adding in Favourate");
+        loading.setCancelable(false);
+        loading.show();
+
+
+        String tag_json_obj = "json_category_req";
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("user_id", userid);
+        params.put("cat_id",productid);
+
+        CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
+                BaseURL.addfavourate, params, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+
+
+                try {
+                    loading.dismiss();
+//                    if (response != null && response.length() > 0) {
+                    Boolean status = response.getBoolean("response");
+                    if (status) {
+                        favcheckk=true;
+//                            Toast.makeText(getActivity(), "ADD", Toast.LENGTH_SHORT).show();
+                        imageView.setImageResource(R.drawable.heartf);
+
+                    }
+//                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getActivity(), e+"", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+
+                    loading.dismiss();
+                }
+            }
+        });
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
+    public void checkfavouratecat(String userid, final String productid, final ImageView fav){
+        String tag_json_obj = "json_category_req";
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("user_id", userid);
+
+        CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
+                BaseURL.GET_FAVOURITE, params, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+
+
+                try {
+                    if (response != null && response.length() > 0) {
+                        Boolean status = response.getBoolean("responce");
+                        if (status) {
+                            JSONArray array=response.getJSONArray("data");
+                            for (int i =0 ;i<array.length();i++){
+                                JSONObject object=array.getJSONObject(i);
+                                if(productid.equals(object.getString("product_id"))){
+                                    fav.setVisibility(View.VISIBLE);
+                                    fav.setImageResource(R.drawable.heartf);
+                                    favcheckk=true;
+                                    return;
+                                }else{
+                                    fav.setVisibility(View.VISIBLE);
+                                    fav.setImageResource(R.drawable.heartnf);
+                                    favcheckk=false;
+                                }
+                            }
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
+    public void removefromfavstore(String userid, String productid, final ImageView imageView){
+        final SweetAlertDialog loading=new SweetAlertDialog(getActivity(),SweetAlertDialog.PROGRESS_TYPE)
+                .setTitleText("Removing From Favourate");
+        loading.setCancelable(false);
+        loading.show();
+        String tag_json_obj = "json_category_req";
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("user_id", userid);
+        params.put("store_id",productid);
+
+        CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
+                BaseURL.removefavourate, params, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+
+
+                try {
+                    loading.dismiss();
+//                    if (response != null && response.length() > 0) {
+                    Boolean status = response.getBoolean("response");
+                    if (status) {
+
+                        loading.dismiss();
+                        favcheckk=false;
+                        imageView.setImageResource(R.drawable.heartnf);
+
+                    }
+//                    }
+                } catch (JSONException e) {
+                    loading.dismiss();
+                    e.printStackTrace();
+                    Toast.makeText(getActivity(), e+"", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    loading.dismiss();
+                }
+            }
+        });
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+
+
+    }
+    public void addinfavstore(String userid, final String productid, final ImageView imageView){
+        final SweetAlertDialog loading=new SweetAlertDialog(getActivity(),SweetAlertDialog.PROGRESS_TYPE)
+                .setTitleText("Adding in Favourate");
+        loading.setCancelable(false);
+        loading.show();
+
+
+        String tag_json_obj = "json_category_req";
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("user_id", userid);
+        params.put("store_id",productid);
+
+        CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
+                BaseURL.addfavourate, params, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+
+
+                try {
+                    loading.dismiss();
+//                    if (response != null && response.length() > 0) {
+                    Boolean status = response.getBoolean("response");
+                    if (status) {
+                        favcheckk=true;
+//                            Toast.makeText(getActivity(), "ADD", Toast.LENGTH_SHORT).show();
+                        imageView.setImageResource(R.drawable.heartf);
+
+                    }
+//                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getActivity(), e+"", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+
+                    loading.dismiss();
+                }
+            }
+        });
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
+    public void checkfavouratestore(String userid, final String productid, final ImageView fav){
+        String tag_json_obj = "json_category_req";
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("user_id", userid);
+
+        CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
+                BaseURL.GET_FAVOURITE, params, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+
+
+                try {
+                    if (response != null && response.length() > 0) {
+                        Boolean status = response.getBoolean("responce");
+                        if (status) {
+                            JSONArray array=response.getJSONArray("data");
+                            for (int i =0 ;i<array.length();i++){
+                                JSONObject object=array.getJSONObject(i);
+                                if(productid.equals(object.getString("product_id"))){
+                                    fav.setVisibility(View.VISIBLE);
+                                    fav.setImageResource(R.drawable.heartf);
+                                    favcheckk=true;
+                                    return;
+                                }else{
+                                    fav.setVisibility(View.VISIBLE);
+                                    fav.setImageResource(R.drawable.heartnf);
+                                    favcheckk=false;
+                                }
+                            }
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
 }
 
 
