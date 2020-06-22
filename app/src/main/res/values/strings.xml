@@ -1,4 +1,12 @@
 <resources>
+
+    <string name="stores">Store</string>
+    <string name="caty">Categories</string>
+    <string name="favourt">Favourite</string>
+    <string name="Cart">Cart</string>
+    <string name="Me">Account</string>
+
+
     <string name="app_name" translatable="false">J6</string>
     <string name="name" translatable="false">SameCiti - Customer</string>
     <string name="currency" translatable="false">\u20B9</string>

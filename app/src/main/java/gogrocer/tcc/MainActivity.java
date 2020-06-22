@@ -129,11 +129,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String token = FirebaseInstanceId.getInstance().getToken();
         Log.d("MYTAG", "This is your Firebase token" + token);
 
-        sharedPreferences= getSharedPreferences("lan", Context.MODE_PRIVATE);
-
-         editor = sharedPreferences.edit();
-
-         editor.putString("language", "english");
+//        sharedPreferences= getSharedPreferences("lan", Context.MODE_PRIVATE);
+//
+//         editor = sharedPreferences.edit();
+//
+//         editor.putString("language", "english");
 
 
          bot_cat=findViewById(R.id.bot_categories);
@@ -618,7 +618,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id==R.id.action_language){
-            openLanguageDialog();
+            //openLanguageDialog();
         }
 
         if (id == R.id.action_cart) {
