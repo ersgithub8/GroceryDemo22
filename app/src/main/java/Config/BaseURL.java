@@ -150,4 +150,7 @@ public class BaseURL {
     public static final String getfavouratestore=BASE_URL+"index.php/Api/get_favourite_store_list";
     public static final String getfavouratecat=BASE_URL+"index.php/Api/get_favourite_category_list";
 
+    public static final String saverating=BASE_URL+"index.php/Api/save_ratings";
+    public static final String getrating=BASE_URL+"index.php/Api/get_stars";
+
 }

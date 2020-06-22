@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +44,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.MainActivity;
 import gogrocer.tcc.R;
+import gogrocer.tcc.Rating;
 import util.CustomVolleyJsonRequest;
 import util.DatabaseHandler;
 
@@ -284,6 +288,8 @@ SharedPreferences preferences;
         final TextView  tv_price, tv_reward, tv_total;
         ImageView iv_logo, iv_remove;
 
+        RatingBar ratingBar;
+
         ImageView iv_image = (ImageView) dialog.findViewById(R.id.iv_product_detail_img);
         final ImageView iv_fav_image = (ImageView) dialog.findViewById(R.id.fav_product);
         final ImageView iv_minus = (ImageView) dialog.findViewById(R.id.iv_subcat_minus);
@@ -292,6 +298,10 @@ SharedPreferences preferences;
         TextView tv_detail = (TextView) dialog.findViewById(R.id.tv_product_detail);
         final TextView tv_contetiy = (TextView) dialog.findViewById(R.id.tv_subcat_contetiy);
         final TextView tv_add = (TextView) dialog.findViewById(R.id.tv_subcat_add);
+        ratingBar=dialog.findViewById(R.id.ratingbarprod);
+
+
+
 
 
         Double price = Double.parseDouble(modelList.get(position).getPrice());
@@ -403,6 +413,7 @@ SharedPreferences preferences;
             }
         });
 
+        saverating(productid,ratingBar);
         iv_plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -612,5 +623,56 @@ SharedPreferences preferences;
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 
+    }
+
+
+    private void saverating(String productid, final RatingBar ratingBar) {
+
+        // Tag used to cancel the request
+        String tag_json_obj = "json_edit_address_req";
+
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("prod_id", productid);
+
+        CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
+                BaseURL.getrating, params, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+//                Log.d(TAG, response.toString());
+
+                try {
+                    Boolean status = response.getBoolean("response");
+                    if (status) {
+
+                        JSONArray array=response.getJSONArray("data");
+                        JSONObject object=array.getJSONObject(0);
+                        String rating=object.getString("rating");
+                        if(rating.equals("null")){
+                            ratingBar.setVisibility(View.GONE);
+                        }else
+                        {
+                            ratingBar.setVisibility(View.VISIBLE);
+                            ratingBar.setRating(Float.valueOf(rating));
+
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+//                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Toast.makeText(context, context.getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
 }

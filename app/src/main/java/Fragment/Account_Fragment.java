@@ -24,6 +24,7 @@ import gogrocer.tcc.LoginActivity;
 import gogrocer.tcc.MainActivity;
 import gogrocer.tcc.My_Order_activity;
 import gogrocer.tcc.R;
+import gogrocer.tcc.Rating;
 import util.Session_management;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
@@ -150,7 +151,9 @@ public class Account_Fragment extends Fragment {
                     FragmentManager fragmentManager = getFragmentManager();
                     fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
                             .addToBackStack(null).commit();
-                } else {
+//                startActivity(new Intent(getActivity(), Rating.class));
+                }
+                else {
                     Intent i = new Intent(getActivity(), LoginActivity.class);
                     startActivity(i);
 
