@@ -53,6 +53,9 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
     private Context context;
     private DatabaseHandler dbcart;
     String language;
+
+    SharedPreferences sharedPreferences;
+    String usrid;
     boolean favcheckk=false;
 SharedPreferences preferences;
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -423,15 +426,20 @@ SharedPreferences preferences;
                 }
             }
         });
+        sharedPreferences=context.getSharedPreferences(BaseURL.PREFS_NAME,MODE_PRIVATE);
 
-        checkfavourate("23",productid,iv_fav_image);
+        usrid=sharedPreferences.getString(BaseURL.KEY_ID,"0");
+        checkfavourate(usrid,productid,iv_fav_image);
+
         iv_fav_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
                 if(favcheckk){
-                    removefromfav("23",productid,iv_fav_image);
+                    removefromfav(usrid,productid,iv_fav_image);
                 }else{
-                    addinfav("23",productid,iv_fav_image);
+                    addinfav(usrid,productid,iv_fav_image);
                 }
 //                Toast.makeText(context, "abc", Toast.LENGTH_SHORT).show();
             }
@@ -561,6 +569,12 @@ SharedPreferences preferences;
                         Boolean status = response.getBoolean("responce");
                         if (status) {
                             JSONArray array=response.getJSONArray("data");
+                            if(array.length()==0){
+                                fav.setVisibility(View.VISIBLE);
+                                fav.setImageResource(R.drawable.heartnf);
+                                favcheckk=false;
+                                return;
+                            }
                            for (int i =0 ;i<array.length();i++){
                                JSONObject object=array.getJSONObject(i);
                                if(productid.equals(object.getString("product_id"))){
