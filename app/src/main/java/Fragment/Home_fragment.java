@@ -356,7 +356,6 @@ public class Home_fragment extends Fragment {
             }
         });
 
-
         //REcyclerview Top Selling
         rv_top_selling.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), rv_top_selling, new RecyclerTouchListener.OnItemClickListener() {
             @Override

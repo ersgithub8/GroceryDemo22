@@ -31,7 +31,7 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class Account_Fragment extends Fragment {
 
-    TextView my_order,my_wallet,j6points,my_profile,logout,rate,share,feedback,login,lEnglish,lSpanish;
+    TextView my_order,my_wallet,j6points,my_profile,logout,rate,share,feedback,login,lEnglish,lSpanish,top_selling;
     private Session_management sessionManagement;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -44,6 +44,8 @@ public class Account_Fragment extends Fragment {
 
         lEnglish = view.findViewById(R.id.eng);
         lSpanish = view.findViewById(R.id.arab);
+
+        top_selling = view.findViewById(R.id.top_selling);
 
         sessionManagement = new Session_management(getActivity());
         my_order=view.findViewById(R.id.my_orders);
@@ -61,7 +63,11 @@ public class Account_Fragment extends Fragment {
 
         String current_lan = sharedPreferences.getString("language",null);
 
-        if (current_lan.equals("english")){
+        if (current_lan == null){
+            lEnglish.setBackgroundColor(Color.parseColor("#7abcbc"));
+            lEnglish.setTextColor(Color.parseColor("#ffffff"));
+        }
+        else if (current_lan.equals("english")){
             lEnglish.setBackgroundColor(Color.parseColor("#7abcbc"));
             lEnglish.setTextColor(Color.parseColor("#ffffff"));
         }
@@ -132,6 +138,23 @@ public class Account_Fragment extends Fragment {
                 getActivity().finish();
             }
         });
+
+        top_selling.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle args = new Bundle();
+                Fragment fm = new Product_fragment();
+                args.putString("cat_top_selling", "2");
+                args.putString("laddan_jaffery", "murshid");
+                fm.setArguments(args);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                        .addToBackStack(null).commit();
+
+
+            }
+        });
+
         my_wallet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

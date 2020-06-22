@@ -1,5 +1,7 @@
 <resources>
 
+    <string name="top_selling">Top Selling</string>
+
     <string name="stores">Store</string>
     <string name="caty">Categories</string>
     <string name="favourt">Favourite</string>

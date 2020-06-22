@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,8 +58,6 @@ import util.CustomVolleyJsonRequest;
 
 import static android.content.Context.MODE_PRIVATE;
 
-
-
 public class Product_fragment extends Fragment {
     private static String TAG = Product_fragment.class.getSimpleName();
     private RecyclerView rv_cat;
@@ -72,6 +71,7 @@ public class Product_fragment extends Fragment {
     private SliderLayout  banner_slider;
     String language;
     String storeid;
+    RelativeLayout relativeLayout;
     boolean favcheckk;
     SharedPreferences sharedPreferences;
     String usrid;
@@ -102,6 +102,7 @@ public class Product_fragment extends Fragment {
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
         final String getcat_id = getArguments().getString("cat_id");
 
+        relativeLayout = view.findViewById(R.id.tempy);
         sharedPreferences=getActivity().getSharedPreferences(BaseURL.PREFS_NAME,MODE_PRIVATE);
 
         usrid=sharedPreferences.getString(BaseURL.KEY_ID,"0");
@@ -112,7 +113,19 @@ public class Product_fragment extends Fragment {
         storeid=getArguments().getString("storeid");
         String names=getArguments().getString("name");
         String get_deal_id = getArguments().getString("cat_deal");
+
         String get_top_sale_id = getArguments().getString("cat_top_selling");
+
+        String yeh_to_hoga = getArguments().getString("laddan_jaffery");
+        if (yeh_to_hoga == null){
+        }
+        else if (yeh_to_hoga.equals("murshid")){
+            relativeLayout.setVisibility(View.GONE);
+        }
+        else {
+        }
+
+
         String getcat_title = getArguments().getString("cat_title");
         ((MainActivity) getActivity()).setTitle(getResources().getString(R.string.tv_product_name));
 
@@ -454,7 +467,6 @@ public class Product_fragment extends Fragment {
 
     ////Get Top Sale Products
     private void maketopsaleProductRequest(String cat_id) {
-
 
         final SweetAlertDialog loading=new SweetAlertDialog(getActivity(),SweetAlertDialog.PROGRESS_TYPE);
         loading.setCancelable(false);
@@ -913,6 +925,3 @@ public class Product_fragment extends Fragment {
 
     }
 }
-
-
-

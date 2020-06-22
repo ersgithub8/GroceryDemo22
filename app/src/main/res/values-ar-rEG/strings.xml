@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="top_selling">الأكثر مبيعا</string>
+
     <string name="stores">متجر</string>
     <string name="caty">التصنيفات</string>
     <string name="favourt">مفضل</string>
