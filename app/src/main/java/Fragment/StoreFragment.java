@@ -2,6 +2,7 @@ package Fragment;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -49,7 +50,9 @@ import Model.Home_Icon_model;
 import Model.Store_Model;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.CustomSlider;
+import gogrocer.tcc.MainActivity;
 import gogrocer.tcc.R;
+import gogrocer.tcc.WebView;
 import util.CustomVolleyJsonRequest;
 import util.RecyclerTouchListener;
 
@@ -83,7 +86,8 @@ public class StoreFragment extends Fragment {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(),"Still Working",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getActivity(), WebView.class));
+
             }
         });
 

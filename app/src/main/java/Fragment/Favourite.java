@@ -1,6 +1,7 @@
 package Fragment;
 
 import android.app.Fragment;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import android.util.Log;
@@ -40,12 +41,16 @@ import gogrocer.tcc.AppController;
 import gogrocer.tcc.R;
 import util.CustomVolleyJsonRequest;
 
+import static android.content.Context.MODE_PRIVATE;
+
 
 public class Favourite extends Fragment {
 
     RecyclerView rv_headre_icons,rv_cat,rv_store;
     TextView fav_prod,fav_store,fav_cat;
     private Favourite_Adappter menu_adapter;
+    SharedPreferences sharedPreferences;
+    String usrid;
     private Home_Icon_Adapter menu_adapter1;
     private List<Home_Icon_model> menu_models = new ArrayList<>();
     @Override
@@ -57,6 +62,10 @@ public class Favourite extends Fragment {
         fav_cat=view.findViewById(R.id.fav_category);
         fav_prod=view.findViewById(R.id.fav_prod);
         fav_store=view.findViewById(R.id.fav_store);
+
+        sharedPreferences=getActivity().getSharedPreferences(BaseURL.PREFS_NAME,MODE_PRIVATE);
+
+        usrid=sharedPreferences.getString(BaseURL.KEY_ID,"0");
 
         rv_headre_icons = (RecyclerView) view.findViewById(R.id.rv_fav);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
@@ -76,14 +85,14 @@ public class Favourite extends Fragment {
         rv_store.setItemAnimator(new DefaultItemAnimator());
         rv_store.setNestedScrollingEnabled(false);
 
-            make_menu_items();
+            make_menu_items(usrid);
                 fav_store.setOnClickListener(new View.OnClickListener() {
                   @Override
                       public void onClick(View view) {
                       rv_headre_icons.setVisibility(View.GONE);
                       rv_cat.setVisibility(View.GONE);
                       rv_store.setVisibility(View.VISIBLE);
-                      makestore();
+                      makestore(usrid);
                         }
                 });
         fav_prod.setOnClickListener(new View.OnClickListener() {
@@ -92,7 +101,7 @@ public class Favourite extends Fragment {
                 rv_cat.setVisibility(View.GONE);
                 rv_store.setVisibility(View.GONE);
                 rv_headre_icons.setVisibility(View.VISIBLE);
-                make_menu_items();
+                make_menu_items(usrid);
             }
         });
         fav_cat.setOnClickListener(new View.OnClickListener() {
@@ -101,17 +110,17 @@ public class Favourite extends Fragment {
                 rv_store.setVisibility(View.GONE);
                 rv_headre_icons.setVisibility(View.GONE);
                 rv_cat.setVisibility(View.VISIBLE);
-             make_categories();
+             make_categories(usrid);
             }
         });
 
         return view;
     }
-    private void make_menu_items() {
+    private void make_menu_items(String userid) {
         String tag_json_obj = "json_category_req";
 
         Map<String, String> params = new HashMap<String, String>();
-        params.put("user_id", "23");
+        params.put("user_id", userid);
 
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
                 BaseURL.GET_FAVOURITE, params, new Response.Listener<JSONObject>() {
@@ -153,11 +162,11 @@ public class Favourite extends Fragment {
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 
     }
-    private void makestore() {
+    private void makestore(String userid) {
         String tag_json_obj = "json_category_req";
 
         Map<String, String> params = new HashMap<String, String>();
-        params.put("user_id", "23");
+        params.put("user_id", userid);
 
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
                 BaseURL.getfavouratestore, params, new Response.Listener<JSONObject>() {
@@ -198,11 +207,11 @@ public class Favourite extends Fragment {
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 
     }
-    private void make_categories() {
+    private void make_categories(String userid) {
         String tag_json_obj = "json_category_req";
 
         Map<String, String> params = new HashMap<String, String>();
-        params.put("user_id", "23");
+        params.put("user_id", userid);
 
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
                 BaseURL.getfavouratecat, params, new Response.Listener<JSONObject>() {

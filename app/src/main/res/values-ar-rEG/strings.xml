@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="stores">متجر</string>
+    <string name="caty">التصنيفات</string>
+    <string name="favourt">مفضل</string>
+    <string name="Cart">عربة التسوق</string>
+    <string name="Me">الحساب</string>
+
     <string name="uname">اسم</string>
     <string name="uphone">هاتف</string>
     <string name="urefrel">كود الإحالة</string>

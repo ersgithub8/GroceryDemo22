@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="gogrocer.tcc.Rating"
+    android:background="@color/colorPrimaryDark">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@android:color/transparent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:srcCompat="@drawable/backbutton"
+            android:layout_marginLeft="@dimen/space_10"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:text="Rating"
+            android:textColor="@color/white"
+            android:layout_toRightOf="@id/back"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/space_10"/>
+    </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:paddingTop="@dimen/space_10"
+        android:paddingBottom="@dimen/space_10"
+        android:orientation="vertical">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            app:cardCornerRadius="@dimen/space_20"
+            app:cardElevation="@dimen/space_5"
+            app:contentPadding="10dp">
+        <RatingBar
+            android:id="@+id/ratingbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:numStars="5"
+
+            android:stepSize="1"
+            android:theme="@style/RatingBar" />
+        </com.google.android.material.card.MaterialCardView>
+        <TextView
+            android:id="@+id/rattv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/space_20"
+            android:layout_gravity="center_horizontal"
+
+            android:layout_marginTop="@dimen/space_12"
+            android:textColor="@color/white"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:layout_margin="@dimen/space_20"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="@dimen/space_5">
+        <EditText
+            android:id="@+id/ratdescription"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:gravity="top"
+            android:hint="Describe your experience(optional)"
+            android:background="@drawable/bg2"/>
+        </androidx.cardview.widget.CardView>
+
+
+    </LinearLayout>
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"
+            android:text="Submit"
+            android:textColor="@color/green"
+            android:textSize="22dp"/>
+
+
+</RelativeLayout>

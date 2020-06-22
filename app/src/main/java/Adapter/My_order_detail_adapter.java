@@ -2,9 +2,12 @@ package Adapter;
 
 import android.content.Context;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,6 +19,7 @@ import java.util.List;
 import Config.BaseURL;
 import Model.My_order_detail_model;
 import gogrocer.tcc.R;
+import gogrocer.tcc.Rating;
 
 /**
  * Created by Rajesh Dabhi on 30/6/2017.
@@ -29,14 +33,14 @@ public class My_order_detail_adapter extends RecyclerView.Adapter<My_order_detai
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView tv_title, tv_price, tv_qty;
         public ImageView iv_img;
-
+        Button rate;
         public MyViewHolder(View view) {
             super(view);
             tv_title = (TextView) view.findViewById(R.id.tv_order_Detail_title);
             tv_price = (TextView) view.findViewById(R.id.tv_order_Detail_price);
             tv_qty = (TextView) view.findViewById(R.id.tv_order_Detail_qty);
             iv_img = (ImageView) view.findViewById(R.id.iv_order_detail_img);
-
+            rate=(Button) view.findViewById(R.id.ratebtn);
         }
     }
 
@@ -56,7 +60,7 @@ public class My_order_detail_adapter extends RecyclerView.Adapter<My_order_detai
 
     @Override
     public void onBindViewHolder(My_order_detail_adapter.MyViewHolder holder, int position) {
-        My_order_detail_model mList = modelList.get(position);
+        final My_order_detail_model mList = modelList.get(position);
 
         Glide.with(context)
                 .load(BaseURL.IMG_PRODUCT_URL + mList.getProduct_image())
@@ -71,6 +75,14 @@ public class My_order_detail_adapter extends RecyclerView.Adapter<My_order_detai
         holder.tv_price.setText(mList.getPrice());
         holder.tv_qty.setText(mList.getQty());
 
+        holder.rate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(context.getApplicationContext(), Rating.class);
+                intent.putExtra("prod_id",mList.getProduct_id());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

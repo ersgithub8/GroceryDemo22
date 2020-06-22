@@ -73,6 +73,8 @@ public class Product_fragment extends Fragment {
     String language;
     String storeid;
     boolean favcheckk;
+    SharedPreferences sharedPreferences;
+    String usrid;
     ImageView fav;
     TextView name;
     SharedPreferences preferences;
@@ -100,6 +102,11 @@ public class Product_fragment extends Fragment {
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
         final String getcat_id = getArguments().getString("cat_id");
 
+        sharedPreferences=getActivity().getSharedPreferences(BaseURL.PREFS_NAME,MODE_PRIVATE);
+
+        usrid=sharedPreferences.getString(BaseURL.KEY_ID,"0");
+
+        Toast.makeText(getActivity(), usrid, Toast.LENGTH_SHORT).show();
         name=view.findViewById(R.id.name);
         String id = getArguments().getString("id");
         storeid=getArguments().getString("storeid");
@@ -119,10 +126,10 @@ public class Product_fragment extends Fragment {
             //
             if(storeid !=null){
                 makeGetCategoryRequest(storeid);
-                checkfavouratestore("23",storeid,fav);
+                checkfavouratestore(usrid,storeid,fav);
             }else{
                 makeGetCategoryRequest(getcat_id);
-                checkfavouratecat("23",getcat_id,fav);
+                checkfavouratecat(usrid,getcat_id,fav);
             }
             //Deal Of The Day Products
             makedealIconProductRequest(get_deal_id);
@@ -142,15 +149,15 @@ public class Product_fragment extends Fragment {
                 if(storeid!=null)
                 {
                     if(favcheckk){
-                        removefromfavstore("23",storeid,fav);
+                        removefromfavstore(usrid,storeid,fav);
                     }else {
-                        addinfavstore("23",storeid,fav);
+                        addinfavstore(usrid,storeid,fav);
                     }
                 }else{
                     if(favcheckk){
-                        removefromfavcat("23",getcat_id,fav);
+                        removefromfavcat(usrid,getcat_id,fav);
                     }else {
-                        addinfavcat("23",getcat_id,fav);
+                        addinfavcat(usrid,getcat_id,fav);
                     }
                 }
             }

@@ -1,4 +1,11 @@
 <resources>
+
+    <string name="stores">Store</string>
+    <string name="caty">Categories</string>
+    <string name="favourt">Favourite</string>
+    <string name="Cart">Cart</string>
+    <string name="Me">Account</string>
+
     <string name="app_name">J6</string>
     <string name="name">GoGrocer</string>
     <string name="currency"> ر.س</string>
