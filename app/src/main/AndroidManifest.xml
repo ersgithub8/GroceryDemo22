@@ -30,7 +30,9 @@
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ThanksActivity"></activity>
+        <activity android:name=".Rating"></activity>
+        <activity android:name=".WebView" />
+        <activity android:name=".ThanksActivity" />
         <activity
             android:name=".SplashActivity"
             android:theme="@style/AppTheme.NoActionBar">
