@@ -68,6 +68,8 @@ public class BaseURL {
     public static String REWARDS_REFRESH = BASE_URL + "index.php/api/rewards?user_id=";
 
 
+    //save store rating
+    public static String SAVE_STORE_RATING = BASE_URL + "index.php/Api/save_stars_stores";
 
     public static String GET_CATEGORY_URL = BASE_URL + "index.php/api/get_categories";
     public static String GET_SLIDER_CATEGORY_URL = BASE_URL + "index.php/api/get_sub_cat";

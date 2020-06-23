@@ -1,6 +1,7 @@
 package Fragment;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -53,6 +54,7 @@ import gogrocer.tcc.AppController;
 import gogrocer.tcc.CustomSlider;
 import gogrocer.tcc.MainActivity;
 import gogrocer.tcc.R;
+import gogrocer.tcc.Rating;
 import util.ConnectivityReceiver;
 import util.CustomVolleyJsonRequest;
 
@@ -111,7 +113,7 @@ public class Product_fragment extends Fragment {
 
         Toast.makeText(getActivity(), usrid, Toast.LENGTH_SHORT).show();
         name=view.findViewById(R.id.name);
-        String id = getArguments().getString("id");
+        final String id = getArguments().getString("id");
         storeid=getArguments().getString("storeid");
         String names=getArguments().getString("name");
         String get_deal_id = getArguments().getString("cat_deal");
@@ -126,7 +128,6 @@ public class Product_fragment extends Fragment {
         }
         else {
         }
-
 
         String getcat_title = getArguments().getString("cat_title");
         ((MainActivity) getActivity()).setTitle(getResources().getString(R.string.tv_product_name));
@@ -156,6 +157,18 @@ public class Product_fragment extends Fragment {
             makeGetBannerSliderRequest();
 
         }
+
+        star.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getActivity(), Rating.class);
+                intent.putExtra("status","store");
+                intent.putExtra("store_id",storeid);
+                startActivity(intent);
+
+            }
+        });
 
         fav.setOnClickListener(new View.OnClickListener() {
             @Override
