@@ -2,6 +2,7 @@ package Adapter;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -43,6 +44,7 @@ import Model.Product_model;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.MainActivity;
+import gogrocer.tcc.ProductActivity;
 import gogrocer.tcc.R;
 import gogrocer.tcc.Rating;
 import util.CustomVolleyJsonRequest;
@@ -163,21 +165,54 @@ SharedPreferences preferences;
                 preferences = context.getSharedPreferences("lan", MODE_PRIVATE);
                 language=preferences.getString("language","");
                 Log.d("lang",language);
-                if (language.contains("english")) {
-                    showProductDetail(modelList.get(position).getProduct_image(),
-                            modelList.get(position).getProduct_name(),
-                            modelList.get(position).getProduct_description(),
-                            "",
-                            position, tv_contetiy.getText().toString()
-                            ,modelList.get(position).getProduct_id());
-                }else {
-                    showProductDetail(modelList.get(position).getProduct_image(),
-                            modelList.get(position).getProduct_name_arb(),
-                            modelList.get(position).getProduct_description_arb(),
-                            "",
-                            position, tv_contetiy.getText().toString()
-                    ,modelList.get(position).getProduct_id());
+//                if (language.contains("english")) {
+//                    showProductDetail(modelList.get(position).getProduct_image(),
+//                            modelList.get(position).getProduct_name(),
+//                            modelList.get(position).getProduct_description(),
+//                            "",
+//                            position, tv_contetiy.getText().toString()
+//                            ,modelList.get(position).getProduct_id());
+//                }else {
+//
+//
+//                    showProductDetail(modelList.get(position).getProduct_image(),
+//                            modelList.get(position).getProduct_name_arb(),
+//                            modelList.get(position).getProduct_description_arb(),
+//                            "",
+//                            position, tv_contetiy.getText().toString()
+//                    ,modelList.get(position).getProduct_id());
+//                }
+
+                Intent intent=new Intent(context, ProductActivity.class);
+                if(language.contains("english")){
+
+                    intent.putExtra("product_name",modelList.get(position).getProduct_name());//TODO
+                    intent.putExtra("description",modelList.get(position).getProduct_description());//TODO
+                }else{
+                    intent.putExtra("product_name",modelList.get(position).getProduct_name_arb());//TODO
+                    intent.putExtra("description",modelList.get(position).getProduct_description_arb());
+
                 }
+                intent.putExtra("product_id",modelList.get(position).getProduct_id());
+                intent.putExtra("category_id",modelList.get(position).getCategory_id());
+                intent.putExtra("deal_price",modelList.get(position).getDeal_price());
+                intent.putExtra("start_date",modelList.get(position).getStart_date());
+                intent.putExtra("start_time",modelList.get(position).getStart_time());
+                intent.putExtra("end_date",modelList.get(position).getEnd_date());
+                intent.putExtra("end_time",modelList.get(position).getEnd_time());
+                intent.putExtra("price",modelList.get(position).getPrice());
+                intent.putExtra("image",modelList.get(position).getProduct_image());
+                intent.putExtra("status",modelList.get(position).getStatus());
+                intent.putExtra("stock",modelList.get(position).getStock());
+                intent.putExtra("unit_value",modelList.get(position).getUnit_value());
+                intent.putExtra("unit",modelList.get(position).getUnit());
+                intent.putExtra("increment",modelList.get(position).getStoreid());
+                intent.putExtra("rewards",modelList.get(position).getRewards());
+                intent.putExtra("stock",modelList.get(position).getStock());
+                intent.putExtra("title",modelList.get(position).getTitle());
+                intent.putExtra("qty",tv_contetiy.getText().toString());
+
+                context.startActivity(intent);
             }
 
         }
@@ -277,6 +312,10 @@ SharedPreferences preferences;
 
     }
 
+
+
+
+    ////////////////////////
     private void showProductDetail(String image, String title, String description, String detail, final int position, String qty
     , final String productid) {
 
