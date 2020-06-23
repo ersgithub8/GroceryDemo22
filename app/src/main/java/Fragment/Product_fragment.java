@@ -925,4 +925,7 @@ public class Product_fragment extends Fragment {
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 
     }
+    public void staring(){
+        Toast.makeText(getActivity(), "star activity", Toast.LENGTH_SHORT).show();
+    }
 }
