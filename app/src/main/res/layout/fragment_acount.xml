@@ -96,6 +96,17 @@
             android:drawableStart="@drawable/ic_baseline_thumb_up_24"
             android:textColor="@color/black"
             />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:id="@+id/deals"
+            android:text="Deals"
+            android:layout_below="@id/top_selling"
+            android:textSize="18sp"
+            android:drawableStart="@drawable/ic_baseline_thumb_up_24"
+            android:textColor="@color/black"
+            />
 
         <TextView
             android:layout_width="match_parent"
@@ -103,7 +114,7 @@
             android:layout_margin="10dp"
             android:id="@+id/nav_logout"
             android:text="@string/nav_logout"
-            android:layout_below="@id/top_selling"
+            android:layout_below="@id/deals"
             android:textSize="18sp"
             android:visibility="gone"
             android:drawableStart="@drawable/ic_exit"

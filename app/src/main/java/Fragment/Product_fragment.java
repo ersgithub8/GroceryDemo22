@@ -111,7 +111,7 @@ public class Product_fragment extends Fragment {
 
         usrid=sharedPreferences.getString(BaseURL.KEY_ID,"0");
 
-        Toast.makeText(getActivity(), usrid, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), usrid, Toast.LENGTH_SHORT).show();
         name=view.findViewById(R.id.name);
         final String id = getArguments().getString("id");
         storeid=getArguments().getString("storeid");
@@ -429,7 +429,6 @@ public class Product_fragment extends Fragment {
 
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
-
 
     //Get DEal Products
     private void makedealIconProductRequest(String cat_id) {

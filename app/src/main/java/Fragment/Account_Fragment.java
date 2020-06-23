@@ -31,7 +31,7 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class Account_Fragment extends Fragment {
 
-    TextView my_order,my_wallet,j6points,my_profile,logout,rate,share,feedback,login,lEnglish,lSpanish,top_selling;
+    TextView my_order,my_wallet,j6points,my_profile,logout,rate,share,feedback,login,lEnglish,lSpanish,top_selling,deals;
     private Session_management sessionManagement;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -46,6 +46,8 @@ public class Account_Fragment extends Fragment {
         lSpanish = view.findViewById(R.id.arab);
 
         top_selling = view.findViewById(R.id.top_selling);
+
+        deals = view.findViewById(R.id.deals);
 
         sessionManagement = new Session_management(getActivity());
         my_order=view.findViewById(R.id.my_orders);
@@ -146,6 +148,20 @@ public class Account_Fragment extends Fragment {
                 Fragment fm = new Product_fragment();
                 args.putString("cat_top_selling", "2");
                 args.putString("laddan_jaffery", "murshid");
+                fm.setArguments(args);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                        .addToBackStack(null).commit();
+
+            }
+        });
+
+        deals.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle args = new Bundle();
+                Fragment fm = new Deal_Fragemnt();
+                args.putString("laddan_jaffery", "deals");
                 fm.setArguments(args);
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)

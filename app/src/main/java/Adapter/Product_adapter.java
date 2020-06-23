@@ -52,7 +52,6 @@ import util.DatabaseHandler;
 
 import static android.content.Context.MODE_PRIVATE;
 
-
 public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyViewHolder> {
 
     private List<Product_model> modelList;
