@@ -75,7 +75,7 @@ public class Product_fragment extends Fragment {
     boolean favcheckk;
     SharedPreferences sharedPreferences;
     String usrid;
-    ImageView fav;
+    ImageView fav,star;
     TextView name;
     SharedPreferences preferences;
     public Product_fragment() {
@@ -101,6 +101,8 @@ public class Product_fragment extends Fragment {
         rv_cat.setLayoutManager((new GridLayoutManager(getActivity(),3)));
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
         final String getcat_id = getArguments().getString("cat_id");
+
+        star = view.findViewById(R.id.imagestar);
 
         relativeLayout = view.findViewById(R.id.tempy);
         sharedPreferences=getActivity().getSharedPreferences(BaseURL.PREFS_NAME,MODE_PRIVATE);
@@ -924,8 +926,5 @@ public class Product_fragment extends Fragment {
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 
-    }
-    public void staring(){
-        Toast.makeText(getActivity(), "star activity", Toast.LENGTH_SHORT).show();
     }
 }

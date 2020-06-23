@@ -56,7 +56,6 @@
             android:background="@drawable/heartnfw"
             />
         <ImageView
-            android:onClick="staring"
             android:layout_marginLeft="5dp"
             android:layout_centerVertical="true"
             android:id="@+id/imagestar"
