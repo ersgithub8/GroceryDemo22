@@ -156,6 +156,7 @@ public class Account_Fragment extends Fragment {
             }
         });
 
+
         deals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
