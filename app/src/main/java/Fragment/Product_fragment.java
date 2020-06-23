@@ -166,6 +166,7 @@ public class Product_fragment extends Fragment {
                     }else {
                         addinfavstore(usrid,storeid,fav);
                     }
+
                 }else{
                     if(favcheckk){
                         removefromfavcat(usrid,getcat_id,fav);
