@@ -48,6 +48,8 @@
     <string name="nav_user" translatable="false">User</string>
     <string name="nav_order" translatable="false">My Orders</string>
     <string name="nav_profile" translatable="false">My Profile</string>
+    <string name="nav_order_note" translatable="false">Order note:(optional)</string>
+    <string name="nav_note" translatable="false">Enter any extra note(optional)</string>
     <string name="nav_support" translatable="false">Support</string>
     <string name="nav_about" translatable="false">About Us</string>
     <string name="failed" translatable="false">Sorry,Your Payment Has Failed</string>

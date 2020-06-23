@@ -63,7 +63,7 @@ SharedPreferences preferences;
         db_cart = new DatabaseHandler(getActivity());
         sessionManagement = new Session_management(getActivity());
 
-        note = (TextView) view.findViewById(R.id.note_id);
+
 
         tv_timeslot = (TextView) view.findViewById(R.id.textTimeSlot);
         tv_address = (TextView) view.findViewById(R.id.txtAddress);
