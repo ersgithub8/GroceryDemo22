@@ -143,7 +143,7 @@ public class Product_fragment extends Fragment {
             if(storeid !=null){
                 makeGetCategoryRequest(storeid);
                 checkfavouratestore(usrid,storeid,fav);
-            }else{
+            }else if(getcat_id != null){
                 makeGetCategoryRequest(getcat_id);
                 checkfavouratecat(usrid,getcat_id,fav);
             }
