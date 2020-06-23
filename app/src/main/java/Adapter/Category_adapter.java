@@ -60,6 +60,8 @@ public class Category_adapter extends RecyclerView.Adapter<Category_adapter.MyVi
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         final Home_Icon_model mList = modelList.get(position);
+
+
         Glide.with(context)
                 .load(BaseURL.IMG_CATEGORY_URL + mList.getImage())
                 .placeholder(R.drawable.icon)
