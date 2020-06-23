@@ -27,7 +27,15 @@ public class Product_model {
     String rewards;
     String stock;
     String title;
+    String store_id;
 
+    public String getStoreid() {
+        return store_id;
+    }
+
+    public void setStoreid(String storeid) {
+        this.store_id = storeid;
+    }
 
     public String  getProduct_id() {
         return product_id;

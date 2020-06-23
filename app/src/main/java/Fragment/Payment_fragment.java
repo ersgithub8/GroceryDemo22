@@ -301,6 +301,8 @@ public class Payment_fragment extends Fragment {
                     jObjP.put("unit", map.get("unit"));
                     jObjP.put("price", map.get("price"));
                     jObjP.put("rewards", map.get("rewards"));
+                    jObjP.put("store_id", map.get("increament"));
+
                     passArray.put(jObjP);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -314,8 +316,8 @@ public class Payment_fragment extends Fragment {
                 Log.e(TAG, "from:" + gettime + "\ndate:" + getdate +
                         "\n" + "\nuser_id:" + getuser_id + "\n" + getlocation_id + getstore_id + "\ndata:" + passArray.toString());
 
-
-    makeAddOrderRequest(getdate, gettime, getuser_id, getlocation_id, getstore_id, passArray);
+                Toast.makeText(getActivity(),passArray+"", Toast.LENGTH_SHORT).show();
+   // makeAddOrderRequest(getdate, gettime, getuser_id, getlocation_id, getstore_id, passArray);
 
 
             }

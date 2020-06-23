@@ -136,6 +136,7 @@ SharedPreferences preferences;
     map.put("rewards", modelList.get(position).getRewards());
     map.put("stock", modelList.get(position).getStock());
     map.put("title", modelList.get(position).getTitle());
+    map.put("store_id", modelList.get(position).getStoreid());
 
 
                 if (!tv_contetiy.getText().toString().equalsIgnoreCase("0")) {
@@ -384,10 +385,12 @@ SharedPreferences preferences;
                     map.put("in_stock", modelList.get(position).getIn_stock());
                     map.put("unit_value", modelList.get(position).getUnit_value());
                     map.put("unit", modelList.get(position).getUnit());
-                    map.put("increament", modelList.get(position).getIncreament());
+                    map.put("increament", modelList.get(position).getStoreid());
                     map.put("rewards", modelList.get(position).getRewards());
                     map.put("stock", modelList.get(position).getStock());
                     map.put("title", modelList.get(position).getTitle());
+
+
 
 
                 if (!tv_contetiy.getText().toString().equalsIgnoreCase("0")) {
