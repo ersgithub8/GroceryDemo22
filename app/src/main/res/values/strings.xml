@@ -16,7 +16,7 @@
     <string name="uname">Name</string>
     <string name="uphone">Phone</string>
     <string name="urefrel">Referal Code</string>
-
+    <string name="rating">Rating &amp; Reviews</string>
     <string name="create">Create an Account?</string>
     <string name="email">Email</string>
     <string name="password">Password</string>

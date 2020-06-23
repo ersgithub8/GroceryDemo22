@@ -153,4 +153,6 @@ public class BaseURL {
     public static final String saverating=BASE_URL+"index.php/Api/save_ratings";
     public static final String getrating=BASE_URL+"index.php/Api/get_stars";
 
+    public static final String getallrating=BASE_URL+"index.php/Api/get_all_rating";
+
 }

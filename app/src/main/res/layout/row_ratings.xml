@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="@dimen/space_5"
+    app:cardCornerRadius="@dimen/space_20"
+    android:layout_margin="@dimen/space_15">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/space_10"
+        android:paddingBottom="@dimen/space_10"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp">
+        <RatingBar
+            android:id="@+id/ratingbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:stepSize="1"
+            android:isIndicator="true"
+            style="@style/Widget.AppCompat.RatingBar.Indicator"
+            android:theme="@style/RatingBar"
+            />
+
+        <TextView
+            android:id="@+id/ratingcoment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ratingbar"
+            android:layout_marginTop="@dimen/space_10"
+            android:textColor="@color/black"
+            android:textSize="@dimen/space_14"
+            android:isIndicator="true"
+            />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
