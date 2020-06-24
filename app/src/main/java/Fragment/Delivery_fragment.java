@@ -85,7 +85,7 @@ SharedPreferences preferences;
     private String gettime = "";
     private String getdate = "";
 
-    private String deli_charges;
+    private String deli_charges,ischarge;
     String store_id;
 String language;
     public Delivery_fragment() {
@@ -107,6 +107,8 @@ String language;
 
         store_id = SharedPref.getString(getActivity(), BaseURL.STORE_ID);
         preferences = getActivity().getSharedPreferences("lan", MODE_PRIVATE);
+
+        ischarge=getArguments().getString("ischarge");
 
         tv_date = (TextView) view.findViewById(R.id.tv_deli_date);
         tv_time = (TextView) view.findViewById(R.id.tv_deli_fromtime);
@@ -308,7 +310,12 @@ String language;
             args.putString("time", gettime);
             args.putString("location_id", location_id);
             args.putString("address", address);
-            args.putString("deli_charges", deli_charges);
+            if (ischarge.equals("1")){
+                args.putString("deli_charges", "0");
+            }else {
+                args.putString("deli_charges", deli_charges);
+            }
+
             args.putString("store_id", store_id);
             fm.setArguments(args);
             FragmentManager fragmentManager = getFragmentManager();
@@ -408,9 +415,15 @@ String language;
                 deli_charges = intent.getStringExtra("charge");
                 //Toast.makeText(getActivity(), deli_charges, Toast.LENGTH_SHORT).show();
 
-                Double total = Double.parseDouble(db_cart.getTotalAmount()) + Integer.parseInt(deli_charges);
+                if (ischarge.equals("1")){
+                    Double total = Double.parseDouble(db_cart.getTotalAmount());
 
-                tv_total.setText("" + db_cart.getTotalAmount() + " + " + deli_charges + " = "  + total+ getActivity().getResources().getString(R.string.currency));
+                    tv_total.setText("" + db_cart.getTotalAmount() + " + " + "0" + " = "  + total+ getActivity().getResources().getString(R.string.currency));
+                }else {
+                    Double total = Double.parseDouble(db_cart.getTotalAmount()) + Integer.parseInt(deli_charges);
+
+                    tv_total.setText("" + db_cart.getTotalAmount() + " + " + deli_charges + " = " + total + getActivity().getResources().getString(R.string.currency));
+                }
             }
         }
     };

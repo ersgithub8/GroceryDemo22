@@ -69,7 +69,6 @@ public class StoreFragment extends Fragment {
     RecyclerView stores;
     LinearLayout Search_layout;
     String storeid,getid;
-    SharedPreferences sharedPreferences;
     private ShimmerFrameLayout mShimmerViewContainer,shimmy;
     private RecyclerView rv_headre_icons;
     List<Store_Model> store_models=new ArrayList<>();
@@ -162,6 +161,7 @@ public class StoreFragment extends Fragment {
                 Bundle args = new Bundle();
                 Fragment fm = new Product_fragment();
                 args.putString("storeid", storeid);
+                args.putString("laddan_jaffery", "store");
                 args.putString("name",store_models.get(position).getUser_name());
                 fm.setArguments(args);
                 FragmentManager fragmentManager = getFragmentManager();
@@ -178,8 +178,6 @@ public class StoreFragment extends Fragment {
         }));
         return view;
     }
-
-
 
     public void getstores(){
 

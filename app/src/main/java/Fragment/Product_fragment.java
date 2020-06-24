@@ -94,7 +94,6 @@ public class Product_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_product, container, false);
 
-
         new StoreFragment();
         tab_cat = (TabLayout) view.findViewById(R.id.tab_cat);
         fav=view.findViewById(R.id.imagefav);
@@ -126,6 +125,9 @@ public class Product_fragment extends Fragment {
         else if (yeh_to_hoga.equals("murshid")){
             relativeLayout.setVisibility(View.GONE);
         }
+        else if (yeh_to_hoga.equals("store")){
+            star.setVisibility(View.VISIBLE);
+        }
         else {
         }
 
@@ -133,8 +135,7 @@ public class Product_fragment extends Fragment {
         ((MainActivity) getActivity()).setTitle(getResources().getString(R.string.tv_product_name));
 
         name.setText(names);
-//        Toast.makeText(getActivity(), "abvc", Toast.LENGTH_SHORT).show();
-        // check internet connection
+
         if (ConnectivityReceiver.isConnected()) {
             //Shop by Catogary
 //            makeGetCategoryRequest(getcat_id);
@@ -752,7 +753,7 @@ public class Product_fragment extends Fragment {
             public void onResponse(JSONObject response) {
 
 
-                Toast.makeText(getActivity(), "abg", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "abg", Toast.LENGTH_SHORT).show();
 
                 try {
                     if (response != null && response.length() > 0) {
@@ -919,7 +920,7 @@ public class Product_fragment extends Fragment {
                         Boolean status = response.getBoolean("responce");
                         if (status) {
 
-                            Toast.makeText(getActivity(), "abc", Toast.LENGTH_SHORT).show();
+ //                           Toast.makeText(getActivity(), "abc", Toast.LENGTH_SHORT).show();
                             JSONArray array=response.getJSONArray("data");
                             for (int i =0 ;i<array.length();i++){
                                 JSONObject object=array.getJSONObject(i);
