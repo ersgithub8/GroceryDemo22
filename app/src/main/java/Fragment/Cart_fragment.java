@@ -56,6 +56,7 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
     private RelativeLayout btn_checkout;
 
     private DatabaseHandler db;
+    String delicharge;
 
     private Session_management sessionManagement;
 
@@ -198,6 +199,16 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
                                         isbig = true;
                                         Toast.makeText(getActivity(), "" + jsonObject.getString("title") + " : " + value, Toast.LENGTH_SHORT).show();
                                     }
+                                }else if (jsonObject.getString("id").equals("3")) {
+                                    value = Integer.parseInt(jsonObject.getString("value"));
+
+                                    if (total_amount > value) {
+
+                                        delicharge="1";
+                                        //Toast.makeText(getActivity(), "" + jsonObject.getString("title") + " : " + value, Toast.LENGTH_SHORT).show();
+                                    }else {
+                                        delicharge="0";
+                                    }
                                 }
 
                             }
@@ -206,7 +217,9 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
                                 if (sessionManagement.isLoggedIn()) {
                                     Bundle args = new Bundle();
                                     Fragment fm = new Delivery_fragment();
+                                    args.putString("ischarge",delicharge);
                                     fm.setArguments(args);
+
                                     FragmentManager fragmentManager = getFragmentManager();
                                     fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
                                             .addToBackStack(null).commit();
