@@ -103,6 +103,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         String qry = "Select *  from " + CART_TABLE + " where " + COLUMN_ID + " = " + id;
         Cursor cursor = db.rawQuery(qry, null);
         cursor.moveToFirst();
+
         return cursor.getString(cursor.getColumnIndex(COLUMN_QTY));
 
     }

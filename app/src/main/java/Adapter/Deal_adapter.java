@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -34,6 +35,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,7 +59,11 @@ public class Deal_adapter extends RecyclerView.Adapter<Deal_adapter.MyViewHolder
     private Context context;
 
     SharedPreferences preferences;
+    private DatabaseHandler dbcart;
+    String languagee;
 
+    SharedPreferences sharedPreferences;
+    String usrid;
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -84,8 +90,8 @@ public class Deal_adapter extends RecyclerView.Adapter<Deal_adapter.MyViewHolder
         public void onClick(View view) {
 
 
-//            int id = view.getId();
-//            int position = getAdapterPosition();
+            int id = view.getId();
+            int position = getAdapterPosition();
 //            if (id == R.id.iv_subcat_plus) {
 //                int qty = Integer.valueOf(tv_contetiy.getText().toString());
 //                qty = qty + 1;
@@ -149,29 +155,30 @@ public class Deal_adapter extends RecyclerView.Adapter<Deal_adapter.MyViewHolder
 //                tv_reward.setText("" + reward * items);
 //                tv_total.setText("" + price * items);
 //                ((MainActivity) context).setCartCounter("" + dbcart.getCartCount());
-//
-//            } else if (id == R.id.iv_subcat_img) {
+
+//            } else
+//                if (id == R.id.iv_subcat_img) {
 //                preferences = context.getSharedPreferences("lan", MODE_PRIVATE);
 //                language=preferences.getString("language","");
 //                Log.d("lang",language);
-////                if (language.contains("english")) {
-////                    showProductDetail(modelList.get(position).getProduct_image(),
-////                            modelList.get(position).getProduct_name(),
-////                            modelList.get(position).getProduct_description(),
-////                            "",
-////                            position, tv_contetiy.getText().toString()
-////                            ,modelList.get(position).getProduct_id());
-////                }else {
-////
-////
-////                    showProductDetail(modelList.get(position).getProduct_image(),
-////                            modelList.get(position).getProduct_name_arb(),
-////                            modelList.get(position).getProduct_description_arb(),
-////                            "",
-////                            position, tv_contetiy.getText().toString()
-////                    ,modelList.get(position).getProduct_id());
-////                }
+//                if (language.contains("english")) {
+//                    showProductDetail(modelList.get(position).getProduct_image(),
+//                            modelList.get(position).getProduct_name(),
+//                            modelList.get(position).getProduct_description(),
+//                            "",
+//                            position, tv_contetiy.getText().toString()
+//                            ,modelList.get(position).getProduct_id());
+//                }else {
 //
+//
+//                    showProductDetail(modelList.get(position).getProduct_image(),
+//                            modelList.get(position).getProduct_name_arb(),
+//                            modelList.get(position).getProduct_description_arb(),
+//                            "",
+//                            position, tv_contetiy.getText().toString()
+//                    ,modelList.get(position).getProduct_id());
+//                }
+
 //                Intent intent=new Intent(context, ProductActivity.class);
 //                if(language.contains("english")){
 //
@@ -199,13 +206,13 @@ public class Deal_adapter extends RecyclerView.Adapter<Deal_adapter.MyViewHolder
 //                intent.putExtra("rewards",modelList.get(position).getRewards());
 //                intent.putExtra("stock",modelList.get(position).getStock());
 //                intent.putExtra("title",modelList.get(position).getTitle());
-//                intent.putExtra("qty",tv_contetiy.getText().toString());
+//                intent.putExtra("qty",dbcart.getCartItemQty(modelList.get(position).getProduct_id()));
 //
 //                context.startActivity(intent);
 //            }
 //
-//        }
         }
+
 
     }
     public Deal_adapter(List<Deal_Model> modelList,Activity activity) {
@@ -222,7 +229,7 @@ public class Deal_adapter extends RecyclerView.Adapter<Deal_adapter.MyViewHolder
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
-        Deal_Model mList = modelList.get(position);
+        final Deal_Model mList = modelList.get(position);
 
         preferences = context.getSharedPreferences("lan", MODE_PRIVATE);
         String language=preferences.getString("language","");
@@ -252,21 +259,21 @@ public class Deal_adapter extends RecyclerView.Adapter<Deal_adapter.MyViewHolder
         } else if (mList.getStatus().equals("0")) {
 
             if (language == null){
-                holder.offer_product_prize.setText("End Time : Expired");
+                holder.offer_product_prize.setText("Expired");
                 holder.offer_product_prize.setTextColor(context.getResources().getColor(R.color.color_3));
                 holder.offer_textview.setTextColor(context.getResources().getColor(R.color.color_3));
                 holder.end_time.setText("End Time : Expired");
                 holder.end_time.setTextColor(context.getResources().getColor(R.color.color_3));
             }
             if (language.contains("english")) {
-                holder.offer_product_prize.setText("End Time : Expired");
+                holder.offer_product_prize.setText("Expired");
                 holder.offer_product_prize.setTextColor(context.getResources().getColor(R.color.color_3));
                 holder.offer_textview.setTextColor(context.getResources().getColor(R.color.color_3));
                 holder.end_time.setText("End Time : Expired");
                 holder.end_time.setTextColor(context.getResources().getColor(R.color.color_3));
             }
             else {
-                holder.offer_product_prize.setText("وقت النهاية : تنقضي");
+                holder.offer_product_prize.setText("تنقضي");
                 holder.offer_product_prize.setTextColor(context.getResources().getColor(R.color.color_3));
                 holder.offer_textview.setTextColor(context.getResources().getColor(R.color.color_3));
                 holder.end_time.setText("وقت النهاية : تنقضي");
@@ -298,6 +305,70 @@ public class Deal_adapter extends RecyclerView.Adapter<Deal_adapter.MyViewHolder
         }
         holder.start_time.setText(mList.getStart_time());
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(mList.getStatus().equals("0")){
+                    SweetAlertDialog alertDialog=new SweetAlertDialog(context,SweetAlertDialog.ERROR_TYPE).
+                            setTitleText("Offer not Available")
+                            .setConfirmButtonBackgroundColor(Color.RED);
+                    alertDialog.show();
+                    return;
+                }
+                dbcart=new DatabaseHandler(context);
+                preferences = context.getSharedPreferences("lan", MODE_PRIVATE);
+                languagee=preferences.getString("language","");
+                Log.d("lang",languagee);
+//                if (language.contains("english")) {
+//                    showProductDetail(modelList.get(position).getProduct_image(),
+//                            modelList.get(position).getProduct_name(),
+//                            modelList.get(position).getProduct_description(),
+//                            "",
+//                            position, tv_contetiy.getText().toString()
+//                            ,modelList.get(position).getProduct_id());
+//                }else {
+//
+//
+//                    showProductDetail(modelList.get(position).getProduct_image(),
+//                            modelList.get(position).getProduct_name_arb(),
+//                            modelList.get(position).getProduct_description_arb(),
+//                            "",
+//                            position, tv_contetiy.getText().toString()
+//                    ,modelList.get(position).getProduct_id());
+//                }
+
+                Intent intent=new Intent(context, ProductActivity.class);
+                if(languagee.contains("english")){
+
+                    intent.putExtra("product_name",mList.getProduct_name());//TODO
+                    intent.putExtra("description",mList.getProduct_description());//TODO
+                }else{
+                    intent.putExtra("product_name",mList.getProduct_name_arb());//TODO
+                    intent.putExtra("description",mList.getProduct_description_arb());
+
+                }
+                intent.putExtra("product_id",mList.getProduct_id());
+                intent.putExtra("category_id",mList.getCategory_id());
+                intent.putExtra("deal_price",mList.getDeal_price());
+                intent.putExtra("start_date",mList.getStart_date());
+                intent.putExtra("start_time",mList.getStart_time());
+                intent.putExtra("end_date",mList.getEnd_date());
+                intent.putExtra("end_time",mList.getEnd_time());
+                intent.putExtra("price",mList.getPrice());
+                intent.putExtra("image",mList.getProduct_image());
+                intent.putExtra("status",mList.getStatus());
+                intent.putExtra("stock",mList.getStock());
+                intent.putExtra("unit_value",mList.getUnit_value());
+                intent.putExtra("unit",mList.getUnit());
+                intent.putExtra("increment",mList.getStore_id());
+                intent.putExtra("rewards",mList.getRewards());
+                intent.putExtra("stock",mList.getStock());
+                intent.putExtra("title",mList.getTitle());
+                intent.putExtra("qty",dbcart.getCartItemQty(mList.getProduct_id()));
+
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
