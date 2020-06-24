@@ -60,6 +60,7 @@ import Adapter.Home_Icon_Adapter;
 import Adapter.Top_Selling_Adapter;
 import Config.BaseURL;
 import Model.Category_model;
+import Model.Deal_Model;
 import Model.Deal_Of_Day_model;
 import Model.Home_Icon_model;
 import Model.Top_Selling_model;
@@ -91,7 +92,7 @@ public class Home_fragment extends Fragment {
 
     //Deal O Day
     private Deal_OfDay_Adapter deal_ofDay_adapter;
-    private List<Deal_Of_Day_model> deal_of_day_models = new ArrayList<>();
+    private List<Deal_Model> deal_of_day_models = new ArrayList<>();
     LinearLayout Deal_Linear_layout;
     FrameLayout Deal_Frame_layout, Deal_Frame_layout1;
 
@@ -326,7 +327,12 @@ public class Home_fragment extends Fragment {
         rv_deal_of_day.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), rv_deal_of_day, new RecyclerTouchListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                getid = deal_of_day_models.get(position).getId();
+
+                // change getis()  to   getStore_id
+                //And model DEal_model
+
+
+                getid = deal_of_day_models.get(position).getStore_id();
                 Bundle args = new Bundle();
                 Fragment fm = new Product_fragment();
                 args.putString("cat_deal", "2");

@@ -2,7 +2,10 @@ package Fragment;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -50,6 +53,7 @@ import Model.Home_Icon_model;
 import Model.Store_Model;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.CustomSlider;
+import gogrocer.tcc.LocaleHelper;
 import gogrocer.tcc.MainActivity;
 import gogrocer.tcc.R;
 import gogrocer.tcc.WebView;
@@ -157,6 +161,7 @@ public class StoreFragment extends Fragment {
                 Bundle args = new Bundle();
                 Fragment fm = new Product_fragment();
                 args.putString("storeid", storeid);
+                args.putString("laddan_jaffery", "store");
                 args.putString("name",store_models.get(position).getUser_name());
                 fm.setArguments(args);
                 FragmentManager fragmentManager = getFragmentManager();
@@ -173,8 +178,6 @@ public class StoreFragment extends Fragment {
         }));
         return view;
     }
-
-
 
     public void getstores(){
 

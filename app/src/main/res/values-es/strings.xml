@@ -1,6 +1,7 @@
 <resources>
 
     <string name="top_selling">Top Selling</string>
+    <string name="Deal">Deals</string>
 
     <string name="stores">Store</string>
     <string name="caty">Categories</string>
@@ -34,8 +35,11 @@
 
 
     <string name="action_settings">Configuraciones</string>
+    <string name="expire">Expired</string>
 
     <string name="nav_terms">Términos y Privacidad</string>
+    <string name="start_time">Start Time : </string>
+    <string name="end_time">End Time : </string>
 
     <!-- string.xml -->
     <string name="nav_home">Comprar Ahora</string>

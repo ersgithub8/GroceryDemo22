@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="Deal">صفقات</string>
+    <string name="expire">منتهية الصلاحية</string>
 
     <string name="top_selling">الأكثر مبيعا</string>
 
@@ -50,8 +52,8 @@
     <string name="thanks">شكراً لك</string>
     <string name="paytm">Paytm</string>
     <string name="offer">عرض</string>
-    <string name="start_time">وقت البدء :</string>
-    <string name="end_time">وقت النهاية :</string>
+    <string name="start_time">وقت البدء : </string>
+    <string name="end_time">وقت النهاية : </string>
     <string name="wall_am">رصيد المحفظة</string>
 <string name="tv_out">إنتهى من المخزن</string>
     <string name="tv_rech">أدخل المبلغ للمحفظة</string>

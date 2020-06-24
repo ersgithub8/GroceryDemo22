@@ -242,11 +242,11 @@ public class Payment_fragment extends Fragment {
                     Coupon_and_wallet.setVisibility(View.VISIBLE);
                     Relative_used_coupon.setVisibility(View.VISIBLE);
                     if (rb_Store.isChecked() || rb_Cod.isChecked() || rb_card.isChecked() || rb_Netbanking.isChecked() || rb_paytm.isChecked()) {
-                        rb_Store.setChecked(false);
-                        rb_Cod.setChecked(false);
-                        rb_card.setChecked(false);
-                        rb_Netbanking.setChecked(false);
-                        rb_paytm.setChecked(false);
+//                        rb_Store.setChecked(false);
+//                        rb_Cod.setChecked(false);
+//                        rb_card.setChecked(false);
+//                        rb_Netbanking.setChecked(false);
+//                        rb_paytm.setChecked(false);
                     }
                 } else {
                     et_Coupon.setText("");
@@ -321,7 +321,7 @@ public class Payment_fragment extends Fragment {
                         "\n" + "\nuser_id:" + getuser_id + "\n" + getlocation_id + getstore_id + "\ndata:" + passArray.toString());
 
                 Toast.makeText(getActivity(),getlocation_id+"", Toast.LENGTH_SHORT).show();
-    //makeAddOrderRequest(text,getdate, gettime, getuser_id, getlocation_id, getstore_id, passArray);
+    makeAddOrderRequest(text,getdate, gettime, getuser_id, getlocation_id, getstore_id, passArray);
 
 
             }
@@ -330,6 +330,7 @@ public class Payment_fragment extends Fragment {
 
     private void makeAddOrderRequest(String note1,String date, String gettime, String userid, String
             location, String store_id, JSONArray passArray) {
+//        Toast.makeText(getActivity(), "abc", Toast.LENGTH_SHORT).show();
         String tag_json_obj = "json_add_order_req";
         Map<String, String> params = new HashMap<String, String>();
         params.put("date", date);
@@ -369,10 +370,13 @@ public class Payment_fragment extends Fragment {
 //                                .addToBackStack(null).commit();
 //
 
+                    }else{
+                        Toast.makeText(getActivity(), response+"", Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Toast.makeText(getActivity(), e+"", Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {
