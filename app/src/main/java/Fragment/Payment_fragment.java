@@ -82,6 +82,7 @@ public class Payment_fragment extends Fragment {
     RadioGroup radioGroup;
     String Prefrence_TotalAmmount;
     String getwallet;
+    EditText note;
     LinearLayout Promo_code_layout, Coupon_and_wallet;
     RelativeLayout Apply_Coupon_Code, Relative_used_wallet, Relative_used_coupon;
 
@@ -108,6 +109,7 @@ public class Payment_fragment extends Fragment {
 
         Prefrence_TotalAmmount = SharedPref.getString(getActivity(), BaseURL.TOTAL_AMOUNT);
 
+        note=view.findViewById(R.id.extra_note);
         radioGroup = (RadioGroup) view.findViewById(R.id.radio_group);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
@@ -175,6 +177,8 @@ public class Payment_fragment extends Fragment {
             }
         });
 
+        text=note.getText().toString();
+
 
         total_amount = getArguments().getString("total");
         order_total_amount = getArguments().getString("total");
@@ -238,11 +242,11 @@ public class Payment_fragment extends Fragment {
                     Coupon_and_wallet.setVisibility(View.VISIBLE);
                     Relative_used_coupon.setVisibility(View.VISIBLE);
                     if (rb_Store.isChecked() || rb_Cod.isChecked() || rb_card.isChecked() || rb_Netbanking.isChecked() || rb_paytm.isChecked()) {
-                        rb_Store.setChecked(false);
-                        rb_Cod.setChecked(false);
-                        rb_card.setChecked(false);
-                        rb_Netbanking.setChecked(false);
-                        rb_paytm.setChecked(false);
+//                        rb_Store.setChecked(false);
+//                        rb_Cod.setChecked(false);
+//                        rb_card.setChecked(false);
+//                        rb_Netbanking.setChecked(false);
+//                        rb_paytm.setChecked(false);
                     }
                 } else {
                     et_Coupon.setText("");
@@ -316,16 +320,17 @@ public class Payment_fragment extends Fragment {
                 Log.e(TAG, "from:" + gettime + "\ndate:" + getdate +
                         "\n" + "\nuser_id:" + getuser_id + "\n" + getlocation_id + getstore_id + "\ndata:" + passArray.toString());
 
-             //   Toast.makeText(getActivity(),passArray+"", Toast.LENGTH_SHORT).show();
-    makeAddOrderRequest(getdate, gettime, getuser_id, getlocation_id, getstore_id, passArray);
+                Toast.makeText(getActivity(),getlocation_id+"", Toast.LENGTH_SHORT).show();
+    makeAddOrderRequest(text,getdate, gettime, getuser_id, getlocation_id, getstore_id, passArray);
 
 
             }
         }
     }
 
-    private void makeAddOrderRequest(String date, String gettime, String userid, String
+    private void makeAddOrderRequest(String note1,String date, String gettime, String userid, String
             location, String store_id, JSONArray passArray) {
+//        Toast.makeText(getActivity(), "abc", Toast.LENGTH_SHORT).show();
         String tag_json_obj = "json_add_order_req";
         Map<String, String> params = new HashMap<String, String>();
         params.put("date", date);
@@ -335,6 +340,7 @@ public class Payment_fragment extends Fragment {
         params.put("store_id", store_id);
         params.put("total_ammount",total_amount);
         params.put("payment_method", getvalue);
+        params.put("order_note", note1);
         params.put("data", passArray.toString());
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
                 BaseURL.ADD_ORDER_URL, params, new Response.Listener<JSONObject>() {
@@ -364,10 +370,13 @@ public class Payment_fragment extends Fragment {
 //                                .addToBackStack(null).commit();
 //
 
+                    }else{
+                        Toast.makeText(getActivity(), response+"", Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Toast.makeText(getActivity(), e+"", Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {

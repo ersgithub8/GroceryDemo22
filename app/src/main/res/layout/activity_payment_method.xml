@@ -474,8 +474,7 @@
             android:layout_height="100dp"
             android:hint="@string/nav_note"
             android:id="@+id/extra_note"
-            android:textAlignment="textStart"
-
+            android:background="@drawable/bg"
             android:padding="5dp"/>
 
         <RelativeLayout
