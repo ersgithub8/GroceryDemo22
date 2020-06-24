@@ -38,7 +38,7 @@ public class Rating extends AppCompatActivity {
     TextView ratingtext;
     Button submit;
     EditText description;
-    String productid,userid;
+    String productid,userid,status;
     SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +53,8 @@ public class Rating extends AppCompatActivity {
         sharedPreferences=getSharedPreferences(BaseURL.PREFS_NAME,MODE_PRIVATE);
 
         userid=sharedPreferences.getString(BaseURL.KEY_ID,"0");
+
+        status = getIntent().getStringExtra("status");
 
         productid=getIntent().getStringExtra("prod_id");
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
@@ -86,12 +88,27 @@ public class Rating extends AppCompatActivity {
                 if(ratingBar.getRating()==0){
                     Toast.makeText(Rating.this, "Rate Product First", Toast.LENGTH_SHORT).show();
                 }else{
+
+                    if (status == null)
+                    {
+
                     if(description.getText().toString().isEmpty()){
                         saverating(productid,userid,ratingBar.getRating(),"");
                     }else{
                         saverating(productid,userid,ratingBar.getRating(),description.getText().toString());
                     }
-//                    saverating(productid,userid,ratingBar.getRating(),);
+
+                }
+
+                    //if store
+                    else if (status.equals("store")){
+                        if(description.getText().toString().isEmpty()){
+                            savestorerating(getIntent().getStringExtra("store_id"),ratingBar.getRating(),"");
+                        }else{
+                            savestorerating(getIntent().getStringExtra("store_id"),ratingBar.getRating(),description.getText().toString());
+                        }
+
+                    }
                 }
             }
         });
@@ -104,6 +121,73 @@ public class Rating extends AppCompatActivity {
     });
     }
 
+    private void savestorerating(String id,Float rating,String description){
+
+        // Tag used to cancel the request
+        String tag_json_obj = "json_edit_address_req";
+
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("store_id", id);
+        params.put("star", String.valueOf(rating));
+        //params.put("comment", description);
+
+        CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
+                BaseURL.SAVE_STORE_RATING, params, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+//                Log.d(TAG, response.toString());
+
+                try {
+                    Boolean status = response.getBoolean("response");
+                    if (status) {
+
+                        String data=response.getString("data");
+                        SweetAlertDialog alertDialog=new SweetAlertDialog(Rating.this,SweetAlertDialog.SUCCESS_TYPE).
+                                setConfirmButtonBackgroundColor(Color.GREEN).
+                                setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                        onBackPressed();
+                                    }
+                                });
+                        alertDialog.setCancelable(false);
+                        alertDialog.setTitleText(data);
+                        alertDialog.show();
+                    }else{
+                        String data=response.getString("data");
+                        SweetAlertDialog alertDialog=new SweetAlertDialog(Rating.this,SweetAlertDialog.ERROR_TYPE).
+                                setConfirmButtonBackgroundColor(Color.RED).
+                                setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                        onBackPressed();
+                                    }
+                                });
+                        alertDialog.setCancelable(false);
+                        alertDialog.setTitleText(data);
+                        alertDialog.show();
+                    }
+                } catch (JSONException e) {
+                    Toast.makeText(Rating.this, "Error", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+//                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Toast.makeText(Rating.this, getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
 
 
     private void saverating(String productid,String userid,Float rating,String description) {

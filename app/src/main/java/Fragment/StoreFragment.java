@@ -181,7 +181,6 @@ public class StoreFragment extends Fragment {
         Map<String, String> params = new HashMap<String, String>();
         params.put("city_id", "");
 
-
         CustomVolleyJsonRequest jsonRequest=new CustomVolleyJsonRequest(Request.Method.POST,
                 BaseURL.getStores, params, new Response.Listener<JSONObject>() {
             @Override
@@ -205,9 +204,6 @@ public class StoreFragment extends Fragment {
                             stores.setLayoutManager(new GridLayoutManager(getActivity(),3));
                             stores.setAdapter(store_adapter);
                             store_adapter.notifyDataSetChanged();
-
-
-
 
                         }
 

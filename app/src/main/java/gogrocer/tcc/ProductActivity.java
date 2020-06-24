@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +32,7 @@ import java.util.Map;
 
 import Config.BaseURL;
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import gogrocer.tcc.networkconnectivity.RatingAndReviews;
 import util.CustomVolleyJsonRequest;
 import util.DatabaseHandler;
 
@@ -38,6 +41,7 @@ public class ProductActivity extends AppCompatActivity {
     boolean favcheckk;
     SharedPreferences sharedPreferences,preferences;
     String usrid,language,detail,qty;
+    RelativeLayout ratingrl;
 //            ,productid,product_name,category_id,dealprice,startdate,starttime,endtime,enddate,price,status,instock,
 //            ,title
 //            ,description
@@ -68,7 +72,7 @@ public class ProductActivity extends AppCompatActivity {
     String title;
 
     private DatabaseHandler dbcart;
-    ImageView iv_image,iv_fav_image,iv_minus,iv_plus;
+    ImageView iv_image,iv_fav_image,iv_minus,iv_plus,rateall;
    TextView tv_price, tv_reward, tv_total,tv_title,tv_detail,tv_contetiy,tv_add;
    ImageView iv_logo, iv_remove;
     RatingBar ratingBar;
@@ -89,7 +93,7 @@ public class ProductActivity extends AppCompatActivity {
         tv_detail = (TextView) findViewById(R.id.tv_product_detail);
         tv_contetiy = (TextView) findViewById(R.id.tv_subcat_contetiy);
         tv_add = (TextView) findViewById(R.id.tv_subcat_add);
-
+        rateall=findViewById(R.id.allrate);
         tv_price = (TextView) findViewById(R.id.tv_subcat_price);
         tv_reward = (TextView) findViewById(R.id.tv_reward_point);
         tv_total = (TextView) findViewById(R.id.tv_subcat_total);
@@ -98,6 +102,8 @@ public class ProductActivity extends AppCompatActivity {
 
 
         ratingBar=findViewById(R.id.ratingbarprod);
+        ratingrl=findViewById(R.id.rl1);
+
 
 
         dbcart=new DatabaseHandler(this);
@@ -129,6 +135,15 @@ public class ProductActivity extends AppCompatActivity {
         qty=getIntent().getStringExtra("qty");
 
 
+        rateall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent=new Intent(ProductActivity.this, RatingAndReviews.class);
+                intent.putExtra("prod_id",productid);
+                startActivity(intent);
+            }
+        });
         Double price = Double.parseDouble(pricee);
         Double reward = Double.parseDouble(rewards);
         Double items = Double.parseDouble(dbcart.getInCartItemQty(productid));
@@ -469,9 +484,11 @@ public class ProductActivity extends AppCompatActivity {
                         JSONObject object=array.getJSONObject(0);
                         String rating=object.getString("rating");
                         if(rating.equals("null")){
+                            ratingrl.setVisibility(View.GONE);
                             ratingBar.setVisibility(View.GONE);
                         }else
                         {
+                            ratingrl.setVisibility(View.VISIBLE);
                             ratingBar.setVisibility(View.VISIBLE);
                             ratingBar.setRating(Float.valueOf(rating));
 

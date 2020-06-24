@@ -1,6 +1,7 @@
 package Fragment;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -53,6 +54,7 @@ import gogrocer.tcc.AppController;
 import gogrocer.tcc.CustomSlider;
 import gogrocer.tcc.MainActivity;
 import gogrocer.tcc.R;
+import gogrocer.tcc.Rating;
 import util.ConnectivityReceiver;
 import util.CustomVolleyJsonRequest;
 
@@ -75,7 +77,7 @@ public class Product_fragment extends Fragment {
     boolean favcheckk;
     SharedPreferences sharedPreferences;
     String usrid;
-    ImageView fav;
+    ImageView fav,star;
     TextView name;
     SharedPreferences preferences;
     public Product_fragment() {
@@ -102,14 +104,16 @@ public class Product_fragment extends Fragment {
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
         final String getcat_id = getArguments().getString("cat_id");
 
+        star = view.findViewById(R.id.imagestar);
+
         relativeLayout = view.findViewById(R.id.tempy);
         sharedPreferences=getActivity().getSharedPreferences(BaseURL.PREFS_NAME,MODE_PRIVATE);
 
         usrid=sharedPreferences.getString(BaseURL.KEY_ID,"0");
 
-        Toast.makeText(getActivity(), usrid, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), usrid, Toast.LENGTH_SHORT).show();
         name=view.findViewById(R.id.name);
-        String id = getArguments().getString("id");
+        final String id = getArguments().getString("id");
         storeid=getArguments().getString("storeid");
         String names=getArguments().getString("name");
         String get_deal_id = getArguments().getString("cat_deal");
@@ -125,7 +129,6 @@ public class Product_fragment extends Fragment {
         else {
         }
 
-
         String getcat_title = getArguments().getString("cat_title");
         ((MainActivity) getActivity()).setTitle(getResources().getString(R.string.tv_product_name));
 
@@ -140,7 +143,7 @@ public class Product_fragment extends Fragment {
             if(storeid !=null){
                 makeGetCategoryRequest(storeid);
                 checkfavouratestore(usrid,storeid,fav);
-            }else{
+            }else if(getcat_id != null){
                 makeGetCategoryRequest(getcat_id);
                 checkfavouratecat(usrid,getcat_id,fav);
             }
@@ -155,6 +158,18 @@ public class Product_fragment extends Fragment {
 
         }
 
+        star.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getActivity(), Rating.class);
+                intent.putExtra("status","store");
+                intent.putExtra("store_id",storeid);
+                startActivity(intent);
+
+            }
+        });
+
         fav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -166,6 +181,7 @@ public class Product_fragment extends Fragment {
                     }else {
                         addinfavstore(usrid,storeid,fav);
                     }
+
                 }else{
                     if(favcheckk){
                         removefromfavcat(usrid,getcat_id,fav);
@@ -413,7 +429,6 @@ public class Product_fragment extends Fragment {
 
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
-
 
     //Get DEal Products
     private void makedealIconProductRequest(String cat_id) {

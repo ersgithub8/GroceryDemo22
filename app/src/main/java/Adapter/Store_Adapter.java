@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,7 +24,7 @@ public class Store_Adapter extends RecyclerView.Adapter<Store_Adapter.Store_VH> 
 
     List<Store_Model> store_models;
     Context context;
-
+    float rate;
     public Store_Adapter(Context context,List<Store_Model> store_models) {
         this.store_models = store_models;
         this.context=context;
@@ -44,9 +45,16 @@ public class Store_Adapter extends RecyclerView.Adapter<Store_Adapter.Store_VH> 
     public void onBindViewHolder(@NonNull Store_VH holder, int position) {
 
         Store_Model modellist=store_models.get(position);
-
         Glide.with(context).load(modellist.getUser_image()).into(holder.storeimage);
         holder.storename.setText(modellist.getUser_name());
+
+        if (modellist.getStar() == null){
+            rate = 0;
+        }
+        else {
+            rate = Float.parseFloat(modellist.getStar());
+        }
+        holder.ratingBar.setRating(rate);
 
     }
 
@@ -59,9 +67,11 @@ public class Store_Adapter extends RecyclerView.Adapter<Store_Adapter.Store_VH> 
 
         ImageView storeimage;
         TextView storename;
+        RatingBar ratingBar;
         public Store_VH(@NonNull View itemView) {
             super(itemView);
 
+            ratingBar = itemView.findViewById(R.id.rating_bar);
             storename=itemView.findViewById(R.id.store_name);
             storeimage=itemView.findViewById(R.id.store_image);
 

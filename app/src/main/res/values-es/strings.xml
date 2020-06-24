@@ -25,6 +25,7 @@
     <string name="password">Password</string>
     <string name="sign_up"><u>Sign Up</u></string>
 
+    <string name="rating">Rating &amp; Reviews</string>
     <string name="uname">Name</string>
     <string name="uphone">Phone</string>
     <string name="urefrel">Referal Code</string>

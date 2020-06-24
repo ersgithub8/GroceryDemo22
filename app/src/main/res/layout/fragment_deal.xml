@@ -9,67 +9,62 @@
     android:orientation="vertical">
 
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_cat"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/green"
-        app:tabMode="scrollable"
-        app:tabSelectedTextColor="@color/white"
-        app:tabTextAppearance="@style/MineCustomTabText"
-        app:tabTextColor="@color/white" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/slider_one_height"
-        android:background="@color/white">
+        android:background="@color/white"
+        >
         <com.daimajia.slider.library.SliderLayout
             android:id="@+id/relative_banner"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </com.daimajia.slider.library.SliderLayout>
+
     </LinearLayout>
 
 
-    <RelativeLayout
-        android:id="@+id/tempy"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:layout_marginBottom="2dp"
-        android:background="@color/green">
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:text="Product"
-            android:fontFamily="@font/bold"
-            android:layout_centerVertical="true"
-            android:textColor="@color/white"/>
-        <ImageView
-            android:layout_centerVertical="true"
-            android:id="@+id/imagefav"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_toLeftOf="@id/imagestar"
-            android:background="@drawable/heartnfw"
-            />
-        <ImageView
-            android:layout_marginLeft="5dp"
-            android:layout_centerVertical="true"
-            android:id="@+id/imagestar"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/ic_baseline_star_24"
-            android:layout_alignParentEnd="true"/>
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/tempy"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:padding="10dp"-->
+<!--        android:layout_marginBottom="2dp"-->
+<!--        android:background="@color/green">-->
+<!--        <TextView-->
+<!--            android:id="@+id/name"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textSize="18sp"-->
+<!--            android:text="Product"-->
+<!--            android:fontFamily="@font/bold"-->
+<!--            android:layout_centerVertical="true"-->
+<!--            android:textColor="@color/white"/>-->
+<!--        <ImageView-->
+<!--            android:layout_centerVertical="true"-->
+<!--            android:id="@+id/imagefav"-->
+<!--            android:layout_width="30dp"-->
+<!--            android:layout_height="30dp"-->
+<!--            android:layout_toLeftOf="@id/imagestar"-->
+<!--            android:background="@drawable/heartnfw"-->
+<!--            />-->
+<!--        <ImageView-->
+<!--            android:layout_marginLeft="5dp"-->
+<!--            android:layout_centerVertical="true"-->
+<!--            android:id="@+id/imagestar"-->
+<!--            android:layout_width="40dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:background="@drawable/ic_baseline_star_24"-->
+<!--            android:layout_alignParentEnd="true"/>-->
 
-    </RelativeLayout>
+<!--    </RelativeLayout>-->
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_subcategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
+
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmer_view_container"
         android:layout_width="wrap_content"
@@ -92,5 +87,6 @@
         </LinearLayout>
 
     </com.facebook.shimmer.ShimmerFrameLayout>
+
 
 </LinearLayout>

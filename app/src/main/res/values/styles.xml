@@ -9,6 +9,13 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
+<!--    ratingbar-->
+    <style name="customRatingBar"
+        parent="android:style/Widget.Material.RatingBar.Small">
+
+    </style>
+
     <style name="AppTabLayout" parent="Widget.Design.TabLayout">
         <item name="android:layout_marginLeft">40dp</item>
         <item name="android:layout_marginRight">40dp</item>

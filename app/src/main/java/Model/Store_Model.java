@@ -2,11 +2,9 @@ package Model;
 
 public class Store_Model {
 String user_id,user_name,user_email,user_phone,user_fullname,user_password,user_type_id,user_bdate,is_email_varified,varified_token,
-        user_gcm_code,user_ios_token,user_status,user_image,user_city,user_login_status;
+        user_gcm_code,user_ios_token,user_status,user_image,user_city,user_login_status,star;
 
-
-    public Store_Model(String user_id, String user_name, String user_email, String user_phone, String user_fullname, String user_password, String user_type_id, String user_bdate, String is_email_varified, String varified_token, String user_gcm_code, String user_ios_token, String user_status
-            , String user_image, String user_city, String user_login_status) {
+    public Store_Model(String user_id, String user_name, String user_email, String user_phone, String user_fullname, String user_password, String user_type_id, String user_bdate, String is_email_varified, String varified_token, String user_gcm_code, String user_ios_token, String user_status, String user_image, String user_city, String user_login_status, String star) {
         this.user_id = user_id;
         this.user_name = user_name;
         this.user_email = user_email;
@@ -23,11 +21,8 @@ String user_id,user_name,user_email,user_phone,user_fullname,user_password,user_
         this.user_image = user_image;
         this.user_city = user_city;
         this.user_login_status = user_login_status;
+        this.star = star;
     }
-
-    public Store_Model() {
-    }
-
 
     public String getUser_id() {
         return user_id;
@@ -156,4 +151,16 @@ String user_id,user_name,user_email,user_phone,user_fullname,user_password,user_
     public void setUser_login_status(String user_login_status) {
         this.user_login_status = user_login_status;
     }
+
+    public String getStar() {
+        return star;
+    }
+
+    public void setStar(String star) {
+        this.star = star;
+    }
+
+    public Store_Model() {
+    }
+
 }
