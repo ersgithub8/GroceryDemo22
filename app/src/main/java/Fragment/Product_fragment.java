@@ -239,6 +239,8 @@ public class Product_fragment extends Fragment {
                 try {
                     Boolean status = response.getBoolean("responce");
                     if (status) {
+                        mShimmerViewContainer.stopShimmerAnimation();
+                        mShimmerViewContainer.setVisibility(View.GONE);
 
                         Gson gson = new Gson();
                         Type listType = new TypeToken<List<Category_model>>() {}.getType();
@@ -260,11 +262,17 @@ public class Product_fragment extends Fragment {
                                 }
                             }
                         } else {
+                            mShimmerViewContainer.stopShimmerAnimation();
+                            mShimmerViewContainer.setVisibility(View.GONE);
+
                             makeGetProductRequest(parent_id);
                         }
 
                     }
                 } catch (JSONException e) {
+                    mShimmerViewContainer.stopShimmerAnimation();
+                    mShimmerViewContainer.setVisibility(View.GONE);
+
                     e.printStackTrace();
                 }
             }
@@ -446,6 +454,9 @@ public class Product_fragment extends Fragment {
                 try {
                     Boolean status = response.getBoolean("responce");
                     if (status) {
+                        mShimmerViewContainer.stopShimmerAnimation();
+                        mShimmerViewContainer.setVisibility(View.GONE);
+
                         Gson gson = new Gson();
                         Type listType = new TypeToken<List<Product_model>>() {
                         }.getType();
@@ -461,6 +472,9 @@ public class Product_fragment extends Fragment {
 
                     }
                 } catch (JSONException e) {
+                    mShimmerViewContainer.stopShimmerAnimation();
+                    mShimmerViewContainer.setVisibility(View.GONE);
+
                     e.printStackTrace();
                 }
             }
@@ -507,6 +521,9 @@ public class Product_fragment extends Fragment {
 //                    Toast.makeText(getActivity(), "aaaa", Toast.LENGTH_SHORT).show();
                     Boolean status = response.getBoolean("responce");
                     if (status) {
+                        mShimmerViewContainer.stopShimmerAnimation();
+                        mShimmerViewContainer.setVisibility(View.GONE);
+
                         Gson gson = new Gson();
                         Type listType = new TypeToken<List<Product_model>>() {
                         }.getType();
@@ -516,12 +533,16 @@ public class Product_fragment extends Fragment {
                         adapter_product.notifyDataSetChanged();
                         if (getActivity() != null) {
                             if (product_modelList.isEmpty()) {
+
                                 Toast.makeText(getActivity(), getResources().getString(R.string.no_rcord_found), Toast.LENGTH_SHORT).show();
                             }
                         }
 
                     }
                 } catch (JSONException e) {
+                    mShimmerViewContainer.stopShimmerAnimation();
+                    mShimmerViewContainer.setVisibility(View.GONE);
+
                     e.printStackTrace();
                     loading.dismiss();
                 }

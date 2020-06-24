@@ -101,7 +101,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:id="@+id/deals"
-            android:text="Deals"
+            android:text="@string/Deal"
             android:layout_below="@id/top_selling"
             android:textSize="18sp"
             android:drawableStart="@drawable/ic_baseline_thumb_up_24"

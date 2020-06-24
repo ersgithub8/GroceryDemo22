@@ -6,11 +6,13 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import Adapter.Deal_OfDay_Adapter;
 import Adapter.Deal_adapter;
 import Adapter.Product_adapter;
 import Adapter.Store_Adapter;
 import Config.BaseURL;
 import Model.Category_model;
+import Model.Deal_Model;
 import Model.Product_model;
 import Model.Slider_subcat_model;
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -64,24 +66,12 @@ public class Deal_Fragemnt extends Fragment {
     private static String TAG = Product_fragment.class.getSimpleName();
     private RecyclerView rv_cat;
     private ShimmerFrameLayout mShimmerViewContainer;
-    private TabLayout tab_cat;
-    private List<Category_model> category_modelList = new ArrayList<>();
-    private List<Slider_subcat_model> slider_subcat_models = new ArrayList<>();
-    private List<String> cat_menu_id = new ArrayList<>();
-    private List<Product_model> product_modelList = new ArrayList<>();
+    private List<Deal_Model> product_modelList = new ArrayList<>();
     private Deal_adapter deal_product;
-    private Product_adapter adapter_product;
-
     private SliderLayout banner_slider;
-    String language;
     String storeid;
-    RelativeLayout relativeLayout;
-    boolean favcheckk;
     SharedPreferences sharedPreferences;
     String usrid;
-    ImageView fav, star;
-    TextView name;
-    SharedPreferences preferences;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -91,7 +81,7 @@ public class Deal_Fragemnt extends Fragment {
 
         banner_slider = (SliderLayout) view.findViewById(R.id.relative_banner);
         rv_cat = (RecyclerView) view.findViewById(R.id.rv_subcategory);
-        rv_cat.setLayoutManager((new GridLayoutManager(getActivity(), 3)));
+        rv_cat.setLayoutManager((new GridLayoutManager(getActivity(), 2)));
 
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
 
@@ -99,23 +89,18 @@ public class Deal_Fragemnt extends Fragment {
 
         usrid = sharedPreferences.getString(BaseURL.KEY_ID, "0");
 
-        //Toast.makeText(getActivity(), usrid, Toast.LENGTH_SHORT).show();
-
         storeid = getArguments().getString("storeid");
-        String get_deal_id = getArguments().getString("cat_deal");
 
-        String get_top_sale_id = getArguments().getString("cat_top_selling");
-
-        String yeh_to_hoga = getArguments().getString("laddan_jaffery");
-        if (yeh_to_hoga == null) {
-        }
-        else if (yeh_to_hoga.equals("murshid")) {
-
-        } else if (yeh_to_hoga.equals("deals")){
+//        String yeh_to_hoga = getArguments().getString("laddan_jaffery");
+//        if (yeh_to_hoga == null) {
+//        }
+//        else if (yeh_to_hoga.equals("murshid")) {
+//
+//        } else if (yeh_to_hoga.equals("deals")){
 
             makeDealRequest();
 
-        }
+//        }
 
         if (ConnectivityReceiver.isConnected()) {
             //Shop by Catogary
@@ -128,7 +113,7 @@ public class Deal_Fragemnt extends Fragment {
 //            maketopsaleProductRequest(get_top_sale_id);
 //
 //            //Slider
-//            makeGetBannerSliderRequest();
+            makeGetBannerSliderRequest();
 
         }
 
@@ -140,8 +125,7 @@ public class Deal_Fragemnt extends Fragment {
     //Get Shop By Catogary Products
     private void makeDealRequest() {
 
-
-        String tag_json_obj = "json_product_req";
+        String tag_json_obj = "json_category_req";
         Map<String, String> params = new HashMap<String, String>();
 
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
@@ -152,12 +136,12 @@ public class Deal_Fragemnt extends Fragment {
                 Log.d(TAG, response.toString());
 
                 try {
-                    Boolean status = response.getBoolean("responce");
-                    if (status) {
+                    String status = response.getString("responce");
+                    if (status.equals("true")) {
                         mShimmerViewContainer.stopShimmerAnimation();
                         mShimmerViewContainer.setVisibility(View.GONE);
                         Gson gson = new Gson();
-                        Type listType = new TypeToken<List<Product_model>>() {
+                        Type listType = new TypeToken<List<Deal_Model>>() {
                         }.getType();
                         product_modelList = gson.fromJson(response.getString("Deal_of_the_day"), listType);
                         deal_product = new Deal_adapter(product_modelList, getActivity());
@@ -243,9 +227,9 @@ public class Deal_Fragemnt extends Fragment {
                         Type listType = new TypeToken<List<Product_model>>() {
                         }.getType();
                         product_modelList = gson.fromJson(response.getString("top_selling_product"), listType);
-                        adapter_product = new Product_adapter(product_modelList, getActivity());
-                        rv_cat.setAdapter(adapter_product);
-                        adapter_product.notifyDataSetChanged();
+                        //deal_product = new Deal_adapter(product_modelList, getActivity());
+                        rv_cat.setAdapter(deal_product);
+                        deal_product.notifyDataSetChanged();
                         if (getActivity() != null) {
                             if (product_modelList.isEmpty()) {
                                 Toast.makeText(getActivity(), getResources().getString(R.string.no_rcord_found), Toast.LENGTH_SHORT).show();

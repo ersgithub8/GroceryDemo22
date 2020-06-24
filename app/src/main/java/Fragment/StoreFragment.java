@@ -2,7 +2,10 @@ package Fragment;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -50,6 +53,7 @@ import Model.Home_Icon_model;
 import Model.Store_Model;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.CustomSlider;
+import gogrocer.tcc.LocaleHelper;
 import gogrocer.tcc.MainActivity;
 import gogrocer.tcc.R;
 import gogrocer.tcc.WebView;
@@ -65,6 +69,7 @@ public class StoreFragment extends Fragment {
     RecyclerView stores;
     LinearLayout Search_layout;
     String storeid,getid;
+    SharedPreferences sharedPreferences;
     private ShimmerFrameLayout mShimmerViewContainer,shimmy;
     private RecyclerView rv_headre_icons;
     List<Store_Model> store_models=new ArrayList<>();

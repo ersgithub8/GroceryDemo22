@@ -18,6 +18,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import java.util.List;
 
 import Config.BaseURL;
+import Model.Deal_Model;
 import Model.Deal_Of_Day_model;
 import gogrocer.tcc.R;
 
@@ -29,7 +30,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class Deal_OfDay_Adapter extends RecyclerView.Adapter<Deal_OfDay_Adapter.MyViewHolder> {
 
-    private List<Deal_Of_Day_model> modelList;
+    private List<Deal_Model> modelList;
     private Context context;
     public int counter;
     SharedPreferences preferences;
@@ -53,7 +54,7 @@ public class Deal_OfDay_Adapter extends RecyclerView.Adapter<Deal_OfDay_Adapter.
         }
     }
 
-    public Deal_OfDay_Adapter(List<Deal_Of_Day_model> modelList, Activity activity) {
+    public Deal_OfDay_Adapter(List<Deal_Model> modelList, Activity activity) {
         this.modelList = modelList;
     }
 
@@ -61,7 +62,6 @@ public class Deal_OfDay_Adapter extends RecyclerView.Adapter<Deal_OfDay_Adapter.
     public Deal_OfDay_Adapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.row_deal_of_the_day, parent, false);
-
         context = parent.getContext();
 
         return new Deal_OfDay_Adapter.MyViewHolder(itemView);
@@ -69,7 +69,7 @@ public class Deal_OfDay_Adapter extends RecyclerView.Adapter<Deal_OfDay_Adapter.
 
     @Override
     public void onBindViewHolder(final Deal_OfDay_Adapter.MyViewHolder holder, int position) {
-        Deal_Of_Day_model mList = modelList.get(position);
+        Deal_Model mList = modelList.get(position);
         preferences = context.getSharedPreferences("lan", MODE_PRIVATE);
         String language=preferences.getString("language","");
 
@@ -118,6 +118,4 @@ public class Deal_OfDay_Adapter extends RecyclerView.Adapter<Deal_OfDay_Adapter.
         return modelList.size();
     }
 
-
 }
-
