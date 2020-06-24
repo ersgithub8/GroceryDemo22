@@ -319,23 +319,7 @@ public class Deal_adapter extends RecyclerView.Adapter<Deal_adapter.MyViewHolder
                 preferences = context.getSharedPreferences("lan", MODE_PRIVATE);
                 languagee=preferences.getString("language","");
                 Log.d("lang",languagee);
-//                if (language.contains("english")) {
-//                    showProductDetail(modelList.get(position).getProduct_image(),
-//                            modelList.get(position).getProduct_name(),
-//                            modelList.get(position).getProduct_description(),
-//                            "",
-//                            position, tv_contetiy.getText().toString()
-//                            ,modelList.get(position).getProduct_id());
-//                }else {
-//
-//
-//                    showProductDetail(modelList.get(position).getProduct_image(),
-//                            modelList.get(position).getProduct_name_arb(),
-//                            modelList.get(position).getProduct_description_arb(),
-//                            "",
-//                            position, tv_contetiy.getText().toString()
-//                    ,modelList.get(position).getProduct_id());
-//                }
+
 
                 Intent intent=new Intent(context, ProductActivity.class);
                 if(languagee.contains("english")){
@@ -364,7 +348,11 @@ public class Deal_adapter extends RecyclerView.Adapter<Deal_adapter.MyViewHolder
                 intent.putExtra("rewards",mList.getRewards());
                 intent.putExtra("stock",mList.getStock());
                 intent.putExtra("title",mList.getTitle());
-                intent.putExtra("qty",dbcart.getCartItemQty(mList.getProduct_id()));
+                if(dbcart.isInCart(mList.getProduct_id())){
+                    intent.putExtra("qty",dbcart.getCartItemQty(mList.getProduct_id()));
+                }else{
+                    intent.putExtra("qty","0");
+                }
 
                 context.startActivity(intent);
             }
