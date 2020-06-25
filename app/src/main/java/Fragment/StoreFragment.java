@@ -46,9 +46,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import Adapter.CatProdAdapter;
+import Adapter.Category_adapter;
 import Adapter.Home_Icon_Adapter;
 import Adapter.Store_Adapter;
 import Config.BaseURL;
+import Model.Category_model;
 import Model.Home_Icon_model;
 import Model.Store_Model;
 import gogrocer.tcc.AppController;
@@ -70,10 +73,14 @@ public class StoreFragment extends Fragment {
     LinearLayout Search_layout;
     String storeid,getid;
     private ShimmerFrameLayout mShimmerViewContainer,shimmy;
-    private RecyclerView rv_headre_icons;
+    private RecyclerView rv_headre_icons,catprod;
     List<Store_Model> store_models=new ArrayList<>();
     Store_Adapter store_adapter;
     FloatingActionButton floatingActionButton;
+
+    List<Category_model> models=new ArrayList<>();
+    CatProdAdapter catProdAdapter;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -83,6 +90,8 @@ public class StoreFragment extends Fragment {
         stores=(RecyclerView)view.findViewById(R.id.rv_stores);
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
         shimmy = view.findViewById(R.id.shimmer_view_container2);
+
+        catprod =view.findViewById(R.id.catprodrv);
 
         makeGetBannerSliderRequest();
 
@@ -130,6 +139,13 @@ public class StoreFragment extends Fragment {
         rv_headre_icons.setItemViewCacheSize(10);
         rv_headre_icons.setDrawingCacheEnabled(true);
         rv_headre_icons.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_LOW);
+
+
+        catprod.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+
+
+        make_menu_items1();
 
         make_menu_items();
         getstores();
@@ -358,6 +374,60 @@ public class StoreFragment extends Fragment {
         super.onPause();
         mShimmerViewContainer.stopShimmerAnimation();
         shimmy.startShimmerAnimation();
+    }
+
+
+
+
+    private void make_menu_items1() {
+        String tag_json_obj = "json_category_req";
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("parent", "");
+
+       /* if (parent_id != null && parent_id != "") {
+        }*/
+
+        CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
+                BaseURL.GET_CATEGORY_URL, params, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d(TAG, response.toString());
+
+                try {
+                    if (response != null && response.length() > 0) {
+                        Boolean status = response.getBoolean("responce");
+                        if (status) {
+
+                            Gson gson = new Gson();
+                            Type listType = new TypeToken<List<Category_model>>() {
+                            }.getType();
+                            models = gson.fromJson(response.getString("data"), listType);
+                            catProdAdapter = new CatProdAdapter(models);
+                            catprod.setAdapter(catProdAdapter);
+                            catProdAdapter.notifyDataSetChanged();
+
+//                            getProducts(menu_models.get(0).getId());
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
     }
 
 }
