@@ -5,6 +5,7 @@
     android:weightSum="3"
     android:orientation="vertical"
     tools:context="Fragment.Favourite">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="50dp"
