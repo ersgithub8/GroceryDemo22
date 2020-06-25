@@ -14,7 +14,8 @@
 
     <string name="app_name" translatable="false">J6</string>
     <string name="name" translatable="false">SameCiti - Customer</string>
-    <string name="currency" translatable="false">\u20B9</string>
+<!--    <string name="currency" translatable="false">\u20B9</string>-->
+    <string name="currency" translatable="false">SAR</string>
     <string name="title_activity_main" translatable="false">MainActivity</string>
     <string name="txtCredits" translatable="false"><a href="http://www.google.com">Google</a></string>
     <string name="uname">Name</string>

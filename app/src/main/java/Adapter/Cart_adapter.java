@@ -26,7 +26,7 @@ import static android.content.Context.MODE_PRIVATE;
  * Created by Rajesh Dabhi on 26/6/2017.
  */
 
-public class Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHolder> {
+public class    Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHolder> {
     ArrayList<HashMap<String, String>> list;
     Activity activity;
     String Reward;
