@@ -35,9 +35,8 @@ public class Favourite_Adappter extends RecyclerView.Adapter<Favourite_Adappter.
 
         public MyViewHolder(View view) {
             super(view);
-            title = (TextView) view.findViewById(R.id.service_text);
-            image = (ImageView) view.findViewById(R.id.service_image);
-
+            title = (TextView) view.findViewById(R.id.tv_subcat_title);
+            image = (ImageView) view.findViewById(R.id.iv_subcat_img);
 
         }
     }
@@ -49,33 +48,70 @@ public class Favourite_Adappter extends RecyclerView.Adapter<Favourite_Adappter.
     @Override
     public Favourite_Adappter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.row_headre_catogaries, parent, false);
+                .inflate(R.layout.row_fav_rv, parent, false);
 
         context = parent.getContext();
-
         return new Favourite_Adappter.MyViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(Favourite_Adappter.MyViewHolder holder, int position) {
         Home_Icon_model mList = modelList.get(position);
-        Glide.with(context)
-                .load(BaseURL.IMG_PRODUCT_URL + mList.getProduct_image())
-                .placeholder(R.drawable.icon)
-                .crossFade()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .dontAnimate()
-                .into(holder.image);
-        preferences = context.getSharedPreferences("lan", MODE_PRIVATE);
-        language=preferences.getString("language","");
 
-        if (language.contains("english")) {
-            holder.title.setText(mList.getProduct_name());
-        }
-        else {
-            holder.title.setText(mList.getProduct_arb_name());
+        if (mList.getProduct_name() != null) {
+            Glide.with(context)
+                    .load(BaseURL.IMG_PRODUCT_URL + mList.getProduct_image())
+                    .placeholder(R.drawable.icon)
+                    .crossFade()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .dontAnimate()
+                    .into(holder.image);
+            preferences = context.getSharedPreferences("lan", MODE_PRIVATE);
+            language = preferences.getString("language", "");
 
+            if (language.contains("english")) {
+                holder.title.setText(mList.getProduct_name());
+            } else {
+                holder.title.setText(mList.getProduct_arb_name());
+            }
         }
+
+        else if (mList.getUser_name() != null) {
+            Glide.with(context)
+                    .load(mList.getUser_image())
+                    .placeholder(R.drawable.icon)
+                    .crossFade()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .dontAnimate()
+                    .into(holder.image);
+            preferences = context.getSharedPreferences("lan", MODE_PRIVATE);
+            language = preferences.getString("language", "");
+
+            if (language.contains("english")) {
+                holder.title.setText(mList.getUser_name());
+            } else {
+                holder.title.setText(mList.getUser_name());
+            }
+        }
+
+        else if (mList.getTitle() != null) {
+            Glide.with(context)
+                    .load(BaseURL.IMG_CATEGORY_URL + mList.getImage())
+                    .placeholder(R.drawable.icon)
+                    .crossFade()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .dontAnimate()
+                    .into(holder.image);
+            preferences = context.getSharedPreferences("lan", MODE_PRIVATE);
+            language = preferences.getString("language", "");
+
+            if (language.contains("english")) {
+                holder.title.setText(mList.getTitle());
+            } else {
+                holder.title.setText(mList.getArb_title());
+            }
+        }
+
     }
 
     @Override

@@ -3,8 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="3"
+    xmlns:shimmer="http://schemas.android.com/tools"
     android:orientation="vertical"
-    tools:context="Fragment.Favourite">
+    tools:context="Fragment.Favourite"
+    >
 
     <TextView
         android:layout_width="match_parent"
@@ -14,16 +16,17 @@
         android:textColor="@color/white"
         android:textSize="23sp"
         android:gravity="center_vertical"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:weightSum="3">
+            >
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_margin="5dp"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_weight="0.7"
         android:orientation="vertical"
         >
         <TextView
@@ -32,7 +35,7 @@
             android:layout_marginTop="20dp"
             android:id="@+id/fav_prod"
             android:textAlignment="center"
-            android:text="Favourite Products"
+            android:text="Favourite\n Products"
             android:textSize="12sp"
             android:textColor="@color/black"
             android:drawableTop="@drawable/fav_prod"/>
@@ -52,45 +55,46 @@
             android:layout_marginTop="20dp"
             android:id="@+id/fav_category"
             android:textAlignment="center"
-            android:text="Favourite Categories"
+            android:text="Favourite\n Categories"
             android:textSize="13sp"
             android:textColor="@color/black"
             android:drawableTop="@drawable/category"/>
 
-
-
     </LinearLayout>
-    <View
-        android:layout_width="1dp"
 
+            <View
+        android:layout_width="1dp"
         android:layout_height="match_parent"
         android:id="@+id/v_fav"
         android:background="@color/green"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="0dp"
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmer_view_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                shimmer:duration="500"
+                >
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <include layout="@layout/dataholder3" />
+                    <include layout="@layout/dataholder3" />
+                    <include layout="@layout/dataholder3" />
+                    <include layout="@layout/dataholder3" />
+                    <include layout="@layout/dataholder3" />
+                </LinearLayout>
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="2.3"
         android:layout_margin="5dp"
-
         android:id="@+id/rv_fav"/>
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2.3"
-                android:visibility="gone"
-                android:layout_margin="5dp"
-
-                android:id="@+id/rv_store"/>
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2.3"
-                android:visibility="gone"
-                android:layout_margin="5dp"
-                android:id="@+id/rv_cat"/>
-
 
 
         </LinearLayout>
+
 </LinearLayout>

@@ -21,6 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -46,12 +47,13 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class Favourite extends Fragment {
 
-    RecyclerView rv_headre_icons,rv_cat,rv_store;
+    private ShimmerFrameLayout mShimmerViewContainer;
+
+    RecyclerView rv_headre_icons;
     TextView fav_prod,fav_store,fav_cat;
     private Favourite_Adappter menu_adapter;
     SharedPreferences sharedPreferences;
     String usrid;
-    private Home_Icon_Adapter menu_adapter1;
     private List<Home_Icon_model> menu_models = new ArrayList<>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,54 +65,51 @@ public class Favourite extends Fragment {
         fav_prod=view.findViewById(R.id.fav_prod);
         fav_store=view.findViewById(R.id.fav_store);
 
+        mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
+
         sharedPreferences=getActivity().getSharedPreferences(BaseURL.PREFS_NAME,MODE_PRIVATE);
 
         usrid=sharedPreferences.getString(BaseURL.KEY_ID,"0");
 
         rv_headre_icons = (RecyclerView) view.findViewById(R.id.rv_fav);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
         rv_headre_icons.setLayoutManager(gridLayoutManager);
         rv_headre_icons.setItemAnimator(new DefaultItemAnimator());
         rv_headre_icons.setNestedScrollingEnabled(false);
-
-        rv_cat = (RecyclerView) view.findViewById(R.id.rv_cat);
-        GridLayoutManager gridLayoutManager1= new GridLayoutManager(getActivity(), 3);
-        rv_cat.setLayoutManager(gridLayoutManager1);
-        rv_cat.setItemAnimator(new DefaultItemAnimator());
-        rv_cat.setNestedScrollingEnabled(false);
-
-        rv_store = (RecyclerView) view.findViewById(R.id.rv_store);
-        GridLayoutManager gridLayoutManager2 = new GridLayoutManager(getActivity(), 3);
-        rv_store.setLayoutManager(gridLayoutManager2);
-        rv_store.setItemAnimator(new DefaultItemAnimator());
-        rv_store.setNestedScrollingEnabled(false);
 
             make_menu_items(usrid);
                 fav_store.setOnClickListener(new View.OnClickListener() {
                   @Override
                       public void onClick(View view) {
-                      rv_headre_icons.setVisibility(View.GONE);
-                      rv_cat.setVisibility(View.GONE);
-                      rv_store.setVisibility(View.VISIBLE);
+                      menu_models.clear();
+                      menu_adapter.notifyDataSetChanged();
+                      mShimmerViewContainer.setVisibility(View.VISIBLE);
+                      mShimmerViewContainer.startShimmerAnimation();
+
                       makestore(usrid);
                         }
                 });
         fav_prod.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rv_cat.setVisibility(View.GONE);
-                rv_store.setVisibility(View.GONE);
-                rv_headre_icons.setVisibility(View.VISIBLE);
+                menu_models.clear();
+                menu_adapter.notifyDataSetChanged();
+                mShimmerViewContainer.setVisibility(View.VISIBLE);
+                mShimmerViewContainer.startShimmerAnimation();
+
                 make_menu_items(usrid);
             }
         });
         fav_cat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rv_store.setVisibility(View.GONE);
-                rv_headre_icons.setVisibility(View.GONE);
-                rv_cat.setVisibility(View.VISIBLE);
-             make_categories(usrid);
+                menu_models.clear();
+                menu_adapter.notifyDataSetChanged();
+
+                mShimmerViewContainer.setVisibility(View.VISIBLE);
+                mShimmerViewContainer.startShimmerAnimation();
+
+                make_categories(usrid);
             }
         });
 
@@ -133,6 +132,8 @@ public class Favourite extends Fragment {
                     if (response != null && response.length() > 0) {
                         Boolean status = response.getBoolean("responce");
                         if (status) {
+                            mShimmerViewContainer.stopShimmerAnimation();
+                            mShimmerViewContainer.setVisibility(View.GONE);
 
                             Gson gson = new Gson();
                             Type listType = new TypeToken<List<Home_Icon_model>>() {
@@ -162,6 +163,7 @@ public class Favourite extends Fragment {
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 
     }
+
     private void makestore(String userid) {
         String tag_json_obj = "json_category_req";
 
@@ -174,23 +176,27 @@ public class Favourite extends Fragment {
             @Override
             public void onResponse(JSONObject response) {
 
-
                 try {
                     if (response != null && response.length() > 0) {
                         Boolean status = response.getBoolean("responce");
                         if (status) {
+                            mShimmerViewContainer.stopShimmerAnimation();
+                            mShimmerViewContainer.setVisibility(View.GONE);
+
                             Gson gson = new Gson();
                             Type listType = new TypeToken<List<Home_Icon_model>>() {
                             }.getType();
                             menu_models = gson.fromJson(response.getString("data"), listType);
                             menu_adapter = new Favourite_Adappter(menu_models);
-                            rv_store.setAdapter(menu_adapter);
+                            rv_headre_icons.setAdapter(menu_adapter);
                             menu_adapter.notifyDataSetChanged();
+
                         }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
             }
         }, new Response.ErrorListener() {
 
@@ -219,18 +225,20 @@ public class Favourite extends Fragment {
             @Override
             public void onResponse(JSONObject response) {
 
-
                 try {
                     if (response != null && response.length() > 0) {
                         Boolean status = response.getBoolean("responce");
                         if (status) {
+                            mShimmerViewContainer.stopShimmerAnimation();
+                            mShimmerViewContainer.setVisibility(View.GONE);
+
                             Gson gson = new Gson();
                             Type listType = new TypeToken<List<Home_Icon_model>>() {
                             }.getType();
                             menu_models = gson.fromJson(response.getString("data"), listType);
-                            menu_adapter1 = new Home_Icon_Adapter(menu_models);
-                            rv_cat.setAdapter(menu_adapter1);
-                            menu_adapter1.notifyDataSetChanged();
+                            menu_adapter = new Favourite_Adappter(menu_models);
+                            rv_headre_icons.setAdapter(menu_adapter);
+                            menu_adapter.notifyDataSetChanged();
                         }
                     }
                 } catch (JSONException e) {
@@ -251,6 +259,18 @@ public class Favourite extends Fragment {
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mShimmerViewContainer.startShimmerAnimation();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mShimmerViewContainer.stopShimmerAnimation();
     }
 
 }

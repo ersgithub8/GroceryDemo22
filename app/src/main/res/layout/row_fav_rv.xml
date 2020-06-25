@@ -20,8 +20,8 @@
             android:id="@+id/iv_subcat_img"
             android:layout_width="65dp"
             android:layout_height="65dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="8dp"
             app:civ_border_color="@color/gray"
             android:layout_centerHorizontal="true"
@@ -43,18 +43,20 @@
             app:layout_constraintTop_toTopOf="@+id/iv_subcat_img">
 
             <Fonts.LatoBLack
+                android:fontFamily="@font/bold"
                 android:id="@+id/tv_subcat_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="Name"
-                android:fontFamily="@font/bold"
+                android:padding="5dp"
                 android:textColor="#000"
-                android:textSize="@dimen/text_size_small" />
+                android:textSize="16sp"
+                />
 
             <Fonts.LatoBLack
+                android:visibility="gone"
                 android:id="@+id/tv_subcat_price"
-                android:fontFamily="@font/bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Price"
@@ -119,7 +121,7 @@
                     android:id="@+id/tv_reward_point"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                     android:layout_alignParentEnd="true"
+                    android:layout_alignParentEnd="true"
                     android:layout_alignRight="@dimen/space_18"
                     android:text=""
                     android:textColor="#000"
