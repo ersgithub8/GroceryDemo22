@@ -152,6 +152,7 @@ SharedPreferences preferences;
                     dbcart.removeItemFromCart(map.get("product_id"));
                     tv_add.setText(context.getResources().getString(R.string.tv_pro_add));
                 }
+
                 Double items = Double.parseDouble(dbcart.getInCartItemQty(map.get("product_id")));
 
                 Double price = Double.parseDouble(map.get("price").trim());

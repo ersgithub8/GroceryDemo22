@@ -65,7 +65,7 @@ public class Deal_adapter extends RecyclerView.Adapter<Deal_adapter.MyViewHolder
     SharedPreferences sharedPreferences;
     String usrid;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class MyViewHolder extends RecyclerView.ViewHolder {
 
 
         public TextView product_nmae, product_prize, offer_product_prize, start_time, end_time, offer_textview;
@@ -86,12 +86,12 @@ public class Deal_adapter extends RecyclerView.Adapter<Deal_adapter.MyViewHolder
             image = (ImageView) view.findViewById(R.id.iv_icon);
         }
 
-        @Override
-        public void onClick(View view) {
-
-
-            int id = view.getId();
-            int position = getAdapterPosition();
+//        @Override
+//        public void onClick(View view) {
+//
+//
+//            int id = view.getId();
+//            int position = getAdapterPosition();
 //            if (id == R.id.iv_subcat_plus) {
 //                int qty = Integer.valueOf(tv_contetiy.getText().toString());
 //                qty = qty + 1;
@@ -211,7 +211,7 @@ public class Deal_adapter extends RecyclerView.Adapter<Deal_adapter.MyViewHolder
 //                context.startActivity(intent);
 //            }
 //
-        }
+        //}
 
 
     }
@@ -319,23 +319,7 @@ public class Deal_adapter extends RecyclerView.Adapter<Deal_adapter.MyViewHolder
                 preferences = context.getSharedPreferences("lan", MODE_PRIVATE);
                 languagee=preferences.getString("language","");
                 Log.d("lang",languagee);
-//                if (language.contains("english")) {
-//                    showProductDetail(modelList.get(position).getProduct_image(),
-//                            modelList.get(position).getProduct_name(),
-//                            modelList.get(position).getProduct_description(),
-//                            "",
-//                            position, tv_contetiy.getText().toString()
-//                            ,modelList.get(position).getProduct_id());
-//                }else {
-//
-//
-//                    showProductDetail(modelList.get(position).getProduct_image(),
-//                            modelList.get(position).getProduct_name_arb(),
-//                            modelList.get(position).getProduct_description_arb(),
-//                            "",
-//                            position, tv_contetiy.getText().toString()
-//                    ,modelList.get(position).getProduct_id());
-//                }
+
 
                 Intent intent=new Intent(context, ProductActivity.class);
                 if(languagee.contains("english")){
@@ -347,6 +331,7 @@ public class Deal_adapter extends RecyclerView.Adapter<Deal_adapter.MyViewHolder
                     intent.putExtra("description",mList.getProduct_description_arb());
 
                 }
+
                 intent.putExtra("product_id",mList.getProduct_id());
                 intent.putExtra("category_id",mList.getCategory_id());
                 intent.putExtra("deal_price",mList.getDeal_price());

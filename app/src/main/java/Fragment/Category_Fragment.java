@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.NoConnectionError;
@@ -53,6 +54,7 @@ public class Category_Fragment extends Fragment {
     private ShimmerFrameLayout mShimmerViewContainer,mShimmerViewContainer1;
     private List<Home_Icon_model> menu_models = new ArrayList<>();
     private RecyclerView rv_headre_icons;
+    private TextView textView;
 
     Product_adapter product_adapter;
     List<Product_model> product_models=new ArrayList<>();
@@ -64,6 +66,7 @@ public class Category_Fragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_category, container, false);
 
+        textView = (TextView) view.findViewById(R.id.no_product);
         recyclerView = (RecyclerView) view.findViewById(R.id.rect);
 
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
@@ -117,7 +120,6 @@ public class Category_Fragment extends Fragment {
 
     private void make_menu_items() {
         String tag_json_obj = "json_category_req";
-
         Map<String, String> params = new HashMap<String, String>();
         params.put("parent", "");
 
@@ -201,11 +203,20 @@ public class Category_Fragment extends Fragment {
                             }.getType();
                             product_models = gson.fromJson(response.getString("data"), listType);
                             product_adapter = new Product_adapter(product_models,getActivity());
+                            recyclerView.setVisibility(View.VISIBLE);
+                            textView.setVisibility(View.GONE);
                             recyclerView.setAdapter(product_adapter);
                             product_adapter.notifyDataSetChanged();
+
+                        }
+                        else {
+                            recyclerView.setVisibility(View.GONE);
+                            textView.setVisibility(View.VISIBLE);
                         }
                     }
                 } catch (JSONException e) {
+                    recyclerView.setVisibility(View.GONE);
+                    textView.setVisibility(View.VISIBLE);
                     e.printStackTrace();
                 }
             }
@@ -237,6 +248,5 @@ public class Category_Fragment extends Fragment {
         mShimmerViewContainer.stopShimmerAnimation();
         mShimmerViewContainer1.stopShimmerAnimation();
     }
-
 
 }
