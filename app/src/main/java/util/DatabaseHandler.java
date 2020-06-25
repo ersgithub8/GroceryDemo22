@@ -35,9 +35,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public static final String COLUMN_INCREAMENT = "increament";
     public static final String COLUMN_STOCK = "stock";
     public static final String COLUMN_TITLE = "title";
-
+    Context context;
     public DatabaseHandler(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
+        this.context=context;
     }
 
     @Override
@@ -70,6 +71,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             return false;
         } else {
             ContentValues values = new ContentValues();
+            Toast.makeText(context, map.toString()+"", Toast.LENGTH_SHORT).show();
             values.put(COLUMN_ID, map.get(COLUMN_ID));
             values.put(COLUMN_QTY, Qty);
             values.put(COLUMN_CAT_ID, map.get(COLUMN_CAT_ID));
@@ -83,6 +85,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             values.put(COLUMN_UNIT, map.get(COLUMN_UNIT));
             values.put(COLUMN_UNIT_VALUE, map.get(COLUMN_UNIT_VALUE));
             db.insert(CART_TABLE, null, values);
+
             return true;
         }
     }

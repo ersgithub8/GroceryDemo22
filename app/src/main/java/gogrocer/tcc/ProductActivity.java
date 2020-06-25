@@ -112,6 +112,7 @@ public class ProductActivity extends AppCompatActivity {
         productid=getIntent().getStringExtra("product_id");
         product_name=getIntent().getStringExtra("product_name");
         category_id=getIntent().getStringExtra("category_id");
+
         product_description=getIntent().getStringExtra("description");
         deal_price=getIntent().getStringExtra("deal_price");
         start_date=getIntent().getStringExtra("start_date");
