@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -40,10 +42,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import Adapter.CatProdAdapter;
@@ -94,6 +98,25 @@ public class StoreFragment extends Fragment {
         catprod =view.findViewById(R.id.catprodrv);
 
         makeGetBannerSliderRequest();
+
+        SharedPreferences sharedPreferences=getActivity().getSharedPreferences("location", Context.MODE_PRIVATE);
+        String lat, longi;
+        lat=sharedPreferences.getString("lat",null);
+        longi=sharedPreferences.getString("long",null);
+        double laty = Double.parseDouble(lat);
+        double longy = Double.parseDouble(longi);
+        Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
+        List<Address> addresses = null;
+        try {
+            addresses = geocoder.getFromLocation(laty, longy, 1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String cityName = addresses.get(0).getLocality();
+
+        Toast.makeText(getActivity(),cityName ,Toast.LENGTH_LONG).show();
+
 
         floatingActionButton = view.findViewById(R.id.fab_id);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
