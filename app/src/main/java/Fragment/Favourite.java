@@ -34,10 +34,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import Adapter.Category_adapter;
 import Adapter.Favourite_Adappter;
 import Adapter.Home_Icon_Adapter;
+import Adapter.Product_adapter;
+import Adapter.Store_Adapter;
 import Config.BaseURL;
+import Model.Category_model;
 import Model.Home_Icon_model;
+import Model.Product_model;
+import Model.Store_Model;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.R;
 import util.CustomVolleyJsonRequest;
@@ -52,9 +58,18 @@ public class Favourite extends Fragment {
     RecyclerView rv_headre_icons;
     TextView fav_prod,fav_store,fav_cat;
     private Favourite_Adappter menu_adapter;
+    private Product_adapter product_adapter;
+    private Home_Icon_Adapter category_adapter;
+    private Store_Adapter store_adapter;
+
     SharedPreferences sharedPreferences;
     String usrid;
     private List<Home_Icon_model> menu_models = new ArrayList<>();
+
+    private List<Product_model> product_models = new ArrayList<>();
+    private List<Store_Model> store_models = new ArrayList<>();
+    private List<Category_model> category_models = new ArrayList<>();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -77,12 +92,11 @@ public class Favourite extends Fragment {
         rv_headre_icons.setItemAnimator(new DefaultItemAnimator());
         rv_headre_icons.setNestedScrollingEnabled(false);
 
-            make_menu_items(usrid);
+            //make_menu_items(usrid);
                 fav_store.setOnClickListener(new View.OnClickListener() {
                   @Override
                       public void onClick(View view) {
-                      menu_models.clear();
-                      menu_adapter.notifyDataSetChanged();
+
                       mShimmerViewContainer.setVisibility(View.VISIBLE);
                       mShimmerViewContainer.startShimmerAnimation();
 
@@ -92,19 +106,14 @@ public class Favourite extends Fragment {
         fav_prod.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                menu_models.clear();
-                menu_adapter.notifyDataSetChanged();
                 mShimmerViewContainer.setVisibility(View.VISIBLE);
                 mShimmerViewContainer.startShimmerAnimation();
-
                 make_menu_items(usrid);
             }
         });
         fav_cat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                menu_models.clear();
-                menu_adapter.notifyDataSetChanged();
 
                 mShimmerViewContainer.setVisibility(View.VISIBLE);
                 mShimmerViewContainer.startShimmerAnimation();
@@ -127,7 +136,6 @@ public class Favourite extends Fragment {
             @Override
             public void onResponse(JSONObject response) {
 
-
                 try {
                     if (response != null && response.length() > 0) {
                         Boolean status = response.getBoolean("responce");
@@ -136,12 +144,12 @@ public class Favourite extends Fragment {
                             mShimmerViewContainer.setVisibility(View.GONE);
 
                             Gson gson = new Gson();
-                            Type listType = new TypeToken<List<Home_Icon_model>>() {
+                            Type listType = new TypeToken<List<Product_model>>() {
                             }.getType();
-                            menu_models = gson.fromJson(response.getString("data"), listType);
-                            menu_adapter = new Favourite_Adappter(menu_models);
-                            rv_headre_icons.setAdapter(menu_adapter);
-                            menu_adapter.notifyDataSetChanged();
+                            product_models = gson.fromJson(response.getString("data"), listType);
+                            product_adapter = new Product_adapter(product_models,getActivity());
+                            rv_headre_icons.setAdapter(product_adapter);
+                            product_adapter.notifyDataSetChanged();
                         }
                     }
                 } catch (JSONException e) {
@@ -184,12 +192,12 @@ public class Favourite extends Fragment {
                             mShimmerViewContainer.setVisibility(View.GONE);
 
                             Gson gson = new Gson();
-                            Type listType = new TypeToken<List<Home_Icon_model>>() {
+                            Type listType = new TypeToken<List<Store_Model>>() {
                             }.getType();
-                            menu_models = gson.fromJson(response.getString("data"), listType);
-                            menu_adapter = new Favourite_Adappter(menu_models);
-                            rv_headre_icons.setAdapter(menu_adapter);
-                            menu_adapter.notifyDataSetChanged();
+                            store_models = gson.fromJson(response.getString("data"), listType);
+                            store_adapter = new Store_Adapter(getActivity(),store_models);
+                            rv_headre_icons.setAdapter(store_adapter);
+                            store_adapter.notifyDataSetChanged();
 
                         }
                     }
@@ -236,9 +244,9 @@ public class Favourite extends Fragment {
                             Type listType = new TypeToken<List<Home_Icon_model>>() {
                             }.getType();
                             menu_models = gson.fromJson(response.getString("data"), listType);
-                            menu_adapter = new Favourite_Adappter(menu_models);
-                            rv_headre_icons.setAdapter(menu_adapter);
-                            menu_adapter.notifyDataSetChanged();
+                            category_adapter = new Home_Icon_Adapter(menu_models);
+                            rv_headre_icons.setAdapter(category_adapter);
+                            category_adapter.notifyDataSetChanged();
                         }
                     }
                 } catch (JSONException e) {
