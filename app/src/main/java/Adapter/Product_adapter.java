@@ -249,14 +249,13 @@ SharedPreferences preferences;
         }
         else {
             holder.tv_title.setText(mList.getProduct_name_arb());
-
         }
         holder.tv_reward.setText(mList.getRewards());
 
-        //        holder.tv_price.setText(
-////                context.getResources().getString(R.string.tv_pro_price) + mList.getUnit_value() + " " +
-////                mList.getUnit() +
-//                mList.getPrice()+ context.getResources().getString(R.string.currency));
+                holder.tv_price.setText(
+//                context.getResources().getString(R.string.tv_pro_price) + mList.getUnit_value() + " " +
+//                mList.getUnit() +
+                mList.getPrice()+ context.getResources().getString(R.string.currency));
 
         if (Integer.valueOf(modelList.get(position).getStock())<=0){
             holder.tv_add.setText(R.string.tv_out);

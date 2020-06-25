@@ -30,6 +30,8 @@
         android:orientation="vertical"
         >
         <TextView
+            android:padding="5dp"
+            android:background="@color/colorPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -40,6 +42,7 @@
             android:textColor="@color/black"
             android:drawableTop="@drawable/fav_prod"/>
         <TextView
+            android:padding="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -50,6 +53,7 @@
             android:textColor="@color/black"
             android:drawableTop="@drawable/ic_nav_home"/>
         <TextView
+            android:padding="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"

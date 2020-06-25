@@ -2,6 +2,7 @@ package Fragment;
 
 import android.app.Fragment;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import android.util.Log;
@@ -92,10 +93,13 @@ public class Favourite extends Fragment {
         rv_headre_icons.setItemAnimator(new DefaultItemAnimator());
         rv_headre_icons.setNestedScrollingEnabled(false);
 
-            //make_menu_items(usrid);
+        make_menu_items(usrid);
                 fav_store.setOnClickListener(new View.OnClickListener() {
                   @Override
                       public void onClick(View view) {
+                      fav_store.setBackgroundColor(Color.parseColor("#7abcbc"));
+                      fav_cat.setBackgroundColor(Color.parseColor("#ffffff"));
+                      fav_prod.setBackgroundColor(Color.parseColor("#ffffff"));
 
                       mShimmerViewContainer.setVisibility(View.VISIBLE);
                       mShimmerViewContainer.startShimmerAnimation();
@@ -108,6 +112,10 @@ public class Favourite extends Fragment {
             public void onClick(View view) {
                 mShimmerViewContainer.setVisibility(View.VISIBLE);
                 mShimmerViewContainer.startShimmerAnimation();
+                fav_store.setBackgroundColor(Color.parseColor("#ffffff"));
+                fav_cat.setBackgroundColor(Color.parseColor("#ffffff"));
+                fav_prod.setBackgroundColor(Color.parseColor("#7abcbc"));
+
                 make_menu_items(usrid);
             }
         });
@@ -117,6 +125,9 @@ public class Favourite extends Fragment {
 
                 mShimmerViewContainer.setVisibility(View.VISIBLE);
                 mShimmerViewContainer.startShimmerAnimation();
+                fav_store.setBackgroundColor(Color.parseColor("#ffffff"));
+                fav_cat.setBackgroundColor(Color.parseColor("#7abcbc"));
+                fav_prod.setBackgroundColor(Color.parseColor("#ffffff"));
 
                 make_categories(usrid);
             }
