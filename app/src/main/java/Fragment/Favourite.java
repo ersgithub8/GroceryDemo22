@@ -1,6 +1,7 @@
 package Fragment;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -48,6 +49,7 @@ import Model.Store_Model;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.R;
 import util.CustomVolleyJsonRequest;
+import util.RecyclerTouchListener;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -93,13 +95,13 @@ public class Favourite extends Fragment {
         rv_headre_icons.setItemAnimator(new DefaultItemAnimator());
         rv_headre_icons.setNestedScrollingEnabled(false);
 
-        rv_store = (RecyclerView) view.findViewById(R.id.rv_fav);
+        rv_store = (RecyclerView) view.findViewById(R.id.rv_store);
         GridLayoutManager gridLayoutManager1 = new GridLayoutManager(getActivity(), 2);
         rv_store.setLayoutManager(gridLayoutManager1);
         rv_store.setItemAnimator(new DefaultItemAnimator());
         rv_store.setNestedScrollingEnabled(false);
 
-        rv_cat = (RecyclerView) view.findViewById(R.id.rv_fav);
+        rv_cat = (RecyclerView) view.findViewById(R.id.rv_cat);
         GridLayoutManager gridLayoutManager2 = new GridLayoutManager(getActivity(), 2);
         rv_cat.setLayoutManager(gridLayoutManager2);
         rv_cat.setItemAnimator(new DefaultItemAnimator());
@@ -156,6 +158,59 @@ public class Favourite extends Fragment {
                 make_categories(usrid);
             }
         });
+
+
+
+
+
+
+        rv_cat.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), rv_cat, new RecyclerTouchListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                String getid;
+                getid = menu_models.get(position).getId();
+                Bundle args = new Bundle();
+                Fragment fm = new Product_fragment();
+                args.putString("cat_id", getid);
+                args.putString("name",menu_models.get(position).getTitle());
+                fm.setArguments(args);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                        .addToBackStack(null).commit();
+
+            }
+
+            @Override
+            public void onLongItemClick(View view, int position) {
+
+            }
+        }));
+        rv_store.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), rv_store, new RecyclerTouchListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                String storeid;
+                storeid = store_models.get(position).getUser_id();
+                Bundle args = new Bundle();
+                Fragment fm = new Product_fragment();
+                args.putString("storeid", storeid);
+                args.putString("laddan_jaffery", "store");
+                args.putString("name",store_models.get(position).getUser_name());
+                fm.setArguments(args);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                        .addToBackStack(null).commit();
+
+
+            }
+
+            @Override
+            public void onLongItemClick(View view, int position) {
+
+            }
+        }));
+
+
+
 
         return view;
     }
