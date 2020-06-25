@@ -56,7 +56,7 @@ public class Favourite extends Fragment {
 
     private ShimmerFrameLayout mShimmerViewContainer;
 
-    RecyclerView rv_headre_icons;
+    RecyclerView rv_headre_icons,rv_store,rv_cat;
     TextView fav_prod,fav_store,fav_cat;
     private Favourite_Adappter menu_adapter;
     private Product_adapter product_adapter;
@@ -93,6 +93,18 @@ public class Favourite extends Fragment {
         rv_headre_icons.setItemAnimator(new DefaultItemAnimator());
         rv_headre_icons.setNestedScrollingEnabled(false);
 
+        rv_store = (RecyclerView) view.findViewById(R.id.rv_fav);
+        GridLayoutManager gridLayoutManager1 = new GridLayoutManager(getActivity(), 2);
+        rv_store.setLayoutManager(gridLayoutManager1);
+        rv_store.setItemAnimator(new DefaultItemAnimator());
+        rv_store.setNestedScrollingEnabled(false);
+
+        rv_cat = (RecyclerView) view.findViewById(R.id.rv_fav);
+        GridLayoutManager gridLayoutManager2 = new GridLayoutManager(getActivity(), 2);
+        rv_cat.setLayoutManager(gridLayoutManager2);
+        rv_cat.setItemAnimator(new DefaultItemAnimator());
+        rv_cat.setNestedScrollingEnabled(false);
+
         make_menu_items(usrid);
                 fav_store.setOnClickListener(new View.OnClickListener() {
                   @Override
@@ -101,6 +113,9 @@ public class Favourite extends Fragment {
                       fav_cat.setBackgroundColor(Color.parseColor("#ffffff"));
                       fav_prod.setBackgroundColor(Color.parseColor("#ffffff"));
 
+                      rv_cat.setVisibility(View.GONE);
+                      rv_headre_icons.setVisibility(View.GONE);
+                      rv_store.setVisibility(View.VISIBLE);
                       mShimmerViewContainer.setVisibility(View.VISIBLE);
                       mShimmerViewContainer.startShimmerAnimation();
 
@@ -110,11 +125,17 @@ public class Favourite extends Fragment {
         fav_prod.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                rv_cat.setVisibility(View.GONE);
+                rv_store.setVisibility(View.GONE);
+                rv_headre_icons.setVisibility(View.VISIBLE);
+
                 mShimmerViewContainer.setVisibility(View.VISIBLE);
                 mShimmerViewContainer.startShimmerAnimation();
                 fav_store.setBackgroundColor(Color.parseColor("#ffffff"));
                 fav_cat.setBackgroundColor(Color.parseColor("#ffffff"));
                 fav_prod.setBackgroundColor(Color.parseColor("#7abcbc"));
+
+
 
                 make_menu_items(usrid);
             }
@@ -122,6 +143,9 @@ public class Favourite extends Fragment {
         fav_cat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                rv_store.setVisibility(View.GONE);
+                rv_headre_icons.setVisibility(View.GONE);
+                rv_cat.setVisibility(View.VISIBLE);
 
                 mShimmerViewContainer.setVisibility(View.VISIBLE);
                 mShimmerViewContainer.startShimmerAnimation();
@@ -207,7 +231,7 @@ public class Favourite extends Fragment {
                             }.getType();
                             store_models = gson.fromJson(response.getString("data"), listType);
                             store_adapter = new Store_Adapter(getActivity(),store_models);
-                            rv_headre_icons.setAdapter(store_adapter);
+                            rv_store.setAdapter(store_adapter);
                             store_adapter.notifyDataSetChanged();
 
                         }
@@ -256,7 +280,7 @@ public class Favourite extends Fragment {
                             }.getType();
                             menu_models = gson.fromJson(response.getString("data"), listType);
                             category_adapter = new Home_Icon_Adapter(menu_models);
-                            rv_headre_icons.setAdapter(category_adapter);
+                            rv_cat.setAdapter(category_adapter);
                             category_adapter.notifyDataSetChanged();
                         }
                     }
