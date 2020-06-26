@@ -320,7 +320,7 @@ public class Payment_fragment extends Fragment {
                 Log.e(TAG, "from:" + gettime + "\ndate:" + getdate +
                         "\n" + "\nuser_id:" + getuser_id + "\n" + getlocation_id + getstore_id + "\ndata:" + passArray.toString());
 
-                Toast.makeText(getActivity(),getlocation_id+"", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(),getlocation_id+"", Toast.LENGTH_SHORT).show();
     makeAddOrderRequest(text,getdate, gettime, getuser_id, getlocation_id, getstore_id, passArray);
 
 
