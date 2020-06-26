@@ -85,5 +85,13 @@ public class ThanksActivity extends AppCompatActivity implements View.OnClickLis
 
 
 
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent myIntent = new Intent(ThanksActivity.this,MainActivity.class);
+        startActivity(myIntent);
+        finishAffinity();
     }
 }
