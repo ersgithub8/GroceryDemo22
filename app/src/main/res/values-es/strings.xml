@@ -1,4 +1,5 @@
 <resources>
+    <string name="no_record">No Record Found</string>
 
     <string name="top_selling">Top Selling</string>
     <string name="Deal">Deals</string>
@@ -173,7 +174,7 @@
     <string name="method_three">Tarjetas</string>
     <string name="method_four">NetBanking</string>
 
-    <string name="search_msg">Buscar verduras, frutas, etc.</string>
+    <string name="search_msg">Search Stores and Products</string>
     <string name="change_password">Cambia la contraseña</string>
     <string name="old_password">Contraseña anterior (obligatorio)</string>
     <string name="new_password">Nueva contraseña (requerida)</string>
