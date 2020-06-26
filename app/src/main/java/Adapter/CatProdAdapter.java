@@ -111,9 +111,6 @@ public class CatProdAdapter extends RecyclerView.Adapter<CatProdAdapter.CartProd
     }
 
 
-
-
-
     private void makeGetProductRequest(final String cat_id, final RecyclerView recyclerView, final RelativeLayout view) {
 
         final SweetAlertDialog loading=new SweetAlertDialog(context,SweetAlertDialog.PROGRESS_TYPE);

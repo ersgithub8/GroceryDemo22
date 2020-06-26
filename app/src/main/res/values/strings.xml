@@ -2,6 +2,9 @@
 
     <string name="expire">Expired</string>
 
+    <string name="no_product">No Products Available</string>
+    <string name="no_fav">No Favourite Available</string>
+
     <string name="Deal">Deals</string>
 
     <string name="top_selling">Top Selling</string>

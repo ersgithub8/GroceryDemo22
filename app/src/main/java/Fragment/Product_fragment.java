@@ -78,7 +78,7 @@ public class Product_fragment extends Fragment {
     SharedPreferences sharedPreferences;
     String usrid;
     ImageView fav,star;
-    TextView name;
+    TextView name,Texty;
     SharedPreferences preferences;
     public Product_fragment() {
     }
@@ -95,6 +95,7 @@ public class Product_fragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_product, container, false);
 
         new StoreFragment();
+        Texty = view.findViewById(R.id.no_product);
         tab_cat = (TabLayout) view.findViewById(R.id.tab_cat);
         fav=view.findViewById(R.id.imagefav);
         banner_slider = (SliderLayout) view.findViewById(R.id.relative_banner);
@@ -138,8 +139,7 @@ public class Product_fragment extends Fragment {
 
         if (ConnectivityReceiver.isConnected()) {
             //Shop by Catogary
-//            makeGetCategoryRequest(getcat_id);
-
+            //makeGetCategoryRequest(getcat_id);
             //
             if(storeid !=null){
                 makeGetCategoryRequest(storeid);
@@ -149,7 +149,7 @@ public class Product_fragment extends Fragment {
                 checkfavouratecat(usrid,getcat_id,fav);
             }
             //Deal Of The Day Products
-            makedealIconProductRequest(get_deal_id);
+            //makedealIconProductRequest(get_deal_id);
             //Top Sale Products
             maketopsaleProductRequest(get_top_sale_id);
             makeGetSliderCategoryRequest(id);
@@ -366,6 +366,7 @@ public class Product_fragment extends Fragment {
                 } catch (JSONException e) {
                     loading.dismiss();
                     e.printStackTrace();
+                    Texty.setVisibility(View.VISIBLE);
                 }
             }
         }, new Response.ErrorListener() {

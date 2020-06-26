@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="no_fav">لا يوجد المفضلة المتاحة</string>
+
     <string name="Deal">صفقات</string>
     <string name="expire">منتهية الصلاحية</string>
+    <string name="no_product">لا توجد منتجات متاحة</string>
 
     <string name="top_selling">الأكثر مبيعا</string>
 

@@ -67,15 +67,10 @@
             />
 
     </RelativeLayout>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_subcategory"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmer_view_container"
         android:layout_width="wrap_content"
-
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="15dp"
@@ -94,5 +89,26 @@
         </LinearLayout>
 
     </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+
+        android:id="@+id/rv_subcategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <TextView
+        android:textStyle="italic"
+        android:fontFamily="@font/bold"
+        android:textColor="@color/black"
+        android:visibility="gone"
+        android:id="@+id/no_product"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/no_product"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textAlignment="center"
+        />
 
 </LinearLayout>

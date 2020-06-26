@@ -94,7 +94,6 @@
             android:background="@color/light_gray"
             android:orientation="vertical">
 
-
             <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -114,6 +113,9 @@
             </LinearLayout>
 
             <com.facebook.shimmer.ShimmerFrameLayout
+
+                android:visibility="gone"
+
                 android:id="@+id/shimmer_view_container2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -143,6 +145,7 @@
 
 
                 <androidx.recyclerview.widget.RecyclerView
+
                     android:id="@+id/collapsing_recycler"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -155,6 +158,8 @@
                 </androidx.recyclerview.widget.RecyclerView>
             </LinearLayout>
             <com.facebook.shimmer.ShimmerFrameLayout
+
+                android:visibility="gone"
 
                 android:id="@+id/shimmer_view_container"
                 android:layout_width="wrap_content"
@@ -183,6 +188,9 @@
                 android:orientation="vertical">
 
                 <androidx.recyclerview.widget.RecyclerView
+
+                    android:visibility="gone"
+
                         android:layout_marginTop="20dp"
                         android:layout_marginBottom="50dp"
                         android:id="@+id/rv_stores"
@@ -192,6 +200,7 @@
                         app:layout_behavior="@string/appbar_scrolling_view_behavior"
                         />
             </LinearLayout>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/catprodrv"
                     android:background="@color/white"

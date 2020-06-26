@@ -59,7 +59,7 @@ public class Favourite extends Fragment {
     private ShimmerFrameLayout mShimmerViewContainer;
 
     RecyclerView rv_headre_icons,rv_store,rv_cat;
-    TextView fav_prod,fav_store,fav_cat;
+    TextView fav_prod,fav_store,fav_cat,Texty;
     private Favourite_Adappter menu_adapter;
     private Product_adapter product_adapter;
     private Home_Icon_Adapter category_adapter;
@@ -83,6 +83,7 @@ public class Favourite extends Fragment {
         fav_prod=view.findViewById(R.id.fav_prod);
         fav_store=view.findViewById(R.id.fav_store);
 
+        Texty = view.findViewById(R.id.no_product);
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
 
         sharedPreferences=getActivity().getSharedPreferences(BaseURL.PREFS_NAME,MODE_PRIVATE);
@@ -241,9 +242,15 @@ public class Favourite extends Fragment {
                             rv_headre_icons.setAdapter(product_adapter);
                             product_adapter.notifyDataSetChanged();
                         }
+                        else {
+                            rv_headre_icons.setVisibility(View.GONE);
+                            Texty.setVisibility(View.VISIBLE);
+                        }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    rv_headre_icons.setVisibility(View.GONE);
+                    Texty.setVisibility(View.VISIBLE);
                 }
             }
         }, new Response.ErrorListener() {
@@ -290,9 +297,15 @@ public class Favourite extends Fragment {
                             store_adapter.notifyDataSetChanged();
 
                         }
+                        else {
+                            rv_store.setVisibility(View.GONE);
+                            Texty.setVisibility(View.VISIBLE);
+                        }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    rv_store.setVisibility(View.GONE);
+                    Texty.setVisibility(View.VISIBLE);
                 }
 
             }
@@ -338,9 +351,15 @@ public class Favourite extends Fragment {
                             rv_cat.setAdapter(category_adapter);
                             category_adapter.notifyDataSetChanged();
                         }
+                        else {
+                            rv_cat.setVisibility(View.GONE);
+                            Texty.setVisibility(View.VISIBLE);
+                        }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    rv_cat.setVisibility(View.GONE);
+                    Texty.setVisibility(View.VISIBLE);
                 }
             }
         }, new Response.ErrorListener() {

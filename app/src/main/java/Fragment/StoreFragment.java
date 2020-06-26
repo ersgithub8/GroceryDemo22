@@ -117,7 +117,6 @@ public class StoreFragment extends Fragment {
         if(addresses.size()>0) {
             city = addresses.get(0).getLocality();
         }
-//        Toast.makeText(getActivity(),cityName ,Toast.LENGTH_LONG).show();
 
         if(city == null){
             city="Lahore";
@@ -128,7 +127,6 @@ public class StoreFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), WebView.class));
-
             }
         });
 
@@ -168,10 +166,7 @@ public class StoreFragment extends Fragment {
         rv_headre_icons.setDrawingCacheEnabled(true);
         rv_headre_icons.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_LOW);
 
-
         catprod.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-
 
         make_menu_items1();
 
