@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="no_fav">لا يوجد المفضلة المتاحة</string>
+    <string name="no_record">لا يوجد سجلات</string>
 
     <string name="Deal">صفقات</string>
     <string name="expire">منتهية الصلاحية</string>
@@ -229,7 +230,7 @@
     <string name="method_three">بطاقات</string>
     <string name="method_four">نيتبانكينج</string>
 <string name="past">الطلبات السابقة</string>
-    <string name="search_msg">البحث عن الخضروات والفواكه ، وما إلى ذلك</string>
+    <string name="search_msg">البحث عن المتاجر والمنتجات</string>
     <string name="change_password">تغيير كلمة المرور</string>
     <string name="old_password">كلمة المرور السابقة (مطلوب)</string>
     <string name="new_password">كلمة المرور الجديدة (مطلوب)</string>

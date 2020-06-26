@@ -20,6 +20,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.NoConnectionError;
@@ -28,6 +29,7 @@ import com.android.volley.Response;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -42,6 +44,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import Adapter.Product_adapter;
 import Adapter.Search_adapter;
 import Adapter.Store_Adapter;
 import Adapter.SuggestionAdapter;
@@ -56,7 +59,7 @@ import util.ConnectivityReceiver;
 import util.CustomVolleyJsonRequest;
 
 /**
- * Created by Rajesh Dabhi on 14/7/2017.
+ * Created by Hamza Ali on 26/6/2020.
  */
 
 public class Search_fragment extends Fragment {
@@ -69,10 +72,12 @@ public class Search_fragment extends Fragment {
     private RelativeLayout btn_search;
     private RecyclerView rv_search,stores;
 
+    ShimmerFrameLayout shimmer_store,shimmer_product;
     String city;
     private List<Product_model> product_modelList = new ArrayList<>();
-    private Search_adapter adapter_product;
+    private Product_adapter adapter_product;
 
+    private TextView Texty;
     List<Store_Model> store_models=new ArrayList<>();
     Store_Adapter store_adapter;
     RadioButton store,product;
@@ -93,6 +98,10 @@ public class Search_fragment extends Fragment {
         store=view.findViewById(R.id.rbstore);
         product=view.findViewById(R.id.rbprod);
 
+        shimmer_product = view.findViewById(R.id.shimmer_product);
+        shimmer_store = view.findViewById(R.id.shimmer_store);
+
+        Texty = view.findViewById(R.id.no_record);
         store.setChecked(true);
         acTextView = (EditText) view.findViewById(R.id.et_search);
 //        acTextView.setThreshold(1);
@@ -102,7 +111,7 @@ public class Search_fragment extends Fragment {
         acTextView.setTextColor(getResources().getColor(R.color.green));
         btn_search = (RelativeLayout) view.findViewById(R.id.btn_search);
         rv_search = (RecyclerView) view.findViewById(R.id.rv_search);
-        rv_search.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rv_search.setLayoutManager(new GridLayoutManager(getActivity(),3));
         stores=view.findViewById(R.id.rv_store);
         stores.setLayoutManager(new GridLayoutManager(getActivity(),3));
 
@@ -133,16 +142,28 @@ public class Search_fragment extends Fragment {
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                rv_search.setVisibility(View.GONE);
+                stores.setVisibility(View.GONE);
+
+                Texty.setVisibility(View.GONE);
+//                shimmer_product.setVisibility(View.GONE);
+//                shimmer_product.stopShimmerAnimation();
+//                shimmer_store.setVisibility(View.GONE);
+//                shimmer_store.stopShimmerAnimation();
+
                 String get_search_txt ="%"+ acTextView.getText().toString() +"%";
                 if (TextUtils.isEmpty(get_search_txt)) {
                     Toast.makeText(getActivity(), getResources().getString(R.string.enter_keyword), Toast.LENGTH_SHORT).show();
                 } else {
                     if (ConnectivityReceiver.isConnected()) {
                         if(product.isChecked()){
-                            stores.setVisibility(View.GONE);
-                        makeGetProductRequest(get_search_txt);
+                            shimmer_product.setVisibility(View.VISIBLE);
+                            shimmer_product.startShimmerAnimation();
+                            makeGetProductRequest(get_search_txt);
                         }else{
-                            rv_search.setVisibility(View.GONE);
+                            shimmer_store.setVisibility(View.VISIBLE);
+                            shimmer_store.startShimmerAnimation();
                         getstores(get_search_txt);
                         }
                     } else {
@@ -184,8 +205,12 @@ public class Search_fragment extends Fragment {
 
                         product_modelList = gson.fromJson(response.getString("data"), listType);
 
-                        adapter_product = new Search_adapter(product_modelList, getActivity());
+                        adapter_product = new Product_adapter(product_modelList, getActivity());
                         rv_search.setAdapter(adapter_product);
+
+                        shimmer_product.setVisibility(View.GONE);
+                        shimmer_product.stopShimmerAnimation();
+
                         rv_search.setVisibility(View.VISIBLE);
                         adapter_product.notifyDataSetChanged();
 
@@ -193,11 +218,20 @@ public class Search_fragment extends Fragment {
                         if (getActivity() != null) {
                             if (product_modelList.isEmpty()) {
                                 Toast.makeText(getActivity(), getResources().getString(R.string.no_rcord_found), Toast.LENGTH_SHORT).show();
+                                shimmer_product.setVisibility(View.GONE);
+                                shimmer_product.stopShimmerAnimation();
+
+                                rv_search.setVisibility(View.GONE);
+                                Texty.setVisibility(View.VISIBLE);
                             }
                         }
 
                     }
                 } catch (JSONException e) {
+                    shimmer_product.setVisibility(View.GONE);
+                    shimmer_product.stopShimmerAnimation();
+                    rv_search.setVisibility(View.GONE);
+                    Texty.setVisibility(View.VISIBLE);
                     e.printStackTrace();
                 }
             }
@@ -249,21 +283,29 @@ public class Search_fragment extends Fragment {
                             stores.setLayoutManager(new GridLayoutManager(getActivity(),3));
                             stores.setAdapter(store_adapter);
 
+                            shimmer_store.setVisibility(View.GONE);
+                            shimmer_store.stopShimmerAnimation();
 
                             stores.setVisibility(View.VISIBLE);
                             store_adapter.notifyDataSetChanged();
 
                             if(store_models.size()==0){
-                                new SweetAlertDialog(getActivity(),SweetAlertDialog.ERROR_TYPE).setTitleText("No data Found")
-                                        .setConfirmButtonBackgroundColor(Color.RED).show();
+//                                new SweetAlertDialog(getActivity(),SweetAlertDialog.ERROR_TYPE).setTitleText("No data Found")
+//                                        .setConfirmButtonBackgroundColor(Color.RED).show();
+                                shimmer_store.setVisibility(View.GONE);
+                                shimmer_store.stopShimmerAnimation();
+                                stores.setVisibility(View.GONE);
+                                Texty.setVisibility(View.VISIBLE);
                             }
 
                         }
 
-
-
                     }
                 }catch (Exception e){
+                    stores.setVisibility(View.GONE);
+                    shimmer_store.setVisibility(View.GONE);
+                    shimmer_store.stopShimmerAnimation();
+                    Texty.setVisibility(View.VISIBLE);
                     e.printStackTrace();
                 }
 
@@ -279,6 +321,19 @@ public class Search_fragment extends Fragment {
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonRequest, "json_stores_req");
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        shimmer_store.startShimmerAnimation();
+        shimmer_product.startShimmerAnimation();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        shimmer_store.stopShimmerAnimation();
+        shimmer_product.startShimmerAnimation();
     }
 
 }

@@ -73,7 +73,6 @@
         android:background="@color/green"/>
 
             <com.facebook.shimmer.ShimmerFrameLayout
-                android:visibility="gone"
                 android:id="@+id/shimmer_view_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

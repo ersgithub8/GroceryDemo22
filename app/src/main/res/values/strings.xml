@@ -2,13 +2,15 @@
 
     <string name="expire">Expired</string>
 
+    <string name="no_record">No Record Found</string>
+
     <string name="no_product">No Products Available</string>
     <string name="no_fav">No Favourite Available</string>
 
     <string name="Deal">Deals</string>
 
     <string name="top_selling">Top Selling</string>
-    <string name="stores">Store</string>
+    <string name="stores">Stores</string>
     <string name="caty">Categories</string>
     <string name="favourt">Favourite</string>
     <string name="Cart">Cart</string>
@@ -240,7 +242,9 @@
     <string name="past" translatable="false">Past Order</string>
     <string name="add" translatable="false">Address</string>
     <string name="searchh" translatable="false">Search</string>
-    <string name="search_msg" translatable="false">Search Vegetables, Fruit etc</string>
+
+    <string name="search_msg" translatable="false">Search Stores and Products</string>
+
     <string name="change_password">Change Password</string>
     <string name="old_password">Old Password (Required)</string>
     <string name="new_password">New Password (Required)</string>
