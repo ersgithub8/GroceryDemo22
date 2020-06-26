@@ -138,6 +138,8 @@ public class Account_Fragment extends Fragment {
                 sessionManagement.logoutSession();
                 disconnectFromFacebook();
                 getActivity().finish();
+                Intent i=new Intent(getActivity(),LoginActivity.class);
+                startActivity(i);
             }
         });
 

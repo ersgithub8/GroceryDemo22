@@ -68,7 +68,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
-
     //-------------------------------------------------
     SignInButton signInButton;
     LoginButton loginButton;
@@ -134,7 +133,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         sharedPreferences= getSharedPreferences("lan", Context.MODE_PRIVATE);
 
-        String current_lan = sharedPreferences.getString("language",null);
+        final String current_lan = sharedPreferences.getString("language",null);
 
         if (current_lan == null){
             lEnglish.setBackgroundColor(Color.parseColor("#7abcbc"));
@@ -158,27 +157,37 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         lEnglish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LocaleHelper.setLocale(getApplication(),"en");
-                getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
 
-                editor.putString("language", "english");
-                editor.apply();
+                if (current_lan.equals("english")){
+                    Toast.makeText(getApplicationContext(),"Already In English",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    LocaleHelper.setLocale(getApplication(), "en");
+                    getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
 
-                recreate();
+                    editor.putString("language", "english");
+                    editor.apply();
+
+                    recreate();
+                }
             }
         });
         lSpanish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LocaleHelper.setLocale(getApplication(),"ar");
-                getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
+                if (current_lan.equals("spanish")){
+                    Toast.makeText(getApplicationContext(),"بالفعل باللغة العربية",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    LocaleHelper.setLocale(getApplication(), "ar");
+                    getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
 
-                editor.putString("language", "spanish");
-                editor.apply();
+                    editor.putString("language", "spanish");
+                    editor.apply();
 
-                recreate();
-
+                    recreate();
+                }
             }
         });
 
@@ -256,43 +265,46 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String getemail = et_email.getText().toString();
         boolean cancel = false;
         View focusView = null;
-        if (TextUtils.isEmpty(getpassword)) {
-            tv_password.setTextColor(getResources().getColor(R.color.black));
-            focusView = et_password;
-            cancel = true;
-        } else if (!isPasswordValid(getpassword)) {
-            tv_password.setText(getResources().getString(R.string.password_too_short));
-            tv_password.setTextColor(getResources().getColor(R.color.black));
-            focusView = et_password;
-            cancel = true;
-        }
 
         if (TextUtils.isEmpty(getemail)) {
-
+            et_email.setError("Email Required");
             tv_email.setTextColor(getResources().getColor(R.color.black));
             focusView = et_email;
             cancel = true;
         } else if (!isEmailValid(getemail)) {
             tv_email.setText(getResources().getString(R.string.invalide_email_address));
+            et_email.setError("Email not Valid");
             tv_email.setTextColor(getResources().getColor(R.color.black));
             focusView = et_email;
             cancel = true;
         }
+        else {
+            if (TextUtils.isEmpty(getpassword)) {
+                et_password.setError("Password Required");
+                tv_password.setTextColor(getResources().getColor(R.color.black));
+                focusView = et_password;
+                cancel = true;
+            } else if (!isPasswordValid(getpassword)) {
+                tv_password.setText(getResources().getString(R.string.password_too_short));
+                tv_password.setTextColor(getResources().getColor(R.color.black));
+                focusView = et_password;
+                cancel = true;
+            }
 
-        if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
-            if (focusView != null)
-                focusView.requestFocus();
-        } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
+            if (cancel) {
+                // There was an error; don't attempt login and focus the first
+                // form field with an error.
+                if (focusView != null)
+                    focusView.requestFocus();
+            } else {
+                // Show a progress spinner, and kick off a background task to
+                // perform the user login attempt.
 
-            if (ConnectivityReceiver.isConnected()) {
-                makeLoginRequest(getemail, getpassword);
+                if (ConnectivityReceiver.isConnected()) {
+                    makeLoginRequest(getemail, getpassword);
+                }
             }
         }
-
     }
 
     private boolean isEmailValid(String email) {
@@ -528,6 +540,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void guest(View view) {
         Intent startmain = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(startmain);
+        finishAffinity();
     }
 
 

@@ -186,10 +186,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         bot_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment fm = new Account_Fragment();
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-                        .addToBackStack(null).commit();
+                if (sessionManagement.isLoggedIn()) {
+                    Fragment fm = new Account_Fragment();
+                    FragmentManager fragmentManager = getFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                            .addToBackStack(null).commit();
+                }
+                else {
+                    Intent i=new Intent(MainActivity.this,LoginActivity.class);
+                    startActivity(i);
+                }
             }
         });
 
