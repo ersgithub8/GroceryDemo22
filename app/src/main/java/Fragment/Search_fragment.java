@@ -1,7 +1,14 @@
 package Fragment;
 
 import android.app.Fragment;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
+
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
@@ -11,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -26,16 +34,21 @@ import com.google.gson.reflect.TypeToken;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import Adapter.Search_adapter;
+import Adapter.Store_Adapter;
 import Adapter.SuggestionAdapter;
 import Config.BaseURL;
 import Model.Product_model;
+import Model.Store_Model;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.MainActivity;
 import gogrocer.tcc.R;
@@ -54,10 +67,15 @@ public class Search_fragment extends Fragment {
 //            , "Toothpaste", "Mouthwash", "Hair oil", "Shampoo", "Pure & pomace olive", "ICE cream", "Theme Egg", "Amul Milk", "AMul Milk Pack power", "kaju pista dd"};
     private EditText acTextView;
     private RelativeLayout btn_search;
-    private RecyclerView rv_search;
+    private RecyclerView rv_search,stores;
 
+    String city;
     private List<Product_model> product_modelList = new ArrayList<>();
     private Search_adapter adapter_product;
+
+    List<Store_Model> store_models=new ArrayList<>();
+    Store_Adapter store_adapter;
+    RadioButton store,product;
 
     public Search_fragment() {
     }
@@ -72,8 +90,10 @@ public class Search_fragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
 
         ((MainActivity) getActivity()).setTitle(getResources().getString(R.string.search));
+        store=view.findViewById(R.id.rbstore);
+        product=view.findViewById(R.id.rbprod);
 
-
+        store.setChecked(true);
         acTextView = (EditText) view.findViewById(R.id.et_search);
 //        acTextView.setThreshold(1);
 //
@@ -83,6 +103,32 @@ public class Search_fragment extends Fragment {
         btn_search = (RelativeLayout) view.findViewById(R.id.btn_search);
         rv_search = (RecyclerView) view.findViewById(R.id.rv_search);
         rv_search.setLayoutManager(new LinearLayoutManager(getActivity()));
+        stores=view.findViewById(R.id.rv_store);
+        stores.setLayoutManager(new GridLayoutManager(getActivity(),3));
+
+        SharedPreferences sharedPreferences=getActivity().getSharedPreferences("location", Context.MODE_PRIVATE);
+        String lat, longi;
+        lat=sharedPreferences.getString("lat",null);
+        longi=sharedPreferences.getString("long",null);
+        double laty = Double.parseDouble(lat);
+        double longy = Double.parseDouble(longi);
+        Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
+        List<Address> addresses = null;
+        try {
+            addresses = geocoder.getFromLocation(laty, longy, 1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if(addresses.size()>0) {
+            city = addresses.get(0).getLocality();
+        }
+//        Toast.makeText(getActivity(),cityName ,Toast.LENGTH_LONG).show();
+
+        if(city == null){
+            city="Lahore";
+        }
+
 
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,7 +138,13 @@ public class Search_fragment extends Fragment {
                     Toast.makeText(getActivity(), getResources().getString(R.string.enter_keyword), Toast.LENGTH_SHORT).show();
                 } else {
                     if (ConnectivityReceiver.isConnected()) {
+                        if(product.isChecked()){
+                            stores.setVisibility(View.GONE);
                         makeGetProductRequest(get_search_txt);
+                        }else{
+                            rv_search.setVisibility(View.GONE);
+                        getstores(get_search_txt);
+                        }
                     } else {
                         ((MainActivity) getActivity()).onNetworkConnectionChanged(false);
                     }
@@ -134,6 +186,7 @@ public class Search_fragment extends Fragment {
 
                         adapter_product = new Search_adapter(product_modelList, getActivity());
                         rv_search.setAdapter(adapter_product);
+                        rv_search.setVisibility(View.VISIBLE);
                         adapter_product.notifyDataSetChanged();
 
                         
@@ -161,6 +214,71 @@ public class Search_fragment extends Fragment {
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
+
+
+
+
+
+
+    public void getstores(String search){
+
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("city", city);
+        params.put("search",search);
+
+        CustomVolleyJsonRequest jsonRequest=new CustomVolleyJsonRequest(Request.Method.POST,
+                BaseURL.getStores, params, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                try {
+                    if(response !=null && response.length()>0){
+
+                        Boolean status=response.getBoolean("response");
+                        if(status)
+                        {
+                            Gson gson=new Gson();
+                            Type listtype=new TypeToken<List<Store_Model>>(){
+
+                            }.getType();
+
+
+                            store_models=gson.fromJson(response.getString("data"),listtype);
+                            store_adapter=new Store_Adapter(getActivity(),store_models);
+                            stores.setLayoutManager(new GridLayoutManager(getActivity(),3));
+                            stores.setAdapter(store_adapter);
+
+
+                            stores.setVisibility(View.VISIBLE);
+                            store_adapter.notifyDataSetChanged();
+
+                            if(store_models.size()==0){
+                                new SweetAlertDialog(getActivity(),SweetAlertDialog.ERROR_TYPE).setTitleText("No data Found")
+                                        .setConfirmButtonBackgroundColor(Color.RED).show();
+                            }
+
+                        }
+
+
+
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonRequest, "json_stores_req");
     }
 
 }

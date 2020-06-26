@@ -57,6 +57,35 @@
                         tools:ignore="LabelFor" />
 
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_horizontal">
+
+
+                        <RadioGroup
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rbstore"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/nav_stores"/>
+                            <RadioButton
+                                android:id="@+id/rbprod"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/tv_home_cat"
+                                />
+
+
+                        </RadioGroup>
+
+
+                    </LinearLayout>
                     <RelativeLayout
                         android:id="@+id/btn_search"
                         android:layout_width="match_parent"
@@ -81,9 +110,14 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_search"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
-
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_store"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
