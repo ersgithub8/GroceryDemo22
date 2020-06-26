@@ -76,6 +76,7 @@ public class StoreFragment extends Fragment {
     RecyclerView stores;
     LinearLayout Search_layout;
     String storeid,getid;
+    String city;
     private ShimmerFrameLayout mShimmerViewContainer,shimmy;
     private RecyclerView rv_headre_icons,catprod;
     List<Store_Model> store_models=new ArrayList<>();
@@ -113,10 +114,14 @@ public class StoreFragment extends Fragment {
             e.printStackTrace();
         }
 
-        String cityName = addresses.get(0).getLocality();
+        if(addresses.size()>0) {
+            city = addresses.get(0).getLocality();
+        }
+//        Toast.makeText(getActivity(),cityName ,Toast.LENGTH_LONG).show();
 
-        Toast.makeText(getActivity(),cityName ,Toast.LENGTH_LONG).show();
-
+        if(city == null){
+            city="Lahore";
+        }
 
         floatingActionButton = view.findViewById(R.id.fab_id);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -221,7 +226,7 @@ public class StoreFragment extends Fragment {
     public void getstores(){
 
         Map<String, String> params = new HashMap<String, String>();
-        params.put("city_id", "");
+        params.put("city", city);
 
         CustomVolleyJsonRequest jsonRequest=new CustomVolleyJsonRequest(Request.Method.POST,
                 BaseURL.getStores, params, new Response.Listener<JSONObject>() {

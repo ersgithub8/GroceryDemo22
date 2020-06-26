@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardElevation="@dimen/space_5"
+    android:id="@+id/rl"
     android:layout_marginRight="@dimen/space_10"
     android:layout_marginLeft="@dimen/space_10"
-    android:layout_marginTop="@dimen/space_10"
+    android:layout_marginTop="@dimen/space_5"
 
     >
 
@@ -43,4 +44,4 @@
             android:layout_marginTop="@dimen/space_3"
             android:layout_marginBottom="@dimen/space_10"/>
     </RelativeLayout>
-</androidx.cardview.widget.CardView>
+</RelativeLayout>

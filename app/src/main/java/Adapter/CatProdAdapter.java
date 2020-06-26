@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -82,7 +83,7 @@ public class CatProdAdapter extends RecyclerView.Adapter<CatProdAdapter.CartProd
 
         holder.catproducts.setLayoutManager(new GridLayoutManager(context,3));
 
-        makeGetProductRequest(mList.getId(),holder.catproducts,holder.itemView);
+        makeGetProductRequest(mList.getId(),holder.catproducts,holder.relativeLayout);
 
     }
 
@@ -98,12 +99,13 @@ public class CatProdAdapter extends RecyclerView.Adapter<CatProdAdapter.CartProd
     public class  CartProdVH extends RecyclerView.ViewHolder{
         TextView catname;
         RecyclerView catproducts;
+        RelativeLayout relativeLayout;
         public CartProdVH(@NonNull View itemView) {
             super(itemView);
 
             catname=itemView.findViewById(R.id.catname);
             catproducts=itemView.findViewById(R.id.productscat);
-
+            relativeLayout=itemView.findViewById(R.id.rl);
 
         }
     }
@@ -112,7 +114,7 @@ public class CatProdAdapter extends RecyclerView.Adapter<CatProdAdapter.CartProd
 
 
 
-    private void makeGetProductRequest(final String cat_id, final RecyclerView recyclerView, final View view) {
+    private void makeGetProductRequest(final String cat_id, final RecyclerView recyclerView, final RelativeLayout view) {
 
         final SweetAlertDialog loading=new SweetAlertDialog(context,SweetAlertDialog.PROGRESS_TYPE);
         loading.setCancelable(false);
