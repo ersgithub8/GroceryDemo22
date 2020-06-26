@@ -5,7 +5,7 @@
         android:width="3dp"
         android:color="@color/green" />
     <solid android:color="@color/green" />
-    <strokeytrewq
+    <stroke
         android:width="0dp"
         android:color="@color/green" />
     <padding
