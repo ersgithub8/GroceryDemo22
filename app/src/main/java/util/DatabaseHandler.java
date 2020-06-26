@@ -71,7 +71,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             return false;
         } else {
             ContentValues values = new ContentValues();
-            Toast.makeText(context, map.toString()+"", Toast.LENGTH_SHORT).show();
             values.put(COLUMN_ID, map.get(COLUMN_ID));
             values.put(COLUMN_QTY, Qty);
             values.put(COLUMN_CAT_ID, map.get(COLUMN_CAT_ID));
