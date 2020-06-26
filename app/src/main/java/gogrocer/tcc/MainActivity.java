@@ -17,6 +17,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
@@ -64,6 +66,10 @@ import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 import Config.BaseURL;
 import Config.SharedPref;
@@ -460,66 +466,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
 
-        getLocation();
+//        getLocation();
     }
 
-    public void getLocation(){
 
-
-
-        final SharedPreferences locationss=getSharedPreferences("location",MODE_PRIVATE);
-        final SharedPreferences.Editor leditor=locationss.edit();
-
-        FusedLocationProviderClient fusedLocationClient;
-        LocationManager locationManager;
-
-
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(MainActivity.this);
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-        if(ActivityCompat.checkSelfPermission(MainActivity.this,
-                Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(MainActivity.this,
-                Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED
-        ){
-
-            ActivityCompat.requestPermissions(this,new String[]{
-                    Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION
-            },2);
-        }else {
-
-            fusedLocationClient.getLastLocation()
-                    .addOnSuccessListener( new OnSuccessListener<Location>() {
-                        @Override
-                        public void onSuccess(android.location.Location location) {
-
-                            // Got last known location. In some rare situations this can be null.
-                            if (location != null) {
-                                // Logic to handle location object
-
-                                Double latitude=location.getLatitude();
-                                Double longitude=location.getLongitude();
-
-//                                Toast.makeText(MainActivity.this, latitude+longitude+"", Toast.LENGTH_SHORT).show();
-
-                                leditor.putString("lat",latitude.toString());
-                                leditor.putString("long",longitude.toString());
-                                leditor.apply();
-
-
-                                location.reset();
-
-                            }else{
-//                                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-//                                startActivity(intent);
-                            }
-
-                        }
-
-                    });
-
-        }
-    }
 
     public void updateHeader() {
         if (sessionManagement.isLoggedIn()) {
@@ -874,7 +824,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onResume();
 
         setCartCounter(String.valueOf(dbcart.getCartCount()));
-        getLocation();
+//        getLocation();
         // register reciver
 
     }

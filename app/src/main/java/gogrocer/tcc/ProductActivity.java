@@ -112,6 +112,7 @@ public class ProductActivity extends AppCompatActivity {
         productid=getIntent().getStringExtra("product_id");
         product_name=getIntent().getStringExtra("product_name");
         category_id=getIntent().getStringExtra("category_id");
+
         product_description=getIntent().getStringExtra("description");
         deal_price=getIntent().getStringExtra("deal_price");
         start_date=getIntent().getStringExtra("start_date");
@@ -129,6 +130,7 @@ public class ProductActivity extends AppCompatActivity {
         increament=getIntent().getStringExtra("increment");
         rewards=getIntent().getStringExtra("rewards");
         stock=getIntent().getStringExtra("stock");
+
         title=getIntent().getStringExtra("title");
 
 
@@ -161,6 +163,7 @@ public class ProductActivity extends AppCompatActivity {
         tv_reward.setText(rewards);
         tv_price.setText(getResources().getString(R.string.tv_pro_price) + unit_value + " " +
                 unit + pricee+getResources().getString(R.string.currency));
+
         if (Integer.valueOf(stock)<=0){
             tv_add.setText(R.string.tv_out);
             tv_add.setTextColor(getResources().getColor(R.color.black));

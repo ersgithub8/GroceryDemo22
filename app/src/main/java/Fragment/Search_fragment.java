@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -51,7 +52,7 @@ public class Search_fragment extends Fragment {
     //    String[] fruits = {"MIlk butter & cream", "Bread Buns & Pals", "Dals Mix Pack", "buns-pavs", "cakes", "Channa Dal", "Toor Dal", "Wheat Atta"
 //            , "Beson", "Almonds", "Packaged Drinking", "Cola drinks", "Other soft drinks", "Instant Noodles", "Cup Noodles", "Salty Biscuits", "cookie", "Sanitary pads", "sanitary Aids"
 //            , "Toothpaste", "Mouthwash", "Hair oil", "Shampoo", "Pure & pomace olive", "ICE cream", "Theme Egg", "Amul Milk", "AMul Milk Pack power", "kaju pista dd"};
-    private AutoCompleteTextView acTextView;
+    private EditText acTextView;
     private RelativeLayout btn_search;
     private RecyclerView rv_search;
 
@@ -73,10 +74,10 @@ public class Search_fragment extends Fragment {
         ((MainActivity) getActivity()).setTitle(getResources().getString(R.string.search));
 
 
-        acTextView = (AutoCompleteTextView) view.findViewById(R.id.et_search);
-        acTextView.setThreshold(1);
-
-        acTextView.setAdapter(new SuggestionAdapter(getActivity(), acTextView.getText().toString()));
+        acTextView = (EditText) view.findViewById(R.id.et_search);
+//        acTextView.setThreshold(1);
+//
+//        acTextView.setAdapter(new SuggestionAdapter(getActivity(), acTextView.getText().toString()));
 
         acTextView.setTextColor(getResources().getColor(R.color.green));
         btn_search = (RelativeLayout) view.findViewById(R.id.btn_search);

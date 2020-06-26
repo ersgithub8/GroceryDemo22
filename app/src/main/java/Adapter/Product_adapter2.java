@@ -4,10 +4,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +15,9 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -26,33 +25,28 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import Config.BaseURL;
-import Model.Home_Icon_model;
 import Model.Product_model;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.MainActivity;
 import gogrocer.tcc.ProductActivity;
 import gogrocer.tcc.R;
-import gogrocer.tcc.Rating;
 import util.CustomVolleyJsonRequest;
 import util.DatabaseHandler;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyViewHolder> {
+public class Product_adapter2 extends RecyclerView.Adapter<Product_adapter2.MyViewHolder> {
 
     private List<Product_model> modelList;
     private Context context;
@@ -218,20 +212,20 @@ SharedPreferences preferences;
         }
     }
 
-    public Product_adapter(List<Product_model> modelList, Context context) {
+    public Product_adapter2(List<Product_model> modelList, Context context) {
         this.modelList = modelList;
         dbcart = new DatabaseHandler(context);
     }
 
     @Override
-    public Product_adapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public Product_adapter2.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_product_rv, parent, false);
         context = parent.getContext();
-        return new Product_adapter.MyViewHolder(itemView);
+        return new Product_adapter2.MyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(Product_adapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(Product_adapter2.MyViewHolder holder, int position) {
         Product_model mList = modelList.get(position);
 
         Glide.with(context)
@@ -249,14 +243,13 @@ SharedPreferences preferences;
         }
         else {
             holder.tv_title.setText(mList.getProduct_name_arb());
+
         }
         holder.tv_reward.setText(mList.getRewards());
-
-                holder.tv_price.setText(
+        holder.tv_price.setText(
 //                context.getResources().getString(R.string.tv_pro_price) + mList.getUnit_value() + " " +
 //                mList.getUnit() +
                 mList.getPrice()+ context.getResources().getString(R.string.currency));
-
         if (Integer.valueOf(modelList.get(position).getStock())<=0){
             holder.tv_add.setText(R.string.tv_out);
             holder.tv_add.setTextColor(context.getResources().getColor(R.color.black));
@@ -282,6 +275,10 @@ SharedPreferences preferences;
 
     @Override
     public int getItemCount() {
+
+        if(modelList.size()>=3){
+            return 3;
+        }else
         return modelList.size();
     }
 
