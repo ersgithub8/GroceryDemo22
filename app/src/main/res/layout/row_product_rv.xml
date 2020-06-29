@@ -8,7 +8,7 @@
     android:layout_height="wrap_content"
     app:cardElevation="@dimen/space_5"
     app:cardUseCompatPadding="true"
-    card_view:cardCornerRadius="10dp"
+    card_view:cardCornerRadius="13dp"
     >
 
     <RelativeLayout

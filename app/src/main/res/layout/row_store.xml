@@ -19,11 +19,11 @@
             android:orientation="vertical">
 
             <ImageView
-                android:maxHeight="120dp"
+                android:scaleType="centerCrop"
                 android:id="@+id/store_image"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/tempy_icon"
+                android:layout_height="100dp"
+                android:src="@drawable/icon"
                 />
 
             <RatingBar

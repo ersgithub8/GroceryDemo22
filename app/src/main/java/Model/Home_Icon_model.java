@@ -1,5 +1,7 @@
 package Model;
 
+import androidx.cardview.widget.CardView;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
@@ -9,7 +11,15 @@ import java.util.ArrayList;
  */
 
 public class Home_Icon_model {
+    public CardView getCardView() {
+        return cardView;
+    }
 
+    public void setCardView(CardView cardView) {
+        this.cardView = cardView;
+    }
+
+    CardView cardView;
     String id;
     String title;
     String slug;

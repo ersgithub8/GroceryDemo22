@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -58,6 +59,7 @@ public class Favourite extends Fragment {
 
     private ShimmerFrameLayout mShimmerViewContainer;
 
+    CardView cardView_store,cardView_cat,cardView_product;
     RecyclerView rv_headre_icons,rv_store,rv_cat;
     TextView fav_prod,fav_store,fav_cat,Texty;
     private Favourite_Adappter menu_adapter;
@@ -82,6 +84,10 @@ public class Favourite extends Fragment {
         fav_cat=view.findViewById(R.id.fav_category);
         fav_prod=view.findViewById(R.id.fav_prod);
         fav_store=view.findViewById(R.id.fav_store);
+
+        cardView_cat = view.findViewById(R.id.card_cate);
+        cardView_product = view.findViewById(R.id.card_product);
+        cardView_store = view.findViewById(R.id.card_store);
 
         Texty = view.findViewById(R.id.no_product);
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);

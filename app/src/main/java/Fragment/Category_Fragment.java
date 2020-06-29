@@ -1,9 +1,12 @@
 package Fragment;
 
 import android.app.Fragment;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import Adapter.Category_adapter;
+
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSmoothScroller;
@@ -32,17 +35,16 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import Adapter.Home_Icon_Adapter;
 import Adapter.Product_adapter;
 import Config.BaseURL;
 import Model.Home_Icon_model;
 import Model.Product_model;
 import gogrocer.tcc.AppController;
-import gogrocer.tcc.Inerface;
 import gogrocer.tcc.R;
 import util.CustomVolleyJsonRequest;
 import util.RecyclerTouchListener;
@@ -55,13 +57,14 @@ public class Category_Fragment extends Fragment {
     private List<Home_Icon_model> menu_models = new ArrayList<>();
     private RecyclerView rv_headre_icons;
     private TextView textView;
+    Inerface inerface;
 
     Product_adapter product_adapter;
     List<Product_model> product_models=new ArrayList<>();
     RecyclerView recyclerView;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_category, container, false);
@@ -92,6 +95,7 @@ public class Category_Fragment extends Fragment {
 
         rv_headre_icons.setLayoutManager((new GridLayoutManager(getActivity(), 1)));
         recyclerView.setLayoutManager((new GridLayoutManager(getActivity(),2)));
+
 //        rv_headre_icons.setHasFixedSize(true);
 //        rv_headre_icons.setItemViewCacheSize(10);
 //        rv_headre_icons.setDrawingCacheEnabled(true);
@@ -104,9 +108,11 @@ public class Category_Fragment extends Fragment {
             public void onItemClick(View view, int position) {
                 product_models.clear();
                 product_adapter.notifyDataSetChanged();
-
                 getProducts(menu_models.get(position).getId());
-//                Toast.makeText(getActivity(), menu_models.get(position).getId(), Toast.LENGTH_SHORT).show();
+
+
+
+
             }
 
             @Override
@@ -122,9 +128,6 @@ public class Category_Fragment extends Fragment {
         String tag_json_obj = "json_category_req";
         Map<String, String> params = new HashMap<String, String>();
         params.put("parent", "");
-
-       /* if (parent_id != null && parent_id != "") {
-        }*/
 
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
                 BaseURL.GET_CATEGORY_URL, params, new Response.Listener<JSONObject>() {
@@ -144,11 +147,12 @@ public class Category_Fragment extends Fragment {
                             Type listType = new TypeToken<List<Home_Icon_model>>() {
                             }.getType();
                             menu_models = gson.fromJson(response.getString("data"), listType);
-                            menu_adapter = new Category_adapter(menu_models);
+                            menu_adapter = new Category_adapter(menu_models,rv_headre_icons);
                             rv_headre_icons.setAdapter(menu_adapter);
                             menu_adapter.notifyDataSetChanged();
 
                             getProducts(menu_models.get(0).getId());
+
                         }
                     }
                 } catch (JSONException e) {
@@ -171,7 +175,7 @@ public class Category_Fragment extends Fragment {
 
     }
 
-    public void getProducts( String cat_id){
+    public void getProducts(String cat_id){
         String tag_json_obj = "json_category_req";
 
         mShimmerViewContainer1.setVisibility(View.VISIBLE);

@@ -24,45 +24,83 @@
             >
 
     <LinearLayout
-        android:layout_margin="5dp"
+        android:layout_margin="8dp"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
-        <TextView
-            android:padding="5dp"
-            android:background="@color/colorPrimary"
+        <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/card_product"
+            app:cardBackgroundColor="@color/colorPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            app:cardElevation="@dimen/space_5"
+            app:cardUseCompatPadding="true"
+            card_view:cardCornerRadius="14dp"
+            >
+        <TextView
+            android:padding="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:id="@+id/fav_prod"
             android:textAlignment="center"
             android:text="Favourite\n Products"
             android:textSize="12sp"
             android:textColor="@color/black"
             android:drawableTop="@drawable/fav_prod"/>
-        <TextView
-            android:padding="5dp"
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/card_store"
+            app:cardBackgroundColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            app:cardElevation="@dimen/space_5"
+            app:cardUseCompatPadding="true"
+            card_view:cardCornerRadius="14dp"
+            >
+        <TextView
+            android:padding="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:textAlignment="center"
             android:id="@+id/fav_store"
             android:text="Favourite\n Stores"
             android:textSize="13sp"
             android:textColor="@color/black"
             android:drawableTop="@drawable/ic_nav_home"/>
-        <TextView
-            android:padding="5dp"
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/card_cate"
+            app:cardBackgroundColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            app:cardElevation="@dimen/space_5"
+            app:cardUseCompatPadding="true"
+            card_view:cardCornerRadius="14dp"
+            >
+        <TextView
+            android:padding="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:id="@+id/fav_category"
             android:textAlignment="center"
             android:text="Favourite\n Categories"
             android:textSize="13sp"
             android:textColor="@color/black"
             android:drawableTop="@drawable/category"/>
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 
