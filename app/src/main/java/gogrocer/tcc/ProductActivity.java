@@ -150,7 +150,7 @@ public class ProductActivity extends AppCompatActivity {
         Double reward = Double.parseDouble(rewards);
         Double items = Double.parseDouble(dbcart.getInCartItemQty(productid));
 
-        tv_title.setText(title);
+        tv_title.setText(product_name);
         tv_detail.setText(detail);
         tv_contetiy.setText(qty);
         tv_detail.setText(product_description);
@@ -161,8 +161,10 @@ public class ProductActivity extends AppCompatActivity {
                 .crossFade()
                 .into(iv_image);
         tv_reward.setText(rewards);
-        tv_price.setText(getResources().getString(R.string.tv_pro_price) + unit_value + " " +
-                unit + pricee+getResources().getString(R.string.currency));
+        tv_price.setText(
+//                getResources().getString(R.string.tv_pro_price) + unit_value + " " +
+//                unit +
+                        pricee+" "+getResources().getString(R.string.currency));
 
         if (Integer.valueOf(stock)<=0){
             tv_add.setText(R.string.tv_out);
@@ -323,7 +325,7 @@ public class ProductActivity extends AppCompatActivity {
 
                         loading.dismiss();
                         favcheckk=false;
-                        imageView.setImageResource(R.drawable.heartnf);
+                        imageView.setImageResource(R.drawable.heartnfw);
 
                     }
 //                    }
@@ -422,7 +424,7 @@ public class ProductActivity extends AppCompatActivity {
                             JSONArray array=response.getJSONArray("data");
                             if(array.length()==0){
                                 fav.setVisibility(View.VISIBLE);
-                                fav.setImageResource(R.drawable.heartnf);
+                                fav.setImageResource(R.drawable.heartnfw);
                                 favcheckk=false;
                                 return;
                             }
@@ -435,13 +437,13 @@ public class ProductActivity extends AppCompatActivity {
                                     return;
                                 }else{
                                     fav.setVisibility(View.VISIBLE);
-                                    fav.setImageResource(R.drawable.heartnf);
+                                    fav.setImageResource(R.drawable.heartnfw);
                                     favcheckk=false;
                                 }
                             }
                         }else{
                             fav.setVisibility(View.VISIBLE);
-                            fav.setImageResource(R.drawable.heartnf);
+                            fav.setImageResource(R.drawable.heartnfw);
                             favcheckk=false;
                         }
                     }

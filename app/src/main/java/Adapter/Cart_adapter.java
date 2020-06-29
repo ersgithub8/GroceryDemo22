@@ -82,8 +82,8 @@ public class    Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHo
             holder.tv_title.setText(map.get("product_name"));
 
         holder.tv_reward.setText(map.get("rewards"));
-        holder.tv_price.setText(activity.getResources().getString(R.string.tv_pro_price) + map.get("unit_value") + " " +
-                map.get("unit")  + map.get("price")+activity.getResources().getString(R.string.currency));
+        holder.tv_price.setText(activity.getResources().getString(R.string.tv_pro_price) +" "+ map.get("unit_value") + " " +
+                map.get("unit") +" " + map.get("price")+" "+activity.getResources().getString(R.string.currency));
         holder.tv_contetiy.setText(map.get("qty"));
         Double items = Double.parseDouble(dbHandler.getInCartItemQty(map.get("product_id")));
         Double price = Double.parseDouble(map.get("price"));
