@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/green"
     tools:context="gogrocer.tcc.RegisterActivity">
 
     <ScrollView
@@ -51,22 +51,35 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/summervibes"
                 android:text="@string/sign_up"
                 android:layout_gravity="center"
                 android:textSize="35dp"
-                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textColor="@color/white"
                 android:textAllCaps="false"
+                />
+            <TextView
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sign_upto"
+                android:layout_gravity="center"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+
                 />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/space_5"
+            android:layout_margin="20dp"
             android:paddingBottom="@dimen/activity_vertical_margin"
             android:paddingLeft="@dimen/activity_horizontal_margin"
+
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
+            android:background="@drawable/registerbg"
             android:orientation="vertical">
 
 
@@ -116,29 +129,28 @@
 
 </LinearLayout>
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_10"
-                android:layout_marginBottom="@dimen/space_10"
-                app:cardCornerRadius="@dimen/space_20"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardElevation="4dp">
-            <EditText
-                android:id="@+id/et_reg_name"
-                android:layout_width="match_parent"
-                android:padding="@dimen/space_10"
-                android:textSize="14sp"
-                android:drawableStart="@drawable/person"
-                android:drawablePadding="@dimen/space_10"
-                android:hint="@string/uname"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg2"
-                android:ems="10"
-                android:inputType="text" />
-            </androidx.cardview.widget.CardView>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:hintAnimationEnabled="false"
+                    app:hintEnabled="false"
+                    android:layout_margin="5dp"
+                    app:passwordToggleEnabled="true">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:textSize="14sp"
+                        android:id="@+id/et_reg_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/space_10"
+                        android:drawableStart="@drawable/person"
+                        android:drawablePadding="@dimen/space_10"
+                        android:hint="@string/uname"
+
+                        android:inputType="text"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
@@ -164,29 +176,28 @@
 
 
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_20"
-                android:layout_marginBottom="@dimen/space_10"
-                app:cardCornerRadius="@dimen/space_20"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardElevation="4dp">
-            <EditText
-                android:id="@+id/et_reg_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/space_10"
-                android:drawableStart="@drawable/email"
-                android:drawablePadding="@dimen/space_10"
-                android:hint="@string/email"
-                android:textSize="14sp"
-                android:background="@drawable/bg2"
-                android:ems="10"
-                android:inputType="textEmailAddress" />
-            </androidx.cardview.widget.CardView>
+                app:hintAnimationEnabled="false"
+                app:hintEnabled="false"
+                android:layout_margin="5dp"
+                app:passwordToggleEnabled="true">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:textSize="14sp"
+                    android:id="@+id/et_reg_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:padding="@dimen/space_10"
+                    android:drawableStart="@drawable/email"
+                    android:drawablePadding="@dimen/space_10"
+                    android:hint="@string/email"
+
+                    android:inputType="textEmailAddress"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
@@ -210,31 +221,28 @@
                     android:src="@drawable/iconn" />
 
             </LinearLayout>
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_20"
-                android:layout_marginBottom="@dimen/space_10"
-                app:cardCornerRadius="@dimen/space_20"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardElevation="4dp">
+                app:hintAnimationEnabled="false"
+                android:layout_margin="5dp"
+                app:hintEnabled="false"
+                app:passwordToggleEnabled="true">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:textSize="14sp"
+                    android:id="@+id/et_reg_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/space_10"
+                    android:drawableStart="@drawable/phone"
+                    android:drawablePadding="@dimen/space_10"
+                    android:hint="@string/uphone"
 
-            <EditText
-                android:textSize="14sp"
-                android:id="@+id/et_reg_phone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg2"
-                android:padding="@dimen/space_10"
-                android:drawableStart="@drawable/phone"
-                android:hint="@string/uphone"
-                android:drawablePadding="@dimen/space_10"
-                android:ems="10"
-                android:inputType="phone"
-                android:maxLength="15" />
-            </androidx.cardview.widget.CardView>
+                    android:inputType="phone"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
             <!--<TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -281,22 +289,14 @@
             </LinearLayout>
 
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_20"
-                android:layout_marginBottom="30dp"
-                app:cardCornerRadius="25dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardElevation="4dp">
+
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:hintAnimationEnabled="false"
                     app:hintEnabled="false"
+                    android:layout_margin="5dp"
                     app:passwordToggleEnabled="true">
             <com.google.android.material.textfield.TextInputEditText
                 android:textSize="14sp"
@@ -307,50 +307,52 @@
                 android:drawableStart="@drawable/password"
                 android:drawablePadding="@dimen/space_10"
                 android:hint="@string/password"
-                android:background="@drawable/bg2"
+
                 android:inputType="textPassword"
                 />
                 </com.google.android.material.textfield.TextInputLayout>
-            </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/space_10"
-                app:cardCornerRadius="@dimen/space_20"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardElevation="4dp">
-                <EditText
+                app:hintAnimationEnabled="false"
+                android:layout_margin="5dp"
+                app:hintEnabled="false"
+                app:passwordToggleEnabled="true">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:textSize="14sp"
                     android:id="@+id/et_reg_referal"
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:padding="@dimen/space_10"
-                    android:textSize="14sp"
                     android:drawableStart="@drawable/referal"
                     android:drawablePadding="@dimen/space_10"
                     android:hint="@string/urefrel"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg2"
-                    android:ems="10"
-                    android:inputType="text" />
-            </androidx.cardview.widget.CardView>
+
+                    android:inputType="text"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <RelativeLayout
                 android:id="@+id/btnRegister"
-                android:layout_width="match_parent"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="12dp"
-                android:background="@drawable/bac1">
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:background="@drawable/bac2">
 
-                <Fonts.LatoBLack
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="@string/btn_Register"
                     android:padding="@dimen/space_12"
                     android:textColor="#fff"
-                    android:textSize="14dp"/>
+                    android:textSize="17dp"
+                    android:textStyle="bold"/>
 
 
             </RelativeLayout>
@@ -368,11 +370,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:orientation="horizontal"
+                android:weightSum="2"
                 >
 
                 <RelativeLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     >
                     <com.facebook.login.widget.LoginButton
@@ -381,9 +385,9 @@
                         android:layout_marginTop="25dp"
                         android:layout_marginRight="15dp"
                         android:layout_marginLeft="15dp"
-                        android:paddingTop="13dp"
-                        android:paddingBottom="13dp"
-                        facebook:com_facebook_login_text="Sign In with Facebook"
+                        android:paddingTop="11dp"
+                        android:paddingBottom="11dp"
+                        facebook:com_facebook_login_text="Facebook"
                         android:layout_centerHorizontal="true"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -392,7 +396,8 @@
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     >
                     <com.google.android.gms.common.SignInButton

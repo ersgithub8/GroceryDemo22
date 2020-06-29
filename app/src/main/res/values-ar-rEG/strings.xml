@@ -23,6 +23,7 @@
     <string name="email">البريد الإلكتروني</string>
     <string name="password">كلمه السر</string>
     <string name="sign_up"><u>سجل</u></string>
+    <string name="sign_upto">يرجى الاشتراك للمتابعة</string>
 
     <string name="create">انشئ حساب؟</string>
     <string name="guest">زائر</string>

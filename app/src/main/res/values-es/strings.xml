@@ -17,7 +17,7 @@
     <string name="txtCredits"><a href="http://www.google.com">Google</a></string>
     <string name="guest">Guest</string>
     <string name="or_sign">Or Sign In as a</string>
-
+    <string name="sign_upto"><u>Please Sign Up to continue</u></string>
     <string name="create">Create an Account?</string>
     <string name="rate" translatable="false">Rate</string>
     <string name="feedback" translatable="false">Feedback</string>

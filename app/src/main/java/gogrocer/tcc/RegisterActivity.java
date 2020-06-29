@@ -41,6 +41,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -59,7 +60,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private static String TAG = RegisterActivity.class.getSimpleName();
 
-    private EditText et_phone, et_name, et_password, et_email,et_refer;
+    private TextInputEditText et_phone, et_name, et_password, et_email,et_refer;
     private RelativeLayout btn_register;
     private TextView tv_phone, tv_name, tv_password, tv_email,lEnglish,lSpanish;
 
@@ -95,11 +96,11 @@ public class RegisterActivity extends AppCompatActivity {
 
         lEnglish = findViewById(R.id.eng);
         lSpanish = findViewById(R.id.arab);
-        et_phone = (EditText) findViewById(R.id.et_reg_phone);
-        et_name = (EditText) findViewById(R.id.et_reg_name);
-        et_password = (EditText) findViewById(R.id.et_reg_password);
-        et_email = (EditText) findViewById(R.id.et_reg_email);
-        et_refer =(EditText)findViewById(R.id.et_reg_referal);
+        et_phone = findViewById(R.id.et_reg_phone);
+        et_name = findViewById(R.id.et_reg_name);
+        et_password =  findViewById(R.id.et_reg_password);
+        et_email =  findViewById(R.id.et_reg_email);
+        et_refer =findViewById(R.id.et_reg_referal);
 
 
         tv_password = (TextView) findViewById(R.id.tv_reg_password);
@@ -128,7 +129,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         TextView textView = (TextView) signInButton.getChildAt(0);
-        textView.setText("Sign In with Google");
+        textView.setText("Google");
 
 
         callbackManager=CallbackManager.Factory.create();
