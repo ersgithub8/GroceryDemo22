@@ -46,6 +46,8 @@
                     android:src="@drawable/lens" />
 
                 <TextView
+                    android:textStyle="bold"
+                    android:fontFamily="@font/bold"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="8dp"
@@ -97,12 +99,12 @@
             <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/light_gray"
+            android:background="@color/white"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="220dp"
+                android:layout_height="210dp"
                 android:background="@color/white">
                 <com.daimajia.slider.library.SliderLayout
                     android:id="@+id/relative_banner"
@@ -157,7 +159,24 @@
                 </androidx.recyclerview.widget.RecyclerView>
             </LinearLayout>
 
-            <com.facebook.shimmer.ShimmerFrameLayout
+
+                <TextView
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="7dp"
+                    android:layout_gravity="right|end"
+                    android:background="@drawable/sign"
+                    android:id="@+id/catname"
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:text="@string/stores"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/bold"/>
+
+
+                <com.facebook.shimmer.ShimmerFrameLayout
                 android:id="@+id/shimmer_view_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -185,8 +204,7 @@
                 android:orientation="vertical">
 
                 <androidx.recyclerview.widget.RecyclerView
-
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginBottom="50dp"
                         android:id="@+id/rv_stores"
                         android:layout_width="match_parent"

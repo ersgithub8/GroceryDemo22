@@ -8,7 +8,8 @@
     android:layout_height="wrap_content"
     app:cardElevation="@dimen/space_5"
     app:cardUseCompatPadding="true"
-    card_view:cardCornerRadius="4dp">
+    card_view:cardCornerRadius="10dp"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -43,14 +44,17 @@
             app:layout_constraintTop_toTopOf="@+id/iv_subcat_img">
 
             <Fonts.LatoBLack
+                android:maxLines="1"
                 android:id="@+id/tv_subcat_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="Name"
-                android:fontFamily="@font/bold"
+                android:fontFamily="@font/cold"
                 android:textColor="#000"
-                android:textSize="@dimen/text_size_small" />
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textSize="16sp" />
 
             <Fonts.LatoBLack
                 android:id="@+id/tv_subcat_price"

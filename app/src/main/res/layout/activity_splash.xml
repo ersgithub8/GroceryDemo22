@@ -4,43 +4,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/colorPrimary"
     tools:context="gogrocer.tcc.SplashActivity">
 
-    <LinearLayout
-        android:layout_centerInParent="true"
+<!--    <LinearLayout-->
+<!--        android:layout_centerInParent="true"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical"-->
+<!--        >-->
+<!--        <TextView-->
+<!--            android:textColor="@color/black"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:textAlignment="center"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Welcome"-->
+<!--            android:fontFamily="@font/bold"-->
+<!--            android:textSize="60sp"-->
+<!--            />-->
+<!--        <TextView-->
+<!--            android:padding="10dp"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:textAlignment="center"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="TO"-->
+<!--            android:fontFamily="@font/vtks"-->
+<!--            android:textSize="60sp"-->
+<!--            />-->
+<!--        <TextView-->
+<!--            android:textColor="@color/black"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:textAlignment="center"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="J6 Store"-->
+<!--            android:fontFamily="@font/bold"-->
+<!--            android:textSize="60sp"-->
+<!--            />-->
+<!--    </LinearLayout>-->
+
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-        <TextView
-            android:textColor="@color/black"
-            android:layout_width="match_parent"
-            android:textAlignment="center"
-            android:layout_height="wrap_content"
-            android:text="Welcome"
-            android:fontFamily="@font/bold"
-            android:textSize="60sp"
-            />
-        <TextView
-            android:padding="10dp"
-            android:textColor="@color/black"
-            android:layout_width="match_parent"
-            android:textAlignment="center"
-            android:layout_height="wrap_content"
-            android:text="TO"
-            android:fontFamily="@font/vtks"
-            android:textSize="60sp"
-            />
-        <TextView
-            android:textColor="@color/black"
-            android:layout_width="match_parent"
-            android:textAlignment="center"
-            android:layout_height="wrap_content"
-            android:text="J6 Store"
-            android:fontFamily="@font/bold"
-            android:textSize="60sp"
-            />
-    </LinearLayout>
+        android:layout_height="match_parent"
+        android:background="@drawable/splash"
+        />
 
 </RelativeLayout>

@@ -8,23 +8,22 @@
     android:layout_margin="10dp"
     >
     <LinearLayout
-        android:background="@drawable/b_background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <LinearLayout
+            android:background="@drawable/b_background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="top|center"
+            android:gravity="center"
             android:orientation="vertical">
 
             <ImageView
-                android:layout_margin="5dp"
+                android:maxHeight="120dp"
                 android:id="@+id/store_image"
                 android:layout_width="wrap_content"
-                android:layout_height="80dp"
-                android:src="@drawable/icon"
+                android:layout_height="wrap_content"
+                android:src="@drawable/tempy_icon"
                 />
 
             <RatingBar
@@ -39,14 +38,13 @@
 
             <TextView
                 android:fontFamily="@font/bold"
-                android:layout_marginTop="5dp"
                 android:id="@+id/store_name"
-                android:background="@color/colorPrimary"
+                android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Store Name"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:padding="4dp"
                 android:textSize="14sp"
                 />
