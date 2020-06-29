@@ -157,5 +157,6 @@ public class BaseURL {
     public static final String getrating=BASE_URL+"index.php/Api/get_stars";
 
     public static final String getallrating=BASE_URL+"index.php/Api/get_all_rating";
+    public static final String checkfirstorder=BASE_URL+"index.php/Api/check_first_order";
 
 }

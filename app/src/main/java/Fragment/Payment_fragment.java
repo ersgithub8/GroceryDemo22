@@ -161,21 +161,21 @@ public class Payment_fragment extends Fragment {
         db_cart = new DatabaseHandler(getActivity());
         view.setFocusableInTouchMode(true);
         view.requestFocus();
-        view.setOnKeyListener(new View.OnKeyListener()
-
-        {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
-                    Fragment fm = new StoreFragment();
-                    FragmentManager fragmentManager = getFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-                            .addToBackStack(null).commit();
-                    return true;
-                }
-                return false;
-            }
-        });
+//        view.setOnKeyListener(new View.OnKeyListener()
+//
+//        {
+//            @Override
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
+//                    Fragment fm = new StoreFragment();
+//                    FragmentManager fragmentManager = getFragmentManager();
+//                    fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+//                            .addToBackStack(null).commit();
+//                    return true;
+//                }
+//                return false;
+//            }
+//        });
 
         text=note.getText().toString();
 

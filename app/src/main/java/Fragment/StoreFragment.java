@@ -107,18 +107,23 @@ public class StoreFragment extends Fragment {
         double laty = Double.parseDouble(lat);
         double longy = Double.parseDouble(longi);
         Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
-        List<Address> addresses = null;
+//         addresses = null;
         try {
-            addresses = geocoder.getFromLocation(laty, longy, 1);
+            List<Address> addresses = geocoder.getFromLocation(laty, longy, 1);
+
+            if(addresses.size()>0) {
+                city = addresses.get(0).getLocality();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        if(addresses.size()>0) {
-            city = addresses.get(0).getLocality();
-        }
+
+//        Toast.makeText(getActivity(), city+"", Toast.LENGTH_SHORT).show();
 
         if(city == null){
+            Toast.makeText(getActivity(), city+"", Toast.LENGTH_SHORT).show();
+
             city="Lahore";
         }
 

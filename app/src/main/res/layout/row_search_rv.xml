@@ -14,9 +14,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:paddingTop="@dimen/space_10"
         android:paddingBottom="@dimen/space_4">
 
-        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/iv_subcat_img"
             android:layout_width="65dp"
             android:layout_height="65dp"
@@ -33,7 +35,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginRight="4dp"
             android:orientation="vertical"
             app:layout_constraintLeft_toRightOf="@+id/iv_subcat_img"
             app:layout_constraintRight_toLeftOf="@+id/iv_subcat_minus"
@@ -46,6 +48,7 @@
                 android:layout_marginTop="4dp"
                 android:text="Jessyka swan"
                 android:textColor="#000"
+                android:maxLines="1"
                 android:textSize="@dimen/text_size_small" />
 
             <Fonts.LatoBLack
@@ -70,16 +73,42 @@
                     android:layout_height="wrap_content"
                     android:text="@string/tv_cart_total"
                     android:textColor="#000"
+                    android:visibility="gone"
                     android:textSize="@dimen/text_size_small" />
 
 
-                <Fonts.LatoBLack
-                    android:id="@+id/tv_subcat_total"
+                <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=" TextView"
-                    android:textColor="#000"
-                    android:textSize="@dimen/text_size_small" />
+                    android:layout_height="25dp"
+                    android:layout_marginBottom="@dimen/space_3"
+                    android:layout_marginTop="@dimen/space_4"
+                    android:background="@drawable/slider_shape"
+                    android:gravity="center_vertical">
+
+                    <Fonts.LatoBLack
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/text_tvr"
+                        android:layout_marginLeft="@dimen/space_2"
+                        android:text="@string/rewards_points"
+                        android:textColor="#000"
+                        android:textSize="13sp" />
+
+                    <Fonts.LatoBLack
+                        android:id="@+id/tv_reward_point"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/text_tvr"
+                        android:layout_marginRight="@dimen/space_5"
+                        android:layout_marginLeft="@dimen/space_15"
+                        android:text=""
+                        android:textColor="#000"
+                        android:textSize="@dimen/text_size_small" />
+
+
+                </RelativeLayout>
+
                 <Fonts.LatoBLack
                     android:id="@+id/textView6"
                     android:layout_width="wrap_content"
@@ -89,36 +118,18 @@
                     android:textColor="#000"
                     android:textSize="@dimen/text_size_small" />
 
-            </LinearLayout>
-
-            <RelativeLayout
-                android:layout_width="130dp"
-                android:layout_height="25dp"
-                android:layout_marginBottom="@dimen/space_3"
-                android:layout_marginTop="@dimen/space_4"
-                android:background="@drawable/slider_shape"
-                android:gravity="center_vertical">
-
                 <Fonts.LatoBLack
+                    android:id="@+id/tv_subcat_total"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/text_tvr"
-                    android:layout_marginLeft="@dimen/space_2"
-                    android:text="@string/rewards_points"
-                    android:textColor="#000"
-                    android:textSize="13sp" />
-
-                <Fonts.LatoBLack
-                    android:id="@+id/tv_reward_point"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-               android:layout_alignParentEnd="true"
-                    android:text=""
-                    android:textColor="#000"
+                    android:text=" TextView"
+                    android:layout_marginLeft="@dimen/space_5"
+                    android:textColor="@android:color/holo_red_dark"
                     android:textSize="@dimen/text_size_small" />
 
 
-            </RelativeLayout>
+            </LinearLayout>
+
 
         </LinearLayout>
 
@@ -126,13 +137,12 @@
             android:id="@+id/iv_subcat_plus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
             android:layout_marginTop="8dp"
+            android:layout_marginRight="4dp"
+            android:background="@color/green"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/add"
-            android:background="@color/green"/>
+            app:srcCompat="@drawable/add" />
 
         <TextView
             android:id="@+id/tv_subcat_contetiy"
@@ -140,7 +150,6 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/space_8"
             android:layout_marginEnd="@dimen/space_8"
-            android:layout_marginRight="@dimen/space_8"
             android:layout_marginTop="@dimen/space_8"
             android:text="0"
             app:layout_constraintBottom_toBottomOf="@+id/iv_subcat_plus"
@@ -152,7 +161,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/space_8"
-            android:layout_marginRight="@dimen/space_8"
             app:layout_constraintBottom_toBottomOf="@+id/iv_subcat_plus"
             app:layout_constraintRight_toLeftOf="@+id/tv_subcat_contetiy"
             app:layout_constraintTop_toTopOf="@+id/iv_subcat_plus"
