@@ -184,6 +184,7 @@
     <string name="amount">Cantidad:\u0020</string>
     <string name="search_here">Busca aquí...</string>
     <string name="total_amount">Cantidad total:\u0020</string>
+    <string name="Discount">Discount</string>
     <string name="search">Buscar</string>
     <string name="search_text">Buscar productos, marcas y más</string>
     <string name="enter_keyword">Por favor ingrese palabra clave</string>

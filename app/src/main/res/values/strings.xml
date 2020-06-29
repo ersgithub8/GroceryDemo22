@@ -254,6 +254,7 @@
     <string name="amount" translatable="false">Amount:\u0020</string>
     <string name="search_here">Search here...</string>
     <string name="total_amount">Total Amount:\u0020</string>
+    <string name="Discount">Discount:</string>
     <string name="search">Search</string>
     <string name="enter_keyword">Please Enter Keyword</string>
     <string name="delete">Delete</string>

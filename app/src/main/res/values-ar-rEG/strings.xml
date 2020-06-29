@@ -240,6 +240,8 @@
     <string name="amount">الكمية:\u0020</string>
     <string name="search_here">ابحث هنا ...</string>
     <string name="total_amount">المبلغ الإجمالي:\u0020</string>
+
+    <string name="Discount">خصم</string>
     <string name="search">البحث</string>
     <string name="searchh">إبحث</string>
     <string name="search_text">بحث المنتجات والعلامات التجارية وأكثر من ذلك</string>

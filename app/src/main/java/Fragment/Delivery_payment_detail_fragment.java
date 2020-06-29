@@ -7,14 +7,33 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.NoConnectionError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.TimeoutError;
+import com.android.volley.VolleyError;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import Config.BaseURL;
 import Config.SharedPref;
+import cn.pedant.SweetAlert.SweetAlertDialog;
+import gogrocer.tcc.AppController;
 import gogrocer.tcc.MainActivity;
+import gogrocer.tcc.ProductActivity;
 import gogrocer.tcc.R;
 import util.ConnectivityReceiver;
+import util.CustomVolleyJsonRequest;
 import util.DatabaseHandler;
 import util.Session_management;
 
@@ -31,6 +50,8 @@ public class Delivery_payment_detail_fragment extends Fragment {
     private TextView tv_timeslot, tv_address, tv_total,note;
     private LinearLayout btn_order;
 
+    Double discount;
+    private int checkfo= 0;
     private String getlocation_id = "";
     private String gettime = "";
     private String getdate = "";
@@ -43,6 +64,8 @@ SharedPreferences preferences;
     private DatabaseHandler db_cart;
     private Session_management sessionManagement;
 
+    SharedPreferences sharedPreferences;
+    String usrid;
     public Delivery_payment_detail_fragment() {
         // Required empty public constructor
     }
@@ -87,6 +110,11 @@ SharedPreferences preferences;
             gettime = getArguments().getString("time");
 
         }
+
+        sharedPreferences=getActivity().getSharedPreferences(BaseURL.PREFS_NAME,MODE_PRIVATE);
+
+        usrid=sharedPreferences.getString(BaseURL.KEY_ID,"0");
+
         getlocation_id = getArguments().getString("location_id");
         getstore_id = getArguments().getString("store_id");
         deli_charges = Integer.parseInt(getArguments().getString("deli_charges"));
@@ -106,11 +134,15 @@ SharedPreferences preferences;
                 db_cart.getTotalAmount() + " + " + deli_charges + " = " + total+ getResources().getString(R.string.currency));
 
 
+
+        checkfirstorder(usrid, String.valueOf(total));
+
         btn_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (ConnectivityReceiver.isConnected()) {
-                    Fragment fm = new Payment_fragment();
+                    if (checkfo==2)
+                    {Fragment fm = new Payment_fragment();
                     Bundle args = new Bundle();
                     args.putString("total", String.valueOf(total));
                     args.putString("getdate", getdate);
@@ -122,6 +154,30 @@ SharedPreferences preferences;
                     fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
                             .addToBackStack(null).commit();
                     SharedPref.putString(getActivity(),BaseURL.TOTAL_AMOUNT, String.valueOf(total));
+                    }else if (checkfo==1){
+                        Fragment fm = new Payment_fragment();
+                        Bundle args = new Bundle();
+                        args.putString("total", String.valueOf(discount));
+                        args.putString("getdate", getdate);
+                        args.putString("gettime", gettime);
+                        args.putString("getlocationid", getlocation_id);
+                        args.putString("getstoreid", getstore_id);
+                        fm.setArguments(args);
+                        FragmentManager fragmentManager = getFragmentManager();
+                        fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                                .addToBackStack(null).commit();
+                        SharedPref.putString(getActivity(),BaseURL.TOTAL_AMOUNT, String.valueOf(discount));
+                    }else{
+                        SweetAlertDialog dialog=new SweetAlertDialog(getActivity(),SweetAlertDialog.ERROR_TYPE).setTitleText("Something went wrong try again later")
+                                .setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                        getActivity().onBackPressed();
+                                    }
+                                });
+                        dialog.setCancelable(false);
+                        dialog.show();
+                    }
                 } else {
                     ((MainActivity) getActivity()).onNetworkConnectionChanged(false);
                 }
@@ -220,4 +276,69 @@ SharedPreferences preferences;
 //        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 //    }
 
+
+
+    public void checkfirstorder(String userid, final String total){
+        final SweetAlertDialog alertDialog=new SweetAlertDialog(getActivity(),SweetAlertDialog.PROGRESS_TYPE)
+                .setTitleText("Loading");
+        alertDialog.setCancelable(false);
+        alertDialog.show();
+
+        String tag_json_obj = "json_category_req";
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("user_id", userid);
+        params.put("total_amount",total);
+
+        CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
+                BaseURL.checkfirstorder, params, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+
+
+                try {
+                    alertDialog.dismiss();
+                    if (response != null && response.length() > 0) {
+                        Boolean status = response.getBoolean("responce");
+                        if (status) {
+
+                            discount=(Double.parseDouble(total)*30)/100;
+                            Toast.makeText(getActivity(), total+discount, Toast.LENGTH_SHORT).show();
+                            tv_total.setText(getResources().getString(R.string.tv_cart_item) + db_cart.getCartCount() + "\n" +
+                                    getResources().getString(R.string.amount) + db_cart.getTotalAmount() + "\n" +
+                                    getResources().getString(R.string.delivery_charge) + deli_charges + "\n" +
+                                    getResources().getString(R.string.Discount)+ discount+"\n"+
+                                    getResources().getString(R.string.total_amount) +
+                                    db_cart.getTotalAmount() + " + " + deli_charges +"-"+discount+ " = " + (Double.parseDouble(total)-discount)+" "+ getResources().getString(R.string.currency));
+
+
+                                    checkfo=1;
+                        }else{
+                                    checkfo=2;
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    alertDialog.dismiss();
+                    checkfo=0;
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                alertDialog.dismiss();
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    checkfo
+                            =0;
+                }
+            }
+        });
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
 }
