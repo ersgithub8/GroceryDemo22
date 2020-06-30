@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#7abcbc</color>
+    <color name="colorPrimary">#2abcbc</color>
     <color name="colorPrimaryDark">#7ad6d6</color>
     <color name="colorAccent">#7ad6d6</color>
     <color name="white">#ffffff</color>
@@ -22,7 +22,7 @@
     <color name="contact_number">#8c8c8c</color>
 
 
-    <color name="color1">#7abcbc</color>
+    <color name="color1">#2abcbc</color>
     <color name="color2">#7ad6d6</color>
 
 </resources>

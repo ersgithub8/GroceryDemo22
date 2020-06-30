@@ -112,7 +112,8 @@ public class Category_Fragment extends Fragment {
 
                 getProducts(menu_models.get(position).getId());
 
-//                view.setBackgroundColor(Color.parseColor("#000000"));
+//                view.setBackgroundColor(Color.parseColor("#ff0000"));
+//                view.setPressed(true);/
 
             }
 
