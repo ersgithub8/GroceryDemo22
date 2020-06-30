@@ -114,9 +114,10 @@
     <string name="card" translatable="false">Cards</string>
     <string name="promo" translatable="false">Promo Code</string>
     <string name="tv_cart_clear">Clear All Product</string>
+    <string name="Remove">Remove</string>
     <string name="tv_cart_checkout">Continue Checkout</string>
     <string name="tv_cart_total">Total:\u0020</string>
-    <string name="tv_cart_item">Items:\u0020</string>
+    <string name="tv_cart_item">Items\u0020</string>
     <string name="tv_cart_rs">\u0020Rs</string>
     <string name="coupon" translatable="false">Coupon</string>
     <string name="sure_del" translatable="false">Are you sure!

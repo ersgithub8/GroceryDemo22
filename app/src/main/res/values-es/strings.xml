@@ -85,6 +85,7 @@
     <string name="tv_cart_checkout">Continuar con el registro</string>
     <string name="tv_cart_total">Total:\u0020</string>
     <string name="tv_cart_item">Artículos:\u0020</string>
+    <string name="Remove">Remove</string>
     <string name="tv_cart_rs">\u0020</string>
 
     <!-- fragment_delivery_time.xml -->
