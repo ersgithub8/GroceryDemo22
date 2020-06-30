@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/login_bg"
     tools:context="gogrocer.tcc.LoginActivity"
     android:fillViewport="true">
 
     <RelativeLayout
-        android:background="@color/white"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
@@ -55,26 +55,45 @@
         <LinearLayout
             android:layout_below="@id/laddan"
             android:id="@+id/rr1"
+            android:weightSum="1"
+            android:layout_marginTop="90dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             >
         <TextView
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/bold"
+            android:text="@string/btn_continueto"
+            android:layout_gravity="center"
             android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/summervibes"
-                android:text="@string/btn_continue"
-                android:layout_gravity="center"
-                android:textSize="35dp"
-                android:textColor="@color/black"
-                android:textAllCaps="false"
+            android:layout_marginStart="50dp"
+            android:textSize="35dp"
+            android:textColor="@color/black"
+            android:textAllCaps="false"
             />
         </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+
+            android:text="@string/btn_continueto1"
+            android:layout_below="@+id/rr1"
+            android:id="@+id/rr2"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginStart="50dp"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:textAllCaps="false"
+            />
     <LinearLayout
         android:id="@+id/aar2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/rr1"
+        android:layout_below="@id/rr2"
         android:orientation="vertical"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -114,32 +133,40 @@
 
         </LinearLayout>
 
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:weightSum="10"
+    android:orientation="horizontal">
+    <View
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1.5"
+        />
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="@dimen/space_10"
-            app:cardCornerRadius="@dimen/space_20"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            app:cardBackgroundColor="@color/white"
-            app:cardElevation="4dp">
+            app:hintAnimationEnabled="false"
+            app:hintEnabled="false"
+            android:layout_weight="7"
+            android:layout_margin="5dp"
+            app:passwordToggleEnabled="true">
+            <com.google.android.material.textfield.TextInputEditText
+                android:textSize="14sp"
+                android:id="@+id/et_login_email"
+                android:layout_width="match_parent"
 
-            <EditText
-            android:id="@+id/et_login_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg2"
-            android:drawablePadding="@dimen/space_10"
-            android:drawableStart="@drawable/email"
-            android:inputType="textEmailAddress"
-            android:padding="@dimen/space_10"
-            android:textColor="#000"
-            android:hint="@string/email"
-            android:textColorHint="@color/dark_gray"
-            android:textSize="14sp" />
-        </androidx.cardview.widget.CardView>
+                android:layout_height="wrap_content"
+                android:padding="@dimen/space_10"
+                android:drawableStart="@drawable/email"
+                android:drawablePadding="@dimen/space_10"
+                android:hint="@string/email"
+
+                android:inputType="text"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+</LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
@@ -164,53 +191,68 @@
 
         </LinearLayout>
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="10">
+    <View
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1.5"/>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_weight="7"
             android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            app:cardCornerRadius="25dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            app:cardBackgroundColor="@color/white"
-            app:cardElevation="4dp">
-            <com.google.android.material.textfield.TextInputLayout
+            app:hintAnimationEnabled="false"
+
+            app:hintEnabled="false"
+            android:layout_margin="5dp"
+            app:passwordToggleEnabled="true">
+            <com.google.android.material.textfield.TextInputEditText
+                android:textSize="14sp"
+                android:id="@+id/et_login_pass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:hintAnimationEnabled="false"
-                app:hintEnabled="false"
-                app:passwordToggleEnabled="true">
-                <EditText
-            android:id="@+id/et_login_pass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg2"
-            android:inputType="textPassword"
-            android:padding="@dimen/space_10"
-            android:textColor="#000"
-            android:hint="@string/password"
-            android:drawablePadding="@dimen/space_10"
-            android:drawableStart="@drawable/password"
-            android:textColorHint="@color/dark_gray"
-            android:textSize="14sp" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </androidx.cardview.widget.CardView>
+                android:padding="@dimen/space_10"
+                android:drawableStart="@drawable/password"
+                android:drawablePadding="@dimen/space_10"
+                android:hint="@string/password"
 
-        <Fonts.LatoBLack
+                android:inputType="textPassword"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+</LinearLayout>
+
+        <TextView
             android:id="@+id/btnForgot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginTop="3dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="60dp"
+            android:textStyle="italic"
             android:layout_marginLeft="20dp"
             android:text="@string/forgot"
             android:textColor="@color/green"
             android:textSize="13sp"
+            android:fontFamily="@font/gotham"
             />
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            >
+<View
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    />
         <RelativeLayout
             android:id="@+id/btnContinue"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginTop="35dp"
             android:layout_marginRight="12dp"
@@ -219,20 +261,22 @@
             android:background="@drawable/bac1"
             >
 
-            <Fonts.LatoBLack
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="12dp"
                 android:gravity="center"
                 android:fontFamily="@font/bold"
                 android:text="@string/btn_continue"
+                android:background="@drawable/bac2"
                 android:textColor="#fff"
                 android:textStyle="bold"
-                android:textSize="14dp"
+                android:textSize="17dp"
                 />
 
 
         </RelativeLayout>
+        </LinearLayout>
 
 
 <!--        <RelativeLayout-->
@@ -260,6 +304,7 @@
             android:text="-OR-"
             android:fontFamily="@font/gotham"
             android:textAlignment="center"
+            android:textSize="17sp"
             />
 
         <LinearLayout
@@ -280,9 +325,9 @@
                     android:layout_marginLeft="15dp"
                     android:paddingTop="13dp"
                     android:paddingBottom="13dp"
-                    facebook:com_facebook_login_text="Sign In with Facebook"
+                    facebook:com_facebook_login_text=""
                     android:layout_centerHorizontal="true"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     />
 

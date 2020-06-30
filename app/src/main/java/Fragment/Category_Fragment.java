@@ -110,7 +110,7 @@ public class Category_Fragment extends Fragment {
                 product_adapter.notifyDataSetChanged();
                 getProducts(menu_models.get(position).getId());
 
-
+                view.setPressed(true);
 
 
             }

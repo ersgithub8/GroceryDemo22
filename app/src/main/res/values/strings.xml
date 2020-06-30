@@ -71,6 +71,8 @@
     <string name="nav_share" translatable="false">Share app</string>
     <string name="nav_logout" translatable="false">Logout</string>
     <string name="btn_continue" translatable="false"><b>Sign In</b></string>
+    <string name="btn_continueto" ><b>Welcome to \n    j6 Stores</b></string>
+    <string name="btn_continueto1" ><b>Please login to continus</b></string>
     <string name="btn_Register" translatable="false">Sign Up</string>
     <string name="rewards_points" translatable="false">J6 Points</string>
     <string name="rech_wallet" translatable="false">Recharge Wallet</string>
