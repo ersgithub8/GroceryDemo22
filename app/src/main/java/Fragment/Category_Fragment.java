@@ -106,12 +106,14 @@ public class Category_Fragment extends Fragment {
         rv_headre_icons.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), rv_headre_icons, new RecyclerTouchListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
+
                 product_models.clear();
                 product_adapter.notifyDataSetChanged();
+
                 getProducts(menu_models.get(position).getId());
 
-                view.setPressed(true);
-
+//                view.setBackgroundColor(Color.parseColor("#ff0000"));
+//                view.setPressed(true);/
 
             }
 
@@ -147,7 +149,7 @@ public class Category_Fragment extends Fragment {
                             Type listType = new TypeToken<List<Home_Icon_model>>() {
                             }.getType();
                             menu_models = gson.fromJson(response.getString("data"), listType);
-                            menu_adapter = new Category_adapter(menu_models,rv_headre_icons);
+                            menu_adapter = new Category_adapter(menu_models);
                             rv_headre_icons.setAdapter(menu_adapter);
                             menu_adapter.notifyDataSetChanged();
 

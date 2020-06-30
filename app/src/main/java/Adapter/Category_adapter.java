@@ -49,7 +49,7 @@ public class Category_adapter extends RecyclerView.Adapter<Category_adapter.MyVi
 
     }
 
-    public Category_adapter(List<Home_Icon_model> modelList,RecyclerView recyclerView) {
+    public Category_adapter(List<Home_Icon_model> modelList) {
         this.modelList = modelList;
         this.recyclerView = recyclerView;
 

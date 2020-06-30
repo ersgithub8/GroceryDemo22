@@ -122,7 +122,7 @@ public class StoreFragment extends Fragment {
 //        Toast.makeText(getActivity(), city+"", Toast.LENGTH_SHORT).show();
 
         if(city == null){
-            Toast.makeText(getActivity(), city+"", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getActivity(), city+"", Toast.LENGTH_SHORT).show();
 
             city="Lahore";
         }
