@@ -55,7 +55,6 @@ import util.RecyclerTouchListener;
 
 import static android.content.Context.MODE_PRIVATE;
 
-
 public class Favourite extends Fragment {
 
     private ShimmerFrameLayout mShimmerViewContainer;
@@ -124,7 +123,6 @@ public class Favourite extends Fragment {
                       fav_store.setCardBackgroundColor(getResources().getColor(R.color.colorPrimary));
                       fav_cat.setCardBackgroundColor(Color.parseColor("#ffffff"));
                       fav_prod.setCardBackgroundColor(Color.parseColor("#ffffff"));
-
 
 //                      fav_store.setBackgroundColor(Color.parseColor("#7abcbc"));
 //                      fav_cat.setBackgroundColor(Color.parseColor("#ffffff"));
@@ -262,6 +260,11 @@ public class Favourite extends Fragment {
                             product_adapter = new Product_adapter(product_models,getActivity());
                             rv_headre_icons.setAdapter(product_adapter);
                             product_adapter.notifyDataSetChanged();
+
+                            if (product_models.isEmpty()){
+                                rv_headre_icons.setVisibility(View.GONE);
+                                Texty.setVisibility(View.VISIBLE);
+                            }
                         }
                         else {
                             rv_headre_icons.setVisibility(View.GONE);
@@ -318,7 +321,10 @@ public class Favourite extends Fragment {
                             store_adapter = new Store_Adapter(getActivity(),store_models);
                             rv_store.setAdapter(store_adapter);
                             store_adapter.notifyDataSetChanged();
-
+                            if (store_models.isEmpty()){
+                                rv_store.setVisibility(View.GONE);
+                                Texty.setVisibility(View.VISIBLE);
+                            }
                         }
                         else {
                             mShimmerViewContainer.stopShimmerAnimation();
@@ -381,6 +387,10 @@ public class Favourite extends Fragment {
                             category_adapter = new Home_Icon_Adapter(menu_models);
                             rv_cat.setAdapter(category_adapter);
                             category_adapter.notifyDataSetChanged();
+                            if (menu_models.isEmpty()){
+                                rv_cat.setVisibility(View.GONE);
+                                Texty.setVisibility(View.VISIBLE);
+                            }
                         }
                         else {
                             mShimmerViewContainer.stopShimmerAnimation();
