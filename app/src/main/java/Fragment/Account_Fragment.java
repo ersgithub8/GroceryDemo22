@@ -32,6 +32,7 @@ import gogrocer.tcc.MainActivity;
 import gogrocer.tcc.My_Order_activity;
 import gogrocer.tcc.R;
 import gogrocer.tcc.Rating;
+import util.DatabaseHandler;
 import util.Session_management;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
@@ -43,7 +44,7 @@ public class Account_Fragment extends Fragment {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
-    TextView name,phone;
+    TextView name,phone,reward,wallet,cart;
     CircleImageView iv_profile;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -72,6 +73,9 @@ public class Account_Fragment extends Fragment {
         feedback=view.findViewById(R.id.feedback);
         name=view.findViewById(R.id.tv_header_name);
         phone=view.findViewById(R.id.tv_adres_phone);
+        reward=view.findViewById(R.id.reward);
+        wallet=view.findViewById(R.id.wallet);
+        cart=view.findViewById(R.id.cart_num);
 
         sharedPreferences= getActivity().getSharedPreferences("lan", Context.MODE_PRIVATE);
 
@@ -142,11 +146,24 @@ public class Account_Fragment extends Fragment {
         String getname = sessionManagement.getUserDetails().get(BaseURL.KEY_NAME);
         name.setText(getname);
 
+
+        cart.setText(new DatabaseHandler(getActivity()).getCartCount()+"");
         String getnumber = sessionManagement.getUserDetails().get(BaseURL.KEY_MOBILE);
         if(!getnumber.equals(""))
         phone.setText(getnumber);
         else
             phone.setText(getResources().getString(R.string.mblnumber));
+
+
+        String getreward = sessionManagement.getUserDetails().get(BaseURL.KEY_REWARDS_POINTS);
+        reward.setText(getreward);
+
+        String getwallet = sessionManagement.getUserDetails().get(BaseURL.KEY_WALLET_Ammount);
+        wallet.setText(getwallet+" " + getResources().getString(R.string.currency));
+
+
+
+
 
         if(sessionManagement.isLoggedIn())
         {
@@ -173,6 +190,7 @@ public class Account_Fragment extends Fragment {
                 sessionManagement.logoutSession();
                 disconnectFromFacebook();
                 getActivity().finish();
+                new DatabaseHandler(getActivity()).clearCart();
                 Intent i=new Intent(getActivity(),LoginActivity.class);
                 startActivity(i);
             }
