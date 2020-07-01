@@ -161,6 +161,9 @@ public class ProductActivity extends AppCompatActivity {
 //                unit +
                         pricee+" "+getResources().getString(R.string.currency));
 
+        if (stock.equals("")){
+            stock="0";
+        }
         if (Integer.valueOf(stock)<=0){
             tv_add.setText(R.string.tv_out);
             tv_add.setTextColor(getResources().getColor(R.color.black));

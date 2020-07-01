@@ -17,6 +17,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,11 +59,13 @@ import java.util.Map;
 import Adapter.CatProdAdapter;
 import Adapter.Category_adapter;
 import Adapter.Home_Icon_Adapter;
+import Adapter.Product_adapter;
 import Adapter.Store_Adapter;
 import Adapter.Top_Selling_Adapter;
 import Config.BaseURL;
 import Model.Category_model;
 import Model.Home_Icon_model;
+import Model.Product_model;
 import Model.Store_Model;
 import Model.Top_Selling_model;
 import gogrocer.tcc.AppController;
@@ -83,6 +86,7 @@ public class StoreFragment extends Fragment {
     RecyclerView stores;
     LinearLayout Search_layout;
     String storeid,getid;
+    ImageView deal;
     String city;
     private ShimmerFrameLayout mShimmerViewContainer,shimmy;
     private RecyclerView rv_headre_icons,catprod,rv_top_selling;
@@ -93,8 +97,8 @@ public class StoreFragment extends Fragment {
 
     List<Category_model> models=new ArrayList<>();
     CatProdAdapter catProdAdapter;
-    private Top_Selling_Adapter top_selling_adapter;
-    private List<Top_Selling_model> top_selling_models = new ArrayList<>();
+    private Product_adapter top_selling_adapter;
+    private List<Product_model> top_selling_models = new ArrayList<>();
 
     @Nullable
     @Override
@@ -109,11 +113,13 @@ public class StoreFragment extends Fragment {
         catprod =view.findViewById(R.id.catprodrv);
         t1 =view.findViewById(R.id.catname);
         rv_top_selling = (RecyclerView) view.findViewById(R.id.top_selling_recycler);
-        GridLayoutManager gridLayoutManager2 = new GridLayoutManager(getActivity(), 2);
+        GridLayoutManager gridLayoutManager2 = new GridLayoutManager(getActivity(), 3);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
-        rv_top_selling.setLayoutManager(linearLayoutManager);
+        rv_top_selling.setLayoutManager(gridLayoutManager2);
         rv_top_selling.setItemAnimator(new DefaultItemAnimator());
         rv_top_selling.setNestedScrollingEnabled(false);
+
+        deal=view.findViewById(R.id.dealday);
 
         makeGetBannerSliderRequest();
 
@@ -136,6 +142,18 @@ public class StoreFragment extends Fragment {
         }
 
 
+        deal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle args = new Bundle();
+                Fragment fm = new Deal_Fragemnt();
+                args.putString("laddan_jaffery", "deals");
+                fm.setArguments(args);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                        .addToBackStack(null).commit();
+            }
+        });
 //        Toast.makeText(getActivity(), city+"", Toast.LENGTH_SHORT).show();
 
         if(city == null){
@@ -195,25 +213,25 @@ public class StoreFragment extends Fragment {
         make_menu_items();
         getstores();
         make_top_selling();
-        rv_top_selling.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), rv_top_selling, new RecyclerTouchListener.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                getid = top_selling_models.get(position).getProduct_id();
-                Bundle args = new Bundle();
-                Fragment fm = new Product_fragment();
-                args.putString("cat_top_selling", "2");
-                fm.setArguments(args);
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-                        .addToBackStack(null).commit();
-
-            }
-
-            @Override
-            public void onLongItemClick(View view, int position) {
-
-            }
-        }));
+//        rv_top_selling.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), rv_top_selling, new RecyclerTouchListener.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(View view, int position) {
+//                getid = top_selling_models.get(position).getProduct_id();
+//                Bundle args = new Bundle();
+//                Fragment fm = new Product_fragment();
+//                args.putString("cat_top_selling", "2");
+//                fm.setArguments(args);
+//                FragmentManager fragmentManager = getFragmentManager();
+//                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+//                        .addToBackStack(null).commit();
+//
+//            }
+//
+//            @Override
+//            public void onLongItemClick(View view, int position) {
+//
+//            }
+//        }));
         rv_headre_icons.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), rv_headre_icons, new RecyclerTouchListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -525,10 +543,10 @@ public class StoreFragment extends Fragment {
                         Boolean status = response.getBoolean("responce");
                         if (status) {
                             Gson gson = new Gson();
-                            Type listType = new TypeToken<List<Top_Selling_model>>() {
+                            Type listType = new TypeToken<List<Product_model>>() {
                             }.getType();
                             top_selling_models = gson.fromJson(response.getString("top_selling_product"), listType);
-                            top_selling_adapter = new Top_Selling_Adapter(top_selling_models);
+                            top_selling_adapter = new Product_adapter(top_selling_models,getActivity());
                             rv_top_selling.setAdapter(top_selling_adapter);
                             top_selling_adapter.notifyDataSetChanged();
                         }
