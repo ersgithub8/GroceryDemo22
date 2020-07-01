@@ -15,6 +15,7 @@ import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +44,9 @@ public class Account_Fragment extends Fragment {
     private Session_management sessionManagement;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+
+    LinearLayout rewards,walletl;
+
 
     TextView name,phone,reward,wallet,cart;
     CircleImageView iv_profile;
@@ -76,6 +80,8 @@ public class Account_Fragment extends Fragment {
         reward=view.findViewById(R.id.reward);
         wallet=view.findViewById(R.id.wallet);
         cart=view.findViewById(R.id.cart_num);
+        walletl=view.findViewById(R.id.llwallet);
+        rewards=view.findViewById(R.id.llpoints);
 
         sharedPreferences= getActivity().getSharedPreferences("lan", Context.MODE_PRIVATE);
 
@@ -131,6 +137,27 @@ public class Account_Fragment extends Fragment {
             }
         });
 
+
+        rewards.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fm = new Reward_fragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                        .addToBackStack(null).commit();
+            }
+        });
+
+
+        walletl.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Fragment fm = new Wallet_fragment();
+                        FragmentManager fragmentManager = getFragmentManager();
+                        fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                                .addToBackStack(null).commit();
+                    }
+                });
 
         SharedPreferences shre = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String previouslyEncodedImage = shre.getString("image_data", "");

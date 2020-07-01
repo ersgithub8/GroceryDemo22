@@ -199,6 +199,7 @@
             android:orientation="horizontal"
             >
             <LinearLayout
+                android:id="@+id/llwallet"
                 android:gravity="center"
                 android:layout_margin="10dp"
                 android:background="@drawable/bg_rounded_button"
@@ -232,6 +233,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/llpoints"
                 android:gravity="center"
                 android:layout_margin="10dp"
                 android:background="@drawable/bg_rounded_button"
