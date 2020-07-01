@@ -49,6 +49,8 @@ public class Account_Fragment extends Fragment {
 
 
     TextView name,phone,reward,wallet,cart;
+
+    TextView terms,privacy,returnp,helpcenter;
     CircleImageView iv_profile;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -82,6 +84,13 @@ public class Account_Fragment extends Fragment {
         cart=view.findViewById(R.id.cart_num);
         walletl=view.findViewById(R.id.llwallet);
         rewards=view.findViewById(R.id.llpoints);
+
+
+//        terms=view.findViewById(R.id.);
+//        privacy=view.findViewById(R.id.);
+//        returnp=view.findViewById(R.id.);
+//        helpcenter=view.findViewById(R.id.);
+
 
         sharedPreferences= getActivity().getSharedPreferences("lan", Context.MODE_PRIVATE);
 
@@ -158,6 +167,42 @@ public class Account_Fragment extends Fragment {
                                 .addToBackStack(null).commit();
                     }
                 });
+//        terms.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Fragment fm = new Terms_and_Condition_fragment();
+//                FragmentManager fragmentManager = getFragmentManager();
+//                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+//                        .addToBackStack(null).commit();
+//            }
+//        });
+//        privacy.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                Fragment fm = new ;
+////                FragmentManager fragmentManager = getFragmentManager();
+////                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+////                        .addToBackStack(null).commit();
+//            }
+//        });
+//        helpcenter.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                Fragment fm = new Wallet_fragment();
+////                FragmentManager fragmentManager = getFragmentManager();
+////                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+////                        .addToBackStack(null).commit();
+//            }
+//        });
+//        returnp.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                Fragment fm = new Wallet_fragment();
+////                FragmentManager fragmentManager = getFragmentManager();
+////                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+////                        .addToBackStack(null).commit();
+//            }
+//        });
 
         SharedPreferences shre = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String previouslyEncodedImage = shre.getString("image_data", "");

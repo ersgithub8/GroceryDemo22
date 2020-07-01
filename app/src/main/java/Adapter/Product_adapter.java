@@ -257,7 +257,11 @@ SharedPreferences preferences;
 //                mList.getUnit() +
                 mList.getPrice()+ context.getResources().getString(R.string.currency));
 
-        if (Integer.valueOf(modelList.get(position).getStock())<=0){
+        String stockk=modelList.get(position).getStock();
+                if(stockk.equals("")){
+                    stockk="0";
+                }
+        if (Integer.valueOf(stockk)<=0){
             holder.tv_add.setText(R.string.tv_out);
             holder.tv_add.setTextColor(context.getResources().getColor(R.color.black));
             holder.tv_add.setBackgroundColor(context.getResources().getColor(R.color.gray));
