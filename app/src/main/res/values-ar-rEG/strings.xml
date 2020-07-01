@@ -281,5 +281,6 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">جزء Hello على الأبيض</string>
     <string name="home_fragement_bottom">أضف $ 150،000 واربح<font color='#ff0000'>المنزل الحر.</font></string>
+    <string name="followed">يتبع</string>
 
 </resources>

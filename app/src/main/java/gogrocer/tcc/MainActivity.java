@@ -277,6 +277,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+
+        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+
+        toggle.setDrawerIndicatorEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toggle.syncState();
+
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         Menu m = navigationView.getMenu();
         for (int i = 0; i < m.size(); i++) {
@@ -414,45 +421,52 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                             final String fm_name = fr.getClass().getSimpleName();
                             Log.e("backstack: ", ": " + fm_name);
-                            if (fm_name.contentEquals("Store_fragment")) {
-                                drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-                                toggle.setDrawerIndicatorEnabled(true);
-                                getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-                                toggle.syncState();
 
-                            } else if (fm_name.contentEquals("My_order_fragment") ||
-                                    fm_name.contentEquals("Thanks_fragment")) {
-                                drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+                            drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 
-                                toggle.setDrawerIndicatorEnabled(false);
-                                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                                toggle.syncState();
+                            toggle.setDrawerIndicatorEnabled(false);
+                            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                            toggle.syncState();
 
-                                toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        Fragment fm = new StoreFragment();
-                                        FragmentManager fragmentManager = getFragmentManager();
-                                        fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-                                                .addToBackStack(null).commit();
-                                    }
-                                });
-                            } else {
-
-                                drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-
-                                toggle.setDrawerIndicatorEnabled(false);
-                                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                                toggle.syncState();
-
-                                toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-
-                                        onBackPressed();
-                                    }
-                                });
-                            }
+//                            if (fm_name.contentEquals("Store_fragment")) {
+//                                drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+//                                toggle.setDrawerIndicatorEnabled(true);
+//                                getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+//                                toggle.syncState();
+//
+//                            } else if (fm_name.contentEquals("My_order_fragment") ||
+//                                    fm_name.contentEquals("Thanks_fragment")) {
+//                                drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+//
+//                                toggle.setDrawerIndicatorEnabled(false);
+//                                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//                                toggle.syncState();
+//
+//                                toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(View view) {
+//                                        Fragment fm = new StoreFragment();
+//                                        FragmentManager fragmentManager = getFragmentManager();
+//                                        fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+//                                                .addToBackStack(null).commit();
+//                                    }
+//                                });
+//                            } else {
+//
+//                                drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+//
+//                                toggle.setDrawerIndicatorEnabled(false);
+//                                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//                                toggle.syncState();
+//
+//                                toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(View view) {
+//
+//                                        onBackPressed();
+//                                    }
+//                                });
+//                            }
 
                         } catch (NullPointerException e) {
                             e.printStackTrace();

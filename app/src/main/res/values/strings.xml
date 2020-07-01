@@ -284,4 +284,5 @@
     <string name="status_stop">Powered By <font color="#f7941e">GoGrocer</font></string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="followed">Followed</string>
 </resources>

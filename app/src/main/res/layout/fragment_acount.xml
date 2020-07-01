@@ -3,11 +3,17 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/laddan"
-        android:layout_margin="40dp"
-        android:background="@color/green"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:background="@color/colorPrimary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -33,6 +39,132 @@
             android:textColor="@color/green"
             />
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        >
+        <View
+            android:layout_width="20dp"
+
+            android:layout_height="1dp"
+            />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:id="@+id/iv_header_img"
+            android:src="@drawable/user"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_header_name"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:layout_marginLeft="10dp"
+                android:text="@string/uname"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_adres_phone"
+                android:textColor="@color/white"
+                android:textSize="17sp"
+                android:layout_marginLeft="10dp"
+                android:text="@string/uname"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/nav_logout"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="13dp"
+                    android:textSize="17sp"
+                    android:text="@string/nav_logout"/>
+
+                <TextView
+                    android:id="@+id/nav_my_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="13dp"
+                    android:text="@string/edit_profile"
+                    android:textColor="@color/white"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"
+
+                    android:textSize="17sp" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/nav_fav"
+            android:textColor="@color/white"
+            android:layout_marginTop="13dp"
+            android:fontFamily="@font/bold"
+            android:textSize="23sp"
+            android:text="@string/favourt"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            android:id="@+id/nav_fav_num"
+            android:layout_toRightOf="@+id/nav_fav"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_marginTop="15dp"
+            android:textSize="20sp"
+            android:text="0"/>
+
+
+        <TextView
+            android:id="@+id/nav_followed"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:text="@string/followed"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:fontFamily="@font/bold"
+            android:textSize="23sp" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            android:id="@+id/nav_followed_num"
+            android:textColor="@color/white"
+            android:layout_marginTop="13dp"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:text="0"/>
+    </LinearLayout>
+
+</LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -45,7 +177,7 @@
             android:text="@string/nav_order"
             android:layout_margin="10dp"
             android:textSize="18sp"
-            android:drawableStart="@drawable/order"
+
             android:textColor="@color/black"
 
             />
@@ -73,17 +205,7 @@
             android:textColor="@color/black"
 
             />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:id="@+id/nav_my_profile"
-            android:text="@string/btn_reg_update"
-            android:layout_below="@id/J6points"
-            android:textSize="18sp"
-            android:drawableStart="@drawable/ic_nav_profile"
-            android:textColor="@color/black"
-            />
+
 
         <TextView
             android:layout_width="match_parent"
@@ -91,7 +213,7 @@
             android:layout_margin="10dp"
             android:id="@+id/top_selling"
             android:text="@string/top_selling"
-            android:layout_below="@id/nav_my_profile"
+            android:layout_below="@id/J6points"
             android:textSize="18sp"
             android:drawableStart="@drawable/ic_baseline_thumb_up_24"
             android:textColor="@color/black"
@@ -108,19 +230,7 @@
             android:textColor="@color/black"
             />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:id="@+id/nav_logout"
-            android:text="@string/nav_logout"
-            android:layout_below="@id/deals"
-            android:textSize="18sp"
-            android:visibility="gone"
-            android:drawableStart="@drawable/ic_exit"
-            android:textColor="@color/black"
 
-            />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -128,7 +238,7 @@
             android:id="@+id/nav_login"
             android:text="@string/btn_login"
             android:visibility="gone"
-            android:layout_below="@id/nav_logout"
+            android:layout_below="@id/deals"
             android:textSize="18sp"
             android:drawableStart="@drawable/ic_exit"
             android:textColor="@color/black"
