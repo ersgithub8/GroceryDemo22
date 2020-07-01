@@ -220,6 +220,15 @@
                     android:background="@color/white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/popular"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/bold"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/space_17"/>
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/top_selling_recycler"
                     android:layout_marginTop="15dp"

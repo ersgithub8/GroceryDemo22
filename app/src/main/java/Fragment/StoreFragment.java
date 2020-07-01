@@ -109,9 +109,9 @@ public class StoreFragment extends Fragment {
         catprod =view.findViewById(R.id.catprodrv);
         t1 =view.findViewById(R.id.catname);
         rv_top_selling = (RecyclerView) view.findViewById(R.id.top_selling_recycler);
-        GridLayoutManager gridLayoutManager2 = new GridLayoutManager(getActivity(), 2);
+        GridLayoutManager gridLayoutManager2 = new GridLayoutManager(getActivity(), 3);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
-        rv_top_selling.setLayoutManager(linearLayoutManager);
+        rv_top_selling.setLayoutManager(gridLayoutManager2);
         rv_top_selling.setItemAnimator(new DefaultItemAnimator());
         rv_top_selling.setNestedScrollingEnabled(false);
 
