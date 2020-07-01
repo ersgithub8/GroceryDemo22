@@ -23,6 +23,9 @@
     <string name="email">البريد الإلكتروني</string>
     <string name="password">كلمه السر</string>
     <string name="sign_up"><u>سجل</u></string>
+    <string name="sign_upto">يرجى الاشتراك للمتابعة</string>
+    <string name="btn_continueto" ><b>مرحبا بكم في محلات j6</b></string>
+    <string name="btn_continueto1" >الرجاء تسجيل الدخول للمتابعة</string>
 
     <string name="create">انشئ حساب؟</string>
     <string name="guest">زائر</string>

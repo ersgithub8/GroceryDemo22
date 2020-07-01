@@ -127,7 +127,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //        reference= FirebaseDatabase.getInstance().getReference();
 
         TextView textView = (TextView) signInButton.getChildAt(0);
-        textView.setText("Sign In with Google");
+        textView.setText(" Google");
 
         callbackManager=CallbackManager.Factory.create();
 
