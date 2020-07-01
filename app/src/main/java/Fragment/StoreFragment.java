@@ -6,20 +6,24 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSmoothScroller;
@@ -55,10 +59,12 @@ import Adapter.CatProdAdapter;
 import Adapter.Category_adapter;
 import Adapter.Home_Icon_Adapter;
 import Adapter.Store_Adapter;
+import Adapter.Top_Selling_Adapter;
 import Config.BaseURL;
 import Model.Category_model;
 import Model.Home_Icon_model;
 import Model.Store_Model;
+import Model.Top_Selling_model;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.CustomSlider;
 import gogrocer.tcc.LocaleHelper;
@@ -79,13 +85,16 @@ public class StoreFragment extends Fragment {
     String storeid,getid;
     String city;
     private ShimmerFrameLayout mShimmerViewContainer,shimmy;
-    private RecyclerView rv_headre_icons,catprod;
+    private RecyclerView rv_headre_icons,catprod,rv_top_selling;
     List<Store_Model> store_models=new ArrayList<>();
     Store_Adapter store_adapter;
     FloatingActionButton floatingActionButton;
+    TextView t1;
 
     List<Category_model> models=new ArrayList<>();
     CatProdAdapter catProdAdapter;
+    private Top_Selling_Adapter top_selling_adapter;
+    private List<Top_Selling_model> top_selling_models = new ArrayList<>();
 
     @Nullable
     @Override
@@ -98,6 +107,13 @@ public class StoreFragment extends Fragment {
         shimmy = view.findViewById(R.id.shimmer_view_container2);
 
         catprod =view.findViewById(R.id.catprodrv);
+        t1 =view.findViewById(R.id.catname);
+        rv_top_selling = (RecyclerView) view.findViewById(R.id.top_selling_recycler);
+        GridLayoutManager gridLayoutManager2 = new GridLayoutManager(getActivity(), 2);
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
+        rv_top_selling.setLayoutManager(linearLayoutManager);
+        rv_top_selling.setItemAnimator(new DefaultItemAnimator());
+        rv_top_selling.setNestedScrollingEnabled(false);
 
         makeGetBannerSliderRequest();
 
@@ -178,6 +194,26 @@ public class StoreFragment extends Fragment {
 
         make_menu_items();
         getstores();
+        make_top_selling();
+        rv_top_selling.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), rv_top_selling, new RecyclerTouchListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                getid = top_selling_models.get(position).getProduct_id();
+                Bundle args = new Bundle();
+                Fragment fm = new Product_fragment();
+                args.putString("cat_top_selling", "2");
+                fm.setArguments(args);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                        .addToBackStack(null).commit();
+
+            }
+
+            @Override
+            public void onLongItemClick(View view, int position) {
+
+            }
+        }));
         rv_headre_icons.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), rv_headre_icons, new RecyclerTouchListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -242,6 +278,7 @@ public class StoreFragment extends Fragment {
                         Boolean status=response.getBoolean("response");
                         if(status)
                         {
+                            t1.setVisibility(View.VISIBLE);
                             Gson gson=new Gson();
                             Type listtype=new TypeToken<List<Store_Model>>(){
 
@@ -459,6 +496,54 @@ public class StoreFragment extends Fragment {
                     if(activity !=null && isAdded()) {
                         Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                     }
+                }
+            }
+        });
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
+    private void make_top_selling() {
+        String tag_json_obj = "json_category_req";
+
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("parent", "");
+
+       /* if (parent_id != null && parent_id != "") {
+        }*/
+
+        CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
+                BaseURL.GET_TOP_SELLING_PRODUCTS, params, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d(TAG, response.toString());
+
+                try {
+                    if (response != null && response.length() > 0) {
+                        Boolean status = response.getBoolean("responce");
+                        if (status) {
+                            Gson gson = new Gson();
+                            Type listType = new TypeToken<List<Top_Selling_model>>() {
+                            }.getType();
+                            top_selling_models = gson.fromJson(response.getString("top_selling_product"), listType);
+                            top_selling_adapter = new Top_Selling_Adapter(top_selling_models);
+                            rv_top_selling.setAdapter(top_selling_adapter);
+                            top_selling_adapter.notifyDataSetChanged();
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 }
             }
         });

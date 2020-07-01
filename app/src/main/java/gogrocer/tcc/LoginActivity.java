@@ -366,6 +366,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 user_phone, user_image, wallet_ammount, reward_points,
                                 "", "", "", "", password,referalcode);
 
+//                        Toast.makeText(LoginActivity.this, reward_points+"   "+wallet_ammount, Toast.LENGTH_SHORT).show();
+
                         Intent i = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(i);
                         finishAffinity();
