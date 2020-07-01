@@ -114,56 +114,63 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_margin="10dp"
         android:orientation="horizontal"
-        android:weightSum="4"
+        android:weightSum="3"
         >
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="1.4"
             android:layout_height="wrap_content"
-            android:id="@+id/nav_fav"
             android:textColor="@color/white"
-            android:layout_marginTop="13dp"
             android:fontFamily="@font/bold"
-            android:textSize="20sp"
-            android:text="@string/favourt"/>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:id="@+id/nav_fav_num"
-            android:layout_toRightOf="@+id/nav_fav"
-            android:textColor="@color/white"
-            android:gravity="center"
-            android:layout_marginTop="15dp"
             android:textSize="18sp"
-            android:text="0"/>
+            android:gravity="right"
+            android:text="@string/cart"/>
+        <TextView
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:layout_width="0dp"
+            android:layout_weight="0.2"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:layout_height="wrap_content"
+            android:text=" : "
+            />
+        <TextView
+
+            android:layout_width="0dp"
+            android:layout_weight="1.4"
+            android:layout_height="wrap_content"
+            android:id="@+id/cart_num"
+            android:textColor="@color/white"
+            android:gravity="left"
+            android:textSize="18sp"
+            android:text="0"
+            />
 
 
-        <TextView
-            android:id="@+id/nav_followed"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="13dp"
-            android:text="@string/followed"
-            android:textColor="@color/white"
-            android:gravity="center"
-            android:fontFamily="@font/bold"
-            android:textSize="20sp" />
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:id="@+id/nav_followed_num"
-            android:textColor="@color/white"
-            android:layout_marginTop="13dp"
-            android:textSize="18sp"
-            android:gravity="center"
-            android:text="0"/>
+<!--        <TextView-->
+<!--            android:id="@+id/nav_followed"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="13dp"-->
+<!--            android:text="@string/followed"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:gravity="center"-->
+<!--            android:fontFamily="@font/bold"-->
+<!--            android:textSize="20sp" />-->
+<!--        <TextView-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/nav_followed_num"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:layout_marginTop="13dp"-->
+<!--            android:textSize="18sp"-->
+<!--            android:gravity="center"-->
+<!--            android:text="0"/>-->
     </LinearLayout>
 
 </LinearLayout>
@@ -177,39 +184,91 @@
             android:layout_height="wrap_content"
             android:id="@+id/my_orders"
             android:text="@string/nav_order"
-            android:layout_margin="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="@dimen/space_10"
+            android:layout_marginLeft="12dp"
             android:textSize="18sp"
             android:textColor="@color/black"
             />
 
         <LinearLayout
-
             android:layout_below="@id/my_orders"
             android:id="@+id/jaffery"
-            android:layout_margin="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="6"
             >
-            <TextView
-                android:layout_margin="5dp"
+            <LinearLayout
+                android:id="@+id/llwallet"
+                android:gravity="center"
+                android:layout_margin="10dp"
+                android:background="@drawable/bg_rounded_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:text="My wallet "
-                />
+                android:layout_weight="65"
+                android:orientation="horizontal"
+                >
             <TextView
-                android:layout_margin="5dp"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="My Wallet Ammount : "
+                />
+                <TextView
+                    android:id="@+id/wallet"
+                    android:textSize="12sp"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:padding="5dp"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llpoints"
+                android:gravity="center"
+                android:layout_margin="10dp"
+                android:background="@drawable/bg_rounded_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="J6 Points"
-                />
+                android:layout_weight="38"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:textSize="12sp"
+                    android:padding="5dp"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="J6 Points : "
+                    />
+                <TextView
+                    android:id="@+id/reward"
+                    android:textSize="12sp"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:padding="5dp"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    />
+
+            </LinearLayout>
+
 
         </LinearLayout>
 
         <TextView
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/my_wallet"
@@ -222,6 +281,7 @@
 
             />
         <TextView
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -236,6 +296,7 @@
 
 
         <TextView
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"

@@ -195,10 +195,12 @@ public class Edit_profile_fragment extends Fragment implements View.OnClickListe
         View focusView = null;
 
         if (TextUtils.isEmpty(getphone)) {
+            et_phone.setError("Invalid Phone number");
             tv_phone.setTextColor(getResources().getColor(R.color.colorPrimary));
             focusView = et_phone;
             cancel = true;
         } else if (!isPhoneValid(getphone)) {
+            et_phone.setError(getResources().getString(R.string.phone_too_short));
             tv_phone.setText(getResources().getString(R.string.phone_too_short));
             tv_phone.setTextColor(getResources().getColor(R.color.colorPrimary));
             focusView = et_phone;
@@ -206,12 +208,14 @@ public class Edit_profile_fragment extends Fragment implements View.OnClickListe
         }
 
         if (TextUtils.isEmpty(getname)) {
+            et_name.setError("Invalid Name");
             tv_name.setTextColor(getResources().getColor(R.color.colorPrimary));
             focusView = et_name;
             cancel = true;
         }
 
         if (TextUtils.isEmpty(getemail)) {
+            et_email.setError("Invalid Email");
             tv_email.setTextColor(getResources().getColor(R.color.colorPrimary));
             focusView = et_email;
             cancel = true;
@@ -249,7 +253,7 @@ public class Edit_profile_fragment extends Fragment implements View.OnClickListe
     }
 
     private void storeImage(Bitmap thumbnail) {
-        if (iv_profile.getDrawable() == null) {
+        if (iv_profile.getDrawable() == null || thumbnail ==null) {
             //  Toast.makeText(getActivity(), "Select Image", Toast.LENGTH_SHORT).show();
 
         } else {
