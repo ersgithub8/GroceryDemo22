@@ -50,13 +50,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         app:cardElevation="@dimen/space_4">
+
         <LinearLayout
         android:id="@+id/ll"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:weightSum="100"
-
-            android:paddingTop="5dp"
+        android:paddingTop="5dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="@color/white"
