@@ -32,7 +32,6 @@ public class Category_adapter extends RecyclerView.Adapter<Category_adapter.MyVi
     private Context context;
     String language;
     SharedPreferences preferences;
-    List<CardView> cardViewList = new ArrayList<>();
     RecyclerView recyclerView;
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
@@ -84,49 +83,6 @@ public class Category_adapter extends RecyclerView.Adapter<Category_adapter.MyVi
         else {
             holder.title.setText(mList.getArb_title());
         }
-
-        cardViewList.add(holder.cardView);
-
-//        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(context, recyclerView, new RecyclerTouchListener.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(View view, int i) {
-//
-//                inerface.OnClick(modelList.get(i).getId(),cardViewList);
-//
-//                for(CardView cardView : cardViewList){
-//
-//                    cardView.setCardBackgroundColor(context.getResources().getColor(R.color.white));
-//
-//                }
-//
-//                holder.cardView.setCardBackgroundColor(context.getResources().getColor(R.color.colorPrimary));
-//
-//            }
-//
-//            @Override
-//            public void onLongItemClick(View view, int position) {
-//
-//            }
-//        }));
-
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                inerface.OnClick(mList.getId());
-//
-//                Toast.makeText(context,"Click",Toast.LENGTH_SHORT).show();
-//
-//                for(CardView cardView : cardViewList){
-//
-//                    cardView.setCardBackgroundColor(context.getResources().getColor(R.color.white));
-//
-//                }
-//
-//                holder.cardView.setCardBackgroundColor(context.getResources().getColor(R.color.colorPrimary));
-//
-//            }
-//        });
 
     }
 

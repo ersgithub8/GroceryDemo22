@@ -233,9 +233,6 @@ public class Category_Fragment extends Fragment {
                             recyclerView.setAdapter(product_adapter);
                             product_adapter.notifyDataSetChanged();
 
-
-
-
                         }
                         else {
                             recyclerView.setVisibility(View.GONE);
