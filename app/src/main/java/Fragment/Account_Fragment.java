@@ -5,13 +5,18 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import android.preference.PreferenceManager;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
@@ -19,6 +24,8 @@ import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
 import com.facebook.login.LoginManager;
 
+import Config.BaseURL;
+import de.hdodenhof.circleimageview.CircleImageView;
 import gogrocer.tcc.LocaleHelper;
 import gogrocer.tcc.LoginActivity;
 import gogrocer.tcc.MainActivity;
@@ -36,6 +43,8 @@ public class Account_Fragment extends Fragment {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
+    TextView name,phone;
+    CircleImageView iv_profile;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -46,6 +55,8 @@ public class Account_Fragment extends Fragment {
         lSpanish = view.findViewById(R.id.arab);
 
         top_selling = view.findViewById(R.id.top_selling);
+
+        iv_profile=view.findViewById(R.id.iv_header_img);
 
         deals = view.findViewById(R.id.deals);
 
@@ -59,7 +70,8 @@ public class Account_Fragment extends Fragment {
         rate=view.findViewById(R.id.rate);
         share=view.findViewById(R.id.share);
         feedback=view.findViewById(R.id.feedback);
-
+        name=view.findViewById(R.id.tv_header_name);
+        phone=view.findViewById(R.id.tv_adres_phone);
 
         sharedPreferences= getActivity().getSharedPreferences("lan", Context.MODE_PRIVATE);
 
@@ -82,7 +94,11 @@ public class Account_Fragment extends Fragment {
             lEnglish.setTextColor(Color.parseColor("#ffffff"));
         }
 
+
+
+
         editor = sharedPreferences.edit();
+
 
         lEnglish.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,6 +128,25 @@ public class Account_Fragment extends Fragment {
         });
 
 
+        SharedPreferences shre = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String previouslyEncodedImage = shre.getString("image_data", "");
+        if (!previouslyEncodedImage.equalsIgnoreCase("")) {
+            byte[] b = Base64.decode(previouslyEncodedImage, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(b, 0, b.length);
+            iv_profile.setImageBitmap(bitmap);
+        }else{
+            iv_profile.setImageResource(R.drawable.user);
+        }
+
+
+        String getname = sessionManagement.getUserDetails().get(BaseURL.KEY_NAME);
+        name.setText(getname);
+
+        String getnumber = sessionManagement.getUserDetails().get(BaseURL.KEY_MOBILE);
+        if(!getnumber.equals(""))
+        phone.setText(getnumber);
+        else
+            phone.setText(getResources().getString(R.string.mblnumber));
 
         if(sessionManagement.isLoggedIn())
         {
