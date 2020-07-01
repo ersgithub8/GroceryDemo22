@@ -1,5 +1,6 @@
 package Fragment;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -180,7 +181,8 @@ public class Category_Fragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
-                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {Activity activity=getActivity();
+                    if(activity !=null)
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -221,13 +223,16 @@ public class Category_Fragment extends Fragment {
                             Gson gson = new Gson();
                             Type listType = new TypeToken<List<Product_model>>() {
                             }.getType();
-                            product_models = gson.fromJson(response.getString("data"), listType);
 
+                            product_models = gson.fromJson(response.getString("data"), listType);
                             product_adapter = new Product_adapter(product_models,getActivity());
                             recyclerView.setVisibility(View.VISIBLE);
                             textView.setVisibility(View.GONE);
                             recyclerView.setAdapter(product_adapter);
                             product_adapter.notifyDataSetChanged();
+
+
+
 
                         }
                         else {
@@ -247,6 +252,8 @@ public class Category_Fragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Activity activity=getActivity();
+                    if(activity !=null)
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 }
             }

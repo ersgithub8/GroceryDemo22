@@ -2,14 +2,10 @@ package gogrocer.tcc;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
-import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
@@ -32,7 +28,6 @@ import java.util.Map;
 
 import Config.BaseURL;
 import cn.pedant.SweetAlert.SweetAlertDialog;
-import gogrocer.tcc.networkconnectivity.RatingAndReviews;
 import util.CustomVolleyJsonRequest;
 import util.DatabaseHandler;
 

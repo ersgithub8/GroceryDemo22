@@ -1,4 +1,4 @@
-package gogrocer.tcc.networkconnectivity;
+package gogrocer.tcc;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.NoConnectionError;
@@ -27,13 +26,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import Adapter.Product_adapter;
 import Adapter.RatingAdapter;
 import Config.BaseURL;
-import Model.Product_model;
 import Model.Rating_Model;
-import gogrocer.tcc.AppController;
-import gogrocer.tcc.R;
 import util.CustomVolleyJsonRequest;
 
 import static gogrocer.tcc.AppController.TAG;

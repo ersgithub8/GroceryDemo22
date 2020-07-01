@@ -1,5 +1,6 @@
 package Fragment;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
@@ -637,6 +638,8 @@ public class Payment_fragment extends Fragment {
             if (rb_Store.isChecked() || rb_Cod.isChecked()) {
                 attemptOrder();
             } else {
+                Activity activity=getActivity();
+                if(activity !=null)
                 Toast.makeText(getActivity(), "Select Store Or Cod", Toast.LENGTH_SHORT).show();
             }
 
