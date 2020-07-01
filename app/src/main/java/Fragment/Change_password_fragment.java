@@ -1,5 +1,6 @@
 package Fragment;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -76,7 +77,7 @@ public class Change_password_fragment extends Fragment {
         et_new_pass = (EditText) view.findViewById(R.id.et_change_new_password);
         et_old_pass = (EditText) view.findViewById(R.id.et_change_old_password);
         et_con_pass = (EditText) view.findViewById(R.id.et_change_con_password);
-        btn_change_pass = (Button) view.findViewById(R.id.btn_change_password);
+        btn_change_pass = view.findViewById(R.id.btn_change_password);
 
         btn_change_pass.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -207,6 +208,8 @@ public class Change_password_fragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Activity activity=getActivity();
+                    if(activity !=null)
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 }
             }

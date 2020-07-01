@@ -1,5 +1,6 @@
 package Fragment;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -59,6 +60,7 @@ public class Category_Fragment extends Fragment {
     private TextView textView;
     Inerface inerface;
 
+    View viewb=null;
     Product_adapter product_adapter;
     List<Product_model> product_models=new ArrayList<>();
     RecyclerView recyclerView;
@@ -102,7 +104,7 @@ public class Category_Fragment extends Fragment {
 //        rv_headre_icons.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_LOW);
 
         make_menu_items();
-
+        product_adapter = new Product_adapter(product_models,getActivity());
         rv_headre_icons.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), rv_headre_icons, new RecyclerTouchListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -112,7 +114,20 @@ public class Category_Fragment extends Fragment {
 
                 getProducts(menu_models.get(position).getId());
 
-//                view.setBackgroundColor(Color.parseColor("#ff0000"));
+                if(view != viewb){
+                if(viewb ==  null){
+
+                    view.setBackgroundColor(getResources().getColor(R.color.green));
+                    viewb=view;
+                }else {
+                    view.setBackgroundColor(getResources().getColor(R.color.green));
+                    viewb.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                    viewb=view;
+                }
+                }
+
+
+
 //                view.setPressed(true);/
 
             }
@@ -166,7 +181,8 @@ public class Category_Fragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
-                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {Activity activity=getActivity();
+                    if(activity !=null)
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -207,12 +223,16 @@ public class Category_Fragment extends Fragment {
                             Gson gson = new Gson();
                             Type listType = new TypeToken<List<Product_model>>() {
                             }.getType();
+
                             product_models = gson.fromJson(response.getString("data"), listType);
                             product_adapter = new Product_adapter(product_models,getActivity());
                             recyclerView.setVisibility(View.VISIBLE);
                             textView.setVisibility(View.GONE);
                             recyclerView.setAdapter(product_adapter);
                             product_adapter.notifyDataSetChanged();
+
+
+
 
                         }
                         else {
@@ -232,6 +252,8 @@ public class Category_Fragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Activity activity=getActivity();
+                    if(activity !=null)
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 }
             }

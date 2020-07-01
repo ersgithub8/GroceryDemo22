@@ -41,6 +41,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import Config.BaseURL;
+import de.hdodenhof.circleimageview.CircleImageView;
 import gogrocer.tcc.MainActivity;
 import gogrocer.tcc.R;
 import util.ConnectivityReceiver;
@@ -114,6 +115,19 @@ public class Edit_profile_fragment extends Fragment implements View.OnClickListe
 
         et_name.setText(getname);
         et_phone.setText(getphone);
+
+
+        SharedPreferences shre = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String previouslyEncodedImage = shre.getString("image_data", "");
+        if (!previouslyEncodedImage.equalsIgnoreCase("")) {
+            byte[] b = Base64.decode(previouslyEncodedImage, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(b, 0, b.length);
+            iv_profile.setImageBitmap(bitmap);
+        }else{
+            iv_profile.setImageResource(R.drawable.profile_image1);
+        }
+
+
 
         /*if (!TextUtils.isEmpty(getsocity_name)) {
             btn_socity.setText(getsocity_name);

@@ -1,5 +1,6 @@
 package Fragment;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.SharedPreferences;
@@ -61,11 +62,13 @@ public class Favourite extends Fragment {
 
     CardView cardView_store,cardView_cat,cardView_product;
     RecyclerView rv_headre_icons,rv_store,rv_cat;
-    TextView fav_prod,fav_store,fav_cat,Texty;
+    TextView Texty;
     private Favourite_Adappter menu_adapter;
     private Product_adapter product_adapter;
     private Home_Icon_Adapter category_adapter;
     private Store_Adapter store_adapter;
+
+    CardView fav_prod,fav_store,fav_cat;
 
     SharedPreferences sharedPreferences;
     String usrid;
@@ -81,9 +84,9 @@ public class Favourite extends Fragment {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_favourite, container, false);
 
-        fav_cat=view.findViewById(R.id.fav_category);
-        fav_prod=view.findViewById(R.id.fav_prod);
-        fav_store=view.findViewById(R.id.fav_store);
+        fav_cat=view.findViewById(R.id.card_cate);
+        fav_prod=view.findViewById(R.id.card_product);
+        fav_store=view.findViewById(R.id.card_store);
 
         cardView_cat = view.findViewById(R.id.card_cate);
         cardView_product = view.findViewById(R.id.card_product);
@@ -118,9 +121,14 @@ public class Favourite extends Fragment {
                 fav_store.setOnClickListener(new View.OnClickListener() {
                   @Override
                       public void onClick(View view) {
-                      fav_store.setBackgroundColor(Color.parseColor("#7abcbc"));
-                      fav_cat.setBackgroundColor(Color.parseColor("#ffffff"));
-                      fav_prod.setBackgroundColor(Color.parseColor("#ffffff"));
+                      fav_store.setCardBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                      fav_cat.setCardBackgroundColor(Color.parseColor("#ffffff"));
+                      fav_prod.setCardBackgroundColor(Color.parseColor("#ffffff"));
+
+
+//                      fav_store.setBackgroundColor(Color.parseColor("#7abcbc"));
+//                      fav_cat.setBackgroundColor(Color.parseColor("#ffffff"));
+//                      fav_prod.setBackgroundColor(Color.parseColor("#ffffff"));
 
                       rv_cat.setVisibility(View.GONE);
                       rv_headre_icons.setVisibility(View.GONE);
@@ -140,11 +148,14 @@ public class Favourite extends Fragment {
 
                 mShimmerViewContainer.setVisibility(View.VISIBLE);
                 mShimmerViewContainer.startShimmerAnimation();
-                fav_store.setBackgroundColor(Color.parseColor("#ffffff"));
-                fav_cat.setBackgroundColor(Color.parseColor("#ffffff"));
-                fav_prod.setBackgroundColor(Color.parseColor("#7abcbc"));
+//                fav_store.setBackgroundColor(Color.parseColor("#ffffff"));
+//                fav_cat.setBackgroundColor(Color.parseColor("#ffffff"));
+//                fav_prod.setBackgroundColor(Color.parseColor("#7abcbc"));
 
 
+                fav_prod.setCardBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                fav_cat.setCardBackgroundColor(Color.parseColor("#ffffff"));
+                fav_store.setCardBackgroundColor(Color.parseColor("#ffffff"));
 
                 make_menu_items(usrid);
             }
@@ -158,9 +169,13 @@ public class Favourite extends Fragment {
 
                 mShimmerViewContainer.setVisibility(View.VISIBLE);
                 mShimmerViewContainer.startShimmerAnimation();
-                fav_store.setBackgroundColor(Color.parseColor("#ffffff"));
-                fav_cat.setBackgroundColor(Color.parseColor("#7abcbc"));
-                fav_prod.setBackgroundColor(Color.parseColor("#ffffff"));
+//                fav_store.setBackgroundColor(Color.parseColor("#ffffff"));
+//                fav_cat.setBackgroundColor(Color.parseColor("#7abcbc"));
+//                fav_prod.setBackgroundColor(Color.parseColor("#ffffff"));
+
+                fav_cat.setCardBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                fav_store.setCardBackgroundColor(Color.parseColor("#ffffff"));
+                fav_prod.setCardBackgroundColor(Color.parseColor("#ffffff"));
 
                 make_categories(usrid);
             }
@@ -265,6 +280,8 @@ public class Favourite extends Fragment {
             public void onErrorResponse(VolleyError error) {
 
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Activity activity=getActivity();
+                    if(activity !=null)
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -304,12 +321,16 @@ public class Favourite extends Fragment {
 
                         }
                         else {
+                            mShimmerViewContainer.stopShimmerAnimation();
+                            mShimmerViewContainer.setVisibility(View.GONE);
                             rv_store.setVisibility(View.GONE);
                             Texty.setVisibility(View.VISIBLE);
                         }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    mShimmerViewContainer.stopShimmerAnimation();
+                    mShimmerViewContainer.setVisibility(View.GONE);
                     rv_store.setVisibility(View.GONE);
                     Texty.setVisibility(View.VISIBLE);
                 }
@@ -320,7 +341,11 @@ public class Favourite extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
 
+                mShimmerViewContainer.stopShimmerAnimation();
+                mShimmerViewContainer.setVisibility(View.GONE);
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Activity activity=getActivity();
+                    if(activity !=null)
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -358,12 +383,16 @@ public class Favourite extends Fragment {
                             category_adapter.notifyDataSetChanged();
                         }
                         else {
+                            mShimmerViewContainer.stopShimmerAnimation();
+                            mShimmerViewContainer.setVisibility(View.GONE);
                             rv_cat.setVisibility(View.GONE);
                             Texty.setVisibility(View.VISIBLE);
                         }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    mShimmerViewContainer.stopShimmerAnimation();
+                    mShimmerViewContainer.setVisibility(View.GONE);
                     rv_cat.setVisibility(View.GONE);
                     Texty.setVisibility(View.VISIBLE);
                 }
@@ -374,7 +403,19 @@ public class Favourite extends Fragment {
             public void onErrorResponse(VolleyError error) {
 
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+
+//                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+
+
+                    mShimmerViewContainer.stopShimmerAnimation();
+                    mShimmerViewContainer.setVisibility(View.GONE);
+
+                    Activity activity=getActivity();
+                    if(activity != null)
+                        Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+
+//                    Texty.setVisibility(View.VISIBLE);
+//                    Texty.setText(getResources().getString(R.string.connection_time_out));
                 }
             }
         });

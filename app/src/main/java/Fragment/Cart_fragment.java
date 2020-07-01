@@ -1,5 +1,6 @@
 package Fragment;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.BroadcastReceiver;
@@ -15,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,6 +58,7 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
     private TextView tv_clear, tv_total, tv_item;
     private RelativeLayout btn_checkout;
 
+    Button continueshoping;
     private DatabaseHandler db;
     String delicharge;
 
@@ -76,6 +79,7 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
         ((MainActivity) getActivity()).setTitle(getResources().getString(R.string.cart));
 
+
         sessionManagement = new Session_management(getActivity());
         sessionManagement.cleardatetime();
 
@@ -86,7 +90,7 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
         btn_checkout = (RelativeLayout) view.findViewById(R.id.btn_cart_checkout);
         rv_cart = (RecyclerView) view.findViewById(R.id.rv_cart);
         rv_cart.setLayoutManager(new LinearLayoutManager(getActivity()));
-
+        continueshoping=view.findViewById(R.id.btnContinue);
         db = new DatabaseHandler(getActivity());
 
         ArrayList<HashMap<String, String>> map = db.getCartAll();
@@ -100,6 +104,15 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
         tv_clear.setOnClickListener(this);
         btn_checkout.setOnClickListener(this);
 
+        continueshoping.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fm = new StoreFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                        .addToBackStack(null).commit();
+            }
+        });
         return view;
     }
 
@@ -250,7 +263,10 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Activity activity=getActivity();
+                    if(activity != null && isAdded())
                     Toast.makeText(getActivity(), "Connection Time out", Toast.LENGTH_SHORT).show();
+
                     loading.dismiss();
                 }
             }

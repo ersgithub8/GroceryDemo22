@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,6 +30,7 @@ import java.util.Map;
 
 import Config.BaseURL;
 import Config.SharedPref;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import gogrocer.tcc.GifImageView;
 import gogrocer.tcc.MainActivity;
 import gogrocer.tcc.networkconnectivity.NetworkConnection;
@@ -76,14 +78,21 @@ public class Reward_fragment extends Fragment {
         Reedeem_Points.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Shift_Reward_to_WAllet();
-                gifImageView.setVisibility(View.VISIBLE);
-                final View myview = gifImageView;
-                view.postDelayed(new Runnable() {
-                    public void run() {
-                        myview.setVisibility(View.GONE);
-                    }
-                }, 5000);
+                if(Integer.parseInt(Rewards_Points.getText().toString()) >1000) {
+                    Shift_Reward_to_WAllet();
+                    gifImageView.setVisibility(View.VISIBLE);
+                    final View myview = gifImageView;
+                    view.postDelayed(new Runnable() {
+                        public void run() {
+                            myview.setVisibility(View.GONE);
+                        }
+                    }, 5000);
+                }else{
+                    SweetAlertDialog sweetAlertDialog=new SweetAlertDialog(getActivity(),SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("You must have 1000 points to redeem");
+                    sweetAlertDialog.setConfirmButtonBackgroundColor(Color.RED);
+                    sweetAlertDialog.show();
+                }
             }
         });
 
@@ -112,6 +121,13 @@ public class Reward_fragment extends Fragment {
     }
 
     public void getRewards() {
+
+        final SweetAlertDialog alertDialog=new SweetAlertDialog(getActivity(),SweetAlertDialog.PROGRESS_TYPE)
+                .setTitleText("Loading...")
+                ;
+        alertDialog.setCancelable(false);
+        alertDialog.show();
+
         String user_id = sessionManagement.getUserDetails().get(BaseURL.KEY_ID);
         RequestQueue rq = Volley.newRequestQueue(getActivity());
         StringRequest strReq = new StringRequest(Request.Method.GET, BaseURL.REWARDS_REFRESH + user_id,
@@ -119,7 +135,9 @@ public class Reward_fragment extends Fragment {
                     @Override
                     public void onResponse(String response) {
                         try {
+                            alertDialog.dismiss();
                             JSONObject jObj = new JSONObject(response);
+
                             if (jObj.optString("success").equalsIgnoreCase("success")) {
                                 String rewards_points = jObj.getString("total_rewards");
                                 if (rewards_points.equals("null")) {
@@ -134,6 +152,8 @@ public class Reward_fragment extends Fragment {
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
+
+                            alertDialog.dismiss();
                         }
 
                     }
@@ -142,6 +162,7 @@ public class Reward_fragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
 
+                alertDialog.dismiss();
             }
         }) {
 

@@ -1,37 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/login_bg"
     android:orientation="vertical">
 
-    <ScrollView
-        android:id="@+id/scrollView1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:orientation="vertical"
-            android:padding="@dimen/space_10">
+            android:layout_gravity="center">
 
             <ImageView
                 android:id="@+id/iv_pro_img"
-                android:layout_width="120dp"
+                android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:scaleType="fitXY"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="@dimen/space_10"
-                android:background="@drawable/ic_photo_camera_black_24dp"
+                android:src="@drawable/profile_image1"
+                android:scaleType="fitXY"
                 android:layout_marginTop="@dimen/space_10"
                />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
+                android:visibility="gone"
                 android:orientation="horizontal">
 
                 <Fonts.LatoBLack
@@ -55,10 +53,13 @@
                 android:id="@+id/et_pro_name"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:layout_marginBottom="@dimen/space_5"
-                android:layout_marginTop="@dimen/space_4"
+                android:layout_margin="@dimen/space_10"
                 android:textSize="14sp"
-                android:background="@drawable/xml_textbox_bg"
+                android:hint="@string/uname"
+                android:padding="@dimen/space_10"
+                android:textColorHint="@color/black"
+                android:drawablePadding="@dimen/space_10"
+                android:drawableLeft="@drawable/person"
                 android:ems="10"
                 android:inputType="text" />
 
@@ -66,6 +67,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
+                android:visibility="gone"
                 android:layout_height="wrap_content">
                 <Fonts.LatoBLack
                     android:id="@+id/tv_pro_phone"
@@ -87,17 +89,21 @@
             <EditText
                 android:id="@+id/et_pro_phone"
                 android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/space_4"
                 android:layout_height="45dp"
-                android:layout_marginBottom="@dimen/space_5"
-                android:background="@drawable/xml_textbox_bg"
+                android:layout_margin="@dimen/space_10"
+                android:padding="@dimen/space_10"
+                android:drawableStart="@drawable/phone"
+                android:drawablePadding="@dimen/space_10"
+                android:hint="@string/uphone"
                 android:ems="10"
+                android:textColorHint="@color/black"
                 android:textSize="14sp"
                 android:inputType="number"
                 android:maxLength="15" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
+                android:visibility="gone"
                 android:layout_height="wrap_content">
                 <Fonts.LatoBLack
                     android:id="@+id/tv_pro_email"
@@ -121,9 +127,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:textSize="14sp"
-                android:layout_marginTop="@dimen/space_5"
-                android:layout_marginBottom="@dimen/space_5"
-                android:background="@drawable/xml_textbox_bg"
+                android:textColorHint="@color/black"
+                android:layout_margin="@dimen/space_10"
+                android:padding="@dimen/space_10"
+                android:drawableStart="@drawable/email"
+                android:drawablePadding="@dimen/space_10"
+                android:hint="@string/email"
                 android:ems="10" />
 
             <!--<TextView
@@ -162,10 +171,11 @@
 
             <RelativeLayout
                 android:id="@+id/btn_pro_edit"
-                android:layout_width="match_parent"
+                android:layout_width="200dp"
                 android:layout_height="45dp"
+                android:layout_gravity="center_horizontal"
                 android:layout_margin="12dp"
-                android:background="@drawable/bg_rounded_button"
+                android:background="@drawable/bac2"
                 android:padding="12dp">
 
                 <Fonts.LatoBLack
@@ -182,6 +192,5 @@
 
             </RelativeLayout>
         </LinearLayout>
-    </ScrollView>
 
-</LinearLayout>
+</RelativeLayout>

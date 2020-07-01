@@ -89,6 +89,7 @@
     <string name="tv_cart_item">Artículos:\u0020</string>
     <string name="Remove">Remove</string>
     <string name="tv_cart_rs">\u0020</string>
+    <string name="continue_sh">Continue Shoping</string>
 
     <!-- fragment_delivery_time.xml -->
     <string name="tv_del_title">Fecha / hora de entrega</string>

@@ -5,6 +5,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -460,22 +464,24 @@
                             </LinearLayout>
                         </LinearLayout>
                     </RadioGroup>
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:hint="@string/nav_note"
+                        android:id="@+id/extra_note"
+                        android:gravity="top"
+                        android:background="@drawable/bg21"
+                        android:padding="5dp"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
+
+
+
+
+
         </LinearLayout>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/nav_order_note"
-            android:textSize="15sp"
-            android:textColor="@color/black"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:hint="@string/nav_note"
-            android:id="@+id/extra_note"
-            android:background="@drawable/bg"
-            android:padding="5dp"/>
+
+
 
         <RelativeLayout
             android:id="@+id/confirm_order"
@@ -498,5 +504,5 @@
         </RelativeLayout>
 
     </LinearLayout>
-
+    </ScrollView>
 </LinearLayout>
