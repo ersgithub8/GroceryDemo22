@@ -166,6 +166,7 @@
                     android:layout_gravity="right|end"
                     android:background="@drawable/sign"
                     android:id="@+id/catname"
+                    android:visibility="gone"
                     android:layout_width="200dp"
                     android:layout_height="50dp"
                     android:text="@string/stores"
@@ -219,6 +220,18 @@
                     android:background="@color/white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/top_selling_recycler"
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:background="@android:color/transparent"
+                    android:scrollbars="none"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    />
             </LinearLayout>
 
         </RelativeLayout>
