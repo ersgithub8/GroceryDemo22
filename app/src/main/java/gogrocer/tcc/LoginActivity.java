@@ -132,7 +132,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         callbackManager=CallbackManager.Factory.create();
 
         sharedPreferences= getSharedPreferences("lan", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
+        editor.putString("language","english");
+
+        editor.apply();
         final String current_lan = sharedPreferences.getString("language",null);
 
         if (current_lan == null){
@@ -152,7 +156,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             lEnglish.setTextColor(Color.parseColor("#ffffff"));
         }
 
-        editor = sharedPreferences.edit();
 
         lEnglish.setOnClickListener(new View.OnClickListener() {
             @Override

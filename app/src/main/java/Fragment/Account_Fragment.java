@@ -33,6 +33,7 @@ import gogrocer.tcc.MainActivity;
 import gogrocer.tcc.My_Order_activity;
 import gogrocer.tcc.R;
 import gogrocer.tcc.Rating;
+import gogrocer.tcc.WebView;
 import util.DatabaseHandler;
 import util.Session_management;
 
@@ -49,6 +50,8 @@ public class Account_Fragment extends Fragment {
 
 
     TextView name,phone,reward,wallet,cart;
+
+    TextView fb,twitter,tele,insta,whatsapp;
 
     TextView terms,privacy,returnp,helpcenter;
     CircleImageView iv_profile;
@@ -86,11 +89,16 @@ public class Account_Fragment extends Fragment {
         rewards=view.findViewById(R.id.llpoints);
 
 
-//        terms=view.findViewById(R.id.);
-//        privacy=view.findViewById(R.id.);
-//        returnp=view.findViewById(R.id.);
-//        helpcenter=view.findViewById(R.id.);
+        terms=view.findViewById(R.id.term);
+        privacy=view.findViewById(R.id.privacy);
+        returnp=view.findViewById(R.id.ret_policy);
+        helpcenter=view.findViewById(R.id.help);
 
+        fb=view.findViewById(R.id.fb);
+        twitter=view.findViewById(R.id.twitter);
+        insta=view.findViewById(R.id.insta);
+        tele=view.findViewById(R.id.telegram);
+        whatsapp=view.findViewById(R.id.whatsapp);
 
         sharedPreferences= getActivity().getSharedPreferences("lan", Context.MODE_PRIVATE);
 
@@ -167,42 +175,39 @@ public class Account_Fragment extends Fragment {
                                 .addToBackStack(null).commit();
                     }
                 });
-//        terms.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Fragment fm = new Terms_and_Condition_fragment();
+        terms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fm = new Terms_and_Condition_fragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                        .addToBackStack(null).commit();
+            }
+        });
+        privacy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Fragment fm = new ;
 //                FragmentManager fragmentManager = getFragmentManager();
 //                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
 //                        .addToBackStack(null).commit();
-//            }
-//        });
-//        privacy.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-////                Fragment fm = new ;
-////                FragmentManager fragmentManager = getFragmentManager();
-////                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-////                        .addToBackStack(null).commit();
-//            }
-//        });
-//        helpcenter.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-////                Fragment fm = new Wallet_fragment();
-////                FragmentManager fragmentManager = getFragmentManager();
-////                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-////                        .addToBackStack(null).commit();
-//            }
-//        });
-//        returnp.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-////                Fragment fm = new Wallet_fragment();
-////                FragmentManager fragmentManager = getFragmentManager();
-////                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-////                        .addToBackStack(null).commit();
-//            }
-//        });
+            }
+        });
+        helpcenter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), WebView.class));
+            }
+        });
+        returnp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Fragment fm = new Wallet_fragment();
+//                FragmentManager fragmentManager = getFragmentManager();
+//                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+//                        .addToBackStack(null).commit();
+            }
+        });
 
         SharedPreferences shre = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String previouslyEncodedImage = shre.getString("image_data", "");
@@ -234,6 +239,36 @@ public class Account_Fragment extends Fragment {
         wallet.setText(getwallet+" " + getResources().getString(R.string.currency));
 
 
+        fb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        tele.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        twitter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        whatsapp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        insta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
 
 
