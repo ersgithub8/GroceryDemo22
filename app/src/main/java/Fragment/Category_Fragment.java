@@ -60,7 +60,7 @@ public class Category_Fragment extends Fragment {
     private TextView textView;
     Inerface inerface;
 
-    View viewb=null;
+    View viewb;
     Product_adapter product_adapter;
     List<Product_model> product_models=new ArrayList<>();
     RecyclerView recyclerView;
@@ -168,6 +168,8 @@ public class Category_Fragment extends Fragment {
                             rv_headre_icons.setAdapter(menu_adapter);
                             menu_adapter.notifyDataSetChanged();
 
+//                            viewb=rv_headre_icons.findViewHolderForLayoutPosition(1).itemView;
+//                            viewb.setBackgroundColor(getResources().getColor(R.color.green));
                             getProducts(menu_models.get(0).getId());
 
                         }
