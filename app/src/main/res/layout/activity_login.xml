@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/login_bg"
+    android:id="@+id/ll1"
+
+
     tools:context="gogrocer.tcc.LoginActivity"
     android:fillViewport="true">
 

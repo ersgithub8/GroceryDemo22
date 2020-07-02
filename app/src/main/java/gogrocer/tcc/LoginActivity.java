@@ -14,6 +14,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,6 +64,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private static String TAG = LoginActivity.class.getSimpleName();
     private RelativeLayout btn_continue;
+    LinearLayout ll1;
     private TextInputEditText et_password, et_email;
     private TextView tv_password, tv_email,btn_register, btn_forgot,lEnglish,lSpanish;
     private Session_management sessionManagement;
@@ -103,6 +105,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         
         lEnglish = findViewById(R.id.eng);
+        ll1 = findViewById(R.id.ll1);
         lSpanish = findViewById(R.id.arab);
         et_password =  findViewById(R.id.et_login_pass);
         et_email =  findViewById(R.id.et_login_email);
@@ -144,18 +147,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (current_lan == null){
             lEnglish.setBackgroundColor(Color.parseColor("#7abcbc"));
             lEnglish.setTextColor(Color.parseColor("#ffffff"));
+            ll1.setBackgroundResource(R.drawable.login_bg);
         }
         else if (current_lan.equals("english")){
             lEnglish.setBackgroundColor(Color.parseColor("#7abcbc"));
             lEnglish.setTextColor(Color.parseColor("#ffffff"));
+            ll1.setBackgroundResource(R.drawable.login_bg);
         }
         else if (current_lan.equals("spanish")){
             lSpanish.setBackgroundColor(Color.parseColor("#7abcbc"));
             lSpanish.setTextColor(Color.parseColor("#ffffff"));
+            ll1.setBackgroundResource(R.drawable.login_bg1);
         }
         else {
             lEnglish.setBackgroundColor(Color.parseColor("#7abcbc"));
             lEnglish.setTextColor(Color.parseColor("#ffffff"));
+            ll1.setBackgroundResource(R.drawable.login_bg);
         }
 
         lEnglish.setOnClickListener(new View.OnClickListener() {
