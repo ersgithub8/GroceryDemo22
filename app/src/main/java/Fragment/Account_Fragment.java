@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 
 import android.preference.PreferenceManager;
@@ -19,13 +20,24 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
 import com.facebook.login.LoginManager;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import Config.BaseURL;
+import Config.SharedPref;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import de.hdodenhof.circleimageview.CircleImageView;
 import gogrocer.tcc.LocaleHelper;
 import gogrocer.tcc.LoginActivity;
@@ -37,6 +49,7 @@ import gogrocer.tcc.WebView;
 import util.DatabaseHandler;
 import util.Session_management;
 
+import static Config.BaseURL.PREFS_NAME;
 import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class Account_Fragment extends Fragment {
@@ -238,6 +251,7 @@ public class Account_Fragment extends Fragment {
         String getwallet = sessionManagement.getUserDetails().get(BaseURL.KEY_WALLET_Ammount);
         wallet.setText(getwallet+" " + getResources().getString(R.string.currency));
 
+        getRewards();
 
         fb.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -260,6 +274,9 @@ public class Account_Fragment extends Fragment {
         whatsapp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Uri uri = Uri.parse("https://api.WhatsApp.com/send?+966575262321");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
 
             }
         });
@@ -384,5 +401,70 @@ public class Account_Fragment extends Fragment {
 
             }
         }).executeAsync();
+    }
+
+
+
+
+
+    public void getRewards() {
+
+        final SweetAlertDialog alertDialog=new SweetAlertDialog(getActivity(),SweetAlertDialog.PROGRESS_TYPE)
+                .setTitleText("Loading...")
+                ;
+        alertDialog.setCancelable(false);
+        alertDialog.show();
+
+        String user_id = sessionManagement.getUserDetails().get(BaseURL.KEY_ID);
+        RequestQueue rq = Volley.newRequestQueue(getActivity());
+        StringRequest strReq = new StringRequest(Request.Method.GET, BaseURL.REWARDS_REFRESH + user_id,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            alertDialog.dismiss();
+                            JSONObject jObj = new JSONObject(response);
+
+                            if (jObj.optString("success").equalsIgnoreCase("success")) {
+                                String rewards_points = jObj.getString("total_rewards");
+                                if (rewards_points.equals("null")) {
+                                    reward.setText("0");
+                                } else {
+                                    reward.setText(rewards_points);
+                                    SharedPref.putString(getActivity(), BaseURL.KEY_REWARDS_POINTS, rewards_points);
+
+
+                                    SharedPreferences pref;
+                                    SharedPreferences.Editor editor;
+
+                                    pref = getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+
+                                    editor = pref.edit();
+
+                                    editor.putString(BaseURL.KEY_REWARDS_POINTS,rewards_points);
+                                    editor.apply();
+                                }
+
+                            } else {
+                                // Toast.makeText(DashboardPage.this, "" + jObj.optString("msg"), Toast.LENGTH_LONG).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+
+                            alertDialog.dismiss();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                alertDialog.dismiss();
+            }
+        }) {
+
+        };
+        rq.add(strReq);
     }
 }

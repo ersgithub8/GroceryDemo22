@@ -158,7 +158,7 @@ SharedPreferences preferences;
                     }else if (checkfo==1){
                         Fragment fm = new Payment_fragment();
                         Bundle args = new Bundle();
-                        args.putString("total", String.valueOf(discount));
+                        args.putString("total", String.valueOf(total-discount));
                         args.putString("getdate", getdate);
                         args.putString("gettime", gettime);
                         args.putString("getlocationid", getlocation_id);
@@ -167,7 +167,7 @@ SharedPreferences preferences;
                         FragmentManager fragmentManager = getFragmentManager();
                         fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
                                 .addToBackStack(null).commit();
-                        SharedPref.putString(getActivity(),BaseURL.TOTAL_AMOUNT, String.valueOf(discount));
+                        SharedPref.putString(getActivity(),BaseURL.TOTAL_AMOUNT, String.valueOf(total-discount));
                     }else{
                         SweetAlertDialog dialog=new SweetAlertDialog(getActivity(),SweetAlertDialog.ERROR_TYPE).setTitleText("Something went wrong try again later")
                                 .setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {

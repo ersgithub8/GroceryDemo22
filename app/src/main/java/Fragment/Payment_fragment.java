@@ -3,7 +3,9 @@ package Fragment;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
@@ -42,6 +44,7 @@ import java.util.Map;
 
 import Config.BaseURL;
 import Config.SharedPref;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.MainActivity;
 import gogrocer.tcc.PaymentGatWay;
@@ -56,6 +59,7 @@ import util.CustomVolleyJsonRequest;
 import util.DatabaseHandler;
 import util.Session_management;
 
+import static Config.BaseURL.PREFS_NAME;
 import static com.android.volley.VolleyLog.TAG;
 
 
@@ -156,7 +160,7 @@ public class Payment_fragment extends Fragment {
         Relative_used_coupon = (RelativeLayout) view.findViewById(R.id.relative_used_coupon);
 
         //Show  Wallet
-        getwallet = SharedPref.getString(getActivity(), BaseURL.KEY_WALLET_Ammount);
+        getwallet = sessionManagement.getUserDetails().get(BaseURL.KEY_WALLET_Ammount);
         my_wallet_ammount = (TextView) view.findViewById(R.id.user_wallet);
         my_wallet_ammount.setText(getwallet+getActivity().getString(R.string.currency));
         db_cart = new DatabaseHandler(getActivity());
@@ -355,11 +359,8 @@ public class Payment_fragment extends Fragment {
                         String msg = response.getString("data");
                         String msg_arb=response.getString("data_arb");
                         db_cart.clearCart();
-                        Intent myIntent = new Intent(getActivity(), ThanksActivity.class);
-                        myIntent.putExtra("msg", msg);
-                        myIntent.putExtra("msgarb",msg_arb);
-                        startActivity(myIntent);
-                        getActivity().finish();
+
+                        getRefresrh(msg,msg_arb);
 
 //                        Bundle args = new Bundle();
 //                        Fragment fm = new Thanks_fragment();
@@ -649,6 +650,70 @@ public class Payment_fragment extends Fragment {
 
 
     }
+
+
+
+    public void getRefresrh(final String msg, final String msg_arb) {
+        final SweetAlertDialog alertDialog=new SweetAlertDialog(getActivity(),SweetAlertDialog.PROGRESS_TYPE).setTitleText("Loading...")
+                ;
+        alertDialog.setCancelable(false);
+        alertDialog.show();
+
+
+        String user_id = sessionManagement.getUserDetails().get(BaseURL.KEY_ID);
+        RequestQueue rq = Volley.newRequestQueue(getActivity());
+        StringRequest strReq = new StringRequest(Request.Method.GET, BaseURL.WALLET_REFRESH + user_id,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            alertDialog.dismiss();
+                            JSONObject jObj = new JSONObject(response);
+                            if (jObj.optString("success").equalsIgnoreCase("success")) {
+                                String wallet_amount = jObj.getString("wallet");
+//                                Wallet_Ammount.setText(wallet_amount);
+                                SharedPref.putString(getActivity(), BaseURL.KEY_WALLET_Ammount, wallet_amount);
+                                SharedPreferences pref;
+                                SharedPreferences.Editor editor;
+
+                                pref = getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+
+                                editor = pref.edit();
+
+                                editor.putString(BaseURL.KEY_WALLET_Ammount,wallet_amount);
+                                editor.apply();
+
+
+
+                                Intent myIntent = new Intent((MainActivity)getActivity(), ThanksActivity.class);
+                                myIntent.putExtra("msg", msg);
+                                myIntent.putExtra("msgarb",msg_arb);
+                                startActivity(myIntent);
+                                getActivity().finish();
+
+                            } else {
+                                // Toast.makeText(DashboardPage.this, "" + jObj.optString("msg"), Toast.LENGTH_LONG).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            alertDialog.dismiss();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                alertDialog.dismiss();
+            }
+        }) {
+
+        };
+        rq.add(strReq);
+    }
+
+
 
 
 }

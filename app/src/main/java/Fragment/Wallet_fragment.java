@@ -1,7 +1,9 @@
 package Fragment;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +30,9 @@ import gogrocer.tcc.RechargeWallet;
 import util.ConnectivityReceiver;
 import util.Session_management;
 
+import static Config.BaseURL.BASE_URL;
+import static Config.BaseURL.PREFS_NAME;
+
 /**
  * Created by Rajesh Dabhi on 29/6/2017.
  */
@@ -39,6 +44,8 @@ public class Wallet_fragment extends Fragment {
     TextView Wallet_Ammount;
 
 
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
     RelativeLayout Recharge_Wallet;
     private Session_management sessionManagement;
 
@@ -67,9 +74,16 @@ public class Wallet_fragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        pref = getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+
+        editor = pref.edit();
+
         if (ConnectivityReceiver.isConnected()) {
             getRefresrh();
         }
+
+
 
 
         return view;
@@ -96,6 +110,8 @@ public class Wallet_fragment extends Fragment {
                                 String wallet_amount = jObj.getString("wallet");
                                 Wallet_Ammount.setText(wallet_amount);
                                 SharedPref.putString(getActivity(), BaseURL.KEY_WALLET_Ammount, wallet_amount);
+                                editor.putString(BaseURL.KEY_WALLET_Ammount,wallet_amount);
+                                editor.apply();
                             } else {
                                 // Toast.makeText(DashboardPage.this, "" + jObj.optString("msg"), Toast.LENGTH_LONG).show();
                             }
