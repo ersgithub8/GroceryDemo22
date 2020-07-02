@@ -45,16 +45,19 @@
             card_view:cardCornerRadius="14dp"
             app:contentPadding="@dimen/space_8"
             >
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/space_5">
+                android:paddingTop="@dimen/space_5"
+                >
             <ImageView
                 android:id="@+id/img1"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/cart2"/>
+                android:background="@drawable/fav1"
+                />
         <TextView
             android:layout_below="@id/img1"
             android:layout_width="wrap_content"

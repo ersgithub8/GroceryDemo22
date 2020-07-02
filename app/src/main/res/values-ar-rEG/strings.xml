@@ -3,10 +3,9 @@
     <string name="wallet_ammount">مبلغ محفظتي : </string>
     <string name="j6_point">نقاط J6 : </string>
 
-    <string name="fav_store">المتاجر المفضلة</string>
-    <string name="fav_cat">الفئات المفضلة</string>
-    <string name="fav_prod">المنتجات المفضلة</string>
-
+    <string name="fav_store">المتاجر \n المفضلة</string>
+    <string name="fav_cat">الفئات \n المفضلة</string>
+    <string name="fav_prod">المنتجات \n المفضلة</string>
 
     <string name="term_and_conditions">الأحكام والشروط</string>
     <string name="privacy">سياسة خاصة</string>
