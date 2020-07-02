@@ -263,6 +263,8 @@ public class Account_Fragment extends Fragment {
         }
 
         getRewards();
+        getRefresrh();
+
 
         fb.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -444,12 +446,10 @@ public class Account_Fragment extends Fragment {
                                     reward.setText(rewards_points);
                                     SharedPref.putString(getActivity(), BaseURL.KEY_REWARDS_POINTS, rewards_points);
 
-
                                     SharedPreferences pref;
                                     SharedPreferences.Editor editor;
 
                                     pref = getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-
                                     editor = pref.edit();
 
                                     editor.putString(BaseURL.KEY_REWARDS_POINTS,rewards_points);
@@ -477,5 +477,53 @@ public class Account_Fragment extends Fragment {
 
         };
         rq.add(strReq);
+
     }
+
+
+
+    public void getRefresrh() {
+        final SweetAlertDialog alertDialog=new SweetAlertDialog(getActivity(),SweetAlertDialog.PROGRESS_TYPE).setTitleText("Loading...")
+                ;
+        alertDialog.setCancelable(false);
+        alertDialog.show();
+
+
+        String user_id = sessionManagement.getUserDetails().get(BaseURL.KEY_ID);
+        RequestQueue rq = Volley.newRequestQueue(getActivity());
+        StringRequest strReq = new StringRequest(Request.Method.GET, BaseURL.WALLET_REFRESH + user_id,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            alertDialog.dismiss();
+                            JSONObject jObj = new JSONObject(response);
+                            if (jObj.optString("success").equalsIgnoreCase("success")) {
+                                String wallet_amount = jObj.getString("wallet");
+                                wallet.setText(wallet_amount);
+                                SharedPref.putString(getActivity(), BaseURL.KEY_WALLET_Ammount, wallet_amount);
+                                editor.putString(BaseURL.KEY_WALLET_Ammount,wallet_amount);
+                                editor.apply();
+                            } else {
+                                // Toast.makeText(DashboardPage.this, "" + jObj.optString("msg"), Toast.LENGTH_LONG).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            alertDialog.dismiss();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                alertDialog.dismiss();
+            }
+        }) {
+
+        };
+        rq.add(strReq);
+    }
+
 }
