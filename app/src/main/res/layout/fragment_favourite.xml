@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/fav_prod"
             android:textAlignment="center"
-            android:text="Favourite\n Products"
+            android:text="@string/fav_prod"
             android:textSize="12sp"
             android:textColor="@color/black"
             />
@@ -99,7 +99,7 @@
             android:textAlignment="center"
             android:layout_centerHorizontal="true"
             android:id="@+id/fav_store"
-            android:text="Favourite\n Stores"
+            android:text="@string/fav_store"
             android:textSize="12sp"
             android:textColor="@color/black"/>
             </RelativeLayout>
@@ -134,7 +134,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/fav_category"
             android:textAlignment="center"
-            android:text="Favourite\nCategories"
+            android:text="@string/fav_cat"
             android:textSize="12sp"
             android:textColor="@color/black"
             />

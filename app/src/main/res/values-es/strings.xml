@@ -2,6 +2,9 @@
 
     <string name="wallet_ammount">My Wallet Ammount : </string>
     <string name="j6_point">J6 Points : </string>
+    <string name="fav_store">Favourite\n Stores</string>
+    <string name="fav_cat">Favourite\nCategories</string>
+    <string name="fav_prod">Favourite\n Products</string>
 
     <string name="term_and_conditions">Terms and \nConditions</string>
     <string name="privacy">Privacy \nPolicy</string>
