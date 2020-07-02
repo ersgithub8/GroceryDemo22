@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="wallet_ammount">مبلغ محفظتي : </string>
+    <string name="j6_point">نقاط J6 : </string>
+
+
+    <string name="term_and_conditions">الأحكام والشروط</string>
+    <string name="privacy">سياسة خاصة</string>
+    <string name="return_p">سياسة العائدات</string>
+    <string name="help_centre">مركز المساعدة</string>
+
+
     <string name="no_fav">لا يوجد المفضلة المتاحة</string>
     <string name="no_record">لا يوجد سجلات</string>
 

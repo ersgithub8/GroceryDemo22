@@ -1,4 +1,14 @@
 <resources>
+
+    <string name="wallet_ammount">My Wallet Ammount : </string>
+    <string name="j6_point">J6 Points : </string>
+
+    <string name="term_and_conditions">Terms and \nConditions</string>
+    <string name="privacy">Privacy \nPolicy</string>
+    <string name="return_p">Return \nPolicy</string>
+    <string name="help_centre">Help \nCentre</string>
+
+
     <string name="no_record">No Record Found</string>
 
     <string name="top_selling">Top Selling</string>
