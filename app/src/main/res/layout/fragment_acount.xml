@@ -203,7 +203,7 @@
                 />
                 <TextView
                     android:id="@+id/wallet"
-                    android:textSize="8sp"
+                    android:textSize="12sp"
                     android:gravity="center"
                     android:layout_gravity="center"
                     android:padding="5dp"
@@ -236,7 +236,7 @@
 
                 <TextView
                     android:id="@+id/reward"
-                    android:textSize="8sp"
+                    android:textSize="12sp"
                     android:gravity="center"
                     android:layout_gravity="center"
                     android:padding="5dp"
