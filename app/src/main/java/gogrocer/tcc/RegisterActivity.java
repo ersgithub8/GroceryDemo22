@@ -137,7 +137,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         sharedPreferences= getSharedPreferences("lan", Context.MODE_PRIVATE);
 
-        String current_lan = sharedPreferences.getString("language",null);
+        final String current_lan = sharedPreferences.getString("language",null);
 
         if (current_lan == null){
             lEnglish.setBackgroundColor(Color.parseColor("#7abcbc"));
@@ -161,6 +161,11 @@ public class RegisterActivity extends AppCompatActivity {
         lEnglish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if (current_lan.equals("english")){
+                    Toast.makeText(getApplicationContext(),"Already In English",Toast.LENGTH_SHORT).show();
+                }
+                else {
                 LocaleHelper.setLocale(getApplication(),"en");
                 getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
 
@@ -169,19 +174,25 @@ public class RegisterActivity extends AppCompatActivity {
 
                 recreate();
             }
+            }
         });
         lSpanish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LocaleHelper.setLocale(getApplication(),"ar");
-                getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
+                if (current_lan.equals("spanish")){
+                    Toast.makeText(getApplicationContext(),"بالفعل باللغة العربية",Toast.LENGTH_SHORT).show();
+                }
+                else {
 
-                editor.putString("language", "spanish");
-                editor.apply();
+                    LocaleHelper.setLocale(getApplication(), "ar");
+                    getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
 
-                recreate();
+                    editor.putString("language", "spanish");
+                    editor.apply();
 
+                    recreate();
+                }
             }
         });
         

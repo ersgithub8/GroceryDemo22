@@ -115,7 +115,7 @@ public class Account_Fragment extends Fragment {
 
         sharedPreferences= getActivity().getSharedPreferences("lan", Context.MODE_PRIVATE);
 
-        String current_lan = sharedPreferences.getString("language",null);
+        final String current_lan = sharedPreferences.getString("language",null);
 
         if (current_lan == null){
             lEnglish.setBackgroundColor(Color.parseColor("#7abcbc"));
@@ -135,35 +135,43 @@ public class Account_Fragment extends Fragment {
         }
 
 
-
-
         editor = sharedPreferences.edit();
-
 
         lEnglish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LocaleHelper.setLocale(getApplicationContext(),"en");
-                getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+                if (current_lan.equals("english")){
+                    Toast.makeText(getActivity(),"Already In English",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    LocaleHelper.setLocale(getApplicationContext(), "en");
+                    getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
 
-                editor.putString("language", "english");
-                editor.apply();
+                    editor.putString("language", "english");
+                    editor.apply();
 
-                getActivity().recreate();
+                    getActivity().recreate();
+                }
             }
         });
         lSpanish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LocaleHelper.setLocale(getApplicationContext(),"ar");
-                getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
+                if (current_lan.equals("spanish")){
+                    Toast.makeText(getApplicationContext(),"بالفعل باللغة العربية",Toast.LENGTH_SHORT).show();
+                }
+                else {
 
-                editor.putString("language", "spanish");
-                editor.apply();
+                    LocaleHelper.setLocale(getApplicationContext(), "ar");
+                    getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
 
-                getActivity().recreate();
+                    editor.putString("language", "spanish");
+                    editor.apply();
 
+                    getActivity().recreate();
+
+                }
             }
         });
 
@@ -244,12 +252,16 @@ public class Account_Fragment extends Fragment {
         else
             phone.setText(getResources().getString(R.string.mblnumber));
 
-
         String getreward = sessionManagement.getUserDetails().get(BaseURL.KEY_REWARDS_POINTS);
         reward.setText(getreward);
 
         String getwallet = sessionManagement.getUserDetails().get(BaseURL.KEY_WALLET_Ammount);
-        wallet.setText(getwallet+" " + getResources().getString(R.string.currency));
+        if (getwallet == null){
+            wallet.setText("0 " + getResources().getString(R.string.currency));
+        }
+        else {
+            wallet.setText(getwallet + " " + getResources().getString(R.string.currency));
+        }
 
         getRewards();
 
