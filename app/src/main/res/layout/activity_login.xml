@@ -260,6 +260,7 @@
             android:layout_marginLeft="12dp"
             android:layout_marginBottom="2dp"
             android:background="@drawable/bac1"
+            android:layout_marginTop="10dp"
             >
 
             <TextView
@@ -268,6 +269,7 @@
                 android:padding="12dp"
                 android:gravity="center"
                 android:fontFamily="@font/bold"
+
                 android:text="@string/btn_continue"
                 android:background="@drawable/bac2"
                 android:textColor="#fff"
