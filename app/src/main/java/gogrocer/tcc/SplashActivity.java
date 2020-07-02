@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -31,6 +32,8 @@ import java.util.List;
 import java.util.Locale;
 
 import util.Session_management;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class SplashActivity extends AppCompatActivity {
     public static final int MY_PERMISSIONS_REQUEST_WRITE_FIELS = 102;
@@ -113,22 +116,33 @@ public class SplashActivity extends AppCompatActivity {
         final String current_lan = sharedPreferences.getString("language",null);
 
         if (current_lan == null){
+            LocaleHelper.setLocale(getApplicationContext(), "en");
+            getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+
             editor.putString("language", "english");
             editor.apply();
         }
         else if (current_lan.equals("english")){
+            LocaleHelper.setLocale(getApplicationContext(), "en");
+            getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+
             editor.putString("language", "english");
             editor.apply();
         }
         else if (current_lan.equals("spanish")){
+            LocaleHelper.setLocale(getApplicationContext(), "ar");
+            getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+
             editor.putString("language", "spanish");
             editor.apply();
         }
         else {
+            LocaleHelper.setLocale(getApplicationContext(), "en");
+            getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+
             editor.putString("language", "english");
             editor.apply();
         }
-
 
     }
 
