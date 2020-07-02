@@ -499,7 +499,7 @@ public class Account_Fragment extends Fragment {
                             JSONObject jObj = new JSONObject(response);
                             if (jObj.optString("success").equalsIgnoreCase("success")) {
                                 String wallet_amount = jObj.getString("wallet");
-                                wallet.setText(wallet_amount);
+                                wallet.setText(wallet_amount +" "+getResources().getString(R.string.currency));
                                 SharedPref.putString(getActivity(), BaseURL.KEY_WALLET_Ammount, wallet_amount);
                                 editor.putString(BaseURL.KEY_WALLET_Ammount,wallet_amount);
                                 editor.apply();

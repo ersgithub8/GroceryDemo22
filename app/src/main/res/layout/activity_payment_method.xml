@@ -486,13 +486,13 @@
         <RelativeLayout
             android:id="@+id/confirm_order"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/confirm_order_button"
+            android:layout_height="wrap_content"
             android:background="@drawable/bg_rounded_button1"
             android:padding="12dp">
 
             <Fonts.LatoBLack
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/confirm_order"
                 android:textColor="#fff"
