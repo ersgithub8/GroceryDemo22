@@ -135,9 +135,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         sharedPreferences= getSharedPreferences("lan", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
-        editor.putString("language","english");
+//        editor.putString("language","english");
 
-        editor.apply();
+//        editor.apply();
+
         final String current_lan = sharedPreferences.getString("language",null);
 
         if (current_lan == null){
@@ -156,7 +157,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             lEnglish.setBackgroundColor(Color.parseColor("#7abcbc"));
             lEnglish.setTextColor(Color.parseColor("#ffffff"));
         }
-
 
         lEnglish.setOnClickListener(new View.OnClickListener() {
             @Override

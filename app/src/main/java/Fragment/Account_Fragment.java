@@ -133,7 +133,6 @@ public class Account_Fragment extends Fragment {
             lEnglish.setTextColor(Color.parseColor("#ffffff"));
         }
 
-
         editor = sharedPreferences.edit();
 
         lEnglish.setOnClickListener(new View.OnClickListener() {
