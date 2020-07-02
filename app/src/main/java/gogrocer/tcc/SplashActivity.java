@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -34,6 +35,8 @@ import util.Session_management;
 public class SplashActivity extends AppCompatActivity {
     public static final int MY_PERMISSIONS_REQUEST_WRITE_FIELS = 102;
     private AlertDialog dialog;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     private Session_management sessionManagement;
 
@@ -86,6 +89,9 @@ public class SplashActivity extends AppCompatActivity {
                     .permission.ACCESS_COARSE_LOCATION)
 
             ) {
+
+                getLanguange();
+
                 go_next();
             } else {
                 ActivityCompat.requestPermissions(this,
@@ -99,6 +105,10 @@ public class SplashActivity extends AppCompatActivity {
         } else {
             go_next();
         }
+    }
+
+    private void getLanguange() {
+
     }
 
     @Override

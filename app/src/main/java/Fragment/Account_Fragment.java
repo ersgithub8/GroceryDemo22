@@ -97,7 +97,6 @@ public class Account_Fragment extends Fragment {
         phone=view.findViewById(R.id.tv_adres_phone);
         reward=view.findViewById(R.id.reward);
         wallet=view.findViewById(R.id.wallet);
-        cart=view.findViewById(R.id.cart_num);
         walletl=view.findViewById(R.id.llwallet);
         rewards=view.findViewById(R.id.llpoints);
 
@@ -245,7 +244,7 @@ public class Account_Fragment extends Fragment {
         name.setText(getname);
 
 
-        cart.setText(new DatabaseHandler(getActivity()).getCartCount()+"");
+        //cart.setText(new DatabaseHandler(getActivity()).getCartCount()+"");
         String getnumber = sessionManagement.getUserDetails().get(BaseURL.KEY_MOBILE);
         if(!getnumber.equals(""))
         phone.setText(getnumber);

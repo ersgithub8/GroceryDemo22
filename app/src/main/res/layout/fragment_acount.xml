@@ -58,7 +58,8 @@
             android:src="@drawable/user"/>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
+            android:gravity="center_vertical"
             android:orientation="vertical">
 
             <TextView
@@ -69,7 +70,7 @@
                 android:id="@+id/tv_header_name"
                 android:textColor="@color/white"
                 android:textSize="18sp"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="15dp"
                 android:text="@string/uname"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -77,10 +78,11 @@
                 android:id="@+id/tv_adres_phone"
                 android:textColor="@color/white"
                 android:textSize="17sp"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="15dp"
                 android:text="@string/uphone"/>
 
             <RelativeLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 >
@@ -88,14 +90,13 @@
                     android:layout_marginStart="@dimen/space_10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/nav_logout"
+                    android:id="@+id/nav_logout1"
                     android:textColor="@color/white"
                     android:layout_marginTop="8dp"
                     android:textSize="17sp"
                     android:text="@string/nav_logout"/>
 
                 <TextView
-                    android:id="@+id/nav_my_profile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -109,25 +110,26 @@
         </LinearLayout>
 
 
-
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
         android:orientation="horizontal"
         android:weightSum="3"
         >
         <TextView
+            android:id="@+id/nav_logout"
             android:layout_width="0dp"
             android:layout_weight="1.4"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:fontFamily="@font/bold"
             android:textSize="18sp"
-            android:gravity="right|end"
-            android:text="@string/cart"/>
+            android:gravity="center"
+            android:text="@string/nav_logout"/>
         <TextView
             android:layout_gravity="center"
             android:textColor="@color/white"
@@ -135,18 +137,20 @@
             android:layout_weight="0.2"
             android:gravity="center"
             android:textSize="18sp"
+            android:fontFamily="@font/bold"
             android:layout_height="wrap_content"
-            android:text=" : "
+            android:text=" | "
             />
         <TextView
+            android:fontFamily="@font/bold"
             android:layout_width="0dp"
             android:layout_weight="1.4"
             android:layout_height="wrap_content"
-            android:id="@+id/cart_num"
+            android:id="@+id/nav_my_profile"
             android:textColor="@color/white"
-            android:gravity="start|left"
+            android:gravity="center"
             android:textSize="18sp"
-            android:text="0"
+            android:text="@string/edit_profile"
             />
 
     </LinearLayout>
