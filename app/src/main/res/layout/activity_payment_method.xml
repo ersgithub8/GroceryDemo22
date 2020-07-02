@@ -487,9 +487,7 @@
             android:id="@+id/confirm_order"
             android:layout_width="match_parent"
             android:layout_height="@dimen/confirm_order_button"
-            android:layout_marginLeft="@dimen/space_6"
-            android:layout_marginRight="@dimen/space_6"
-            android:background="@drawable/bg_rounded_button"
+            android:background="@drawable/bg_rounded_button1"
             android:padding="12dp">
 
             <Fonts.LatoBLack

@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 
 import android.preference.PreferenceManager;
@@ -19,13 +20,24 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
 import com.facebook.login.LoginManager;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import Config.BaseURL;
+import Config.SharedPref;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import de.hdodenhof.circleimageview.CircleImageView;
 import gogrocer.tcc.LocaleHelper;
 import gogrocer.tcc.LoginActivity;
@@ -33,9 +45,11 @@ import gogrocer.tcc.MainActivity;
 import gogrocer.tcc.My_Order_activity;
 import gogrocer.tcc.R;
 import gogrocer.tcc.Rating;
+import gogrocer.tcc.WebView;
 import util.DatabaseHandler;
 import util.Session_management;
 
+import static Config.BaseURL.PREFS_NAME;
 import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class Account_Fragment extends Fragment {
@@ -49,6 +63,8 @@ public class Account_Fragment extends Fragment {
 
 
     TextView name,phone,reward,wallet,cart;
+
+    TextView fb,twitter,tele,insta,whatsapp;
 
     TextView terms,privacy,returnp,helpcenter;
     CircleImageView iv_profile;
@@ -81,20 +97,24 @@ public class Account_Fragment extends Fragment {
         phone=view.findViewById(R.id.tv_adres_phone);
         reward=view.findViewById(R.id.reward);
         wallet=view.findViewById(R.id.wallet);
-        cart=view.findViewById(R.id.cart_num);
         walletl=view.findViewById(R.id.llwallet);
         rewards=view.findViewById(R.id.llpoints);
 
 
-//        terms=view.findViewById(R.id.);
-//        privacy=view.findViewById(R.id.);
-//        returnp=view.findViewById(R.id.);
-//        helpcenter=view.findViewById(R.id.);
+        terms=view.findViewById(R.id.term);
+        privacy=view.findViewById(R.id.privacy);
+        returnp=view.findViewById(R.id.ret_policy);
+        helpcenter=view.findViewById(R.id.help);
 
+        fb=view.findViewById(R.id.fb);
+        twitter=view.findViewById(R.id.twitter);
+        insta=view.findViewById(R.id.insta);
+        tele=view.findViewById(R.id.telegram);
+        whatsapp=view.findViewById(R.id.whatsapp);
 
         sharedPreferences= getActivity().getSharedPreferences("lan", Context.MODE_PRIVATE);
 
-        String current_lan = sharedPreferences.getString("language",null);
+        final String current_lan = sharedPreferences.getString("language",null);
 
         if (current_lan == null){
             lEnglish.setBackgroundColor(Color.parseColor("#7abcbc"));
@@ -114,35 +134,43 @@ public class Account_Fragment extends Fragment {
         }
 
 
-
-
         editor = sharedPreferences.edit();
-
 
         lEnglish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LocaleHelper.setLocale(getApplicationContext(),"en");
-                getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+                if (current_lan.equals("english")){
+                    Toast.makeText(getActivity(),"Already In English",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    LocaleHelper.setLocale(getApplicationContext(), "en");
+                    getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
 
-                editor.putString("language", "english");
-                editor.apply();
+                    editor.putString("language", "english");
+                    editor.apply();
 
-                getActivity().recreate();
+                    getActivity().recreate();
+                }
             }
         });
         lSpanish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LocaleHelper.setLocale(getApplicationContext(),"ar");
-                getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
+                if (current_lan.equals("spanish")){
+                    Toast.makeText(getApplicationContext(),"بالفعل باللغة العربية",Toast.LENGTH_SHORT).show();
+                }
+                else {
 
-                editor.putString("language", "spanish");
-                editor.apply();
+                    LocaleHelper.setLocale(getApplicationContext(), "ar");
+                    getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
 
-                getActivity().recreate();
+                    editor.putString("language", "spanish");
+                    editor.apply();
 
+                    getActivity().recreate();
+
+                }
             }
         });
 
@@ -167,42 +195,39 @@ public class Account_Fragment extends Fragment {
                                 .addToBackStack(null).commit();
                     }
                 });
-//        terms.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Fragment fm = new Terms_and_Condition_fragment();
+        terms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fm = new Terms_and_Condition_fragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                        .addToBackStack(null).commit();
+            }
+        });
+        privacy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Fragment fm = new ;
 //                FragmentManager fragmentManager = getFragmentManager();
 //                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
 //                        .addToBackStack(null).commit();
-//            }
-//        });
-//        privacy.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-////                Fragment fm = new ;
-////                FragmentManager fragmentManager = getFragmentManager();
-////                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-////                        .addToBackStack(null).commit();
-//            }
-//        });
-//        helpcenter.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-////                Fragment fm = new Wallet_fragment();
-////                FragmentManager fragmentManager = getFragmentManager();
-////                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-////                        .addToBackStack(null).commit();
-//            }
-//        });
-//        returnp.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-////                Fragment fm = new Wallet_fragment();
-////                FragmentManager fragmentManager = getFragmentManager();
-////                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-////                        .addToBackStack(null).commit();
-//            }
-//        });
+            }
+        });
+        helpcenter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), WebView.class));
+            }
+        });
+        returnp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Fragment fm = new Wallet_fragment();
+//                FragmentManager fragmentManager = getFragmentManager();
+//                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+//                        .addToBackStack(null).commit();
+            }
+        });
 
         SharedPreferences shre = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String previouslyEncodedImage = shre.getString("image_data", "");
@@ -219,21 +244,61 @@ public class Account_Fragment extends Fragment {
         name.setText(getname);
 
 
-        cart.setText(new DatabaseHandler(getActivity()).getCartCount()+"");
+        //cart.setText(new DatabaseHandler(getActivity()).getCartCount()+"");
         String getnumber = sessionManagement.getUserDetails().get(BaseURL.KEY_MOBILE);
         if(!getnumber.equals(""))
         phone.setText(getnumber);
         else
             phone.setText(getResources().getString(R.string.mblnumber));
 
-
         String getreward = sessionManagement.getUserDetails().get(BaseURL.KEY_REWARDS_POINTS);
         reward.setText(getreward);
 
         String getwallet = sessionManagement.getUserDetails().get(BaseURL.KEY_WALLET_Ammount);
-        wallet.setText(getwallet+" " + getResources().getString(R.string.currency));
+        if (getwallet == null){
+            wallet.setText("0 " + getResources().getString(R.string.currency));
+        }
+        else {
+            wallet.setText(getwallet + " " + getResources().getString(R.string.currency));
+        }
+
+        getRewards();
+        getRefresrh();
 
 
+        fb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        tele.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        twitter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        whatsapp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Uri uri = Uri.parse("https://api.WhatsApp.com/send?+966575262321");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+
+            }
+        });
+        insta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
 
 
@@ -350,4 +415,115 @@ public class Account_Fragment extends Fragment {
             }
         }).executeAsync();
     }
+
+
+
+
+
+    public void getRewards() {
+
+        final SweetAlertDialog alertDialog=new SweetAlertDialog(getActivity(),SweetAlertDialog.PROGRESS_TYPE)
+                .setTitleText("Loading...")
+                ;
+        alertDialog.setCancelable(false);
+        alertDialog.show();
+
+        String user_id = sessionManagement.getUserDetails().get(BaseURL.KEY_ID);
+        RequestQueue rq = Volley.newRequestQueue(getActivity());
+        StringRequest strReq = new StringRequest(Request.Method.GET, BaseURL.REWARDS_REFRESH + user_id,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            alertDialog.dismiss();
+                            JSONObject jObj = new JSONObject(response);
+
+                            if (jObj.optString("success").equalsIgnoreCase("success")) {
+                                String rewards_points = jObj.getString("total_rewards");
+                                if (rewards_points.equals("null")) {
+                                    reward.setText("0");
+                                } else {
+                                    reward.setText(rewards_points);
+                                    SharedPref.putString(getActivity(), BaseURL.KEY_REWARDS_POINTS, rewards_points);
+
+                                    SharedPreferences pref;
+                                    SharedPreferences.Editor editor;
+
+                                    pref = getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+                                    editor = pref.edit();
+
+                                    editor.putString(BaseURL.KEY_REWARDS_POINTS,rewards_points);
+                                    editor.apply();
+                                }
+
+                            } else {
+                                // Toast.makeText(DashboardPage.this, "" + jObj.optString("msg"), Toast.LENGTH_LONG).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+
+                            alertDialog.dismiss();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                alertDialog.dismiss();
+            }
+        }) {
+
+        };
+        rq.add(strReq);
+
+    }
+
+
+
+    public void getRefresrh() {
+        final SweetAlertDialog alertDialog=new SweetAlertDialog(getActivity(),SweetAlertDialog.PROGRESS_TYPE).setTitleText("Loading...")
+                ;
+        alertDialog.setCancelable(false);
+        alertDialog.show();
+
+
+        String user_id = sessionManagement.getUserDetails().get(BaseURL.KEY_ID);
+        RequestQueue rq = Volley.newRequestQueue(getActivity());
+        StringRequest strReq = new StringRequest(Request.Method.GET, BaseURL.WALLET_REFRESH + user_id,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            alertDialog.dismiss();
+                            JSONObject jObj = new JSONObject(response);
+                            if (jObj.optString("success").equalsIgnoreCase("success")) {
+                                String wallet_amount = jObj.getString("wallet");
+                                wallet.setText(wallet_amount);
+                                SharedPref.putString(getActivity(), BaseURL.KEY_WALLET_Ammount, wallet_amount);
+                                editor.putString(BaseURL.KEY_WALLET_Ammount,wallet_amount);
+                                editor.apply();
+                            } else {
+                                // Toast.makeText(DashboardPage.this, "" + jObj.optString("msg"), Toast.LENGTH_LONG).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            alertDialog.dismiss();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                alertDialog.dismiss();
+            }
+        }) {
+
+        };
+        rq.add(strReq);
+    }
+
 }

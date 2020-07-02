@@ -33,6 +33,7 @@ import Config.SharedPref;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import gogrocer.tcc.GifImageView;
 import gogrocer.tcc.MainActivity;
+import gogrocer.tcc.ThanksActivity;
 import gogrocer.tcc.networkconnectivity.NetworkConnection;
 import gogrocer.tcc.networkconnectivity.NetworkError;
 import gogrocer.tcc.R;
@@ -145,6 +146,17 @@ public class Reward_fragment extends Fragment {
                                 } else {
                                     Rewards_Points.setText(rewards_points);
                                     SharedPref.putString(getActivity(), BaseURL.KEY_REWARDS_POINTS, rewards_points);
+
+
+                                    SharedPreferences pref;
+                                    SharedPreferences.Editor editor;
+
+                                    pref = getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+
+                                    editor = pref.edit();
+
+                                    editor.putString(BaseURL.KEY_REWARDS_POINTS,rewards_points);
+                                    editor.apply();
                                 }
 
                             } else {
@@ -190,6 +202,20 @@ public class Reward_fragment extends Fragment {
                                     String final_rewards = json_data.getString("final_rewards");
                                     Rewards_Points.setText(final_rewards);
                                     SharedPref.putString(getActivity(), BaseURL.KEY_WALLET_Ammount, final_amount);
+
+
+                                    SharedPref.putString(getActivity(), BaseURL.KEY_WALLET_Ammount, final_rewards);
+                                    SharedPreferences pref;
+                                    SharedPreferences.Editor editor;
+
+                                    pref = getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+
+                                    editor = pref.edit();
+
+                                    editor.putString(BaseURL.KEY_REWARDS_POINTS,final_rewards);
+                                    editor.apply();
+
+                                    getRefresrh();
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -220,5 +246,63 @@ public class Reward_fragment extends Fragment {
 
     }
 
+    public void getRefresrh() {
+        final SweetAlertDialog alertDialog=new SweetAlertDialog(getActivity(),SweetAlertDialog.PROGRESS_TYPE).setTitleText("Loading...")
+                ;
+        alertDialog.setCancelable(false);
+        alertDialog.show();
 
+
+        String user_id = sessionManagement.getUserDetails().get(BaseURL.KEY_ID);
+        RequestQueue rq = Volley.newRequestQueue(getActivity());
+        StringRequest strReq = new StringRequest(Request.Method.GET, BaseURL.WALLET_REFRESH + user_id,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            alertDialog.dismiss();
+                            JSONObject jObj = new JSONObject(response);
+                            if (jObj.optString("success").equalsIgnoreCase("success")) {
+                                String wallet_amount = jObj.getString("wallet");
+//                                Wallet_Ammount.setText(wallet_amount);
+                                SharedPref.putString(getActivity(), BaseURL.KEY_WALLET_Ammount, wallet_amount);
+                                SharedPreferences pref;
+                                SharedPreferences.Editor editor;
+
+                                pref = getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+
+                                editor = pref.edit();
+
+                                editor.putString(BaseURL.KEY_WALLET_Ammount,wallet_amount);
+                                editor.apply();
+
+
+
+//                                Intent myIntent = new Intent((MainActivity)getActivity(), ThanksActivity.class);
+//                                myIntent.putExtra("msg", msg);
+//                                myIntent.putExtra("msgarb",msg_arb);
+//                                startActivity(myIntent);
+//                                getActivity().finish();
+
+                            } else {
+                                // Toast.makeText(DashboardPage.this, "" + jObj.optString("msg"), Toast.LENGTH_LONG).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            alertDialog.dismiss();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                alertDialog.dismiss();
+            }
+        }) {
+
+        };
+        rq.add(strReq);
+    }
 }
