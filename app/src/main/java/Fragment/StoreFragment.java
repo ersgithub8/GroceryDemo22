@@ -93,7 +93,7 @@ public class StoreFragment extends Fragment {
     List<Store_Model> store_models=new ArrayList<>();
     Store_Adapter store_adapter;
     FloatingActionButton floatingActionButton;
-    TextView t1;
+    TextView t1,t2;
 
     List<Category_model> models=new ArrayList<>();
     CatProdAdapter catProdAdapter;
@@ -112,6 +112,7 @@ public class StoreFragment extends Fragment {
 
         catprod =view.findViewById(R.id.catprodrv);
         t1 =view.findViewById(R.id.catname);
+        t2 =view.findViewById(R.id.t2);
         rv_top_selling = (RecyclerView) view.findViewById(R.id.top_selling_recycler);
         GridLayoutManager gridLayoutManager2 = new GridLayoutManager(getActivity(), 3);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
@@ -542,6 +543,7 @@ public class StoreFragment extends Fragment {
                     if (response != null && response.length() > 0) {
                         Boolean status = response.getBoolean("responce");
                         if (status) {
+                            t2.setVisibility(View.VISIBLE);
                             Gson gson = new Gson();
                             Type listType = new TypeToken<List<Product_model>>() {
                             }.getType();

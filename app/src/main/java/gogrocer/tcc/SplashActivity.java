@@ -90,8 +90,6 @@ public class SplashActivity extends AppCompatActivity {
 
             ) {
 
-                getLanguange();
-
                 go_next();
             } else {
                 ActivityCompat.requestPermissions(this,
@@ -108,6 +106,29 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void getLanguange() {
+
+        sharedPreferences= getSharedPreferences("lan", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+
+        final String current_lan = sharedPreferences.getString("language",null);
+
+        if (current_lan == null){
+            editor.putString("language", "english");
+            editor.apply();
+        }
+        else if (current_lan.equals("english")){
+            editor.putString("language", "english");
+            editor.apply();
+        }
+        else if (current_lan.equals("spanish")){
+            editor.putString("language", "spanish");
+            editor.apply();
+        }
+        else {
+            editor.putString("language", "english");
+            editor.apply();
+        }
+
 
     }
 
@@ -139,6 +160,8 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     public void go_next() {
+
+
         if(sessionManagement.isLoggedIn()) {
         Intent startmain = new Intent(SplashActivity.this, MainActivity.class);
         startActivity(startmain);
@@ -146,7 +169,10 @@ public class SplashActivity extends AppCompatActivity {
             Intent startmain = new Intent(SplashActivity.this, LoginActivity.class);
             startActivity(startmain);
         }
+        getLanguange();
+
         finish();
+
         getLocation();
     }
 

@@ -297,11 +297,11 @@ public class Product_fragment extends Fragment {
     //Get Shop By Catogary Products
     private void makeGetProductRequest(String cat_id) {
 
-        final SweetAlertDialog loading=new SweetAlertDialog(getActivity(),SweetAlertDialog.PROGRESS_TYPE);
-        loading.setCancelable(false);
-        loading.setTitleText("Loading...");
-
-        loading.getProgressHelper().setBarColor(getResources().getColor(R.color.green));
+//        final SweetAlertDialog loading=new SweetAlertDialog(getActivity(),SweetAlertDialog.PROGRESS_TYPE);
+//        loading.setCancelable(false);
+//        loading.setTitleText("Loading...");
+//
+//        loading.getProgressHelper().setBarColor(getResources().getColor(R.color.green));
 
 //        loading.show();
 
@@ -322,7 +322,7 @@ public class Product_fragment extends Fragment {
                 Log.d(TAG, response.toString());
 
                 try {
-                    loading.dismiss();
+//                    loading.dismiss();
                     Boolean status = response.getBoolean("responce");
                     if (status) {
                         mShimmerViewContainer.stopShimmerAnimation();
@@ -367,7 +367,7 @@ public class Product_fragment extends Fragment {
                         error.show();
                     }
                 } catch (JSONException e) {
-                    loading.dismiss();
+//                    loading.dismiss();
                     e.printStackTrace();
                     Texty.setVisibility(View.VISIBLE);
                 }
@@ -381,7 +381,7 @@ public class Product_fragment extends Fragment {
                     Activity activity=getActivity();
                     if(activity !=null)
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
-                    loading.dismiss();
+//                    loading.dismiss();
                 }
             }
         });

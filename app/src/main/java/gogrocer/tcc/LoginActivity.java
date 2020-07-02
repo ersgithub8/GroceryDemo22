@@ -42,6 +42,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONException;
@@ -62,7 +63,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private static String TAG = LoginActivity.class.getSimpleName();
     private RelativeLayout btn_continue;
-    private EditText et_password, et_email;
+    private TextInputEditText et_password, et_email;
     private TextView tv_password, tv_email,btn_register, btn_forgot,lEnglish,lSpanish;
     private Session_management sessionManagement;
     SharedPreferences sharedPreferences;
@@ -103,8 +104,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         
         lEnglish = findViewById(R.id.eng);
         lSpanish = findViewById(R.id.arab);
-        et_password = (EditText) findViewById(R.id.et_login_pass);
-        et_email = (EditText) findViewById(R.id.et_login_email);
+        et_password =  findViewById(R.id.et_login_pass);
+        et_email =  findViewById(R.id.et_login_email);
         tv_password = (TextView) findViewById(R.id.tv_login_password);
         tv_email = (TextView) findViewById(R.id.tv_login_email);
         btn_continue = (RelativeLayout) findViewById(R.id.btnContinue);
@@ -134,9 +135,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         sharedPreferences= getSharedPreferences("lan", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
-        editor.putString("language","english");
+//        editor.putString("language","english");
 
-        editor.apply();
+//        editor.apply();
+
         final String current_lan = sharedPreferences.getString("language",null);
 
         if (current_lan == null){
@@ -155,7 +157,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             lEnglish.setBackgroundColor(Color.parseColor("#7abcbc"));
             lEnglish.setTextColor(Color.parseColor("#ffffff"));
         }
-
 
         lEnglish.setOnClickListener(new View.OnClickListener() {
             @Override
