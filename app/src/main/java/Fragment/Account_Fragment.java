@@ -112,6 +112,17 @@ public class Account_Fragment extends Fragment {
         tele=view.findViewById(R.id.telegram);
         whatsapp=view.findViewById(R.id.whatsapp);
 
+
+
+
+        ((MainActivity)getActivity()).bot_profile.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        ((MainActivity)getActivity()).bot_cat.setBackgroundColor(getResources().getColor(R.color.white));
+        ((MainActivity)getActivity()).bot_fav.setBackgroundColor(getResources().getColor(R.color.white));
+        ((MainActivity)getActivity()).bot_cart.setBackgroundColor(getResources().getColor(R.color.white));
+        ((MainActivity)getActivity()).bot_store.setBackgroundColor(getResources().getColor(R.color.white));
+
+
+
         sharedPreferences= getActivity().getSharedPreferences("lan", Context.MODE_PRIVATE);
 
         final String current_lan = sharedPreferences.getString("language",null);

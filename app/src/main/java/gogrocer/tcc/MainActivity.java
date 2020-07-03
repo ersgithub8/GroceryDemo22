@@ -103,9 +103,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Session_management sessionManagement;
     private Menu nav_menu;
     ImageView imageView;
-    LinearLayout bot_store,bot_cat,bot_fav,bot_profile;
+    public LinearLayout bot_store,bot_cat,bot_fav,bot_profile;
     LinearLayout viewpa;
-    RelativeLayout bot_cart;
+    public RelativeLayout bot_cart;
     Toolbar toolbar;
     String language="";
     LinearLayout My_Order, My_Reward, My_Walllet, My_Cart;
@@ -153,12 +153,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
              @Override
              public void onClick(View view) {
 
-                 bot_cart.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-
-                 bot_cat.setBackgroundColor(getResources().getColor(R.color.white));
-                 bot_fav.setBackgroundColor(getResources().getColor(R.color.white));
-                 bot_profile.setBackgroundColor(getResources().getColor(R.color.white));
-                 bot_store.setBackgroundColor(getResources().getColor(R.color.white));
+//                 bot_cart.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+//
+//                 bot_cat.setBackgroundColor(getResources().getColor(R.color.white));
+//                 bot_fav.setBackgroundColor(getResources().getColor(R.color.white));
+//                 bot_profile.setBackgroundColor(getResources().getColor(R.color.white));
+//                 bot_store.setBackgroundColor(getResources().getColor(R.color.white));
 
                  if (dbcart.getCartCount() > 0) {
                      Fragment fm = new Cart_fragment();
@@ -178,12 +178,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
              @Override
              public void onClick(View view) {
 
-                 bot_cart.setBackgroundColor(getResources().getColor(R.color.white));
-
-                 bot_cat.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                 bot_fav.setBackgroundColor(getResources().getColor(R.color.white));
-                 bot_profile.setBackgroundColor(getResources().getColor(R.color.white));
-                 bot_store.setBackgroundColor(getResources().getColor(R.color.white));
+//                 bot_cart.setBackgroundColor(getResources().getColor(R.color.white));
+//
+//                 bot_cat.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+//                 bot_fav.setBackgroundColor(getResources().getColor(R.color.white));
+//                 bot_profile.setBackgroundColor(getResources().getColor(R.color.white));
+//                 bot_store.setBackgroundColor(getResources().getColor(R.color.white));
 
 
                  Fragment fm = new Category_Fragment();
@@ -196,12 +196,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View view) {
 
-                bot_cart.setBackgroundColor(getResources().getColor(R.color.white));
-
-                bot_cat.setBackgroundColor(getResources().getColor(R.color.white));
-                bot_fav.setBackgroundColor(getResources().getColor(R.color.white));
-                bot_profile.setBackgroundColor(getResources().getColor(R.color.white));
-                bot_store.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+//                bot_cart.setBackgroundColor(getResources().getColor(R.color.white));
+//
+//                bot_cat.setBackgroundColor(getResources().getColor(R.color.white));
+//                bot_fav.setBackgroundColor(getResources().getColor(R.color.white));
+//                bot_profile.setBackgroundColor(getResources().getColor(R.color.white));
+//                bot_store.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
                 Fragment fm = new StoreFragment();
                 FragmentManager fragmentManager = getFragmentManager();
@@ -214,12 +214,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(View view) {
                 if (sessionManagement.isLoggedIn()) {
 
-                    bot_cart.setBackgroundColor(getResources().getColor(R.color.white));
-
-                    bot_cat.setBackgroundColor(getResources().getColor(R.color.white));
-                    bot_fav.setBackgroundColor(getResources().getColor(R.color.white));
-                    bot_profile.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                    bot_store.setBackgroundColor(getResources().getColor(R.color.white));
+//                    bot_cart.setBackgroundColor(getResources().getColor(R.color.white));
+//
+//                    bot_cat.setBackgroundColor(getResources().getColor(R.color.white));
+//                    bot_fav.setBackgroundColor(getResources().getColor(R.color.white));
+//                    bot_profile.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+//                    bot_store.setBackgroundColor(getResources().getColor(R.color.white));
 
 
                     Fragment fm = new Account_Fragment();
@@ -239,12 +239,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(View view) {
                 if (sessionManagement.isLoggedIn()){
 
-                    bot_cart.setBackgroundColor(getResources().getColor(R.color.white));
-
-                    bot_cat.setBackgroundColor(getResources().getColor(R.color.white));
-                    bot_fav.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                    bot_profile.setBackgroundColor(getResources().getColor(R.color.white));
-                    bot_store.setBackgroundColor(getResources().getColor(R.color.white));
+//                    bot_cart.setBackgroundColor(getResources().getColor(R.color.white));
+//
+//                    bot_cat.setBackgroundColor(getResources().getColor(R.color.white));
+//                    bot_fav.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+//                    bot_profile.setBackgroundColor(getResources().getColor(R.color.white));
+//                    bot_store.setBackgroundColor(getResources().getColor(R.color.white));
 
                     Fragment fm = new Favourite();
                     FragmentManager fragmentManager = getFragmentManager();

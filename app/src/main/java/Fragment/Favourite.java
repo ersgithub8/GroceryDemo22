@@ -49,6 +49,7 @@ import Model.Home_Icon_model;
 import Model.Product_model;
 import Model.Store_Model;
 import gogrocer.tcc.AppController;
+import gogrocer.tcc.MainActivity;
 import gogrocer.tcc.R;
 import util.CustomVolleyJsonRequest;
 import util.RecyclerTouchListener;
@@ -115,6 +116,16 @@ public class Favourite extends Fragment {
         rv_cat.setLayoutManager(gridLayoutManager2);
         rv_cat.setItemAnimator(new DefaultItemAnimator());
         rv_cat.setNestedScrollingEnabled(false);
+
+
+
+        ((MainActivity)getActivity()).bot_fav.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        ((MainActivity)getActivity()).bot_cat.setBackgroundColor(getResources().getColor(R.color.white));
+        ((MainActivity)getActivity()).bot_cart.setBackgroundColor(getResources().getColor(R.color.white));
+        ((MainActivity)getActivity()).bot_profile.setBackgroundColor(getResources().getColor(R.color.white));
+        ((MainActivity)getActivity()).bot_store.setBackgroundColor(getResources().getColor(R.color.white));
+
+
 
         make_menu_items(usrid);
                 fav_store.setOnClickListener(new View.OnClickListener() {

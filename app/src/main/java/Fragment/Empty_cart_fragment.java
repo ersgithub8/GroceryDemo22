@@ -42,6 +42,15 @@ public class Empty_cart_fragment extends Fragment {
             }
         });
 
+
+
+
+        ((MainActivity)getActivity()).bot_cart.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        ((MainActivity)getActivity()).bot_cat.setBackgroundColor(getResources().getColor(R.color.white));
+        ((MainActivity)getActivity()).bot_fav.setBackgroundColor(getResources().getColor(R.color.white));
+        ((MainActivity)getActivity()).bot_profile.setBackgroundColor(getResources().getColor(R.color.white));
+        ((MainActivity)getActivity()).bot_store.setBackgroundColor(getResources().getColor(R.color.white));
+
         return view;
     }
 
