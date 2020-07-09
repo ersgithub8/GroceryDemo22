@@ -151,7 +151,9 @@ public class SplashActivity extends AppCompatActivity {
                                            String permissions[], int[] grantResults) {
         if (requestCode == MY_PERMISSIONS_REQUEST_WRITE_FIELS) {
             if (grantResults.length > 0
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[3] == PackageManager.PERMISSION_GRANTED
+            ) {
                 go_next();
             } else {
                 AlertDialog.Builder builder = new AlertDialog.Builder(SplashActivity.this);

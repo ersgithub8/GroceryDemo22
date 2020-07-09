@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.NoConnectionError;
@@ -40,6 +42,7 @@ public class RatingAndReviews extends AppCompatActivity {
     List<Rating_Model> rating_models=new ArrayList<>();
     RecyclerView recyclerView;
     String productid;
+    ImageView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +50,15 @@ public class RatingAndReviews extends AppCompatActivity {
         setContentView(R.layout.activity_rating_and_reviews);
     recyclerView=findViewById(R.id.recyclerreview);
 
+    back=findViewById(R.id.back);
 
+
+    back.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            onBackPressed();
+        }
+    });
     productid=getIntent().getStringExtra("prod_id");
 
     recyclerView.setLayoutManager(new LinearLayoutManager(this));

@@ -17,6 +17,7 @@ public class My_order_detail_model {
     String qty_in_kg;
     String product_image;
 
+
     public String getSale_item_id(){
         return sale_item_id;
     }

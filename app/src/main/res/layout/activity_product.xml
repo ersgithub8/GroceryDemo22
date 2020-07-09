@@ -172,7 +172,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/tv_cart_total"
                         android:textColor="#000"
-                        android:textSize="@dimen/text_size_small" />
+                        android:textSize="15sp" />
 
                     <Fonts.LatoBLack
                         android:id="@+id/tv_subcat_total"
@@ -180,7 +180,7 @@
                         android:layout_height="wrap_content"
                         android:text=" TextView"
                         android:textColor="#000"
-                        android:textSize="@dimen/text_size_small" />
+                        android:textSize="15sp" />
                     <Fonts.LatoBLack
                         android:id="@+id/textView6"
                         android:layout_width="wrap_content"
@@ -188,7 +188,7 @@
                         android:layout_marginLeft="2dp"
                         android:text="@string/currency"
                         android:textColor="#000"
-                        android:textSize="@dimen/text_size_small" />
+                        android:textSize="15sp" />
 
                 </LinearLayout>
 
