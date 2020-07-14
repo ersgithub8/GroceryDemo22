@@ -12,6 +12,9 @@
       <module fileurl="file://$PROJECT_DIR$/GroceryDemo22.iml" filepath="$PROJECT_DIR$/GroceryDemo22.iml" group="GroceryDemo22" />
       <module fileurl="file://$PROJECT_DIR$/FORTSDKv1.5/GroceryDemo22-FORTSDKv1.5.iml" filepath="$PROJECT_DIR$/FORTSDKv1.5/GroceryDemo22-FORTSDKv1.5.iml" group="GroceryDemo22/FORTSDKv1.5" />
       <module fileurl="file://$PROJECT_DIR$/app/GroceryDemo22-app.iml" filepath="$PROJECT_DIR$/app/GroceryDemo22-app.iml" group="GroceryDemo22/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/J6-GroceryDemo22.iml" filepath="$PROJECT_DIR$/.idea/modules/J6-GroceryDemo22.iml" group="GroceryDemo22" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/FORTSDKv1.5/J6-GroceryDemo22-FORTSDKv1.5.iml" filepath="$PROJECT_DIR$/.idea/modules/FORTSDKv1.5/J6-GroceryDemo22-FORTSDKv1.5.iml" group="GroceryDemo22/FORTSDKv1.5" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/J6-GroceryDemo22-app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/J6-GroceryDemo22-app.iml" group="GroceryDemo22/app" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/StudioProjects-GroceryDemo22.iml" filepath="$PROJECT_DIR$/.idea/modules/StudioProjects-GroceryDemo22.iml" group="GroceryDemo22" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/FORTSDKv1.5/StudioProjects-GroceryDemo22-FORTSDKv1.5.iml" filepath="$PROJECT_DIR$/.idea/modules/FORTSDKv1.5/StudioProjects-GroceryDemo22-FORTSDKv1.5.iml" group="GroceryDemo22/FORTSDKv1.5" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/StudioProjects-GroceryDemo22-app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/StudioProjects-GroceryDemo22-app.iml" group="GroceryDemo22/app" />
