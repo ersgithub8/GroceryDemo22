@@ -125,6 +125,7 @@
 
     <!-- fragment_Wallet.xml -->
     <string name="tv_app_name">Billetera</string>
+    <string name="wall_am" >My Wallet</string>
     <!-- fragment_Reward.xml -->
     <string name="tv_toolbar_name">Recompensas</string>
     <!-- row_product_rv.xml -->

@@ -79,7 +79,7 @@
     <string name="start_time">وقت البدء : </string>
     <string name="end_time">وقت النهاية : </string>
     <string name="wall_am">محفظتي</string>
-<string name="tv_out">إنتهى من المخزن</string>
+    <string name="tv_out">إنتهى من المخزن</string>
     <string name="tv_rech">أدخل المبلغ للمحفظة</string>
     <string name="tv_rech_wall"> تعبئة الرصيد</string>
     <!-- activity_login.xml -->

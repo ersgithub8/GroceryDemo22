@@ -143,7 +143,7 @@ public class ForgotActivity extends AppCompatActivity implements View.OnClickLis
                     String error = response.getString("error");
                     String error_arb=response.getString("error_arb");
                     if (status) {
-//                        Toast.makeText(ForgotActivity.this, "" + error, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ForgotActivity.this, "" + error, Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(ForgotActivity.this, LoginActivity.class);
                         startActivity(i);
                         finish();

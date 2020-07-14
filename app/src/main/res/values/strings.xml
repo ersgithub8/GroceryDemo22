@@ -98,7 +98,7 @@
     <string name="rech_wallet" translatable="false">Recharge Wallet</string>
     <string name="continue_bt" translatable="false">Continue</string>
     <string name="continue_sh">Continue Shoping</string>
-    <string name="wall_am" translatable="false">My Wallet Amount</string>
+    <string name="wall_am" >My Wallet</string>
     <!-- activity_login.xml -->
     <string name="et_login_phone_hint" translatable="false">Mobile Number</string>
     <string name="tv_login_email" translatable="false">Email</string>

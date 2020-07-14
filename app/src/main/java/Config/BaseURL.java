@@ -158,5 +158,6 @@ public class BaseURL {
 
     public static final String getallrating=BASE_URL+"index.php/Api/get_all_rating";
     public static final String checkfirstorder=BASE_URL+"index.php/Api/check_first_order";
+    public static final String getOTP=BASE_URL+"index.php/Api/get_otp";
 
 }
