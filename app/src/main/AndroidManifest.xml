@@ -30,7 +30,8 @@
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RatingAndReviews"></activity>
+        <activity android:name=".OTPActivity"></activity>
+        <activity android:name=".RatingAndReviews" />
         <activity android:name=".ProductActivity" />
         <activity android:name=".Rating" />
         <activity android:name=".WebView" />

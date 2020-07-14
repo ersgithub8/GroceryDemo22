@@ -324,7 +324,21 @@ public class RegisterActivity extends AppCompatActivity {
             // perform the user login attempt.
 
             if (ConnectivityReceiver.isConnected()) {
-                makeRegisterRequest(getname, getphone, getemail, getpassword);
+                Intent intent=new Intent(RegisterActivity.this,OTPActivity.class);
+                intent.putExtra("name",getname);
+                intent.putExtra("password",getpassword);
+                intent.putExtra("email",getemail);
+                intent.putExtra("phone",getphone);
+                String refer=et_refer.getText().toString();
+                if(refer.isEmpty()){
+//                    Toast.makeText(this, "adasdas", Toast.LENGTH_SHORT).show();
+                    refer="";
+                }
+                intent.putExtra("referalcode",refer);
+
+                startActivity(intent);
+
+//                makeRegisterRequest(getname, getphone, getemail, getpassword);
             }
         }
 

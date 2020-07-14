@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -208,7 +209,13 @@ public class Account_Fragment extends Fragment {
         terms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Bundle args = new Bundle();
                 Fragment fm = new Terms_and_Condition_fragment();
+
+                args.putString("url", BaseURL.GET_TERMS_URL);
+                args.putString("title", getResources().getString(R.string.nav_terms));
+                        fm.setArguments(args);
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
                         .addToBackStack(null).commit();
@@ -406,6 +413,16 @@ public class Account_Fragment extends Fragment {
 
 
 
+        if(current_lan.equals("english")){
+            Typeface type = Typeface.createFromAsset(getActivity().getAssets(),"fonts/kellyslab.ttf");
+//            textView.setTypeface(type);
+            logout.setTypeface(type);
+
+        }else{
+            Typeface type = Typeface.createFromAsset(getActivity().getAssets(),"fonts/janna.ttf");
+//            textView.setTypeface(type);
+            logout.setTypeface(type);
+        }
 
         return view;
     }

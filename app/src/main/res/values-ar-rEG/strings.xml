@@ -13,6 +13,8 @@
     <string name="help_centre">مركز المساعدة</string>
 
 
+    <string name="VerificationCode">شيفرة التأكيد</string>
+    <string name="VerificationCodeDesc">يرجى إدخال رمز التحقق المرسلة إلى</string>
     <string name="no_fav">لا يوجد المفضلة المتاحة</string>
     <string name="no_record">لا يوجد سجلات</string>
 
@@ -76,7 +78,7 @@
     <string name="offer">عرض</string>
     <string name="start_time">وقت البدء : </string>
     <string name="end_time">وقت النهاية : </string>
-    <string name="wall_am">رصيد المحفظة</string>
+    <string name="wall_am">محفظتي</string>
 <string name="tv_out">إنتهى من المخزن</string>
     <string name="tv_rech">أدخل المبلغ للمحفظة</string>
     <string name="tv_rech_wall"> تعبئة الرصيد</string>
@@ -114,7 +116,7 @@
     <string name="tv_reg_address">العنوان (مطلوب)</string>
     <string name="et_reg_address">أكمل عنوانك</string>
 <string name="use">استخدم</string>
-    <string name="currency">ر.س</string>
+    <string name="currency">ریال</string>
     <string name="cash">الدفع عند الاستلام</string>
     <string name="checkout">الدفع</string>
     <string name="card">بطاقات</string>
@@ -301,4 +303,10 @@
     <string name="home_fragement_bottom">أضف $ 150،000 واربح<font color='#ff0000'>المنزل الحر.</font></string>
     <string name="followed">يتبع</string>
 
+
+
+
+    <string name="Coupons">كوبونات</string>
+    <string name="VIP">كبار الشخصيات</string>
+    <string name="FreeShipping">الشحن مجانا</string>
 </resources>

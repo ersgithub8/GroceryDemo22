@@ -12,6 +12,8 @@
     <string name="help_centre">Help \nCentre</string>
 
 
+    <string name="VerificationCode">Verification Code</string>
+    <string name="VerificationCodeDesc">Please enter verification code sent to</string>
     <string name="no_record">No Record Found</string>
 
     <string name="top_selling">Top Selling</string>
@@ -239,4 +241,12 @@
     <string name="hello_blank_fragment">Hola fragmento en blanco</string>
     <string name="home_fragement_bottom">Agrega $150,000 y gana <font color='#ff0000'>domicilio gratis.</font></string>
     <string name="followed">Followed</string>
+
+
+
+
+
+    <string name="Coupons">Coupons</string>
+    <string name="VIP">VIP</string>
+    <string name="FreeShipping">Free Shiping</string>
 </resources>

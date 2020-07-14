@@ -197,14 +197,14 @@
                 android:orientation="horizontal"
                 >
             <TextView
-                android:textSize="10sp"
+                android:textSize="12sp"
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:padding="5dp"
                 android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/wallet_ammount"
+                android:text="@string/wall_am"
                 />
                 <TextView
                     android:id="@+id/wallet"
@@ -231,7 +231,7 @@
                 android:orientation="horizontal"
                 >
                 <TextView
-                    android:textSize="10sp"
+                    android:textSize="12sp"
                     android:padding="5dp"
                     android:textColor="@color/white"
                     android:layout_width="wrap_content"
@@ -369,7 +369,7 @@
                 android:textAlignment="center"
                 android:textSize="20sp"
                 android:textColor="@color/black"
-                android:drawableTop="@drawable/group_like"
+                android:drawableTop="@drawable/thumb"
                 android:layout_weight="1"
                 />
 
