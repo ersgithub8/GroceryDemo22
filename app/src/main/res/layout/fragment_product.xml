@@ -44,7 +44,6 @@
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:text="Product"
-            android:fontFamily="@font/bold"
             android:layout_centerVertical="true"
             android:textColor="@color/white"/>
         <ImageView
@@ -99,7 +98,6 @@
 
     <TextView
         android:textStyle="italic"
-        android:fontFamily="@font/bold"
         android:textColor="@color/black"
         android:visibility="gone"
         android:id="@+id/no_product"

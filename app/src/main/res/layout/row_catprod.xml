@@ -31,8 +31,7 @@
             android:layout_marginLeft="25dp"
             android:layout_marginRight="@dimen/space_7"
             android:textColor="@color/white"
-            android:textSize="@dimen/space_18"
-            android:fontFamily="@font/bold"/>
+            android:textSize="13sp"/>
         </RelativeLayout>
 
         <androidx.recyclerview.widget.RecyclerView
