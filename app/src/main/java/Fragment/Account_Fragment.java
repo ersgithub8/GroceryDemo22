@@ -413,23 +413,23 @@ public class Account_Fragment extends Fragment {
 
 
 
-        if(current_lan.equals("english")){
-            Typeface type = Typeface.createFromAsset(getActivity().getAssets(),"fonts/kellyslab.ttf");
-//            textView.setTypeface(type);
-            logout.setTypeface(type);
-            my_wallet.setTypeface(type);
-            my_order.setTypeface(type);
-            my_profile.setTypeface(type);
-
-        }else{
-            Typeface type = Typeface.createFromAsset(getActivity().getAssets(),"fonts/janna.ttf");
-//            textView.setTypeface(type);
-            logout.setTypeface(type);
-
-            my_wallet.setTypeface(type);
-            my_order.setTypeface(type);
-            my_profile.setTypeface(type);
-        }
+//        if(current_lan.equals("english")){
+//            Typeface type = Typeface.createFromAsset(getActivity().getAssets(),"fonts/kellyslab.ttf");
+////            textView.setTypeface(type);
+//            logout.setTypeface(type);
+//            my_wallet.setTypeface(type);
+//            my_order.setTypeface(type);
+//            my_profile.setTypeface(type);
+//
+//        }else{
+//            Typeface type = Typeface.createFromAsset(getActivity().getAssets(),"fonts/janna.ttf");
+////            textView.setTypeface(type);
+//            logout.setTypeface(type);
+//
+//            my_wallet.setTypeface(type);
+//            my_order.setTypeface(type);
+//            my_profile.setTypeface(type);
+//        }
 
         return view;
     }

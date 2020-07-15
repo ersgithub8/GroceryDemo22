@@ -1,7 +1,10 @@
 package gogrocer.tcc;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.text.TextUtils;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -33,7 +36,20 @@ public class AppController extends Application {
         locales.add(Locale.ENGLISH);
         locales.add(new Locale("ar","ARABIC"));
         LocaleHelper.setLocale(getApplicationContext(),"en");
-            }
+
+        SharedPreferences sharedPreferences= getSharedPreferences("lan", Context.MODE_PRIVATE);
+
+        final String current_lan = sharedPreferences.getString("language","english");
+
+        if(current_lan.equals("spanish")){
+        setTheme(R.style.AppTheme1);
+            Toast.makeText(mInstance, "abc", Toast.LENGTH_SHORT).show();
+        }else{
+
+            Toast.makeText(mInstance, "jkadgsd", Toast.LENGTH_SHORT).show();
+            setTheme(R.style.AppTheme);
+        }
+    }
 
     public static synchronized AppController getInstance() {
         return mInstance;
