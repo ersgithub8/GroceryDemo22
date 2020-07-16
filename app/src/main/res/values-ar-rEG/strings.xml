@@ -309,4 +309,7 @@
     <string name="Coupons">كوبونات</string>
     <string name="VIP">كبار الشخصيات</string>
     <string name="FreeShipping">الشحن مجانا</string>
+
+
+    <string name="agree">وافق على الشروط والأحكام الخاصة بنا</string>
 </resources>

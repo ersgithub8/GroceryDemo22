@@ -313,4 +313,6 @@
     <string name="Coupons">Coupons</string>
     <string name="VIP">VIP</string>
     <string name="FreeShipping">Free Shiping</string>
+
+    <string name="agree">Agree our Terms and Conditions</string>
 </resources>

@@ -8,10 +8,13 @@ import android.net.Uri;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -64,6 +67,7 @@ public class RegisterActivity extends AppCompatActivity {
     private RelativeLayout btn_register;
     private TextView tv_phone, tv_name, tv_password, tv_email,lEnglish,lSpanish;
 
+    CheckBox checkBox;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
@@ -102,6 +106,7 @@ public class RegisterActivity extends AppCompatActivity {
         et_email =  findViewById(R.id.et_reg_email);
         et_refer =findViewById(R.id.et_reg_referal);
 
+        checkBox=findViewById(R.id.checkbox1);
 
         tv_password = (TextView) findViewById(R.id.tv_reg_password);
         tv_phone = (TextView) findViewById(R.id.tv_reg_phone);
@@ -112,13 +117,38 @@ public class RegisterActivity extends AppCompatActivity {
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 attemptRegister();
+                if(checkBox.isChecked())
+                 {attemptRegister();}
+                else{
+                    Toast.makeText(RegisterActivity.this, getString(R.string.agree), Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
         f=false;
 
 
+        et_phone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                if(et_phone.getText().toString().length()<4){
+                    et_phone.setText("+966");
+
+                    et_phone.setSelection(et_phone.getText().toString().length());
+                }
+            }
+        });
         //-----------------------------------------------------------------------
         signInButton=findViewById(R.id.gsignin);
         loginButton=findViewById(R.id.loginfb);

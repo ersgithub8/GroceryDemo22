@@ -237,6 +237,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/space_10"
+                    android:text="+966"
                     android:drawableStart="@drawable/phone"
                     android:drawablePadding="@dimen/space_10"
                     android:hint="@string/uphone"
@@ -355,7 +356,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="2"
-                android:layout_marginBottom="@dimen/space_20"
                 >
 
                 <RelativeLayout
@@ -397,8 +397,13 @@
                 </RelativeLayout>
             </LinearLayout>
 
-
-
+            <CheckBox
+                android:id="@+id/checkbox1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/agree"
+                android:layout_marginTop="@dimen/space_10"
+                android:layout_marginBottom="20dp"/>
         </LinearLayout>
                 <RelativeLayout
                     android:id="@+id/btnRegister"

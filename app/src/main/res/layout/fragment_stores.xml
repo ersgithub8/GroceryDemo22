@@ -120,6 +120,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:orientation="horizontal"
+                    android:layout_marginRight="@dimen/space_10"
+                    android:layout_marginLeft="@dimen/space_10"
                     android:weightSum="3">
                     <RelativeLayout
                         android:layout_width="0dp"
@@ -330,7 +332,6 @@
                     android:text="@string/popular"
                     android:visibility="gone"
                     android:textColor="@color/black"
-                    android:fontFamily="@font/bold"
                     android:gravity="center"
                     android:textStyle="bold"
                     android:id="@+id/t2"
