@@ -2,6 +2,7 @@ package gogrocer.tcc;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -38,11 +39,18 @@ public class Rating extends AppCompatActivity {
     TextView ratingtext;
     Button submit;
     EditText description;
-    String productid,userid,status;
+    String productid,userid,status,language="";
     SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPreferences= getSharedPreferences("lan", Context.MODE_PRIVATE);
+        language=sharedPreferences.getString("language","");
+        if (language.equals("spanish")){
+            setTheme(R.style.AppTheme1);
+        }else {
+            setTheme(R.style.AppTheme);
+        }
         setContentView(R.layout.activity_rating);
     back=findViewById(R.id.back);
     ratingBar=findViewById(R.id.ratingbar);

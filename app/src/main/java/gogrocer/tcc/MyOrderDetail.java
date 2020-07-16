@@ -53,6 +53,8 @@ public class MyOrderDetail extends AppCompatActivity {
     private RecyclerView rv_detail_order;
 
     private String sale_id;
+    SharedPreferences sharedPreferences;
+    String language="";
     ImageView back_button;
      SharedPreferences preferences;
     private List<My_order_detail_model> my_order_detail_modelList = new ArrayList<>();
@@ -70,6 +72,13 @@ public class MyOrderDetail extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPreferences= getSharedPreferences("lan", Context.MODE_PRIVATE);
+        language=sharedPreferences.getString("language","");
+        if (language.equals("spanish")){
+            setTheme(R.style.AppTheme1);
+        }else {
+            setTheme(R.style.AppTheme);
+        }
         setContentView(R.layout.fragment_my_order_detail);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

@@ -3,6 +3,7 @@ package gogrocer.tcc;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -52,6 +53,8 @@ public class Paytm extends Activity {
     String mid = "BISHTT45712521385572", order_id = "ORDER_ID", cust_id = "CUST_ID", callback = "https://securegw.paytm.in/theia/paytmCallback?ORDER_ID=<ORDER_ID>", industry_type = "INDUS_TYPE", txn_amount = "TXN_AMOUNT", checksum = "CHECKSUM", mobile = "MOBILE_NO", email = "EMAIL", channel_id = "WAP";
     String website = "APP_STAGING";
     String getuser_id, get_email, gte_phoe;
+    SharedPreferences sharedPreferences;
+    String language="";
     @Override
     protected void attachBaseContext(Context newBase) {
 
@@ -64,6 +67,13 @@ public class Paytm extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPreferences= getSharedPreferences("lan", Context.MODE_PRIVATE);
+        language=sharedPreferences.getString("language","");
+        if (language.equals("spanish")){
+            setTheme(R.style.AppTheme1);
+        }else {
+            setTheme(R.style.AppTheme);
+        }
         setContentView(R.layout.activity_paytm);
         initOrderId();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);

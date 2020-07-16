@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
@@ -43,6 +45,8 @@ public class RechargeWallet extends AppCompatActivity implements PaymentResultLi
     EditText Wallet_Ammount;
     RelativeLayout Recharge_Button;
     String ammount;
+    SharedPreferences sharedPreferences;
+    String language="";
     @Override
     protected void attachBaseContext(Context newBase) {
 
@@ -55,6 +59,13 @@ public class RechargeWallet extends AppCompatActivity implements PaymentResultLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPreferences= getSharedPreferences("lan", Context.MODE_PRIVATE);
+        language=sharedPreferences.getString("language","");
+        if (language.equals("spanish")){
+            setTheme(R.style.AppTheme1);
+        }else {
+            setTheme(R.style.AppTheme);
+        }
         setContentView(R.layout.activity_recharge_wallet);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

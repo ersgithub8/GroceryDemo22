@@ -3,6 +3,8 @@ package gogrocer.tcc;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
@@ -17,9 +19,18 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 public class WebView extends AppCompatActivity {
 android.webkit.WebView webView;
 ProgressBar mProgress;
+SharedPreferences sharedPreferences;
+String language="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPreferences= getSharedPreferences("lan", Context.MODE_PRIVATE);
+        language=sharedPreferences.getString("language","");
+        if (language.equals("spanish")){
+            setTheme(R.style.AppTheme1);
+        }else {
+            setTheme(R.style.AppTheme);
+        }
         setContentView(R.layout.activity_web_view);
 
         webView = findViewById(R.id.webView_id);

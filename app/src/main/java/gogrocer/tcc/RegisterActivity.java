@@ -72,6 +72,7 @@ public class RegisterActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
 
 
+    String language="";
     //-------------------------------------------------
     SignInButton signInButton;
     LoginButton loginButton;
@@ -95,7 +96,13 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // remove title
-
+        sharedPreferences= getSharedPreferences("lan", Context.MODE_PRIVATE);
+        language=sharedPreferences.getString("language","");
+        if (language.equals("spanish")){
+            setTheme(R.style.AppTheme1);
+        }else {
+            setTheme(R.style.AppTheme);
+        }
         setContentView(R.layout.activity_register);
 
         lEnglish = findViewById(R.id.eng);

@@ -40,6 +40,7 @@ public class SplashActivity extends AppCompatActivity {
     private AlertDialog dialog;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+    String language="";
 
     private Session_management sessionManagement;
 
@@ -48,6 +49,13 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 //        requestWindowFeature(Window.FEATURE_NO_TITLE);
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        sharedPreferences= getSharedPreferences("lan", Context.MODE_PRIVATE);
+        language=sharedPreferences.getString("language","");
+        if (language.equals("spanish")){
+            setTheme(R.style.AppTheme1);
+        }else {
+            setTheme(R.style.AppTheme);
+        }
         setContentView(R.layout.activity_splash);
         sessionManagement = new Session_management(SplashActivity.this);
 

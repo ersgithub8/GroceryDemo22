@@ -2,6 +2,7 @@ package gogrocer.tcc;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,6 +21,8 @@ public class My_Order_activity extends AppCompatActivity {
     Toolbar toolbar;
     int padding = 0;
     ImageView back_button;
+    SharedPreferences sharedPreferences;
+    String language="";
     @Override
     protected void attachBaseContext(Context newBase) {
         newBase = LocaleHelper.onAttach(newBase);
@@ -29,6 +32,13 @@ public class My_Order_activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPreferences= getSharedPreferences("lan", Context.MODE_PRIVATE);
+        language=sharedPreferences.getString("language","");
+        if (language.equals("spanish")){
+            setTheme(R.style.AppTheme1);
+        }else {
+            setTheme(R.style.AppTheme);
+        }
         setContentView(R.layout.activity_my__oreder_activity);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

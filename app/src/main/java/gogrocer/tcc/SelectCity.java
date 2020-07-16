@@ -4,6 +4,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -40,6 +42,8 @@ public class SelectCity extends AppCompatActivity {
     String City_Id;
     ArrayList<String> CITY_LIST_ID = new ArrayList<>();
     LinearLayout City_Selected;
+    SharedPreferences sharedPreferences;
+    String language="";
     final Context context = this;
     TextView textView;
     private JsonObject Json;
@@ -58,6 +62,13 @@ public class SelectCity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        sharedPreferences= getSharedPreferences("lan", Context.MODE_PRIVATE);
+        language=sharedPreferences.getString("language","");
+        if (language.equals("spanish")){
+            setTheme(R.style.AppTheme1);
+        }else {
+            setTheme(R.style.AppTheme);
+        }
         setContentView(R.layout.activity_select_city);
 
 

@@ -5,6 +5,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -44,6 +46,8 @@ public class SelectStore extends AppCompatActivity {
     ArrayList<String> Store_LIST_ID = new ArrayList<>();
     private JsonObject Json;
     String GetCityId;
+    SharedPreferences sharedPreferences;
+    String language="";
     ListView listView;
     int count;
 
@@ -61,6 +65,13 @@ public class SelectStore extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        sharedPreferences= getSharedPreferences("lan", Context.MODE_PRIVATE);
+        language=sharedPreferences.getString("language","");
+        if (language.equals("spanish")){
+            setTheme(R.style.AppTheme1);
+        }else {
+            setTheme(R.style.AppTheme);
+        }
         setContentView(R.layout.activity_select_store);
         Store_Selected = (LinearLayout) findViewById(R.id.edit_store);
         textStore = (TextView) findViewById(R.id.store);

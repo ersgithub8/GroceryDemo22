@@ -2,7 +2,9 @@ package gogrocer.tcc;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -25,6 +27,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import Config.BaseURL;
+import Config.SharedPref;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import util.CustomVolleyJsonRequest;
 
@@ -32,10 +35,19 @@ public class OTPActivity extends AppCompatActivity {
 
     private PinView pinView;
     private TextView desc;
+    SharedPreferences sharedPreferences;
+    String language="";
     private String number,email,password,referalcode,name,code;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPreferences= getSharedPreferences("lan", Context.MODE_PRIVATE);
+        language=sharedPreferences.getString("language","");
+        if (language.equals("spanish")){
+            setTheme(R.style.AppTheme1);
+        }else {
+            setTheme(R.style.AppTheme);
+        }
         setContentView(R.layout.activity_otp);
 
 

@@ -55,6 +55,13 @@ public class ForgotActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // remove title
+        preferences= getSharedPreferences("lan", Context.MODE_PRIVATE);
+        lan=preferences.getString("language","");
+        if (lan.equals("spanish")){
+            setTheme(R.style.AppTheme1);
+        }else {
+            setTheme(R.style.AppTheme);
+        }
 
         setContentView(R.layout.activity_forgot);
         // Call the function callInstamojo to start payment here

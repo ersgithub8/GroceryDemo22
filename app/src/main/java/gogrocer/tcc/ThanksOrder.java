@@ -3,6 +3,8 @@ package gogrocer.tcc;
 import android.content.Context;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
 import android.text.Html;
@@ -13,6 +15,8 @@ import android.widget.TextView;
 public class ThanksOrder extends AppCompatActivity {
     RelativeLayout Go_Home, Track_Order;
     TextView tv_info;
+    SharedPreferences sharedPreferences;
+    String language="";
     @Override
     protected void attachBaseContext(Context newBase) {
 
@@ -25,6 +29,13 @@ public class ThanksOrder extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPreferences= getSharedPreferences("lan", Context.MODE_PRIVATE);
+        language=sharedPreferences.getString("language","");
+        if (language.equals("spanish")){
+            setTheme(R.style.AppTheme1);
+        }else {
+            setTheme(R.style.AppTheme);
+        }
         setContentView(R.layout.activity_tahnks_order);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

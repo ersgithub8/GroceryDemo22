@@ -131,15 +131,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPreferences= getSharedPreferences("lan", Context.MODE_PRIVATE);
+        language=sharedPreferences.getString("language","");
+        if (language.equals("spanish")){
+            setTheme(R.style.AppTheme1);
+        }else {
+            setTheme(R.style.AppTheme);
+        }
+
         setContentView(R.layout.activity_main);
         String token = FirebaseInstanceId.getInstance().getToken();
         Log.d("MYTAG", "This is your Firebase token" + token);
-
-//        sharedPreferences= getSharedPreferences("lan", Context.MODE_PRIVATE);
-//
-//         editor = sharedPreferences.edit();
-//
-//         editor.putString("language", "english");
 
 
          bot_cat=findViewById(R.id.bot_categories);

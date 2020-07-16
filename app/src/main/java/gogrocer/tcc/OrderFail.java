@@ -4,15 +4,20 @@ package gogrocer.tcc;
 import android.content.Context;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import Config.SharedPref;
 import Fragment.Payment_fragment;
-
 public class OrderFail extends AppCompatActivity {
     RelativeLayout oredr_fail;
+    SharedPreferences sharedPreferences;
+    String language="";
+
     private Payment_fragment mItemsFragment;
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -24,6 +29,13 @@ public class OrderFail extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPreferences= getSharedPreferences("lan", Context.MODE_PRIVATE);
+        language=sharedPreferences.getString("language","");
+        if (language.equals("spanish")){
+            setTheme(R.style.AppTheme1);
+        }else {
+            setTheme(R.style.AppTheme);
+        }
         setContentView(R.layout.activity_order_fail);
         mItemsFragment = new Payment_fragment();
 

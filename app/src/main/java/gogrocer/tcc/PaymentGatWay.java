@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.RelativeLayout;
@@ -29,6 +31,7 @@ import java.util.Map;
 
 import Config.BaseURL;
 
+import Config.SharedPref;
 import util.ConnectivityReceiver;
 import util.CustomVolleyJsonRequest;
 import util.DatabaseHandler;
@@ -49,6 +52,8 @@ public class PaymentGatWay extends Activity implements PaymentResultListener {
     private String getuser_id = "";
     String text;
     private String user_id = "";
+    SharedPreferences sharedPreferences;
+    String language="";
     @Override
     protected void attachBaseContext(Context newBase) {
 
@@ -61,6 +66,13 @@ public class PaymentGatWay extends Activity implements PaymentResultListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPreferences= getSharedPreferences("lan", Context.MODE_PRIVATE);
+        language=sharedPreferences.getString("language","");
+        if (language.equals("spanish")){
+            setTheme(R.style.AppTheme1);
+        }else {
+            setTheme(R.style.AppTheme);
+        }
         setContentView(R.layout.activity_instamojo_payment);
         sessionManagement = new Session_management(PaymentGatWay.this);
         String email = sessionManagement.getUserDetails().get(BaseURL.KEY_EMAIL);
