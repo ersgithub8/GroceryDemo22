@@ -47,8 +47,8 @@
     <string name="urefrel">Referal Code</string>
     <string name="rating">Rating &amp; Reviews</string>
     <string name="create">Create an Account?</string>
-    <string name="email">Email</string>
-    <string name="password">Password</string>
+    <string name="email">Enter your email or Phone</string>
+    <string name="password">Enter your Password</string>
     <string name="sign_up"><u>Sign Up</u></string>
     <string name="sign_upto">Please Sign Up to continue</string>
     <string name="popular">Popular Products</string>
@@ -90,8 +90,8 @@
     <string name="nav_contact" translatable="false">Contact Us</string>
     <string name="nav_share" translatable="false">Share app</string>
     <string name="nav_logout" translatable="false">Logout</string>
-    <string name="btn_continue" translatable="false"><b>Sign In</b></string>
-    <string name="btn_continueto" ><b>Welcome to \n    j6 Stores</b></string>
+    <string name="btn_continue" translatable="false"><b>Login</b></string>
+    <string name="btn_continueto" ><b>Welcome To \n    j6 Stores</b></string>
     <string name="btn_continueto1" >Please login to continue</string>
     <string name="btn_Register" translatable="false">Sign Up</string>
     <string name="rewards_points" translatable="false">J6 Points</string>
@@ -205,7 +205,7 @@
     <string name="thanks" translatable="false">Thanks Order</string>
     <string name="paytm" translatable="false">Paytm</string>
     <!-- Forgot password -->
-    <string name="forgot"><i>Forgot Password ? </i></string>
+    <string name="forgot"><i>forgot Password ? </i></string>
 
     <!-- Code message and concat  string -->
     <string name="my_order" translatable="false">My Order</string>

@@ -37,8 +37,8 @@
     <string name="urefrel">كود الإحالة</string>
 
 
-    <string name="email">البريد الإلكتروني</string>
-    <string name="password">كلمه السر</string>
+    <string name="email">أدخل بريدك الإلكتروني أو الهاتف</string>
+    <string name="password">ادخل رقمك السري</string>
     <string name="sign_up"><u>سجل</u></string>
     <string name="sign_upto">يرجى الاشتراك للمتابعة</string>
     <string name="btn_continueto" ><b>مرحبا بكم في محلات j6</b></string>
