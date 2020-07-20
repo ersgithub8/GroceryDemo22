@@ -270,7 +270,7 @@ public class Payment_fragment extends Fragment {
             public void onClick(View v) {
                 if (ConnectivityReceiver.isConnected()) {
 
-                    confirm.setEnabled(false);
+//                    confirm.setEnabled(false);
                     if (checkBox_Wallet.isChecked()){
                         getuser_id = sessionManagement.getUserDetails().get(BaseURL.KEY_ID);
 

@@ -152,23 +152,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         final String current_lan = sharedPreferences.getString("language",null);
 
         if (current_lan == null){
-            lEnglish.setBackgroundColor(Color.parseColor("#7abcbc"));
-            lEnglish.setTextColor(Color.parseColor("#ffffff"));
+//            lEnglish.setBackgroundColor(Color.parseColor("#7abcbc"));
+//            lEnglish.setTextColor(Color.parseColor("#ffffff"));
             ll1.setBackgroundResource(R.drawable.login_bg);
         }
         else if (current_lan.equals("english")){
-            lEnglish.setBackgroundColor(Color.parseColor("#7abcbc"));
-            lEnglish.setTextColor(Color.parseColor("#ffffff"));
+//            lEnglish.setBackgroundColor(Color.parseColor("#7abcbc"));
+//            lEnglish.setTextColor(Color.parseColor("#ffffff"));
             ll1.setBackgroundResource(R.drawable.login_bg);
         }
         else if (current_lan.equals("spanish")){
-            lSpanish.setBackgroundColor(Color.parseColor("#7abcbc"));
-            lSpanish.setTextColor(Color.parseColor("#ffffff"));
+//            lSpanish.setBackgroundColor(Color.parseColor("#7abcbc"));
+//            lSpanish.setTextColor(Color.parseColor("#ffffff"));
             ll1.setBackgroundResource(R.drawable.login_bg1);
         }
         else {
-            lEnglish.setBackgroundColor(Color.parseColor("#7abcbc"));
-            lEnglish.setTextColor(Color.parseColor("#ffffff"));
+//            lEnglish.setBackgroundColor(Color.parseColor("#7abcbc"));
+//            lEnglish.setTextColor(Color.parseColor("#ffffff"));
             ll1.setBackgroundResource(R.drawable.login_bg);
         }
 

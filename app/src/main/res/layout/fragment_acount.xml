@@ -19,30 +19,35 @@
         android:id="@+id/laddan"
         android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
-        android:background="@color/colorPrimary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         >
         <TextView
-            android:background="@color/white"
             android:layout_margin="1dp"
             android:id="@+id/eng"
             android:padding="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="English"
-            android:textColor="@color/green"
+            android:textColor="@color/white"
             />
         <TextView
-            android:background="@color/white"
+            android:layout_margin="1dp"
+            android:padding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/"
+            android:textColor="@color/white"
+            />
+        <TextView
             android:layout_margin="1dp"
             android:id="@+id/arab"
             android:padding="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="العربیة"
-            android:textColor="@color/green"
+            android:textColor="@color/white"
             />
     </LinearLayout>
     <LinearLayout
@@ -329,48 +334,81 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="3"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
             android:layout_marginTop="15dp"
             android:layout_below="@id/nav_login"
             android:id="@+id/l1"
             >
 
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/rate"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="@dimen/space_5"
+                    android:src="@drawable/star"/>
             <TextView
                 android:layout_margin="@dimen/space_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/rate"
-                android:id="@+id/rate"
                 android:textAlignment="center"
                 android:textSize="20sp"
                 android:textColor="@color/black"
-                android:drawableTop="@drawable/group_star"
-                android:layout_weight="1"
                 />
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/share"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="@dimen/space_5"
+                android:src="@drawable/share"/>
             <TextView
                 android:layout_margin="@dimen/space_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/nav_share"
-                android:id="@+id/share"
                 android:textSize="20sp"
                 android:textColor="@color/black"
                 android:textAlignment="center"
-                android:drawableTop="@drawable/group_share"
-                android:layout_weight="1"
                 />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/feedback"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="@dimen/space_5"
+                android:src="@drawable/thumb"/>
             <TextView
                 android:layout_margin="@dimen/space_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/feedback"
-                android:id="@+id/feedback"
                 android:textAlignment="center"
                 android:textSize="20sp"
                 android:textColor="@color/black"
-                android:drawableTop="@drawable/thumb"
-                android:layout_weight="1"
                 />
-
+        </LinearLayout>
         </LinearLayout>
 
         <TextView

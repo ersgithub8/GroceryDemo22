@@ -41,14 +41,7 @@ public class AppController extends Application {
 
         final String current_lan = sharedPreferences.getString("language","english");
 
-        if(current_lan.equals("spanish")){
-        setTheme(R.style.AppTheme1);
-            Toast.makeText(mInstance, "abc", Toast.LENGTH_SHORT).show();
-        }else{
 
-            Toast.makeText(mInstance, "jkadgsd", Toast.LENGTH_SHORT).show();
-            setTheme(R.style.AppTheme);
-        }
     }
 
     public static synchronized AppController getInstance() {

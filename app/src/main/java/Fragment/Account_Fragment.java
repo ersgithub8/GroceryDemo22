@@ -55,12 +55,13 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class Account_Fragment extends Fragment {
 
-    TextView my_order,my_wallet,j6points,my_profile,logout,rate,share,feedback,login,lEnglish,lSpanish,top_selling,deals;
+    TextView my_order,my_wallet,j6points,my_profile,logout,login,lEnglish,lSpanish,top_selling,deals;
     private Session_management sessionManagement;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
-    LinearLayout rewards,walletl;
+
+    LinearLayout rewards,walletl,rate,share,feedback;
 
 
     TextView name,phone,reward,wallet,cart;
@@ -91,9 +92,12 @@ public class Account_Fragment extends Fragment {
         my_profile=view.findViewById(R.id.nav_my_profile);
         logout=view.findViewById(R.id.nav_logout);
         login=view.findViewById(R.id.nav_login);
+
         rate=view.findViewById(R.id.rate);
         share=view.findViewById(R.id.share);
         feedback=view.findViewById(R.id.feedback);
+
+
         name=view.findViewById(R.id.tv_header_name);
         phone=view.findViewById(R.id.tv_adres_phone);
         reward=view.findViewById(R.id.reward);
@@ -129,20 +133,20 @@ public class Account_Fragment extends Fragment {
         final String current_lan = sharedPreferences.getString("language",null);
 
         if (current_lan == null){
-            lEnglish.setBackgroundColor(Color.parseColor("#7abcbc"));
-            lEnglish.setTextColor(Color.parseColor("#ffffff"));
+//            lEnglish.setBackgroundColor(Color.parseColor("#7abcbc"));
+//            lEnglish.setTextColor(Color.parseColor("#ffffff"));
         }
         else if (current_lan.equals("english")){
-            lEnglish.setBackgroundColor(Color.parseColor("#7abcbc"));
-            lEnglish.setTextColor(Color.parseColor("#ffffff"));
+//            lEnglish.setBackgroundColor(Color.parseColor("#7abcbc"));
+//            lEnglish.setTextColor(Color.parseColor("#ffffff"));
         }
         else if (current_lan.equals("spanish")){
-            lSpanish.setBackgroundColor(Color.parseColor("#7abcbc"));
-            lSpanish.setTextColor(Color.parseColor("#ffffff"));
+//            lSpanish.setBackgroundColor(Color.parseColor("#7abcbc"));
+//            lSpanish.setTextColor(Color.parseColor("#ffffff"));
         }
         else {
-            lEnglish.setBackgroundColor(Color.parseColor("#7abcbc"));
-            lEnglish.setTextColor(Color.parseColor("#ffffff"));
+//            lEnglish.setBackgroundColor(Color.parseColor("#7abcbc"));
+//            lEnglish.setTextColor(Color.parseColor("#ffffff"));
         }
 
         editor = sharedPreferences.edit();
