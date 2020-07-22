@@ -89,6 +89,10 @@
     <string name="btn_login">تسجيل الدخول</string>
     <string name="btn_send">إرسال</string>
     <string name="btn_continue">تسجيل الدخول</string>
+    <string name="searchtext2">ابحث عن المنتجات والعلامات التجارية والمزيد</string>
+    <string name="fav">المفضلة</string>
+    <string name="MYCart">سلتي</string>
+    <string name="cat"> التصنيفات</string>
     <string name="btn_Register">سجل</string>
 <string name="continue_bt">استمرار</string>
     <string name="tv_login_note">قبل الاستمرار في التطبيق ، يجب عليك التحقق من رقم هاتفك المحمول. سيرسل نظامنا رمز OTP في رقم الهاتف المحمول المسجل</string>

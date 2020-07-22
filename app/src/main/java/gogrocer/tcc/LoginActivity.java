@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private RelativeLayout btn_continue;
     LinearLayout ll1;
     private TextInputEditText et_password, et_email;
-    private TextView tv_password, tv_email,btn_register, btn_forgot,lEnglish,lSpanish;
+    private TextView tv_password, tv_email,btn_register, btn_forgot,lEnglish,lSpanish,guest1;
     private Session_management sessionManagement;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -112,6 +112,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         
         lEnglish = findViewById(R.id.eng);
+        guest1 = findViewById(R.id.guest);
         ll1 = findViewById(R.id.ll1);
         lSpanish = findViewById(R.id.arab);
         et_password =  findViewById(R.id.et_login_pass);
@@ -558,6 +559,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void guest(View view) {
+        guest1.setBackgroundResource(R.drawable.guestbg);
         Intent startmain = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(startmain);
         finishAffinity();

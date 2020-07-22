@@ -7,16 +7,26 @@
     android:orientation="vertical"
     tools:context="Fragment.Category_Fragment">
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@color/green"
-        android:text="  Categories"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:padding="7dp"
-        />
+        android:layout_height="50dp"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/green"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:text="@string/cat"
+            android:textColor="@color/white"
+            android:textSize="23sp"
+
+            android:gravity="center_vertical"/>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

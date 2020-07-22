@@ -52,8 +52,10 @@
     <string name="urefrel">Referal Code</string>
 
     <string name="email">Enter Your email and Password</string>
-
-
+    <string name="searchtext2">Search For Products,Brands and More</string>
+    <string name="fav"> Favourite</string>
+    <string name="cat"> Categories</string>
+    <string name="MYCart">  MY Cart</string>
     <string name="action_settings">Configuraciones</string>
     <string name="expire">Expired</string>
     <string name="no_product">No Products Available</string>

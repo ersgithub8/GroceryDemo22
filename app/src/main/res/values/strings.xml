@@ -5,6 +5,8 @@
     <string name="fav_cat">Favourite\nCategories</string>
     <string name="fav_prod">Favourite\n Products</string>
 
+    <string name="fav"> Favourite</string>
+    <string name="cat"> Categories</string>
 
     <string name="wallet_ammount">My Wallet Ammount : </string>
     <string name="j6_point">J6 Points : </string>
@@ -33,7 +35,9 @@
     <string name="caty">Categories</string>
     <string name="favourt">Favourite</string>
     <string name="Cart">Cart</string>
+    <string name="MYCart"> MY Cart</string>
     <string name="Me">Account</string>
+    <string name="searchtext2">Search For Products,Brands and More</string>
 
 
     <string name="app_name" translatable="false">J6</string>

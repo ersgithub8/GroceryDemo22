@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/green"
+    android:background="@color/colorPrimary"
     tools:context="gogrocer.tcc.RegisterActivity">
 
     <ScrollView
@@ -19,33 +19,37 @@
             <LinearLayout
                 android:id="@+id/laddan"
                 android:layout_margin="10dp"
-                android:background="@color/green"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 >
                 <TextView
-                    android:background="@color/white"
                     android:layout_margin="1dp"
                     android:id="@+id/eng"
                     android:padding="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="English"
-                    android:textColor="@color/green"
+                    android:textColor="@color/white"
                     />
                 <TextView
-                    android:background="@color/white"
+                    android:layout_margin="1dp"
+                    android:padding="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="/"
+                    android:textColor="@color/white"
+                    />
+                <TextView
                     android:layout_margin="1dp"
                     android:id="@+id/arab"
                     android:padding="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="العربیة"
-                    android:textColor="@color/green"
+                    android:textColor="@color/white"
                     />
             </LinearLayout>
-
 
             <TextView
                 android:gravity="center"

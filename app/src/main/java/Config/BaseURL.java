@@ -51,12 +51,12 @@ public class BaseURL {
     public static final String CITY_ID = "CITY_ID";
     public static final String STORE_ID = "STORE_ID";
 
-    public static String BASE_URL = "https://freedomchat.finalyearprojects.website/";
+    public static String BASE_URL = "https://project2.erstechno.online/";
 
     public static String IMG_SLIDER_URL = BASE_URL + "uploads/sliders/";
     public static String IMG_CATEGORY_URL = BASE_URL + "uploads/category/";
     public static String IMG_PRODUCT_URL = BASE_URL + "uploads/products/";
-    public static String IMG_STORE_URL = "https://freedomchat.finalyearprojects.website//uploads/profile/";
+    public static String IMG_STORE_URL = "https://project2.erstechno.online/uploads/profile/";
 
     public static String IMG_PROFILE_URL = BASE_URL + "uploads/profile/";
     public static String GET_SLIDER_URL = BASE_URL + "index.php/api/get_sliders";

@@ -8,14 +8,26 @@
     android:orientation="vertical"
     tools:context="Fragment.Favourite">
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/green"
-        android:text="  Favourites"
-        android:textColor="@color/white"
-        android:textSize="23sp"
-        android:gravity="center_vertical"/>
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/green"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:text="@string/fav"
+            android:textColor="@color/white"
+            android:textSize="23sp"
+
+            android:gravity="center_vertical"/>
+    </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
