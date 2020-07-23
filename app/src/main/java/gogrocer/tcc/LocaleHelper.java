@@ -64,6 +64,7 @@ public class LocaleHelper {
 
             Configuration configuration = context.getResources().getConfiguration();
             configuration.setLocale(locale);
+            configuration.setLayoutDirection(locale);
 
             return context.createConfigurationContext(configuration);
         }
@@ -78,6 +79,7 @@ public class LocaleHelper {
 
             Configuration configuration = resources.getConfiguration();
             configuration.locale = locale;
+            configuration.setLayoutDirection(locale);
 
             resources.updateConfiguration(configuration, resources.getDisplayMetrics());
 
