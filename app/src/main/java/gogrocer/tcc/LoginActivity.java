@@ -1,16 +1,22 @@
 package gogrocer.tcc;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.net.Uri;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -25,6 +31,7 @@ import com.android.volley.Response;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
+import com.bumptech.glide.load.engine.Resource;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
@@ -51,6 +58,7 @@ import org.json.JSONObject;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import Config.BaseURL;
@@ -84,7 +92,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     String first_names="",last_names="",email="",id="",imgurl="",phone="";
     //---------------------------------------
 
-
     String language="";
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -105,7 +112,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             setTheme(R.style.AppTheme);
         }
         setContentView(R.layout.activity_login);
-
 
 
         token = FirebaseInstanceId.getInstance().getToken();
@@ -173,6 +179,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             ll1.setBackgroundResource(R.drawable.login_bg);
         }
 
+
         lEnglish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -182,6 +189,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
                 else {
                     LocaleHelper.setLocale(getApplication(), "en");
+
                     getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
 
                     editor.putString("language", "english");
@@ -198,8 +206,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Toast.makeText(getApplicationContext(),"بالفعل باللغة العربية",Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    LocaleHelper.setLocale(getApplication(), "ar");
+
+                    LocaleHelper.setLocale(LoginActivity.this, "es");
+
                     getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+
                     SharedPreferences.Editor editor = sharedPreferences.edit();
 
                     editor.putString("language", "spanish");

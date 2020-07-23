@@ -1,258 +1,575 @@
 <resources>
+    <string name="wallet_ammount">مبلغ محفظتي : </string>
+    <string name="j6_point">نقاط J6 : </string>
 
-    <string name="wallet_ammount">My Wallet Ammount : </string>
-    <string name="j6_point">J6 Points : </string>
-    <string name="fav_store">Favourite\n Stores</string>
-    <string name="fav_cat">Favourite\nCategories</string>
-    <string name="fav_prod">Favourite\n Products</string>
+    <string name="fav_store">المتاجر المفضلة</string>
+    <string name="fav_cat">الفئات المفضلة</string>
+    <string name="fav_prod">المنتجات المفضلة</string>
 
-    <string name="term_and_conditions">Terms and \nConditions</string>
-    <string name="privacy">Privacy \nPolicy</string>
-    <string name="return_p">Return \nPolicy</string>
-    <string name="help_centre">Help \nCentre</string>
+    <string name="term_and_conditions">الأحكام والشروط</string>
+    <string name="privacy">سياسة خاصة</string>
+    <string name="return_p">سياسة العائدات</string>
+    <string name="help_centre">مركز المساعدة</string>
 
 
-    <string name="VerificationCode">Verification Code</string>
-    <string name="VerificationCodeDesc">Please enter verification code sent to</string>
-    <string name="no_record">No Record Found</string>
+    <string name="VerificationCode">شيفرة التأكيد</string>
+    <string name="VerificationCodeDesc">يرجى إدخال رمز التحقق المرسلة إلى</string>
+    <string name="no_fav">لا يوجد المفضلة المتاحة</string>
+    <string name="no_record">لا يوجد سجلات</string>
 
-    <string name="top_selling">Top Selling</string>
-    <string name="Deal">Deals</string>
+    <string name="Deal">صفقات</string>
+    <string name="expire">منتهية الصلاحية</string>
+    <string name="no_product">لا توجد منتجات متاحة</string>
 
-    <string name="stores">Stores</string>
-    <string name="caty">Categories</string>
-    <string name="favourt">Favourite</string>
-    <string name="Cart">Cart</string>
-    <string name="Me">Account</string>
-    <string name="popular">Popular products</string>
+    <string name="top_selling">الأكثر مبيعا</string>
 
-    <string name="mblnumber">Enter your mobile number</string>
+
+    <string name="mblnumber">أدخل رقم هاتفك المحمول</string>
+    <string name="stores">متجر</string>
+    <string name="caty">التصنيفات</string>
+    <string name="favourt">مفضل</string>
+    <string name="Cart">عربة التسوق</string>
+    <string name="Me">الحساب</string>
+
+    <string name="uname">اسم</string>
+    <string name="uphone">هاتف</string>
+    <string name="urefrel">كود الإحالة</string>
+
+
+    <string name="email">أدخل بريدك الإلكتروني أو الهاتف</string>
+    <string name="password">ادخل رقمك السري</string>
+    <string name="sign_up"><u>سجل</u></string>
+    <string name="sign_upto">يرجى الاشتراك للمتابعة</string>
+    <string name="btn_continueto" ><b>مرحبا بكم في محلات j6</b></string>
+    <string name="btn_continueto1" >الرجاء تسجيل الدخول للمتابعة</string>
+
+    <string name="create">انشئ حساب؟</string>
+    <string name="guest">زائر</string>
+
+
     <string name="app_name">J6</string>
-    <string name="name">GoGrocer</string>
-    <string name="currency"> ر.س</string>
-    <string name="title_activity_main">Actividad principal</string>
-    <string name="txtCredits"><a href="http://www.google.com">Google</a></string>
-    <string name="guest">Guest</string>
-    <string name="or_sign">Or Sign In as a</string>
-    <string name="sign_upto"><u>Please Sign Up to continue</u></string>
-    <string name="btn_continueto" ><b>Welcome to j6 Stores</b></string>
-    <string name="btn_continueto1" >Please login to continus</string>
-    <string name="create">Create an Account?</string>
-    <string name="rate" translatable="false">Rate</string>
-    <string name="feedback" translatable="false">Feedback</string>
-
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="password">Password</string>
-    <string name="sign_up"><u>Sign Up</u></string>
-
-    <string name="rating">Rating &amp; Reviews</string>
-    <string name="uname">Name</string>
-    <string name="uphone">Phone</string>
-    <string name="urefrel">Referal Code</string>
-
-    <string name="email">Enter Your email and Password</string>
-    <string name="searchtext2">Search For Products,Brands and More</string>
-    <string name="fav"> Favourite</string>
-    <string name="cat"> Categories</string>
-    <string name="MYCart">  MY Cart</string>
-    <string name="action_settings">Configuraciones</string>
-    <string name="expire">Expired</string>
-    <string name="no_product">No Products Available</string>
-    <string name="nav_terms">Términos y Privacidad</string>
-    <string name="start_time">Start Time : </string>
-    <string name="end_time">End Time : </string>
-    <string name="no_fav">No Favourite Available</string>
-
-
-    <!-- string.xml -->
-    <string name="nav_home">Comprar Ahora</string>
-    <string name="nav_user">Usuario</string>
-    <string name="nav_order">Mis ordenes</string>
-    <string name="nav_profile">Mi Perfil</string>
-    <string name="nav_chat">Conversa con Nosotros</string>
-    <string name="nav_support">Apoyo</string>
-    <string name="nav_about">Sobre Nosotros</string>
-    <string name="nav_review">Revise nosotros</string>
-    <string name="nav_contact">Contáctenos</string>
-    <string name="nav_share">Compartir con amigos</string>
-    <string name="nav_logout">Cerrar sesión</string>
-    <string name="tv_out" translatable="false">Out of Stock</string>
-
+    <string name="nav_terms">الشروط والخصوصية</string>
+    <string name="nav_user">"المستعمل "</string>
+    <string name="or_sign">أو تسجيل الدخول كـ</string>
+    <string name="popular">المنتجات الشعبية</string>
+    <string name="rating">التقييم والمراجعات</string>
+    <string name="nav_home">تسوق الآن </string>
+    <string name="nav_profile">الملف الشخصي\n</string>
+    <string name="nav_order">طلباتي\n</string>
+    <string name="nav_order_note">مذكرة الطلب(اختياري):\n</string>
+    <string name="nav_note">أدخل أي ملاحظة إضافية (اختياري)\n</string>
+    <string name="tv_toolbar_name">المكافآت\n</string>
+    <string name="nav_chat">دردش معنا</string>
+    <string name="nav_support">الدعم</string>
+    <string name="nav_about">معلومات عنا</string>
+    <string name="nav_review">اكتب عنا</string>
+    <string name="tv_mywall">إعادة شحن المحفظة</string>
+    <string name="nav_contact">اتصل بنا</string>
+    <string name="nav_share">شارك مع الاصدقاء</string>
+    <string name="nav_logout">الخروج</string>
+    <string name="tv_product_name">منتجات</string>
+    <string name="shop_now">تسوق الآن</string>
+    <string name="condition">الشروط</string>
+    <string name="tv_toolbar_price">السعر</string>
+    <string name="tv_toolbar_redeem">استبدال النقاط</string>
+    <string name="thanks">شكراً لك</string>
+    <string name="paytm">Paytm</string>
+    <string name="offer">عرض</string>
+    <string name="start_time">وقت البدء : </string>
+    <string name="end_time">وقت النهاية : </string>
+    <string name="wall_am">محفظتي</string>
+    <string name="tv_out">إنتهى من المخزن</string>
+    <string name="tv_rech">أدخل المبلغ للمحفظة</string>
+    <string name="tv_rech_wall"> تعبئة الرصيد</string>
     <!-- activity_login.xml -->
-    <string name="et_login_phone_hint">Número de móvil (obligatorio)</string>
-    <string name="tv_login_email">Correo electronico (requerido)</string>
-    <string name="tv_login_password">Se requiere contraseña)</string>
-    <string name="btn_login">Iniciar sesión</string>
-    <string name="btn_send">Enviar</string>
-    <string name="tv_login_note">Antes de continuar con la aplicación, debe verificar su número de móvil. Nuestro sistema le enviará el código OTP en el número de móvil registrado</string>
+    <string name="et_login_phone_hint">رقم الجوال</string>
+    <string name="tv_login_email">البريد الإلكتروني</string>
+    <string name="tv_login_password">كلمة المرور</string>
+    <string name="btn_login">تسجيل الدخول</string>
+    <string name="btn_send">إرسال</string>
+    <string name="btn_continue">تسجيل الدخول</string>
+    <string name="searchtext2">ابحث عن المنتجات والعلامات التجارية والمزيد</string>
+    <string name="fav">المفضلة</string>
+    <string name="MYCart">سلتي</string>
+    <string name="cat"> التصنيفات</string>
+    <string name="btn_Register">سجل</string>
+    <string name="continue_bt">استمرار</string>
+    <string name="tv_login_note">قبل الاستمرار في التطبيق ، يجب عليك التحقق من رقم هاتفك المحمول. سيرسل نظامنا رمز OTP في رقم الهاتف المحمول المسجل</string>
 
     <!-- activity_register.xml -->
-    <string name="tv_reg">Registro</string>
-    <string name="tv_reg_name_hint">Nombre (requerido)</string>
-    <string name="tv_reg_pincode">Pincode / Código de área / Zip (obligatorio)</string>
-    <string name="tv_reg_socity">Sociedad / Piso (requerido</string>
-    <string name="btn_reg_socity_choose">Elige la sociedad ...</string>
-    <string name="tv_reg_house">Número de casa (obligatorio)</string>
-    <string name="btn_reg_update">Actualización del perfil</string>
-    <string name="et_reg_search">Buscar Sociedad ...</string>
-    <string name="tv_reg_note">Nota: servicio disponible solo para RAJKOT</string>
-    <string name="tv_reg_address">Dirección (requerida)</string>
-    <string name="et_reg_address">Completa tu direccion</string>
-
+    <string name="tv_reg"> إنشاء حساب جديد</string>
+    <string name="tv_reg_name_hint">اسم المستلم</string>
+    <string name="tv_reg_pincode">الرمز السري / رمز المنطقة / الرمز البريدي</string>
+    <string name="tv_reg_socity">المنطقة</string>
+    <string name="btn_reg_socity_choose">اختر المنطقة</string>
+    <string name="tv_reg_house">رقم المنزل</string>
+    <string name="apply">تطبيق</string>
+    <string name="order_amount">قيمة الطلب</string>
+    <string name="wallet">استخدام المحفظة</string>
+    <string name="coupon_used">استخدام الكوبون</string>
+    <string name="add">العنوان</string>
+    <string name="amount_pa">المبلغ المستحق</string>
+    <string name="add_del">أضف عنوان التسليم</string>
+    <string name="btn_reg_update">تحديث الملف الشخصي</string>
+    <string name="et_reg_search"> البحث في المناطق</string>
+    <string name="et_sea">اكتب للبحث</string>
+    <string name="rate" translatable="false">تطبيق معدل</string>
+    <string name="feedback" translatable="false">ردود الفعل</string>
+    <string name="tv_reg_note">ملاحظة: الخدمة متاحة فقط لـ RAJKOT</string>
+    <string name="tv_reg_address">العنوان (مطلوب)</string>
+    <string name="et_reg_address">أكمل عنوانك</string>
+    <string name="use">استخدم</string>
+    <string name="currency">ریال</string>
+    <string name="cash">الدفع عند الاستلام</string>
+    <string name="checkout">الدفع</string>
+    <string name="card">بطاقات</string>
+    <string name="promo">رمز ترويجي</string>
+    <string name="coupon">كوبون</string>
+    <string name="net">بنك إلكتروني</string>
+    <string name="debit">بطاقة الخصم / الائتمان</string>
+    <string name="store">الدفع في المتجر</string>
     <!-- fragment_cart.xml -->
-    <string name="tv_cart_title">Carro</string>
-    <string name="tv_cart_clear">Borrar todo producto</string>
-    <string name="tv_cart_checkout">Continuar con el registro</string>
-    <string name="tv_cart_total">Total:\u0020</string>
-    <string name="tv_cart_item">Artículos:\u0020</string>
-    <string name="Remove">Remove</string>
+    <string name="tv_cart_title">عربة التسوق</string>
+    <string name="tv_cart_clear">حذف كل المنتجات</string>
+    <string name="tv_cart_checkout">تواصل مع التسجيل</string>
+    <string name="tv_cart_total">المجموع:</string>
+    <string name="total">المجموع :</string>
+    <string name="tv_cart_item">العناصر:</string>
     <string name="tv_cart_rs">\u0020</string>
-    <string name="continue_sh">Continue Shoping</string>
-
+    <string name="rewards_points">نقاط المكافآت</string>
     <!-- fragment_delivery_time.xml -->
-    <string name="tv_del_title">Fecha / hora de entrega</string>
-    <string name="tv_del_address">Dirección de entrega</string>
-    <string name="et_del_address_hint">Ingrese la dirección de entrega ..</string>
-    <string name="tv_del_continue">Continuar con el tiempo</string>
-    <string name="tv_del_date">Seleccione la fecha de entrega</string>
-    <string name="tv_del_time">Seleccione el tiempo de entrega</string>
-    <string name="tv_del_date_time">Datos de entrega / Hora</string>
-    <string name="tv_total_item_amount">Total de artículos y cantidad</string>
-    <string name="tv_total_total">Cantidad total</string>
+    <string name="tv_del_title">تاريخ / وقت التسليم</string>
+    <string name="tv_del_address">عنوان التسليم</string>
+    <string name="et_del_address_hint">أدخل عنوان التسليم ..</string>
+    <string name="tv_del_continue">استمرار</string>
+    <string name="tv_del_date">اختر تاريخ التسليم</string>
+    <string name="tv_del_time">حدد وقت التسليم</string>
+    <string name="tv_del_date_time">بيانات التاريخ/ الوقت</string>
+    <string name="tv_total_item_amount">مجموع البنود والكمية</string>
+    <string name="tv_total_total">المبلغ الإجمالي</string>
 
     <!-- fragment_home.xml -->
-    <string name="tv_home_cat">Productos</string>
-    <string name="tv_home_view">Ver todo></string>
+    <string name="tv_home_cat">المنتجات</string>
+    <string name="tv_home_view">شاهد الكل</string>
 
     <!-- fragment_Wallet.xml -->
-    <string name="tv_app_name">Billetera</string>
-    <string name="wall_am" >My Wallet</string>
+    <string name="tv_app_name">المحفظة</string>
     <!-- fragment_Reward.xml -->
-    <string name="tv_toolbar_name">Recompensas</string>
     <!-- row_product_rv.xml -->
-    <string name="tv_pro_add">Añadir</string>
-    <string name="tv_pro_update">Actualizar</string>
-    <string name="tv_pro_price">Precio por\u0020</string>
+    <string name="selling_product">أعلى بيع المنتجات</string>
+    <string name="view_all">عرض الكل</string>
+    <string name="deals">صفقات اليوم</string>
+    <string name="shop_by_category">تسوق حسب الاقسام</string>
+    <string name="sponsered">برعاية</string>
+    <string name="feature">العلامة التجارية المميزة</string>
+
+
+    <string name="tv_pro_add">أضف</string>
+    <string name="tv_pro_update">تحديث</string>
+    <string name="tv_pro_price">سعر ل\u0020</string>
     <string name="tv_pro_rs">\u0020Rs.\u0020</string>
-    <string name="tv_pro_total">Total: </string>
+    <string name="tv_pro_total">مجموع: </string>
 
     <!-- fragment_confirm_order.xml -->
-    <string name="tv_conf_order_title">Detalles del pago</string>
+    <string name="tv_conf_order_title">تفاصيل الدفع</string>
 
     <!-- fragment_my_order_detail.xml -->
-    <string name="tv_order_cancle">Cancelar orden</string>
-    <string name="tv_order_summery">Resumen</string>
-    <string name="tv_order_total">Total: Rs.</string>
-    <string name="tv_order_qty">Qty</string>
-    <string name="tv_order_rs">Rs.</string>
+    <string name="tv_order_cancle">إلغاء الطلب</string>
+    <string name="tv_order_summery">التقرير</string>
+    <string name="tv_order_total">المجموع : ر.س.</string>
+    <string name="tv_order_qty">الكمية</string>
+    <string name="tv_order_rs">ر.س.</string>
 
     <!-- fragment_order_thanks.xml -->
-    <string name="tv_thanks_title">Gracias por su orden.</string>
-    <string name="tv_thanks_home">Continuar a casa</string>
-    <string name="tv_thanks_order">Seguir mi orden</string>
+    <string name="tv_thanks_title">شكراً على طلبك</string>
+    <string name="tv_thanks_home">عودة للرئيسية</string>
+    <string name="tv_thanks_order">تتبع الطلب</string>
 
     <!-- Forgot password -->
-    <string name="forgot">Se te olvidó tu contraseña ?</string>
+    <string name="forgot">نسيت كلمة المرور؟</string>
 
     <!-- Code message and concat  string -->
-    <string name="my_order">Mi pedido</string>
-    <string name="edit_profile">Editar perfil</string>
-    <string name="delivery">Entrega</string>
-    <string name="delivery_date">Fecha de entrega:</string>
-    <string name="please_select_date">Por favor selecciona la fecha</string>
-    <string name="no_rcord_found">Ningún record fue encontrado</string>
-    <string name="connection_time_out">El tiempo de conexión expiro</string>
-    <string name="add_delivery_address">Agregar dirección de entrega</string>
-    <string name="order_now">Ordenar ahora</string>
-    <string name="payment_detail">Detalles del pago</string>
-    <string name="delivery_time">El tiempo de entrega</string>
-    <string name="please_enter_pincode">Por favor ingrese el código PIN</string>
-    <string name="receiver_mobile_number">Número móvil del receptor (obligatorio)</string>
-    <string name="receiver_name_req">Nombre del receptor (obligatorio)</string>
-    <string name="phone_too_short">Teléfono demasiado corto</string>
-    <string name="please_add_address">Por favor agregue dirección</string>
-    <string name="please_select_address">Por favor selecciona la dirección</string>
-    <string name="please_select_date_time">Por favor seleccione la fecha y la hora</string>
-    <string name="profile_updated">Perfil actualizado</string>
-    <string name="uploading_profile_data">Subiendo datos de perfil</string>
-    <string name="cancle_order_note">Are you sure! you want to cancle order ?</string>
-    <string name="no">No</string>
-    <string name="yes">Sí</string>
-    <string name="thank_you">Gracias</string>
-    <string name="payment">Pago</string>
-    <string name="password_too_short">Contraseña demasiado corta</string>
-    <string name="invalide_email_address">Dirección de correo electrónico de Invalide</string>
-    <string name="no_internet">¡Lo siento! No conectado a internet</string>
-    <string name="order_no">N º de pedido.:\u0020</string>
-    <string name="pending">Pendiente</string>
-    <string name="confirm">Confirmar</string>
-    <string name="delivered">Entregado</string>
-    <string name="outfordeliverd">Salida para entrega Listo para recoger</string>
-    <string name="cancle">Cancle</string>
-    <string name="date">Fecha:\u0020</string>
-    <string name="time">Hora:\u0020</string>
-    <!--Method String-->
-    <string name="method_one">Recoger</string>
-    <string name="method_two">BACALAO</string>
-    <string name="method_three">Tarjetas</string>
-    <string name="method_four">NetBanking</string>
+    <string name="my_order">طلباتي</string>
+    <string name="edit_profile">تحرير الملف الشخصي</string>
+    <string name="delivery">التسليم</string>
+    <string name="delivery_date">تاريخ التسليم:</string>
+    <string name="please_select_date">يرجى تحديد التاريخ</string>
+    <string name="no_rcord_found">تم العثور على أي سجل</string>
+    <string name="connection_time_out">وقت الاتصال تنتهي</string>
+    <string name="add_delivery_address">أضف عنوان التسليم</string>
+    <string name="order_now">اطلب الآن</string>
+    <string name="payment_detail">تفاصيل الدفع</string>
+    <string name="failed">عذرا ، لقد فشل الدفع الخاص بك</string>
+    <string name="again">حاول مرة اخرى</string>
+    <string name="add_cart">أضف العناصر إليها الآن</string>
+    <string name="cart">عربة التسوق</string>
+    <string name="rech_wallet">إعادة تعبئة المحفظة</string>
+    <string name="retry">إعادة المحاولة</string>
+    <string name="sure_del">سيتم حذف كل محتويات عربة التسوق
+               هل أنت متأكد ؟</string>
+    <string name="order_fail">فشلت العملية</string>
+    <string name="cart_em">عربة التسوق فارغة!</string>
+    <string name="delivery_time">وقت التسليم</string>
+    <string name="place_on">التاريخ</string>
+    <string name="date_d">تاريخ:</string>
+    <string name="tracking_st">حالة التتبع</string>
+    <string name="tt_t">المجموع</string>
+    <string name="time_t">الوقت:</string>
+    <string name="order_mode">حالة الطلب</string>
+    <string name="order_id">رقم الطلب</string>
+    <string name="order_detail">تفاصيل الطلب</string>
 
-    <string name="search_msg">Search Stores and Products</string>
-    <string name="change_password">Cambia la contraseña</string>
-    <string name="old_password">Contraseña anterior (obligatorio)</string>
-    <string name="new_password">Nueva contraseña (requerida)</string>
-    <string name="confirm_password">Confirmar contraseña (obligatorio)</string>
-    <string name="password_not_same">Confirmar contraseña y nueva contraseña no es lo mismo.</string>
-    <string name="delivery_charge">Los gastos de envío.:\u0020</string>
-    <string name="amount">Cantidad:\u0020</string>
-    <string name="search_here">Busca aquí...</string>
-    <string name="total_amount">Cantidad total:\u0020</string>
-    <string name="Discount">Discount</string>
-    <string name="search">Buscar</string>
-    <string name="search_text">Buscar productos, marcas y más</string>
-    <string name="enter_keyword">Por favor ingrese palabra clave</string>
-    <string name="delete">Borrar</string>
-    <string name="edit">Editar</string>
-    <string name="description">Descripción:</string>
+    <string name="please_enter_pincode">يرجى إدخال رمز PIN</string>
+    <string name="receiver_mobile_number">رقم الهاتف المحمول للمستلم (مطلوب)</string>
+    <string name="receiver_name_req">اسم المستلم (مطلوب)</string>
+    <string name="phone_too_short">هاتف قصير جدا</string>
+    <string name="please_add_address">يرجى إضافة العنوان</string>
+    <string name="please_select_address">يرجى تحديد العنوان</string>
+    <string name="please_select_date_time">يرجى تحديد التاريخ والوقت</string>
+    <string name="profile_updated">تحديث الملف الشخصي</string>
+    <string name="uploading_profile_data">تحميل بيانات الملف الشخصي</string>
+    <string name="cancle_order_note">هل أنت واثق! تريد النظام cancle؟</string>
+    <string name="no">لا</string>
+    <string name="yes">نعم</string>
+    <string name="thank_you">شكراً لك</string>
+    <string name="payment">الدفع</string>
+    <string name="pay">حالة الطلب</string>
+    <string name="pickup">مكان الدفع</string>
+    <string name="password_too_short">كلمة المرور قصيرة جدا</string>
+    <string name="invalide_email_address">عنوان البريد الإلكتروني غير صالح</string>
+    <string name="no_internet">أنا آسف! غير متصل بالإنترنت</string>
+    <string name="order_no">رقم الطلب:\u0020</string>
+    <string name="pending">قيد الانتظار</string>
+    <string name="confirm">تم التاكيد</string>
+    <string name="confirm_order">تأكيد</string>
+    <string name="delivered"> تم التسليم</string>
+    <string name="outfordeliverd">جاهز للتسليم</string>
+    <string name="cancle">لا</string>
+    <string name="date">تاريخ:\u0020</string>
+    <string name="time">الوقت:\u0020</string>
+    <!--Method String-->
+    <string name="method_one">التقط</string>
+    <string name="method_two">الباكالاه</string>
+    <string name="method_three">بطاقات</string>
+    <string name="method_four">نيتبانكينج</string>
+    <string name="past">الطلبات السابقة</string>
+    <string name="search_msg">البحث عن المتاجر والمنتجات</string>
+    <string name="change_password">تغيير كلمة المرور</string>
+    <string name="old_password">كلمة المرور السابقة (مطلوب)</string>
+    <string name="new_password">كلمة المرور الجديدة (مطلوب)</string>
+    <string name="confirm_password">تأكيد كلمة المرور (مطلوب)</string>
+    <string name="password_not_same">تأكيد كلمة المرور وكلمة المرور الجديدة ليست هي نفسها.</string>
+    <string name="delivery_charge">تكاليف الشحن:\u0020</string>
+    <string name="amount">الكمية:\u0020</string>
+    <string name="search_here">ابحث هنا ...</string>
+    <string name="total_amount">المبلغ الإجمالي:\u0020</string>
+
+    <string name="Discount">خصم</string>
+    <string name="search">البحث</string>
+    <string name="searchh">إبحث</string>
+    <string name="Remove">إزالة</string>
+
+    <string name="continue_sh">مواصلة التسوق</string>
+
+    <string name="search_text">بحث المنتجات والعلامات التجارية وأكثر من ذلك</string>
+    <string name="enter_keyword">يرجى إدخال الكلمة</string>
+    <string name="delete">حذف</string>
+    <string name="edit">تحرير</string>
+    <string name="description">وصف:</string>
 
     <!-- row_delivery_time.xml -->
-    <string name="tv_deli_socity">Sociedad:</string>
-    <string name="tv_deli_mobile">No móviles.:</string>
-    <string name="tv_deli_pin">Código PIN:</string>
+    <string name="tv_deli_socity">المنطقة:</string>
+    رقم<string name="tv_deli_mobile">رقم الموبايل:</string>
+    <string name="tv_deli_pin">رمز PIN:</string>
 
     <!-- delivery_payment_detail_fragment.java -->
-    <string name="tv_deli_pay_ontime">A tiempo :\u0020</string>
-    <string name="tv_deli_pay_address">Dirección:\u0020</string>
+    <string name="tv_deli_pay_ontime">في الوقت المحدد:\u0020</string>
+    <string name="tv_deli_pay_address">عنوان:\u0020</string>
 
     <!-- delivery_get_address_adapter.java -->
-    <string name="reciver_name">Nombre del destinatario:\u0020</string>
-    <string name="reciver_mobile">Receptor Móvil No.:\u0020</string>
-    <string name="pincode">Código PIN:\u0020</string>
-    <string name="house_no">Casa no.:\u0020</string>
-    <string name="socity">Sociedad:\u0020</string>
+    <string name="reciver_name">اسم المستلم:\u0020</string>
+    <string name="reciver_mobile">رقم الهاتف المحمول:\u0020</string>
+    <string name="pincode">رمز PIN:\u0020</string>
+    <string name="house_no">منزل لا.:\u0020</string>
+    <string name="socity">شركة:\u0020</string>
 
-    <string name="h_orders">Ordenes</string>
-    <string name="h_rewards">Recompensas</string>
-    <string name="h_wallet">Billetera</string>
-    <string name="h_cart">Carro</string>
+    <string name="h_orders">أوامر</string>
+    <string name="h_rewards">المكافآت</string>
+    <string name="h_wallet">محفظة نقود</string>
+    <string name="h_cart">عربة التسوق</string>
 
-    <string name="language">Idioma</string>
-    <string name="status_stop">Energizado por <font color="#f233cc01">GoGrocer</font></string>
+    <string name="language">لغة</string>
+    <string name="status_stop">مشغل بواسطة<font color="#f233cc01">GoGrocer</font></string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hola fragmento en blanco</string>
-    <string name="home_fragement_bottom">Agrega $150,000 y gana <font color='#ff0000'>domicilio gratis.</font></string>
-    <string name="followed">Followed</string>
+    <string name="hello_blank_fragment">جزء Hello على الأبيض</string>
+    <string name="home_fragement_bottom">أضف $ 150،000 واربح<font color='#ff0000'>المنزل الحر.</font></string>
+    <string name="followed">يتبع</string>
+
+
+
+
+    <string name="Coupons">كوبونات</string>
+    <string name="VIP">كبار الشخصيات</string>
+    <string name="FreeShipping">الشحن مجانا</string>
+
+
+    <string name="agree">وافق على الشروط والأحكام الخاصة بنا</string>
+
+<!--    <string name="wallet_ammount">My Wallet Ammount : </string>-->
+<!--    <string name="j6_point">J6 Points : </string>-->
+<!--    <string name="fav_store">Favourite\n Stores</string>-->
+<!--    <string name="fav_cat">Favourite\nCategories</string>-->
+<!--    <string name="fav_prod">Favourite\n Products</string>-->
+
+<!--    <string name="term_and_conditions">Terms and \nConditions</string>-->
+<!--    <string name="privacy">Privacy \nPolicy</string>-->
+<!--    <string name="return_p">Return \nPolicy</string>-->
+<!--    <string name="help_centre">Help \nCentre</string>-->
+
+
+<!--    <string name="VerificationCode">Verification Code</string>-->
+<!--    <string name="VerificationCodeDesc">Please enter verification code sent to</string>-->
+<!--    <string name="no_record">No Record Found</string>-->
+
+<!--    <string name="top_selling">Top Selling</string>-->
+<!--    <string name="Deal">Deals</string>-->
+
+<!--    <string name="stores">Stores</string>-->
+<!--    <string name="caty">Categories</string>-->
+<!--    <string name="favourt">Favourite</string>-->
+<!--    <string name="Cart">Cart</string>-->
+<!--    <string name="Me">Account</string>-->
+<!--    <string name="popular">Popular products</string>-->
+
+<!--    <string name="mblnumber">Enter your mobile number</string>-->
+<!--    <string name="app_name">J6</string>-->
+<!--    <string name="name">GoGrocer</string>-->
+<!--    <string name="currency"> ر.س</string>-->
+<!--    <string name="title_activity_main">Actividad principal</string>-->
+<!--    <string name="txtCredits"><a href="http://www.google.com">Google</a></string>-->
+<!--    <string name="guest">Guest</string>-->
+<!--    <string name="or_sign">Or Sign In as a</string>-->
+<!--    <string name="sign_upto"><u>Please Sign Up to continue</u></string>-->
+<!--    <string name="btn_continueto" ><b>Welcome to j6 Stores</b></string>-->
+<!--    <string name="btn_continueto1" >Please login to continus</string>-->
+<!--    <string name="create">Create an Account?</string>-->
+<!--    <string name="rate" translatable="false">Rate</string>-->
+<!--    <string name="feedback" translatable="false">Feedback</string>-->
+
+<!--    <string name="navigation_drawer_open">Open navigation drawer</string>-->
+<!--    <string name="navigation_drawer_close">Close navigation drawer</string>-->
+<!--    <string name="password">Password</string>-->
+<!--    <string name="sign_up"><u>Sign Up</u></string>-->
+
+<!--    <string name="rating">Rating &amp; Reviews</string>-->
+<!--    <string name="uname">Name</string>-->
+<!--    <string name="uphone">Phone</string>-->
+<!--    <string name="urefrel">Referal Code</string>-->
+
+<!--    <string name="email">Enter Your email and Password</string>-->
+<!--    <string name="searchtext2">Search For Products,Brands and More</string>-->
+<!--    <string name="fav"> Favourite</string>-->
+<!--    <string name="cat"> Categories</string>-->
+<!--    <string name="MYCart">  MY Cart</string>-->
+<!--    <string name="action_settings">Configuraciones</string>-->
+<!--    <string name="expire">Expired</string>-->
+<!--    <string name="no_product">No Products Available</string>-->
+<!--    <string name="nav_terms">Términos y Privacidad</string>-->
+<!--    <string name="start_time">Start Time : </string>-->
+<!--    <string name="end_time">End Time : </string>-->
+<!--    <string name="no_fav">No Favourite Available</string>-->
+
+
+<!--    &lt;!&ndash; string.xml &ndash;&gt;-->
+<!--    <string name="nav_home">Comprar Ahora</string>-->
+<!--    <string name="nav_user">Usuario</string>-->
+<!--    <string name="nav_order">Mis ordenes</string>-->
+<!--    <string name="nav_profile">Mi Perfil</string>-->
+<!--    <string name="nav_chat">Conversa con Nosotros</string>-->
+<!--    <string name="nav_support">Apoyo</string>-->
+<!--    <string name="nav_about">Sobre Nosotros</string>-->
+<!--    <string name="nav_review">Revise nosotros</string>-->
+<!--    <string name="nav_contact">Contáctenos</string>-->
+<!--    <string name="nav_share">Compartir con amigos</string>-->
+<!--    <string name="nav_logout">Cerrar sesión</string>-->
+<!--    <string name="tv_out" translatable="false">Out of Stock</string>-->
+
+<!--    &lt;!&ndash; activity_login.xml &ndash;&gt;-->
+<!--    <string name="et_login_phone_hint">Número de móvil (obligatorio)</string>-->
+<!--    <string name="tv_login_email">Correo electronico (requerido)</string>-->
+<!--    <string name="tv_login_password">Se requiere contraseña)</string>-->
+<!--    <string name="btn_login">Iniciar sesión</string>-->
+<!--    <string name="btn_send">Enviar</string>-->
+<!--    <string name="tv_login_note">Antes de continuar con la aplicación, debe verificar su número de móvil. Nuestro sistema le enviará el código OTP en el número de móvil registrado</string>-->
+
+<!--    &lt;!&ndash; activity_register.xml &ndash;&gt;-->
+<!--    <string name="tv_reg">Registro</string>-->
+<!--    <string name="tv_reg_name_hint">Nombre (requerido)</string>-->
+<!--    <string name="tv_reg_pincode">Pincode / Código de área / Zip (obligatorio)</string>-->
+<!--    <string name="tv_reg_socity">Sociedad / Piso (requerido</string>-->
+<!--    <string name="btn_reg_socity_choose">Elige la sociedad ...</string>-->
+<!--    <string name="tv_reg_house">Número de casa (obligatorio)</string>-->
+<!--    <string name="btn_reg_update">Actualización del perfil</string>-->
+<!--    <string name="et_reg_search">Buscar Sociedad ...</string>-->
+<!--    <string name="tv_reg_note">Nota: servicio disponible solo para RAJKOT</string>-->
+<!--    <string name="tv_reg_address">Dirección (requerida)</string>-->
+<!--    <string name="et_reg_address">Completa tu direccion</string>-->
+
+<!--    &lt;!&ndash; fragment_cart.xml &ndash;&gt;-->
+<!--    <string name="tv_cart_title">Carro</string>-->
+<!--    <string name="tv_cart_clear">Borrar todo producto</string>-->
+<!--    <string name="tv_cart_checkout">Continuar con el registro</string>-->
+<!--    <string name="tv_cart_total">Total:\u0020</string>-->
+<!--    <string name="tv_cart_item">Artículos:\u0020</string>-->
+<!--    <string name="Remove">Remove</string>-->
+<!--    <string name="tv_cart_rs">\u0020</string>-->
+<!--    <string name="continue_sh">Continue Shoping</string>-->
+
+<!--    &lt;!&ndash; fragment_delivery_time.xml &ndash;&gt;-->
+<!--    <string name="tv_del_title">Fecha / hora de entrega</string>-->
+<!--    <string name="tv_del_address">Dirección de entrega</string>-->
+<!--    <string name="et_del_address_hint">Ingrese la dirección de entrega ..</string>-->
+<!--    <string name="tv_del_continue">Continuar con el tiempo</string>-->
+<!--    <string name="tv_del_date">Seleccione la fecha de entrega</string>-->
+<!--    <string name="tv_del_time">Seleccione el tiempo de entrega</string>-->
+<!--    <string name="tv_del_date_time">Datos de entrega / Hora</string>-->
+<!--    <string name="tv_total_item_amount">Total de artículos y cantidad</string>-->
+<!--    <string name="tv_total_total">Cantidad total</string>-->
+
+<!--    &lt;!&ndash; fragment_home.xml &ndash;&gt;-->
+<!--    <string name="tv_home_cat">Productos</string>-->
+<!--    <string name="tv_home_view">Ver todo></string>-->
+
+<!--    &lt;!&ndash; fragment_Wallet.xml &ndash;&gt;-->
+<!--    <string name="tv_app_name">Billetera</string>-->
+<!--    <string name="wall_am" >My Wallet</string>-->
+<!--    &lt;!&ndash; fragment_Reward.xml &ndash;&gt;-->
+<!--    <string name="tv_toolbar_name">Recompensas</string>-->
+<!--    &lt;!&ndash; row_product_rv.xml &ndash;&gt;-->
+<!--    <string name="tv_pro_add">Añadir</string>-->
+<!--    <string name="tv_pro_update">Actualizar</string>-->
+<!--    <string name="tv_pro_price">Precio por\u0020</string>-->
+<!--    <string name="tv_pro_rs">\u0020Rs.\u0020</string>-->
+<!--    <string name="tv_pro_total">Total: </string>-->
+
+<!--    &lt;!&ndash; fragment_confirm_order.xml &ndash;&gt;-->
+<!--    <string name="tv_conf_order_title">Detalles del pago</string>-->
+
+<!--    &lt;!&ndash; fragment_my_order_detail.xml &ndash;&gt;-->
+<!--    <string name="tv_order_cancle">Cancelar orden</string>-->
+<!--    <string name="tv_order_summery">Resumen</string>-->
+<!--    <string name="tv_order_total">Total: Rs.</string>-->
+<!--    <string name="tv_order_qty">Qty</string>-->
+<!--    <string name="tv_order_rs">Rs.</string>-->
+
+<!--    &lt;!&ndash; fragment_order_thanks.xml &ndash;&gt;-->
+<!--    <string name="tv_thanks_title">Gracias por su orden.</string>-->
+<!--    <string name="tv_thanks_home">Continuar a casa</string>-->
+<!--    <string name="tv_thanks_order">Seguir mi orden</string>-->
+
+<!--    &lt;!&ndash; Forgot password &ndash;&gt;-->
+<!--    <string name="forgot">Se te olvidó tu contraseña ?</string>-->
+
+<!--    &lt;!&ndash; Code message and concat  string &ndash;&gt;-->
+<!--    <string name="my_order">Mi pedido</string>-->
+<!--    <string name="edit_profile">Editar perfil</string>-->
+<!--    <string name="delivery">Entrega</string>-->
+<!--    <string name="delivery_date">Fecha de entrega:</string>-->
+<!--    <string name="please_select_date">Por favor selecciona la fecha</string>-->
+<!--    <string name="no_rcord_found">Ningún record fue encontrado</string>-->
+<!--    <string name="connection_time_out">El tiempo de conexión expiro</string>-->
+<!--    <string name="add_delivery_address">Agregar dirección de entrega</string>-->
+<!--    <string name="order_now">Ordenar ahora</string>-->
+<!--    <string name="payment_detail">Detalles del pago</string>-->
+<!--    <string name="delivery_time">El tiempo de entrega</string>-->
+<!--    <string name="please_enter_pincode">Por favor ingrese el código PIN</string>-->
+<!--    <string name="receiver_mobile_number">Número móvil del receptor (obligatorio)</string>-->
+<!--    <string name="receiver_name_req">Nombre del receptor (obligatorio)</string>-->
+<!--    <string name="phone_too_short">Teléfono demasiado corto</string>-->
+<!--    <string name="please_add_address">Por favor agregue dirección</string>-->
+<!--    <string name="please_select_address">Por favor selecciona la dirección</string>-->
+<!--    <string name="please_select_date_time">Por favor seleccione la fecha y la hora</string>-->
+<!--    <string name="profile_updated">Perfil actualizado</string>-->
+<!--    <string name="uploading_profile_data">Subiendo datos de perfil</string>-->
+<!--    <string name="cancle_order_note">Are you sure! you want to cancle order ?</string>-->
+<!--    <string name="no">No</string>-->
+<!--    <string name="yes">Sí</string>-->
+<!--    <string name="thank_you">Gracias</string>-->
+<!--    <string name="payment">Pago</string>-->
+<!--    <string name="password_too_short">Contraseña demasiado corta</string>-->
+<!--    <string name="invalide_email_address">Dirección de correo electrónico de Invalide</string>-->
+<!--    <string name="no_internet">¡Lo siento! No conectado a internet</string>-->
+<!--    <string name="order_no">N º de pedido.:\u0020</string>-->
+<!--    <string name="pending">Pendiente</string>-->
+<!--    <string name="confirm">Confirmar</string>-->
+<!--    <string name="delivered">Entregado</string>-->
+<!--    <string name="outfordeliverd">Salida para entrega Listo para recoger</string>-->
+<!--    <string name="cancle">Cancle</string>-->
+<!--    <string name="date">Fecha:\u0020</string>-->
+<!--    <string name="time">Hora:\u0020</string>-->
+<!--    &lt;!&ndash;Method String&ndash;&gt;-->
+<!--    <string name="method_one">Recoger</string>-->
+<!--    <string name="method_two">BACALAO</string>-->
+<!--    <string name="method_three">Tarjetas</string>-->
+<!--    <string name="method_four">NetBanking</string>-->
+
+<!--    <string name="search_msg">Search Stores and Products</string>-->
+<!--    <string name="change_password">Cambia la contraseña</string>-->
+<!--    <string name="old_password">Contraseña anterior (obligatorio)</string>-->
+<!--    <string name="new_password">Nueva contraseña (requerida)</string>-->
+<!--    <string name="confirm_password">Confirmar contraseña (obligatorio)</string>-->
+<!--    <string name="password_not_same">Confirmar contraseña y nueva contraseña no es lo mismo.</string>-->
+<!--    <string name="delivery_charge">Los gastos de envío.:\u0020</string>-->
+<!--    <string name="amount">Cantidad:\u0020</string>-->
+<!--    <string name="search_here">Busca aquí...</string>-->
+<!--    <string name="total_amount">Cantidad total:\u0020</string>-->
+<!--    <string name="Discount">Discount</string>-->
+<!--    <string name="search">Buscar</string>-->
+<!--    <string name="search_text">Buscar productos, marcas y más</string>-->
+<!--    <string name="enter_keyword">Por favor ingrese palabra clave</string>-->
+<!--    <string name="delete">Borrar</string>-->
+<!--    <string name="edit">Editar</string>-->
+<!--    <string name="description">Descripción:</string>-->
+
+<!--    &lt;!&ndash; row_delivery_time.xml &ndash;&gt;-->
+<!--    <string name="tv_deli_socity">Sociedad:</string>-->
+<!--    <string name="tv_deli_mobile">No móviles.:</string>-->
+<!--    <string name="tv_deli_pin">Código PIN:</string>-->
+
+<!--    &lt;!&ndash; delivery_payment_detail_fragment.java &ndash;&gt;-->
+<!--    <string name="tv_deli_pay_ontime">A tiempo :\u0020</string>-->
+<!--    <string name="tv_deli_pay_address">Dirección:\u0020</string>-->
+
+<!--    &lt;!&ndash; delivery_get_address_adapter.java &ndash;&gt;-->
+<!--    <string name="reciver_name">Nombre del destinatario:\u0020</string>-->
+<!--    <string name="reciver_mobile">Receptor Móvil No.:\u0020</string>-->
+<!--    <string name="pincode">Código PIN:\u0020</string>-->
+<!--    <string name="house_no">Casa no.:\u0020</string>-->
+<!--    <string name="socity">Sociedad:\u0020</string>-->
+
+<!--    <string name="h_orders">Ordenes</string>-->
+<!--    <string name="h_rewards">Recompensas</string>-->
+<!--    <string name="h_wallet">Billetera</string>-->
+<!--    <string name="h_cart">Carro</string>-->
+
+<!--    <string name="language">Idioma</string>-->
+<!--    <string name="status_stop">Energizado por <font color="#f233cc01">GoGrocer</font></string>-->
+
+<!--    &lt;!&ndash; TODO: Remove or change this placeholder text &ndash;&gt;-->
+<!--    <string name="hello_blank_fragment">Hola fragmento en blanco</string>-->
+<!--    <string name="home_fragement_bottom">Agrega $150,000 y gana <font color='#ff0000'>domicilio gratis.</font></string>-->
+<!--    <string name="followed">Followed</string>-->
 
 
 
 
 
-    <string name="Coupons">Coupons</string>
-    <string name="VIP">VIP</string>
-    <string name="FreeShipping">Free Shiping</string>
+<!--    <string name="Coupons">Coupons</string>-->
+<!--    <string name="VIP">VIP</string>-->
+<!--    <string name="FreeShipping">Free Shiping</string>-->
 
 
-    <string name="agree">Agree our Terms and Conditions</string>
+<!--    <string name="agree">Agree our Terms and Conditions</string>-->
+
 </resources>

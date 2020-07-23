@@ -221,7 +221,7 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 else {
 
-                    LocaleHelper.setLocale(getApplication(), "ar");
+                    LocaleHelper.setLocale(getApplication(), "es");
                     getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
 

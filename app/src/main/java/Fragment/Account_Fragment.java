@@ -176,7 +176,7 @@ public class Account_Fragment extends Fragment {
                 }
                 else {
 
-                    LocaleHelper.setLocale(getApplicationContext(), "ar");
+                    LocaleHelper.setLocale(getApplicationContext(), "es");
                     getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
 
@@ -188,7 +188,6 @@ public class Account_Fragment extends Fragment {
                 }
             }
         });
-
 
         rewards.setOnClickListener(new View.OnClickListener() {
             @Override
