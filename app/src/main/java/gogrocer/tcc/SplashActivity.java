@@ -139,7 +139,7 @@ public class SplashActivity extends AppCompatActivity {
         }
         else if (current_lan.equals("spanish")){
             LocaleHelper.setLocale(getApplicationContext(), "ar");
-            getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+            getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
 
             editor.putString("language", "spanish");
             editor.apply();

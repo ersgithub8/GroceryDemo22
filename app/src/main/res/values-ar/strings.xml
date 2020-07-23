@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="wallet_ammount">مبلغ محفظتي : </string>
     <string name="j6_point">نقاط J6 : </string>
 
@@ -11,7 +12,6 @@
     <string name="privacy">سياسة خاصة</string>
     <string name="return_p">سياسة العائدات</string>
     <string name="help_centre">مركز المساعدة</string>
-
 
     <string name="VerificationCode">شيفرة التأكيد</string>
     <string name="VerificationCodeDesc">يرجى إدخال رمز التحقق المرسلة إلى</string>
@@ -94,7 +94,7 @@
     <string name="MYCart">سلتي</string>
     <string name="cat"> التصنيفات</string>
     <string name="btn_Register">سجل</string>
-<string name="continue_bt">استمرار</string>
+    <string name="continue_bt">استمرار</string>
     <string name="tv_login_note">قبل الاستمرار في التطبيق ، يجب عليك التحقق من رقم هاتفك المحمول. سيرسل نظامنا رمز OTP في رقم الهاتف المحمول المسجل</string>
 
     <!-- activity_register.xml -->
@@ -119,7 +119,7 @@
     <string name="tv_reg_note">ملاحظة: الخدمة متاحة فقط لـ RAJKOT</string>
     <string name="tv_reg_address">العنوان (مطلوب)</string>
     <string name="et_reg_address">أكمل عنوانك</string>
-<string name="use">استخدم</string>
+    <string name="use">استخدم</string>
     <string name="currency">ریال</string>
     <string name="cash">الدفع عند الاستلام</string>
     <string name="checkout">الدفع</string>
@@ -137,7 +137,7 @@
     <string name="total">المجموع :</string>
     <string name="tv_cart_item">العناصر:</string>
     <string name="tv_cart_rs">\u0020</string>
-       <string name="rewards_points">نقاط المكافآت</string>
+    <string name="rewards_points">نقاط المكافآت</string>
     <!-- fragment_delivery_time.xml -->
     <string name="tv_del_title">تاريخ / وقت التسليم</string>
     <string name="tv_del_address">عنوان التسليم</string>
@@ -253,7 +253,7 @@
     <string name="method_two">الباكالاه</string>
     <string name="method_three">بطاقات</string>
     <string name="method_four">نيتبانكينج</string>
-<string name="past">الطلبات السابقة</string>
+    <string name="past">الطلبات السابقة</string>
     <string name="search_msg">البحث عن المتاجر والمنتجات</string>
     <string name="change_password">تغيير كلمة المرور</string>
     <string name="old_password">كلمة المرور السابقة (مطلوب)</string>
@@ -316,4 +316,5 @@
 
 
     <string name="agree">وافق على الشروط والأحكام الخاصة بنا</string>
+
 </resources>

@@ -118,8 +118,6 @@ public class Account_Fragment extends Fragment {
         whatsapp=view.findViewById(R.id.whatsapp);
 
 
-
-
         ((MainActivity)getActivity()).bot_profile.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         ((MainActivity)getActivity()).bot_cat.setBackgroundColor(getResources().getColor(R.color.white));
         ((MainActivity)getActivity()).bot_fav.setBackgroundColor(getResources().getColor(R.color.white));
@@ -176,7 +174,7 @@ public class Account_Fragment extends Fragment {
                 }
                 else {
 
-                    LocaleHelper.setLocale(getApplicationContext(), "es");
+                    LocaleHelper.setLocale(getApplicationContext(), "ar");
                     getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
 

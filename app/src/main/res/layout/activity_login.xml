@@ -6,9 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/ll1"
-
     tools:context="gogrocer.tcc.LoginActivity"
-    android:fillViewport="true">
+    >
 
     <RelativeLayout
 
@@ -437,7 +436,6 @@
                 android:textSize="14sp"
                 android:text="@string/guest"
                 android:id="@+id/guest"
-
                 android:textColor="@color/black"
                 />
 

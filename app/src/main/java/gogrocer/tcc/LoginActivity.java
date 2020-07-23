@@ -68,6 +68,8 @@ import util.ConnectivityReceiver;
 import util.CustomVolleyJsonRequest;
 import util.Session_management;
 
+import static com.facebook.FacebookSdk.getApplicationContext;
+
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static String TAG = LoginActivity.class.getSimpleName();
@@ -104,8 +106,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // remove title
+
         sharedPreferences= getSharedPreferences("lan", Context.MODE_PRIVATE);
-        language=sharedPreferences.getString("language","");
+        language=sharedPreferences.getString("language",null);
+
         if (language.equals("spanish")){
             setTheme(R.style.AppTheme1);
         }else {
@@ -116,7 +120,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         token = FirebaseInstanceId.getInstance().getToken();
 
-        
         lEnglish = findViewById(R.id.eng);
         guest1 = findViewById(R.id.guest);
         ll1 = findViewById(R.id.ll1);
@@ -150,25 +153,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         callbackManager=CallbackManager.Factory.create();
 
         sharedPreferences= getSharedPreferences("lan", Context.MODE_PRIVATE);
-        editor = sharedPreferences.edit();
+
 
 //        editor.putString("language","english");
 
 //        editor.apply();
 
-        final String current_lan = sharedPreferences.getString("language",null);
+//        final String current_lan = sharedPreferences.getString("language",null);
 
-        if (current_lan == null){
+        if (language == null){
 //            lEnglish.setBackgroundColor(Color.parseColor("#7abcbc"));
 //            lEnglish.setTextColor(Color.parseColor("#ffffff"));
             ll1.setBackgroundResource(R.drawable.login_bg);
         }
-        else if (current_lan.equals("english")){
+        else if (language.equals("english")){
 //            lEnglish.setBackgroundColor(Color.parseColor("#7abcbc"));
 //            lEnglish.setTextColor(Color.parseColor("#ffffff"));
             ll1.setBackgroundResource(R.drawable.login_bg);
         }
-        else if (current_lan.equals("spanish")){
+        else if (language.equals("spanish")){
 //            lSpanish.setBackgroundColor(Color.parseColor("#7abcbc"));
 //            lSpanish.setTextColor(Color.parseColor("#ffffff"));
             ll1.setBackgroundResource(R.drawable.login_bg1);
@@ -179,44 +182,46 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             ll1.setBackgroundResource(R.drawable.login_bg);
         }
 
+        editor = sharedPreferences.edit();
 
         lEnglish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if (current_lan.equals("english")){
+                if (language.equals("english")){
                     Toast.makeText(getApplicationContext(),"Already In English",Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    LocaleHelper.setLocale(getApplication(), "en");
 
+                    LocaleHelper.setLocale(getApplicationContext(), "en");
                     getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
 
                     editor.putString("language", "english");
                     editor.apply();
 
                     recreate();
+
                 }
             }
         });
         lSpanish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (current_lan.equals("spanish")){
+                if (language.equals("spanish")){
                     Toast.makeText(getApplicationContext(),"بالفعل باللغة العربية",Toast.LENGTH_SHORT).show();
                 }
                 else {
 
-                    LocaleHelper.setLocale(LoginActivity.this, "es");
-
+                    LocaleHelper.setLocale(getApplicationContext(), "ar");
                     getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
-
                     SharedPreferences.Editor editor = sharedPreferences.edit();
 
                     editor.putString("language", "spanish");
                     editor.apply();
 
                     recreate();
+
                 }
             }
         });
