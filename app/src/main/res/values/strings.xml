@@ -101,7 +101,7 @@
     <string name="rewards_points" translatable="false">J6 Points</string>
     <string name="rech_wallet" translatable="false">Recharge Wallet</string>
     <string name="continue_bt" translatable="false">Continue</string>
-    <string name="continue_sh">Continue Shoping</string>
+    <string name="continue_sh">Continue Shopping</string>
     <string name="wall_am" >My Wallet</string>
     <!-- activity_login.xml -->
     <string name="et_login_phone_hint" translatable="false">Mobile Number</string>
@@ -318,5 +318,5 @@
     <string name="VIP">VIP</string>
     <string name="FreeShipping">Free Shiping</string>
 
-    <string name="agree">Agree our Terms and Conditions</string>
+    <string name="agree">Agree on our Terms and Conditions</string>
 </resources>

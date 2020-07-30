@@ -56,10 +56,10 @@
         android:orientation="horizontal"
         android:layout_marginTop="15dp"
         >
+
         <View
             android:layout_width="20dp"
-            android:layout_height="1dp"
-            />
+            android:layout_height="6dp" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="80dp"
@@ -417,6 +417,7 @@
             android:text="@string/nav_contact"
             android:layout_below="@id/l1"
             android:textSize="20sp"
+            android:visibility="gone"
             android:layout_marginStart="@dimen/space_12"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="@dimen/space_10"
@@ -551,7 +552,7 @@
                 android:text="@string/term_and_conditions"
                 android:id="@+id/term"
                 android:textAlignment="center"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 android:textColor="@color/black"
                 android:layout_weight="1"
                 />
@@ -565,7 +566,7 @@
                 android:text="@string/privacy"
                 android:id="@+id/privacy"
                 android:textAlignment="center"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 android:textColor="@color/black"
                 android:layout_weight="1"
                 />
@@ -578,7 +579,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/return_p"
                 android:id="@+id/ret_policy"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 android:textColor="@color/black"
                 android:textAlignment="center"
                 android:layout_weight="1"
@@ -592,7 +593,7 @@
                 android:text="@string/help_centre"
                 android:id="@+id/help"
                 android:textAlignment="center"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 android:textColor="@color/black"
                 android:layout_weight="1"
                 />
