@@ -533,18 +533,25 @@
         <LinearLayout
             android:layout_marginStart="@dimen/space_5"
             android:layout_marginEnd="@dimen/space_5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:background="@drawable/laddan_backy"
+            android:layout_below="@id/tempp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="@dimen/space_10"
+            >
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="4"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="@dimen/space_10"
-            android:layout_below="@id/tempp"
-            android:id="@+id/l21"
+            android:weightSum="3"
             >
 
             <TextView
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:layout_marginTop="@dimen/space_10"
                 android:layout_marginBottom="@dimen/space_10"
                 android:layout_width="wrap_content"
@@ -560,6 +567,8 @@
             <TextView
                 android:layout_marginTop="@dimen/space_10"
                 android:layout_marginBottom="@dimen/space_10"
+                android:layout_gravity="center"
+                android:gravity="center"
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -574,6 +583,8 @@
             <TextView
                 android:layout_marginTop="@dimen/space_10"
                 android:layout_marginBottom="@dimen/space_10"
+                android:layout_gravity="center"
+                android:gravity="center"
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -584,23 +595,64 @@
                 android:textAlignment="center"
                 android:layout_weight="1"
                 />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="@dimen/space_10"
+            >
             <TextView
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:layout_marginTop="@dimen/space_10"
                 android:layout_marginBottom="@dimen/space_10"
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/help_centre"
-                android:id="@+id/help"
+                android:text="@string/nav_contact"
+                android:id="@+id/contact_us"
                 android:textAlignment="center"
                 android:textSize="12sp"
                 android:textColor="@color/black"
                 android:layout_weight="1"
                 />
 
+            <TextView
+                android:layout_marginTop="@dimen/space_10"
+                android:layout_marginBottom="@dimen/space_10"
+                android:layout_gravity="center"
+                android:gravity="center"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/maroof"
+                android:id="@+id/maroof_id"
+                android:textSize="12sp"
+                android:textColor="@color/black"
+                android:textAlignment="center"
+                android:layout_weight="1"
+                />
+            <TextView
+                android:layout_marginTop="@dimen/space_10"
+                android:layout_marginBottom="@dimen/space_10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/help_centre"
+                android:id="@+id/help"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:layout_weight="1"
+                />
+
         </LinearLayout>
 
-
+        </LinearLayout>
 
     </RelativeLayout>
     </LinearLayout>

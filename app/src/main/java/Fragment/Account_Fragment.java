@@ -64,7 +64,7 @@ public class Account_Fragment extends Fragment {
     LinearLayout rewards,walletl,rate,share,feedback;
 
 
-    TextView name,phone,reward,wallet,cart;
+    TextView name,phone,reward,wallet,contact,maroof;
 
     TextView fb,twitter,tele,insta,whatsapp;
 
@@ -79,6 +79,8 @@ public class Account_Fragment extends Fragment {
         lEnglish = view.findViewById(R.id.eng);
         lSpanish = view.findViewById(R.id.arab);
 
+        contact=view.findViewById(R.id.contact_us);
+        maroof = view.findViewById(R.id.maroof_id);
         top_selling = view.findViewById(R.id.top_selling);
 
         iv_profile=view.findViewById(R.id.iv_header_img);
@@ -231,6 +233,27 @@ public class Account_Fragment extends Fragment {
 //                        .addToBackStack(null).commit();
             }
         });
+
+        maroof.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Fragment fm = new ;
+//                FragmentManager fragmentManager = getFragmentManager();
+//                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+//                        .addToBackStack(null).commit();
+            }
+        });
+        contact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Fragment fm = new ;
+//                FragmentManager fragmentManager = getFragmentManager();
+//                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+//                        .addToBackStack(null).commit();
+            }
+        });
+
+
         helpcenter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

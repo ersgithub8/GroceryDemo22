@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="maroof">Maroof</string>
+
     <string name="fav_store">Favorite\n Stores</string>
     <string name="fav_cat">Favorite\nCategories</string>
     <string name="fav_prod">Favorite\n Products</string>
@@ -15,9 +17,9 @@
     <string name="VerificationCodeDesc">Please enter verification code sent to</string>
 
     <string name="term_and_conditions">Terms and \nConditions</string>
-    <string name="privacy">Privacy \nPolicy</string>
-    <string name="return_p">Return \nPolicy</string>
-    <string name="help_centre">Help \nCentre</string>
+    <string name="privacy">Privacy Policy</string>
+    <string name="return_p">Return Policy</string>
+    <string name="help_centre">Help Centre</string>
 
 
     <string name="expire">Expired</string>
