@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="fav_store">Favourite\n Stores</string>
-    <string name="fav_cat">Favourite\nCategories</string>
-    <string name="fav_prod">Favourite\n Products</string>
+    <string name="fav_store">Favorite\n Stores</string>
+    <string name="fav_cat">Favorite\nCategories</string>
+    <string name="fav_prod">Favorite\n Products</string>
 
-    <string name="fav"> Favourite</string>
+    <string name="fav"> Favorite</string>
     <string name="cat"> Categories</string>
 
     <string name="wallet_ammount">My Wallet Ammount : </string>
@@ -25,7 +25,7 @@
     <string name="no_record">No Record Found</string>
 
     <string name="no_product">No Products Available</string>
-    <string name="no_fav">No Favourite Available</string>
+    <string name="no_fav">No Favorite Available</string>
 
     <string name="Deal">Deals</string>
 
@@ -33,7 +33,7 @@
     <string name="top_selling">Top Selling</string>
     <string name="stores">Stores</string>
     <string name="caty">Categories</string>
-    <string name="favourt">Favourite</string>
+    <string name="favourt">Favorite</string>
     <string name="Cart">Cart</string>
     <string name="MYCart"> MY Cart</string>
     <string name="Me">Account</string>
