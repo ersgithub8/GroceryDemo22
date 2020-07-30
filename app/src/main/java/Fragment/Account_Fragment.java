@@ -237,19 +237,19 @@ public class Account_Fragment extends Fragment {
         maroof.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Fragment fm = new ;
-//                FragmentManager fragmentManager = getFragmentManager();
-//                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-//                        .addToBackStack(null).commit();
+                Uri uri = Uri.parse("https://maroof.sa/95194");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
             }
         });
         contact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Fragment fm = new ;
-//                FragmentManager fragmentManager = getFragmentManager();
-//                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-//                        .addToBackStack(null).commit();
+
+                Intent email = new Intent(Intent.ACTION_SEND);
+                email.putExtra(Intent.EXTRA_EMAIL, new String[]{"contact@j6stores.com"});
+                email.setType("message/rfc822");
+                startActivity(Intent.createChooser(email, "Choose an Email client :"));
             }
         });
 
@@ -263,10 +263,6 @@ public class Account_Fragment extends Fragment {
         returnp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Fragment fm = new Wallet_fragment();
-//                FragmentManager fragmentManager = getFragmentManager();
-//                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-//                        .addToBackStack(null).commit();
             }
         });
 
@@ -283,7 +279,6 @@ public class Account_Fragment extends Fragment {
 
         String getname = sessionManagement.getUserDetails().get(BaseURL.KEY_NAME);
         name.setText(getname);
-
 
         //cart.setText(new DatabaseHandler(getActivity()).getCartCount()+"");
         String getnumber = sessionManagement.getUserDetails().get(BaseURL.KEY_MOBILE);
