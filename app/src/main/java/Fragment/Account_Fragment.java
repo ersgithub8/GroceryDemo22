@@ -288,11 +288,19 @@ public class Account_Fragment extends Fragment {
             @Override
             public void onClick(View view) {
 
+                Uri uri = Uri.parse("https://www.facebook.com/J6stores");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+
             }
         });
         tele.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Uri uri = Uri.parse("https://t.me/J6stores");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
 
             }
         });
@@ -300,12 +308,16 @@ public class Account_Fragment extends Fragment {
             @Override
             public void onClick(View view) {
 
+                Uri uri = Uri.parse("https://twitter.com/J6stores");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+
             }
         });
         whatsapp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Uri uri = Uri.parse("https://api.WhatsApp.com/send?+966575262321");
+                Uri uri = Uri.parse("https://wa.me/966535262321");
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
 
@@ -314,7 +326,9 @@ public class Account_Fragment extends Fragment {
         insta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Uri uri = Uri.parse("https://instagram.com/j6stores");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
             }
         });
 
