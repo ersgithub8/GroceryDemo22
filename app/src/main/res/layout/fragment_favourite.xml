@@ -145,14 +145,14 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/category1"/>
+                android:src="@drawable/wishlist"/>
             <TextView
                 android:layout_below="@id/img3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/fav_category"
             android:textAlignment="center"
-            android:text="@string/fav_cat"
+            android:text="@string/wish"
             android:textSize="12sp"
             android:textColor="@color/black"
             />
