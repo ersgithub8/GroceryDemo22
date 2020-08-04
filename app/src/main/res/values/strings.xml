@@ -321,4 +321,11 @@
     <string name="FreeShipping">Free Shiping</string>
 
     <string name="agree">Agree on our Terms and Conditions</string>
+
+
+    <string name="ToPay">To Pay</string>
+    <string name="ToReview">To Review</string>
+    <string name="PreOrder">Pre-Order</string>
+    <string name="returns">My Returns</string>
+    <string name="cancelations">Cancellations</string>
 </resources>

@@ -257,4 +257,11 @@
 
     <string name="agree">Agree our Terms and Conditions</string>
 
+
+    <string name="ToPay">To Pay</string>
+
+    <string name="PreOrder">Pre-Order</string>
+    <string name="ToReview">To Review</string>
+    <string name="returns">My Returns</string>
+    <string name="cancelations">Cancellations</string>
 </resources>

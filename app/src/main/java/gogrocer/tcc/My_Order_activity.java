@@ -59,8 +59,11 @@ public class My_Order_activity extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
 
-        tabLayout.addTab(tabLayout.newTab().setText(getResources().getString(R.string.pending)));
-        tabLayout.addTab(tabLayout.newTab().setText(getResources().getString(R.string.past)));
+        tabLayout.addTab(tabLayout.newTab().setText(getResources().getString(R.string.ToPay)));
+        tabLayout.addTab(tabLayout.newTab().setText(getResources().getString(R.string.ToReview)));
+        tabLayout.addTab(tabLayout.newTab().setText(getResources().getString(R.string.PreOrder)));
+        tabLayout.addTab(tabLayout.newTab().setText(getResources().getString(R.string.returns)));
+        tabLayout.addTab(tabLayout.newTab().setText(getResources().getString(R.string.cancelations)));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);

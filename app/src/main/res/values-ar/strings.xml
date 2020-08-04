@@ -317,4 +317,11 @@
 
     <string name="agree">وافق على الشروط والأحكام الخاصة بنا</string>
 
+    <string name="ToPay">للدفع</string>
+    <string name="ToReview">للمراجعة</string>
+    <string name="PreOrder">طلب مسبق</string>
+    <string name="returns">عوائدي</string>
+    <string name="cancelations">عمليات الإلغاء</string>
+
+
 </resources>

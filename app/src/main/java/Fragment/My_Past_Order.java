@@ -33,7 +33,6 @@ import Adapter.My_Past_Order_adapter;
 import Config.BaseURL;
 import Model.My_Past_order_model;
 import gogrocer.tcc.AppController;
-import gogrocer.tcc.MainActivity;
 import gogrocer.tcc.MyOrderDetail;
 import gogrocer.tcc.R;
 import util.ConnectivityReceiver;
@@ -101,7 +100,7 @@ public class My_Past_Order extends Fragment {
         } else
 
         {
-            ((MainActivity) getActivity()).onNetworkConnectionChanged(false);
+//            ((MainActivity) getActivity()).onNetworkConnectionChanged(false);
         }
 
         // recyclerview item click listener

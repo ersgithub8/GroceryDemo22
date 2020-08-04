@@ -100,7 +100,7 @@ public class My_Pending_Order extends Fragment {
         } else
 
         {
-            ((MainActivity) getActivity()).onNetworkConnectionChanged(false);
+//            (getActivity()).onNetworkConnectionChanged(false);
         }
 
         // recyclerview item click listener
