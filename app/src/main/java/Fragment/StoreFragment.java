@@ -126,9 +126,11 @@ public class StoreFragment extends Fragment {
 
         SharedPreferences sharedPreferences=getActivity().getSharedPreferences("location", Context.MODE_PRIVATE);
         String lat, longi;
-        lat=sharedPreferences.getString("lat",null);
-        longi=sharedPreferences.getString("long",null);
-        double laty = Double.parseDouble(lat);
+        lat=sharedPreferences.getString("lat","123");
+        longi=sharedPreferences.getString("long","123");
+        if(!lat.equals("123"))
+        {
+            double laty = Double.parseDouble(lat);
         double longy = Double.parseDouble(longi);
         Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
 //         addresses = null;
@@ -141,7 +143,7 @@ public class StoreFragment extends Fragment {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+}
 
         deal.setOnClickListener(new View.OnClickListener() {
             @Override

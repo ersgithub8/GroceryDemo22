@@ -37,6 +37,7 @@ import Model.My_Pending_order_model;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.MainActivity;
 import gogrocer.tcc.MyOrderDetail;
+import gogrocer.tcc.My_Order_activity;
 import gogrocer.tcc.R;
 import util.ConnectivityReceiver;
 import util.CustomVolleyJsonArrayRequest;
@@ -51,9 +52,9 @@ public class My_Pending_Order extends Fragment {
 
     private List<My_Pending_order_model> my_order_modelList = new ArrayList<>();
     TabHost tHost;
-
-    public My_Pending_Order() {
-
+    int i;
+    public My_Pending_Order(int i) {
+        this.i=i;
     }
 
     @Override
@@ -70,6 +71,7 @@ public class My_Pending_Order extends Fragment {
         // handle the touch event if true
         view.setFocusableInTouchMode(true);
         view.requestFocus();
+
         view.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -143,6 +145,8 @@ public class My_Pending_Order extends Fragment {
 
         Map<String, String> params = new HashMap<String, String>();
         params.put("user_id", userid);
+        Toast.makeText(getActivity(), i+"", Toast.LENGTH_SHORT).show();
+        params.put("status",i+"");
 
         CustomVolleyJsonArrayRequest jsonObjReq = new CustomVolleyJsonArrayRequest(Request.Method.POST,
                 BaseURL.GET_ORDER_URL, params, new Response.Listener<JSONArray>() {
@@ -161,7 +165,7 @@ public class My_Pending_Order extends Fragment {
                 myPendingOrderAdapter.notifyDataSetChanged();
 
                 if (my_order_modelList.isEmpty()) {
-                    Toast.makeText(getActivity(), getResources().getString(R.string.no_rcord_found), Toast.LENGTH_SHORT).show();
+                    Toast.makeText((My_Order_activity)getActivity(), getResources().getString(R.string.no_rcord_found), Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {

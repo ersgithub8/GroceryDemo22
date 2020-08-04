@@ -130,13 +130,28 @@ public class My_Pending_Order_adapter extends RecyclerView.Adapter<My_Pending_Or
             holder.view4.setBackgroundColor(context.getResources().getColor(R.color.green));
             holder.Confirm.setImageResource(R.color.green);
             holder.Out_For_Deliverde.setImageResource(R.color.green);
-            holder.tv_status.setText(context.getResources().getString(R.string.outfordeliverd));
+            String string=context.getResources().getString(R.string.outfordeliverd);
+            holder.tv_status.setText(string.substring(0,16));
             holder.relativetextstatus.setText(context.getResources().getString(R.string.outfordeliverd));
             holder.tv_status.setTextColor(context.getResources().getColor(R.color.green));
         }
            else if (mList.getStatus().equals("4")) {
-holder.linearLayout.setVisibility(View.GONE);
-        }
+            //holder.linearLayout.setVisibility(View.GONE);
+
+            holder.view1.setBackgroundColor(context.getResources().getColor(R.color.green));
+            holder.relative_background.setBackgroundColor(context.getResources().getColor(R.color.green));
+            holder.view2.setBackgroundColor(context.getResources().getColor(R.color.green));
+            holder.view3.setBackgroundColor(context.getResources().getColor(R.color.green));
+            holder.view4.setBackgroundColor(context.getResources().getColor(R.color.green));
+            holder.view5.setBackgroundColor(context.getResources().getColor(R.color.green));
+            holder.view6.setBackgroundColor(context.getResources().getColor(R.color.green));
+            holder.Confirm.setImageResource(R.color.green);
+            holder.Out_For_Deliverde.setImageResource(R.color.green);
+            holder.Delivered.setImageResource(R.color.green);
+            holder.tv_status.setText(context.getResources().getString(R.string.delivered));
+            holder.relativetextstatus.setText(context.getResources().getString(R.string.delivered));
+            holder.tv_status.setTextColor(context.getResources().getColor(R.color.green));
+           }
 
         if (mList.getPayment_method().equals("Store Pick Up")) {
             holder.tv_methid1.setText("Store Pick Up");

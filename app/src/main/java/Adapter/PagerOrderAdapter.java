@@ -21,20 +21,21 @@ public class PagerOrderAdapter extends FragmentStatePagerAdapter {
 
         switch (position) {
             case 0:
-                My_Pending_Order tab1 = new My_Pending_Order();
+                My_Pending_Order tab1 = new My_Pending_Order(0);
                 return tab1;
             case 1:
-                My_Past_Order tab2 = new My_Past_Order();
+                My_Pending_Order tab2 = new My_Pending_Order(4);
                 return tab2;
             case 2:
-                My_Pending_Order tab3 = new My_Pending_Order();
+                My_Pending_Order tab3 = new My_Pending_Order(5);
                 return tab3;
             case 3:
-                My_Past_Order tab4 = new My_Past_Order();
+
+                My_Pending_Order tab4 = new My_Pending_Order(3);
                 return tab4;
-            case 4:
-                My_Pending_Order tab5 = new My_Pending_Order();
-                return tab5;
+//            case 4:
+//                My_Pending_Order tab5 = new My_Pending_Order(3);
+//                return tab5;
 
 
             default:

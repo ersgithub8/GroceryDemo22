@@ -13,6 +13,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import Adapter.PagerOrderAdapter;
 
@@ -62,15 +63,16 @@ public class My_Order_activity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText(getResources().getString(R.string.ToPay)));
         tabLayout.addTab(tabLayout.newTab().setText(getResources().getString(R.string.ToReview)));
         tabLayout.addTab(tabLayout.newTab().setText(getResources().getString(R.string.PreOrder)));
-        tabLayout.addTab(tabLayout.newTab().setText(getResources().getString(R.string.returns)));
+//        tabLayout.addTab(tabLayout.newTab().setText(getResources().getString(R.string.returns)));
         tabLayout.addTab(tabLayout.newTab().setText(getResources().getString(R.string.cancelations)));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         final PagerOrderAdapter adapter = new PagerOrderAdapter
                 (getSupportFragmentManager(), tabLayout.getTabCount());
+
         viewPager.setAdapter(adapter);
-        wrapTabIndicatorToTitle(tabLayout,80,80);
+        wrapTabIndicatorToTitle(tabLayout,30,30);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
