@@ -2,6 +2,7 @@
 <resources>
 
     <string name="maroof">Maroof</string>
+    <string name="wish">Wishlist</string>
 
     <string name="fav_store">Favorite\n Stores</string>
     <string name="fav_cat">Favorite\nCategories</string>

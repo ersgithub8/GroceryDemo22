@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="wish">Wishlist</string>
+
     <string name="maroof">Maroof</string>
     <string name="wallet_ammount">My Wallet Ammount : </string>
     <string name="j6_point">J6 Points : </string>
