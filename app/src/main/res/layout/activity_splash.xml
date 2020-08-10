@@ -4,45 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/welcome"
+    android:background="@color/colorPrimary"
     tools:context="gogrocer.tcc.SplashActivity">
 
-<!--    <LinearLayout-->
-<!--        android:layout_centerInParent="true"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="vertical"-->
-<!--        >-->
-<!--        <TextView-->
-<!--            android:textColor="@color/black"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:textAlignment="center"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Welcome"-->
-<!--            android:fontFamily="@font/bold"-->
-<!--            android:textSize="60sp"-->
-<!--            />-->
-<!--        <TextView-->
-<!--            android:padding="10dp"-->
-<!--            android:textColor="@color/black"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:textAlignment="center"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="TO"-->
-<!--            android:fontFamily="@font/vtks"-->
-<!--            android:textSize="60sp"-->
-<!--            />-->
-<!--        <TextView-->
-<!--            android:textColor="@color/black"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:textAlignment="center"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="J6 Store"-->
-<!--            android:fontFamily="@font/bold"-->
-<!--            android:textSize="60sp"-->
-<!--            />-->
-<!--    </LinearLayout>-->
+    <LinearLayout
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:text="Welcome To"
+            android:textSize="50sp"
+            />
+        <TextView
+            android:background="@drawable/icon99"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            />
+        <TextView
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:text="Stores"
+            android:textSize="50sp"
+            />
 
+    </LinearLayout>
 
 
 </RelativeLayout>
