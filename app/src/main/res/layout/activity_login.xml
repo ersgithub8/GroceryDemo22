@@ -407,10 +407,9 @@
 
         <LinearLayout
             android:layout_below="@id/temp1"
-
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="40dp"
             android:layout_marginRight="50dp"
             android:orientation="horizontal"
             >
@@ -421,7 +420,6 @@
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:text="@string/or_sign"
-
                 android:textColor="@color/black"
                 />
             <TextView

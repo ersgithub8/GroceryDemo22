@@ -215,8 +215,6 @@
 
                 </LinearLayout>
             <com.facebook.shimmer.ShimmerFrameLayout
-
-
                 android:id="@+id/shimmer_view_container2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -291,9 +289,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-                    <include layout="@layout/data_holder1" />
-                    <include layout="@layout/data_holder1" />
-                    <include layout="@layout/data_holder1" />
+                    <include layout="@layout/data_placeholder4" />
+                    <include layout="@layout/data_placeholder4" />
+                    <include layout="@layout/data_placeholder4" />
+                    <include layout="@layout/data_placeholder4" />
 
                 </LinearLayout>
 
@@ -315,17 +314,17 @@
                     android:scrollbars="none"
                     app:layout_behavior="@string/appbar_scrolling_view_behavior" />
             </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/catprodrv"
+                    android:background="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
                 <ImageView
                     android:id="@+id/dealday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:src="@drawable/dealoftheday"/>
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/catprodrv"
-                    android:background="@color/white"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

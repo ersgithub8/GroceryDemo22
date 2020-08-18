@@ -79,7 +79,7 @@ import util.RecyclerTouchListener;
 
 import static gogrocer.tcc.AppController.TAG;
 
-public class StoreFragment extends Fragment {
+public class StoreFragment extends Fragment implements Main_new {
     private Home_Icon_Adapter menu_adapter;
     private List<Home_Icon_model> menu_models = new ArrayList<>();
     private SliderLayout banner_slider;
@@ -161,7 +161,6 @@ public class StoreFragment extends Fragment {
 
         if(city == null){
 //            Toast.makeText(getActivity(), city+"", Toast.LENGTH_SHORT).show();
-
             city="Lahore";
         }
 
@@ -220,7 +219,7 @@ public class StoreFragment extends Fragment {
         make_menu_items1();
 
         make_menu_items();
-        getstores();
+//        getstores();
         make_top_selling();
 //        rv_top_selling.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), rv_top_selling, new RecyclerTouchListener.OnItemClickListener() {
 //            @Override
@@ -497,12 +496,14 @@ public class StoreFragment extends Fragment {
                     if (response != null && response.length() > 0) {
                         Boolean status = response.getBoolean("responce");
                         if (status) {
+                            mShimmerViewContainer.stopShimmerAnimation();
+                            mShimmerViewContainer.setVisibility(View.GONE);
 
                             Gson gson = new Gson();
                             Type listType = new TypeToken<List<Category_model>>() {
                             }.getType();
                             models = gson.fromJson(response.getString("data"), listType);
-                            catProdAdapter = new CatProdAdapter(models);
+                            catProdAdapter = new CatProdAdapter(models,city,StoreFragment.this);
                             catprod.setAdapter(catProdAdapter);
                             catProdAdapter.notifyDataSetChanged();
 
@@ -510,6 +511,8 @@ public class StoreFragment extends Fragment {
                         }
                     }
                 } catch (JSONException e) {
+                    mShimmerViewContainer.stopShimmerAnimation();
+                    mShimmerViewContainer.setVisibility(View.GONE);
                     e.printStackTrace();
                 }
             }
@@ -518,6 +521,9 @@ public class StoreFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
+                mShimmerViewContainer.stopShimmerAnimation();
+                mShimmerViewContainer.setVisibility(View.GONE);
+
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Activity activity=getActivity();
                     if(activity !=null && isAdded()) {
@@ -582,4 +588,17 @@ public class StoreFragment extends Fragment {
 
     }
 
+    @Override
+    public void OnClick(String id, String name, String store) {
+        Bundle args = new Bundle();
+        Fragment fm = new Product_fragment();
+        args.putString("storeid", id);
+        args.putString("laddan_jaffery", "store");
+        args.putString("name",name);
+        fm.setArguments(args);
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                .addToBackStack(null).commit();
+
+    }
 }
