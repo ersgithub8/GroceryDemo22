@@ -77,7 +77,7 @@ public class Delivery_fragment extends Fragment implements View.OnClickListener 
     private List<Delivery_address_model> delivery_address_modelList = new ArrayList<>();
 
     private DatabaseHandler db_cart;
-SharedPreferences preferences;
+    SharedPreferences preferences;
     private Session_management sessionManagement;
 
     private int mYear, mMonth, mDay, mHour, mMinute;
@@ -122,6 +122,7 @@ String language;
         //et_address = (EditText) view.findViewById(R.id.et_deli_address);
 
         db_cart = new DatabaseHandler(getActivity());
+        //Toast.makeText(getActivity(), db_cart.getTotalAmount(), Toast.LENGTH_SHORT).show();
         tv_total.setText(db_cart.getTotalAmount());
         tv_item.setText("" + db_cart.getCartCount());
 

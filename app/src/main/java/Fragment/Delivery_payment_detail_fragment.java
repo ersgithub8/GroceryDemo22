@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,16 +19,25 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.bumptech.glide.load.data.FileDescriptorLocalUriFetcher;
+import com.daimajia.swipe.util.Attributes;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import Adapter.Delivery_get_address_adapter;
 import Config.BaseURL;
 import Config.SharedPref;
+import Model.Delivery_address_model;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.MainActivity;
@@ -41,14 +51,14 @@ import util.Session_management;
 import static android.content.Context.MODE_PRIVATE;
 
 /**
- * Created by Rajesh Dabhi on 29/6/2017.
+ * Created by Bilal Tahir on 25/8/2020.
  */
 
 public class Delivery_payment_detail_fragment extends Fragment {
 
     private static String TAG = Delivery_payment_detail_fragment.class.getSimpleName();
 
-    private TextView tv_timeslot, tv_address, tv_total,note;
+    private TextView tv_timeslot, tv_address, tv_total,note,tv_dis,tv_totalamount;
     private LinearLayout btn_order;
 
     Double discount;
@@ -95,6 +105,8 @@ SharedPreferences preferences;
         //tv_total = (TextView) view.findViewById(R.id.textPrice);
         tv_total = (TextView) view.findViewById(R.id.txtTotal);
 
+        tv_totalamount = (TextView) view.findViewById(R.id.txtTotalamount);
+        tv_dis = (TextView) view.findViewById(R.id.txtDiscount);
         btn_order = (LinearLayout) view.findViewById(R.id.btn_order_now);
 
         getdate = getArguments().getString("getdate");
@@ -124,15 +136,23 @@ SharedPreferences preferences;
         tv_timeslot.setText(getdate + " " + gettime);
         tv_address.setText(getaddress);
 
-        total = Double.parseDouble(db_cart.getTotalAmount()) + deli_charges;
+//        total = Double.parseDouble(db_cart.getTotalAmount()) + deli_charges;
 
         //tv_total.setText("" + db_cart.getTotalAmount());
         //tv_item.setText("" + db_cart.getWishlistCount());
+        String user_id = sessionManagement.getUserDetails().get(BaseURL.KEY_ID);
+
+        getdiscount(user_id);
+
+//        tv_total.setText(getResources().getString(R.string.tv_cart_item) + db_cart.getCartCount() + "\n" +
+//                getResources().getString(R.string.amount) + db_cart.getTotalAmount() + "\n" +
+//                getResources().getString(R.string.delivery_charge) + deli_charges + "\n" +
+//                getResources().getString(R.string.total_amount) +
+//                db_cart.getTotalAmount() + " + " + deli_charges + " = " + total+ getResources().getString(R.string.currency));
+
         tv_total.setText(getResources().getString(R.string.tv_cart_item) + db_cart.getCartCount() + "\n" +
                 getResources().getString(R.string.amount) + db_cart.getTotalAmount() + "\n" +
-                getResources().getString(R.string.delivery_charge) + deli_charges + "\n" +
-                getResources().getString(R.string.total_amount) +
-                db_cart.getTotalAmount() + " + " + deli_charges + " = " + total+ getResources().getString(R.string.currency));
+                getResources().getString(R.string.delivery_charge) + deli_charges);
 
 
 
@@ -186,6 +206,77 @@ SharedPreferences preferences;
         });
 
         return view;
+    }
+
+    private void getdiscount(String user_id) {
+        String tag_json_obj = "json_get_address_req";
+
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("user_id", user_id);
+
+        CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
+                BaseURL.GET_VIP_DISCOUNT, params, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d(TAG, response.toString());
+
+                try {
+                    Boolean status = response.getBoolean("responce");
+
+                    if (status) {
+
+                        String temp = response.getString("discount");
+                        String dis = temp.replace("%","");
+                        float f1 = Float.parseFloat(dis)/100;
+                        float amount= Float.parseFloat(db_cart.getTotalAmount());
+                        float famount=amount-(amount*f1);
+
+                        total = Double.parseDouble(String.valueOf(famount)) + deli_charges;
+
+                        tv_dis.setText(getResources().getString(R.string.vip_dis) + " " +temp);
+
+                        tv_totalamount.setText(getResources().getString(R.string.total_amount) +
+                                String.valueOf(famount) + " + " + deli_charges + " = " + total+ getResources().getString(R.string.currency));
+
+                    }
+                    else {
+
+                        total = Double.parseDouble(db_cart.getTotalAmount()) + deli_charges;
+
+                        tv_dis.setVisibility(View.GONE);
+
+                        tv_totalamount.setText(getResources().getString(R.string.total_amount) +
+                                db_cart.getTotalAmount() + " + " + deli_charges + " = " + total+ getResources().getString(R.string.currency));
+
+                    }
+                } catch (JSONException e) {
+                    total = Double.parseDouble(db_cart.getTotalAmount()) + deli_charges;
+
+                    tv_dis.setVisibility(View.GONE);
+
+                    tv_totalamount.setText(getResources().getString(R.string.total_amount) +
+                            db_cart.getTotalAmount() + " + " + deli_charges + " = " + total+ getResources().getString(R.string.currency));
+
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    if (getActivity() != null) {
+                        Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
     }
 
 //    private void attemptOrder() {
