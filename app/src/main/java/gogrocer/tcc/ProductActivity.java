@@ -70,7 +70,7 @@ public class ProductActivity extends AppCompatActivity {
     private DatabaseHandler dbcart;
     ImageView iv_image,iv_fav_image,iv_minus,iv_plus,rateall;
    TextView tv_price, tv_reward, tv_total,tv_title,tv_detail,tv_contetiy,tv_add;
-   ImageView iv_logo, iv_remove;
+   ImageView iv_logo, iv_remove,iv_share;
     RatingBar ratingBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +90,7 @@ public class ProductActivity extends AppCompatActivity {
 
         iv_image = (ImageView) findViewById(R.id.iv_product_detail_img);
         iv_fav_image = (ImageView)findViewById(R.id.fav_product);
+        iv_share = (ImageView) findViewById(R.id.fav_share);
         iv_minus = (ImageView) findViewById(R.id.iv_subcat_minus);
         iv_plus = (ImageView) findViewById(R.id.iv_subcat_plus);
         tv_title = (TextView) findViewById(R.id.tv_product_detail_title);
@@ -285,6 +286,13 @@ public class ProductActivity extends AppCompatActivity {
 
         usrid=sharedPreferences.getString(BaseURL.KEY_ID,"0");
         checkfavourate(usrid,productid,iv_fav_image);
+
+        iv_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         iv_fav_image.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -6,39 +6,40 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
     tools:context="gogrocer.tcc.RatingAndReviews">
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/appbarr"
-        app:cardBackgroundColor="@android:color/transparent">
+
         <RelativeLayout
+            android:background="@color/white"
+            android:id="@+id/rl1"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize">
-
-
+            android:layout_height="60dp">
             <ImageView
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/colorPrimary"
                 android:id="@+id/back"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                app:srcCompat="@drawable/backbutton"
-                android:layout_marginLeft="@dimen/space_10"
-                android:layout_centerVertical="true"/>
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/backy"
+                android:layout_marginLeft="10dp"
+                />
 
             <TextView
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="22sp"
-                android:text="Rating &amp; Reviews"
-                android:textColor="@color/white"
-                android:layout_toRightOf="@id/back"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/space_10"/>
+                android:textSize="18sp"
+                android:text="@string/ratiii"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginLeft="10dp"/>
         </RelativeLayout>
-    </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:padding="@dimen/space_10"
         android:id="@+id/recyclerreview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/appbarr"/>
+        android:layout_below="@id/rl1"/>
 </RelativeLayout>

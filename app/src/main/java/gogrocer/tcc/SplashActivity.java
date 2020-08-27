@@ -189,9 +189,11 @@ public class SplashActivity extends AppCompatActivity {
         if(sessionManagement.isLoggedIn()) {
         Intent startmain = new Intent(SplashActivity.this, MainActivity.class);
         startActivity(startmain);
+            finish();
         }else{
             Intent startmain = new Intent(SplashActivity.this, LoginActivity.class);
             startActivity(startmain);
+            finish();
         }
         getLanguange();
 
