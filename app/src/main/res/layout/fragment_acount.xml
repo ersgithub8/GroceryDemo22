@@ -174,9 +174,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/my_orders"
             android:text="@string/nav_order"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="@dimen/space_10"
-            android:layout_marginStart="12dp"
+            android:layout_margin="12dp"
             android:textSize="20sp"
             android:textColor="@color/black"
             />
