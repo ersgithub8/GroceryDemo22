@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="go_shop">اذهب للتسوق الآن</string>
+
+    <string name="desiiic">وصف :</string>
+
+    <string name="ratiii">التقييم والمراجعات</string>
+
     <string name="wish">قائمة الرغبات</string>
     <string name="vip_dis">خصم كبار الشخصيات : </string>
     <string name="maroof">معروف</string>
@@ -28,9 +34,9 @@
 
 
     <string name="mblnumber">أدخل رقم هاتفك المحمول</string>
-    <string name="stores">متجر</string>
+    <string name="stores">المتاجر</string>
     <string name="caty">التصنيفات</string>
-    <string name="favourt">مفضل</string>
+    <string name="favourt">المفضلة</string>
     <string name="Cart">عربة التسوق</string>
     <string name="Me">الحساب</string>
 
@@ -39,7 +45,7 @@
     <string name="urefrel">كود الإحالة</string>
 
 
-    <string name="email">أدخل بريدك الإلكتروني أو الهاتف</string>
+    <string name="email">أدخل بريدك الإلكتروني</string>
     <string name="password">ادخل رقمك السري</string>
     <string name="sign_up"><u>سجل</u></string>
     <string name="sign_upto">يرجى الاشتراك للمتابعة</string>
@@ -69,7 +75,7 @@
     <string name="tv_mywall">إعادة شحن المحفظة</string>
     <string name="nav_contact">اتصل بنا</string>
     <string name="nav_share">شارك مع الاصدقاء</string>
-    <string name="nav_logout">الخروج</string>
+    <string name="nav_logout">تسجيل خروج</string>
     <string name="tv_product_name">منتجات</string>
     <string name="shop_now">تسوق الآن</string>
     <string name="condition">الشروط</string>
@@ -91,7 +97,7 @@
     <string name="btn_login">تسجيل الدخول</string>
     <string name="btn_send">إرسال</string>
     <string name="btn_continue">تسجيل الدخول</string>
-    <string name="searchtext2">ابحث عن المنتجات والعلامات التجارية والمزيد</string>
+    <string name="searchtext2">ابحث عن المتاجر والمنتجات والمزيد</string>
     <string name="fav">المفضلة</string>
     <string name="MYCart">سلتي</string>
     <string name="cat"> التصنيفات</string>
@@ -274,7 +280,6 @@
 
     <string name="continue_sh">مواصلة التسوق</string>
 
-    <string name="search_text">بحث المنتجات والعلامات التجارية وأكثر من ذلك</string>
     <string name="enter_keyword">يرجى إدخال الكلمة</string>
     <string name="delete">حذف</string>
     <string name="edit">تحرير</string>
@@ -296,25 +301,17 @@
     <string name="house_no">منزل لا.:\u0020</string>
     <string name="socity">شركة:\u0020</string>
 
-    <string name="h_orders">أوامر</string>
-    <string name="h_rewards">المكافآت</string>
-    <string name="h_wallet">محفظة نقود</string>
-    <string name="h_cart">عربة التسوق</string>
-
-    <string name="language">لغة</string>
     <string name="status_stop">مشغل بواسطة<font color="#f233cc01">GoGrocer</font></string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">جزء Hello على الأبيض</string>
-    <string name="home_fragement_bottom">أضف $ 150،000 واربح<font color='#ff0000'>المنزل الحر.</font></string>
     <string name="followed">يتبع</string>
 
 
 
-
     <string name="Coupons">كوبونات</string>
-    <string name="VIP">كبار الشخصيات</string>
-    <string name="FreeShipping">الشحن مجانا</string>
+    <string name="VIP">الأعضاء الخاصون</string>
+    <string name="FreeShipping">الشحن مجانا \n  ريال 500</string>
 
 
     <string name="agree">وافق على الشروط والأحكام الخاصة بنا</string>

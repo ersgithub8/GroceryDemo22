@@ -44,11 +44,12 @@
             android:paddingTop="5dp">
             <ImageView
                 android:id="@+id/fav_product"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:padding="3dp"
                 android:src="@drawable/heartf"
                 android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 />
             <LinearLayout
                 android:layout_width="match_parent"
@@ -58,6 +59,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@id/fav_product"
+                android:layout_toStartOf="@id/fav_product"
                 android:weightSum="3">
             <Fonts.LatoBLack
                 android:id="@+id/tv_product_detail_title"
@@ -66,6 +68,7 @@
                 android:layout_height="wrap_content"
                 android:text="TextView"
                 android:paddingRight="10dp"
+                android:paddingEnd="10dp"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:maxLines="1"/>
@@ -79,17 +82,18 @@
                 android:layout_weight="1"
                 android:maxLines="1"
                 android:paddingRight="10dp"
+                android:paddingEnd="10dp"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
 
             </LinearLayout>
         </RelativeLayout>
         <RelativeLayout
+            android:id="@+id/rl4"
             android:layout_below="@id/rl2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:padding="@dimen/space_10">
-
 
 
             <LinearLayout
@@ -227,30 +231,58 @@
 
             </LinearLayout>
 
-            <RelativeLayout
-                android:id="@+id/rl1"
-                android:visibility="gone"
-                android:layout_width="match_parent"
+
+        </RelativeLayout>
+    <RelativeLayout
+        android:padding="@dimen/space_5"
+        android:id="@+id/rl5"
+        android:layout_below="@id/rl4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="@dimen/space_8"
+            android:text="@string/desiiic"
+            android:textColor="#000" />
+
+        <Fonts.LatoBLack
+            android:id="@+id/tv_product_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView11"
+            android:layout_marginTop="@dimen/space_3"
+            android:text="TextView"
+            android:textColor="#000" />
+    </RelativeLayout>
+
+        <RelativeLayout
+            android:padding="@dimen/space_5"
+            android:id="@+id/rl1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rl5"
+            android:layout_marginTop="@dimen/space_10">
+            <TextView
+                android:id="@+id/headingrating"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv_product_detail"
-                android:layout_marginTop="@dimen/space_10">
-                <Fonts.LatoBLack
-                    android:id="@+id/headingrating"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:text="@string/rating"
-                    android:textColor="#000"
-                    android:layout_marginTop="@dimen/space_5"
-                    android:textSize="20sp" />
-                <ImageView
-                    android:id="@+id/allrate"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_alignParentRight="true"
-                    app:srcCompat="@drawable/arrow_forward"/>
+                android:layout_alignParentLeft="true"
+                android:text="@string/ratiii"
+                android:textColor="#000"
+                android:layout_marginTop="@dimen/space_5"
+                android:textSize="20sp" />
+            <ImageView
+                android:layout_marginTop="@dimen/space_5"
+                android:id="@+id/allrate"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                app:srcCompat="@drawable/arrow_forward"/>
             <RatingBar
                 android:id="@+id/ratingbarprod"
                 android:layout_width="wrap_content"
@@ -259,38 +291,14 @@
                 android:layout_below="@id/allrate"
                 android:stepSize=".1"
                 android:elevation="@dimen/space_5"
-                android:layout_margin="@dimen/space_5"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="@dimen/space_5"
                 android:layout_centerHorizontal="true"
                 android:isIndicator="true"
                 />
 
-            </RelativeLayout>
-            <Fonts.LatoBLack
-                android:id="@+id/textView11"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/linearLayout"
-                android:layout_marginTop="@dimen/space_8"
-                android:layout_toLeftOf="@+id/linearLayout"
-                android:layout_toStartOf="@+id/linearLayout"
-                android:text="@string/description"
-                android:textColor="#000" />
-
-            <Fonts.LatoBLack
-                android:id="@+id/tv_product_detail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/textView11"
-                android:layout_marginTop="@dimen/space_3"
-                android:layout_toLeftOf="@+id/linearLayout"
-                android:layout_toStartOf="@+id/linearLayout"
-                android:text="TextView"
-                android:textColor="#000" />
         </RelativeLayout>
+
     </RelativeLayout>
 </ScrollView>
 </RelativeLayout>

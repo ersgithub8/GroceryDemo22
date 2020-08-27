@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="go_shop">Go Shop Now</string>
+
+    <string name="desiiic">وصف :</string>
+
+    <string name="ratiii">التقييم والمراجعات</string>
     <string name="wish">Wishlist</string>
     <string name="vip_dis">VIP Discount : </string>
     <string name="maroof">Maroof</string>
@@ -213,7 +218,6 @@
     <string name="total_amount">Cantidad total:\u0020</string>
     <string name="Discount">Discount</string>
     <string name="search">Buscar</string>
-    <string name="search_text">Buscar productos, marcas y más</string>
     <string name="enter_keyword">Por favor ingrese palabra clave</string>
     <string name="delete">Borrar</string>
     <string name="edit">Editar</string>
@@ -235,17 +239,10 @@
     <string name="house_no">Casa no.:\u0020</string>
     <string name="socity">Sociedad:\u0020</string>
 
-    <string name="h_orders">Ordenes</string>
-    <string name="h_rewards">Recompensas</string>
-    <string name="h_wallet">Billetera</string>
-    <string name="h_cart">Carro</string>
-
-    <string name="language">Idioma</string>
     <string name="status_stop">Energizado por <font color="#f233cc01">GoGrocer</font></string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hola fragmento en blanco</string>
-    <string name="home_fragement_bottom">Agrega $150,000 y gana <font color='#ff0000'>domicilio gratis.</font></string>
     <string name="followed">Followed</string>
 
 

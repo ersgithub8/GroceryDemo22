@@ -407,34 +407,37 @@
                 android:layout_height="wrap_content"
                 android:text="@string/agree"
                 android:layout_marginTop="@dimen/space_10"
-                android:layout_marginBottom="20dp"/>
-        </LinearLayout>
-                <RelativeLayout
-                    android:id="@+id/btnRegister"
+                android:layout_marginBottom="5dp"/>
+
+            <RelativeLayout
+                android:id="@+id/btnRegister"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="@dimen/space_5"
+                android:gravity="center"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/bac2">
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="12dp"
                     android:gravity="center"
-                    android:layout_centerHorizontal="true"
-                    android:layout_gravity="center"
-                    android:layout_alignParentBottom="true"
-                    android:background="@drawable/bac2">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/btn_Register"
-                        android:textColor="#fff"
-                        android:paddingTop="12dp"
-                        android:paddingBottom="12dp"
-                        android:paddingRight="30dp"
-                        android:paddingLeft="30dp"
-                        android:textSize="17dp"
-                        android:textStyle="bold"/>
+                    android:text="@string/btn_Register"
+                    android:textColor="#fff"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
+                    android:paddingRight="30dp"
+                    android:paddingLeft="30dp"
+                    android:textSize="17dp"
+                    android:textStyle="bold"/>
 
 
-                </RelativeLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
             </RelativeLayout>
 
 </LinearLayout>

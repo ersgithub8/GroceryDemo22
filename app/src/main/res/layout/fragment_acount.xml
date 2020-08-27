@@ -351,8 +351,8 @@
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_marginBottom="@dimen/space_5"
                     android:src="@drawable/star"/>
             <TextView
@@ -361,7 +361,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/rate"
                 android:textAlignment="center"
-                android:textSize="20sp"
+                android:textSize="14sp"
                 android:textColor="@color/black"
                 />
             </LinearLayout>
@@ -374,8 +374,8 @@
             android:gravity="center_horizontal"
             android:orientation="vertical">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginBottom="@dimen/space_5"
                 android:src="@drawable/share"/>
             <TextView
@@ -383,7 +383,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/nav_share"
-                android:textSize="20sp"
+                android:textSize="14sp"
                 android:textColor="@color/black"
                 android:textAlignment="center"
                 />
@@ -397,8 +397,8 @@
             android:gravity="center_horizontal"
             android:orientation="vertical">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginBottom="@dimen/space_5"
                 android:src="@drawable/thumb1"/>
             <TextView
@@ -407,7 +407,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/feedback"
                 android:textAlignment="center"
-                android:textSize="20sp"
+                android:textSize="14sp"
                 android:textColor="@color/black"
                 />
         </LinearLayout>
@@ -446,8 +446,8 @@
                 >
                 <TextView
                     android:id="@+id/fb"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:textColor="@color/black"
                     android:background="@drawable/facebook"
                     android:textAlignment="center"
@@ -464,8 +464,8 @@
                 >
                 <TextView
                     android:id="@+id/twitter"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:textColor="@color/black"
                     android:background="@drawable/twitter"
                     android:textAlignment="center"
@@ -482,8 +482,8 @@
                 >
                 <TextView
                     android:id="@+id/telegram"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:textColor="@color/black"
                     android:background="@drawable/telegram"
                     android:textAlignment="center"
@@ -503,8 +503,8 @@
                 <TextView
                     android:id="@+id/insta"
                     android:layout_centerHorizontal="true"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:textColor="@color/black"
                     android:background="@drawable/instagram"
                     android:textAlignment="center"
@@ -522,8 +522,8 @@
                 <TextView
                     android:id="@+id/whatsapp"
                     android:layout_centerHorizontal="true"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:textColor="@color/black"
                     android:background="@drawable/whatsapp"
                     android:textAlignment="center"
@@ -561,7 +561,7 @@
                 android:text="@string/term_and_conditions"
                 android:id="@+id/term"
                 android:textAlignment="center"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 android:textColor="@color/black"
                 android:layout_weight="1"
                 />
@@ -577,7 +577,7 @@
                 android:text="@string/privacy"
                 android:id="@+id/privacy"
                 android:textAlignment="center"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 android:textColor="@color/black"
                 android:layout_weight="1"
                 />
@@ -592,7 +592,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/return_p"
                 android:id="@+id/ret_policy"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 android:textColor="@color/black"
                 android:textAlignment="center"
                 android:layout_weight="1"
@@ -617,7 +617,7 @@
                 android:text="@string/nav_contact"
                 android:id="@+id/contact_us"
                 android:textAlignment="center"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 android:textColor="@color/black"
                 android:layout_weight="1"
                 />
@@ -632,7 +632,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/maroof"
                 android:id="@+id/maroof_id"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 android:textColor="@color/black"
                 android:textAlignment="center"
                 android:layout_weight="1"
@@ -645,7 +645,7 @@
                 android:text="@string/help_centre"
                 android:id="@+id/help"
                 android:textAlignment="center"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:textColor="@color/black"

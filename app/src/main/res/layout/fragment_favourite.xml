@@ -40,6 +40,7 @@
                 android:layout_height="match_parent"
                 app:cardElevation="@dimen/space_4">
     <LinearLayout
+        android:padding="@dimen/space_10"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -67,8 +68,8 @@
                 >
             <ImageView
                 android:id="@+id/img1"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/fav"
                 />
@@ -80,7 +81,7 @@
             android:textAlignment="center"
 
             android:text="@string/fav_prod"
-            android:textSize="12sp"
+            android:textSize="10sp"
             android:textColor="@color/black"
             />
             </LinearLayout>
@@ -106,8 +107,8 @@
 
                 <ImageView
                     android:id="@+id/img2"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_centerHorizontal="true"
                     android:src="@drawable/store1"/>
         <TextView
@@ -118,7 +119,7 @@
             android:layout_centerHorizontal="true"
             android:id="@+id/fav_store"
             android:text="@string/fav_store"
-            android:textSize="12sp"
+            android:textSize="10sp"
             android:textColor="@color/black"/>
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
@@ -142,8 +143,8 @@
                 android:paddingTop="@dimen/space_5">
             <ImageView
                 android:id="@+id/img3"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_centerHorizontal="true"
                 android:src="@drawable/wishlist"/>
             <TextView
@@ -153,7 +154,7 @@
             android:id="@+id/fav_category"
             android:textAlignment="center"
             android:text="@string/wish"
-            android:textSize="12sp"
+            android:textSize="10sp"
             android:textColor="@color/black"
             />
             </RelativeLayout>

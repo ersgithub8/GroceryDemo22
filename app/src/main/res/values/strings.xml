@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="go_shop">Go Shop Now</string>
+
+    <string name="desiiic">Description :</string>
+    <string name="ratiii">Rating &amp; Reviews</string>
+
     <string name="vip_dis">VIP Discount : </string>
     <string name="maroof">Maroof</string>
     <string name="wish">Wishlist</string>
@@ -18,7 +23,7 @@
     <string name="VerificationCode">Verification Code</string>
     <string name="VerificationCodeDesc">Please enter verification code sent to</string>
 
-    <string name="term_and_conditions">Terms and \nConditions</string>
+    <string name="term_and_conditions">Terms and Conditions</string>
     <string name="privacy">Privacy Policy</string>
     <string name="return_p">Return Policy</string>
     <string name="help_centre">Help Centre</string>
@@ -41,10 +46,10 @@
     <string name="Cart">Cart</string>
     <string name="MYCart"> MY Cart</string>
     <string name="Me">Account</string>
-    <string name="searchtext2">Search For Products,Brands and More</string>
+    <string name="searchtext2">Search For Stores,Products and More</string>
 
 
-    <string name="app_name" translatable="false">J6</string>
+    <string name="app_name" translatable="false">J6 Stores</string>
     <string name="name" translatable="false">SameCiti - Customer</string>
 <!--    <string name="currency" translatable="false">\u20B9</string>-->
     <string name="currency" translatable="false">SAR</string>
@@ -55,7 +60,7 @@
     <string name="urefrel">Referal Code</string>
     <string name="rating">Rating &amp; Reviews</string>
     <string name="create">Create an Account?</string>
-    <string name="email">Enter your email or Phone</string>
+    <string name="email">Enter your Email</string>
     <string name="password">Enter your Password</string>
     <string name="sign_up"><u>Sign Up</u></string>
     <string name="sign_upto">Please Sign Up to continue</string>
@@ -319,8 +324,8 @@
 
 
     <string name="Coupons">Coupons</string>
-    <string name="VIP">VIP</string>
-    <string name="FreeShipping">Free Shiping</string>
+    <string name="VIP">Special Members</string>
+    <string name="FreeShipping">Free Shiping\n500 SAR</string>
 
     <string name="agree">Agree on our Terms and Conditions</string>
 
