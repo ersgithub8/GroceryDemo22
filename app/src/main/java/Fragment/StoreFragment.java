@@ -131,8 +131,10 @@ public class StoreFragment extends Fragment implements Main_new {
         if(!lat.equals("123"))
         {
             double laty = Double.parseDouble(lat);
-        double longy = Double.parseDouble(longi);
-        Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
+            double longy = Double.parseDouble(longi);
+            //Toast.makeText(getActivity(), city, Toast.LENGTH_SHORT).show();
+
+            Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
 //         addresses = null;
         try {
             List<Address> addresses = geocoder.getFromLocation(laty, longy, 1);
@@ -140,10 +142,17 @@ public class StoreFragment extends Fragment implements Main_new {
             if(addresses.size()>0) {
                 city = addresses.get(0).getLocality();
             }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
 }
+
+        if(city == null){
+            //   city="Lahore";
+        }
+
+        //Toast.makeText(getActivity(), city, Toast.LENGTH_SHORT).show();
 
         deal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,11 +167,6 @@ public class StoreFragment extends Fragment implements Main_new {
             }
         });
 //        Toast.makeText(getActivity(), city+"", Toast.LENGTH_SHORT).show();
-
-        if(city == null){
-//            Toast.makeText(getActivity(), city+"", Toast.LENGTH_SHORT).show();
-            city="Lahore";
-        }
 
         floatingActionButton = view.findViewById(R.id.fab_id);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -221,6 +225,7 @@ public class StoreFragment extends Fragment implements Main_new {
         make_menu_items();
 //        getstores();
         make_top_selling();
+
 //        rv_top_selling.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), rv_top_selling, new RecyclerTouchListener.OnItemClickListener() {
 //            @Override
 //            public void onItemClick(View view, int position) {

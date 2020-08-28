@@ -2,6 +2,10 @@ package gogrocer.tcc;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import Fragment.Cart_fragment;
+import Fragment.Empty_cart_fragment;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -37,7 +41,7 @@ public class ProductActivity extends AppCompatActivity {
     boolean favcheckk;
     SharedPreferences sharedPreferences,preferences;
     String usrid,language,detail,qty;
-    RelativeLayout ratingrl;
+    RelativeLayout ratingrl,Go_Cart;
 //            ,productid,product_name,category_id,dealprice,startdate,starttime,endtime,enddate,price,status,instock,
 //            ,title
 //            ,description
@@ -104,6 +108,7 @@ public class ProductActivity extends AppCompatActivity {
         iv_logo = (ImageView) findViewById(R.id.iv_subcat_img);
         iv_remove = (ImageView)findViewById(R.id.iv_subcat_remove);
 
+        Go_Cart = (RelativeLayout) findViewById(R.id.btn_cart);
 
         ratingBar=findViewById(R.id.ratingbarprod);
         ratingrl=findViewById(R.id.rl1);
@@ -291,8 +296,26 @@ public class ProductActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT,
+                        "Check out this Product '"+product_name+"' in App at: "+BaseURL.Share_URL);
+                sendIntent.setType("text/plain");
+                startActivity(sendIntent);
+
             }
         });
+
+//        Go_Cart.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                Intent intent = new Intent(ProductActivity.this,MainActivity.class);
+//                intent.putExtra("jaffery","laddan");
+//                startActivity(intent);
+//
+//            }
+//        });
 
         iv_fav_image.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -308,6 +308,29 @@
                 />
 
         </RelativeLayout>
+        <RelativeLayout
+            android:visibility="gone"
+            android:layout_below="@id/rl1"
+            android:layout_marginTop="@dimen/space_10"
+            android:id="@+id/btn_cart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
+
+            <TextView
+                android:layout_alignParentStart="true"
+                android:background="@drawable/goshop"
+                android:id="@+id/catname"
+                android:layout_width="190dp"
+                android:layout_height="62dp"
+                android:text="@string/go_cart"
+                android:gravity="center"
+                android:layout_centerInParent="true"
+                android:maxLines="1"
+                android:textColor="@color/white"
+                android:textSize="16sp"/>
+
+        </RelativeLayout>
 
     </RelativeLayout>
 </ScrollView>

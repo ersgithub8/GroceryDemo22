@@ -259,10 +259,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             }
         });
-              if (getIntent().getExtras() != null) {
+        if (getIntent().getExtras() != null) {
 
             for (String key : getIntent().getExtras().keySet()) {
                 String value = getIntent().getExtras().getString(key);
+
+//                if (getIntent().getStringExtra("jaffery").equals("laddan")){
+//                    if (dbcart.getCartCount() > 0) {
+//                        Fragment fm = new Cart_fragment();
+//                        FragmentManager fragmentManager = getFragmentManager();
+//                        fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+//                                .addToBackStack(null).commit();
+//                    }
+//                    else {
+//                        Fragment fm = new Empty_cart_fragment();
+//                        FragmentManager fragmentManager = getFragmentManager();
+//                        fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+//                                .addToBackStack(null).commit();
+//                    }
+//                }
+//                else {
+//
+//                }
 
                 if (key.equals("MainActivity") && value.equals("True")) {
                     Intent intent = new Intent(this, LoginActivity.class);
@@ -270,7 +288,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     startActivity(intent);
                     finish();
                 }
-
             }
             subscribeToPushService();
         }

@@ -2,6 +2,7 @@
 <resources>
 
     <string name="go_shop">Go Shop Now</string>
+    <string name="go_cart">Go To Cart</string>
 
     <string name="desiiic">Description :</string>
     <string name="ratiii">Rating &amp; Reviews</string>

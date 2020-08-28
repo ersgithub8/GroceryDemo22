@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="go_cart">اذهب إلى عربة التسوق</string>
+
     <string name="go_shop">اذهب للتسوق الآن</string>
 
     <string name="desiiic">وصف :</string>

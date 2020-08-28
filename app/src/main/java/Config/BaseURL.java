@@ -6,6 +6,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class BaseURL {
 
+    public static String BASE_URL = "https://project2.erstechno.online/";
+
+    public static String Share_URL = "https://project2.erstechno.online";
+
 
 
     public  static final String fixpass="Abvf435@ee";
@@ -51,7 +55,6 @@ public class BaseURL {
     public static final String CITY_ID = "CITY_ID";
     public static final String STORE_ID = "STORE_ID";
 
-    public static String BASE_URL = "https://project2.erstechno.online/";
 
     public static String IMG_SLIDER_URL = BASE_URL + "uploads/sliders/";
     public static String IMG_CATEGORY_URL = BASE_URL + "uploads/category/";

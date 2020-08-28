@@ -19,7 +19,6 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
     <application
         android:name=".AppController"
         android:allowBackup="true"
@@ -30,7 +29,7 @@
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".OTPActivity"></activity>
+        <activity android:name=".OTPActivity" />
         <activity android:name=".RatingAndReviews" />
         <activity android:name=".ProductActivity" />
         <activity android:name=".Rating" />
@@ -39,6 +38,18 @@
         <activity
             android:name=".SplashActivity"
             android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter >
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data
+
+                    android:host="project2.erstechno.online"
+
+                    android:scheme="https"
+
+                    tools:ignore="AppLinkUrlError,ManifestResource" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -50,7 +61,8 @@
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="networkconnectivity.NetworkError" />
+        <activity android:name="networkconnectivity.NetworkError"
+            tools:ignore="MissingClass" />
         <activity
             android:name=".LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
