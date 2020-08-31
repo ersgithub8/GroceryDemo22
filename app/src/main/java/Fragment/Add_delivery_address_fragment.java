@@ -1,10 +1,15 @@
 package Fragment;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -16,23 +21,32 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.app.ActivityCompat;
+
 import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import Config.BaseURL;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.MainActivity;
 import gogrocer.tcc.R;
+import gogrocer.tcc.SplashActivity;
 import util.ConnectivityReceiver;
 import util.CustomVolleyJsonRequest;
 import util.Session_management;
@@ -44,12 +58,14 @@ import util.Session_management;
 public class Add_delivery_address_fragment extends Fragment implements View.OnClickListener {
 
     private static String TAG = Add_delivery_address_fragment.class.getSimpleName();
+    FusedLocationProviderClient fusedLocationClient;
 
-    private EditText et_phone, et_name, et_pin, et_house;
+    private EditText et_phone, et_name, et_pin, et_house, et_address;
     private RelativeLayout btn_update;
-    private TextView tv_phone, tv_name, tv_pin, tv_house, tv_socity, btn_socity;
+    private TextView tv_phone, tv_name, tv_pin, tv_house, tv_socity, btn_socity, gps, tv_address;
     private String getsocity = "";
-
+    String lat, longi;
+    Double longitude,latitude;
     private Session_management sessionManagement;
 
     private boolean isEdit = false;
@@ -74,7 +90,34 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
         ((MainActivity) getActivity()).setTitle(getResources().getString(R.string.add));
 
         sessionManagement = new Session_management(getActivity());
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
 
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+        }
+
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener(new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(android.location.Location location) {
+
+                        // Got last known location. In some rare situations this can be null.
+                        if (location != null) {
+                            // Logic to handle location object
+
+                            latitude = location.getLatitude();
+                            longitude = location.getLongitude();
+
+                            location.reset();
+
+                        }
+
+                    }
+
+                });
+
+
+        et_address = (EditText) view.findViewById(R.id.et_add_address);
         et_phone = (EditText) view.findViewById(R.id.et_add_adres_phone);
         et_name = (EditText) view.findViewById(R.id.et_add_adres_name);
         tv_phone = (TextView) view.findViewById(R.id.tv_add_adres_phone);
@@ -86,6 +129,8 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
         tv_socity = (TextView) view.findViewById(R.id.tv_add_adres_socity);
         btn_update = (RelativeLayout) view.findViewById(R.id.btn_add_adres_edit);
         btn_socity = (TextView) view.findViewById(R.id.btn_add_adres_socity);
+        gps = (TextView) view.findViewById(R.id.get_gps);
+        tv_address = (TextView) view.findViewById(R.id.tv_address);
 
         String getsocity_name = sessionManagement.getUserDetails().get(BaseURL.KEY_SOCITY_NAME);
         String getsocity_id = sessionManagement.getUserDetails().get(BaseURL.KEY_SOCITY_ID);
@@ -128,11 +173,40 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
         btn_socity.setOnClickListener(this);
 
         SharedPreferences sharedPreferences=getActivity().getSharedPreferences("location", Context.MODE_PRIVATE);
-        String lat, longi;
         lat=sharedPreferences.getString("lat",null);
         longi=sharedPreferences.getString("long",null);
 
-        Toast.makeText(getActivity(), lat+longi, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), lat+longi, Toast.LENGTH_SHORT).show();
+
+        gps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                double laty = Double.parseDouble(lat);
+//                double longy = Double.parseDouble(longi);
+                //Toast.makeText(getActivity(), city, Toast.LENGTH_SHORT).show();
+
+                Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
+//         addresses = null;
+                try {
+                    List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
+                    String final_address=null;
+                    if(addresses.size()>0) {
+                        String address = addresses.get(0).getAddressLine(0);
+//                        String city = addresses.get(0).getLocality();
+//                        String state = addresses.get(0).getAdminArea();
+//                        String country = addresses.get(0).getCountryName();
+                        final_address = address;
+                    }
+
+                    et_address.setText(final_address);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
         return view;
     }
 
@@ -180,6 +254,8 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
         String getname = et_name.getText().toString();
         String getpin = et_pin.getText().toString();
         String gethouse = et_house.getText().toString();
+        String getAdress = et_address.getText().toString();
+
         String getsocity = sessionManagement.getUserDetails().get(BaseURL.KEY_SOCITY_ID);
 
         boolean cancel = false;
@@ -213,6 +289,11 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
             focusView = et_house;
             cancel = true;
         }
+        if (TextUtils.isEmpty(getAdress)) {
+            tv_address.setTextColor(getResources().getColor(R.color.colorPrimary));
+            focusView = et_address;
+            cancel = true;
+        }
 
         if (TextUtils.isEmpty(getsocity) && getsocity == null) {
             tv_socity.setTextColor(getResources().getColor(R.color.colorPrimary));
@@ -236,9 +317,9 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
                 // check internet connection
                 if (ConnectivityReceiver.isConnected()) {
                     if (isEdit) {
-                        makeEditAddressRequest(getlocation_id, getpin, getsocity, gethouse, getname, getphone);
+                        makeEditAddressRequest(getlocation_id, getpin, getsocity, getAdress, getname, getphone);
                     } else {
-                        makeAddAddressRequest(user_id, getpin, getsocity, gethouse, getname, getphone);
+                        makeAddAddressRequest(user_id, getpin, getsocity, getAdress, getname, getphone);
                     }
                 }
             }

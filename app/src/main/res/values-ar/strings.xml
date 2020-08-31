@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <string name="or">-أو-</string>
+    <string name="get_gps">احصل على العنوان من الموقع</string>
     <string name="go_cart">اذهب إلى عربة التسوق</string>
+    <string name="address">عنوان </string>
 
     <string name="go_shop">اذهب للتسوق الآن</string>
 
@@ -294,7 +298,7 @@
 
     <!-- delivery_payment_detail_fragment.java -->
     <string name="tv_deli_pay_ontime">في الوقت المحدد:\u0020</string>
-    <string name="tv_deli_pay_address">عنوان:\u0020</string>
+    <string name="tv_deli_pay_address">عنوان : </string>
 
     <!-- delivery_get_address_adapter.java -->
     <string name="reciver_name">اسم المستلم:\u0020</string>

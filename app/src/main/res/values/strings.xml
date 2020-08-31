@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="or">-OR-</string>
+    <string name="get_gps">Get Address From Location</string>
+    <string name="address">Address </string>
 
     <string name="go_shop">Go Shop Now</string>
     <string name="go_cart">Go To Cart</string>
@@ -307,7 +310,7 @@
 
     <!-- delivery_payment_detail_fragment.java -->
     <string name="tv_deli_pay_ontime">On time :\u0020</string>
-    <string name="tv_deli_pay_address">Address:\u0020</string>
+    <string name="tv_deli_pay_address">Address : </string>
 
     <!-- delivery_get_address_adapter.java -->
     <string name="reciver_name">Receiver Name:\u0020</string>

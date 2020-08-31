@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="go_cart">Go To Cart</string>
 
+    <string name="or">-OR-</string>
+    <string name="go_cart">Go To Cart</string>
+    <string name="address">Address </string>
+    <string name="get_gps">Get Address From Location</string>
     <string name="go_shop">Go Shop Now</string>
 
     <string name="desiiic">وصف :</string>

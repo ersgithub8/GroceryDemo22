@@ -147,7 +147,9 @@
                 android:text="@string/btn_reg_socity_choose"
                 android:textColor="#000"
                 android:textSize="@dimen/space_14" />
+
             <LinearLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:layout_height="wrap_content">
@@ -169,6 +171,8 @@
 
 
             <EditText
+                android:visibility="gone"
+                android:text="dffdfsfsdf"
                 android:id="@+id/et_add_adres_home"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -177,12 +181,64 @@
                 android:background="@drawable/xml_textbox_bg"
                 android:inputType="text"
                 android:textSize="@dimen/space_14" />
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+                <Fonts.LatoBLack
+                    android:id="@+id/tv_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/address"
+                    android:textColor="#000"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/iconn" />
+
+            </LinearLayout>
+
+            <EditText
+                android:inputType="textCapSentences|textNoSuggestions|textMultiLine"
+                android:gravity="top"
+                android:padding="5dp"
+                android:id="@+id/et_add_address"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginBottom="@dimen/space_5"
+                android:layout_marginTop="@dimen/space_4"
+                android:background="@drawable/xml_textbox_bg"
+                android:textSize="@dimen/space_14" />
+
+            <TextView
+                android:layout_margin="@dimen/space_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/or"
+                android:layout_gravity="center"
+                />
+            <TextView
+                android:drawableLeft="@drawable/location"
+                android:id="@+id/get_gps"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/get_gps"
+                android:background="#1E90FF"
+                android:textColor="@color/white"
+                android:padding="10dp"
+                android:textAlignment="center"
+                />
 
             <RelativeLayout
                 android:id="@+id/btn_add_adres_edit"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:layout_margin="12dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="@dimen/space_10"
+                android:layout_marginTop="@dimen/space_20"
                 android:background="@drawable/bg_rounded_button"
                 android:padding="12dp">
 

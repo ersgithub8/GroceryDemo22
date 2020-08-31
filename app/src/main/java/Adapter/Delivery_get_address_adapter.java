@@ -195,7 +195,7 @@ public class Delivery_get_address_adapter extends RecyclerSwipeAdapter<Delivery_
         holder.swipeLayout.setOnDoubleClickListener(new SwipeLayout.DoubleClickListener() {
             @Override
             public void onDoubleClick(SwipeLayout layout, boolean surface) {
-                Toast.makeText(context, "DoubleClick", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "DoubleClick", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -252,7 +252,7 @@ public class Delivery_get_address_adapter extends RecyclerSwipeAdapter<Delivery_
     public String getaddress() {
         String address = context.getResources().getString(R.string.reciver_name) + getname + "\n" + context.getResources().getString(R.string.reciver_mobile) + getphone +
                 "\n" + context.getResources().getString(R.string.pincode) + getpin +
-                "\n" + context.getResources().getString(R.string.house_no) + gethouse +
+                "\n" +context.getResources().getString(R.string.tv_deli_pay_address) + gethouse +
                 "\n" + context.getResources().getString(R.string.socity) + getsocity;
 
         return address;
