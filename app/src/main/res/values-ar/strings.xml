@@ -6,7 +6,7 @@
     <string name="go_cart">اذهب إلى عربة التسوق</string>
     <string name="address">عنوان </string>
 
-    <string name="go_shop">اذهب للتسوق الآن</string>
+    <string name="go_shop">تسوق الآن</string>
 
     <string name="desiiic">وصف :</string>
 
@@ -22,9 +22,9 @@
     <string name="fav_cat">الفئات المفضلة</string>
     <string name="fav_prod">المنتجات المفضلة</string>
 
-    <string name="term_and_conditions">الأحكام والشروط</string>
-    <string name="privacy">سياسة خاصة</string>
-    <string name="return_p">سياسة العائدات</string>
+    <string name="term_and_conditions">الشروط والأحكام</string>
+    <string name="privacy">الخصوصية</string>
+    <string name="return_p">سياسة الاسترجاع</string>
     <string name="help_centre">مركز المساعدة</string>
 
     <string name="VerificationCode">شيفرة التأكيد</string>
@@ -40,9 +40,9 @@
 
 
     <string name="mblnumber">أدخل رقم هاتفك المحمول</string>
-    <string name="stores">المتاجر</string>
-    <string name="caty">التصنيفات</string>
-    <string name="favourt">المفضلة</string>
+    <string name="stores">متاجر</string>
+    <string name="caty">الأقسام</string>
+    <string name="favourt">مفضلة</string>
     <string name="Cart">عربة التسوق</string>
     <string name="Me">الحساب</string>
 
@@ -55,7 +55,7 @@
     <string name="password">ادخل رقمك السري</string>
     <string name="sign_up"><u>سجل</u></string>
     <string name="sign_upto">يرجى الاشتراك للمتابعة</string>
-    <string name="btn_continueto" ><b>مرحبا بكم في محلات j6</b></string>
+    <string name="btn_continueto" ><b>مرحبا بكم في متاجر جي٦</b></string>
     <string name="btn_continueto1" >الرجاء تسجيل الدخول للمتابعة</string>
 
     <string name="create">انشئ حساب؟</string>
@@ -66,7 +66,7 @@
     <string name="nav_terms">الشروط والخصوصية</string>
     <string name="nav_user">"المستعمل "</string>
     <string name="or_sign">أو تسجيل الدخول كـ</string>
-    <string name="popular">المنتجات الشعبية</string>
+    <string name="popular">الأكثر شعبية</string>
     <string name="rating">التقييم والمراجعات</string>
     <string name="nav_home">تسوق الآن </string>
     <string name="nav_profile">الملف الشخصي\n</string>
@@ -79,8 +79,8 @@
     <string name="nav_about">معلومات عنا</string>
     <string name="nav_review">اكتب عنا</string>
     <string name="tv_mywall">إعادة شحن المحفظة</string>
-    <string name="nav_contact">اتصل بنا</string>
-    <string name="nav_share">شارك مع الاصدقاء</string>
+    <string name="nav_contact">تواصل معنا</string>
+    <string name="nav_share">شارك التطبيق</string>
     <string name="nav_logout">تسجيل خروج</string>
     <string name="tv_product_name">منتجات</string>
     <string name="shop_now">تسوق الآن</string>
@@ -128,8 +128,8 @@
     <string name="btn_reg_update">تحديث الملف الشخصي</string>
     <string name="et_reg_search"> البحث في المناطق</string>
     <string name="et_sea">اكتب للبحث</string>
-    <string name="rate" translatable="false">تطبيق معدل</string>
-    <string name="feedback" translatable="false">ردود الفعل</string>
+    <string name="rate">قيّم التطبيق</string>
+    <string name="feedback" translatable="false">قيّم الخدمات</string>
     <string name="tv_reg_note">ملاحظة: الخدمة متاحة فقط لـ RAJKOT</string>
     <string name="tv_reg_address">العنوان (مطلوب)</string>
     <string name="et_reg_address">أكمل عنوانك</string>
