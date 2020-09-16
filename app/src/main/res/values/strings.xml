@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <string name="related">Related Products</string>
+
     <string name="or">-OR-</string>
     <string name="get_gps">Get Address From Location</string>
     <string name="address">Address </string>
@@ -50,7 +53,7 @@
     <string name="Cart">Cart</string>
     <string name="MYCart"> MY Cart</string>
     <string name="Me">Account</string>
-    <string name="searchtext2">Search For Stores,Products and More</string>
+    <string name="searchtext2">Search For Stores , Products and More</string>
 
 
     <string name="app_name" translatable="false">J6 Stores</string>

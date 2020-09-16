@@ -195,6 +195,7 @@ public class StoreFragment extends Fragment implements Main_new {
         ((MainActivity)getActivity()).bot_cart.setBackgroundColor(getResources().getColor(R.color.white));
 
         rv_headre_icons = (RecyclerView) view.findViewById(R.id.collapsing_recycler);
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity()) {
 
             @Override

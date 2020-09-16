@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="related">منتجات ذات صله</string>
     <string name="or">-أو-</string>
     <string name="get_gps">احصل على العنوان من الموقع</string>
     <string name="go_cart">اذهب إلى عربة التسوق</string>
@@ -55,7 +56,7 @@
     <string name="password">ادخل رقمك السري</string>
     <string name="sign_up"><u>سجل</u></string>
     <string name="sign_upto">يرجى الاشتراك للمتابعة</string>
-    <string name="btn_continueto" ><b>مرحبا بكم في متاجر جي٦</b></string>
+    <string name="btn_continueto" ><b>مرحبا بكم في \nمتاجر جي٦</b></string>
     <string name="btn_continueto1" >الرجاء تسجيل الدخول للمتابعة</string>
 
     <string name="create">انشئ حساب؟</string>

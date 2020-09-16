@@ -191,11 +191,10 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
                     List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
                     String final_address=null;
                     if(addresses.size()>0) {
-                        String address = addresses.get(0).getAddressLine(0);
-//                        String city = addresses.get(0).getLocality();
+                        //                        String city = addresses.get(0).getLocality();
 //                        String state = addresses.get(0).getAdminArea();
 //                        String country = addresses.get(0).getCountryName();
-                        final_address = address;
+                        final_address = addresses.get(0).getAddressLine(0);
                     }
 
                     et_address.setText(final_address);

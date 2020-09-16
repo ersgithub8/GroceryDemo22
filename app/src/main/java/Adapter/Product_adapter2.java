@@ -30,6 +30,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -219,13 +220,16 @@ SharedPreferences preferences;
 
     @Override
     public Product_adapter2.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_product_rv, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_related_product, parent, false);
         context = parent.getContext();
         return new Product_adapter2.MyViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(Product_adapter2.MyViewHolder holder, int position) {
+
+        Collections.shuffle(modelList);
+
         Product_model mList = modelList.get(position);
 
         Glide.with(context)
@@ -276,8 +280,8 @@ SharedPreferences preferences;
     @Override
     public int getItemCount() {
 
-        if(modelList.size()>=3){
-            return 3;
+        if(modelList.size()>=5){
+            return 5;
         }else
         return modelList.size();
     }

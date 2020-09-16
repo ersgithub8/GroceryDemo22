@@ -13,10 +13,12 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import android.preference.PreferenceManager;
+import android.text.Html;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +29,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
@@ -64,12 +67,13 @@ public class Account_Fragment extends Fragment {
     LinearLayout rewards,walletl,rate,share,feedback;
 
 
-    TextView name,phone,reward,wallet,contact,maroof;
+    TextView name,phone,reward,wallet,contact;
 
     TextView fb,twitter,tele,insta,whatsapp;
 
     TextView terms,privacy,returnp,helpcenter;
     CircleImageView iv_profile;
+    ImageView maroof;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -78,9 +82,11 @@ public class Account_Fragment extends Fragment {
 
         lEnglish = view.findViewById(R.id.eng);
         lSpanish = view.findViewById(R.id.arab);
+        maroof = view.findViewById(R.id.maroof_id);
+
+//        Glide.with(getActivity()).load("https://maroof.sa/Business/GetStamp?bid=95194").into(maroof);
 
         contact=view.findViewById(R.id.contact_us);
-        maroof = view.findViewById(R.id.maroof_id);
         top_selling = view.findViewById(R.id.top_selling);
 
         iv_profile=view.findViewById(R.id.iv_header_img);

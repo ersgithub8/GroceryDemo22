@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:shimmer="http://schemas.android.com/tools"
     android:background="@color/white"
     android:orientation="vertical">
     <RelativeLayout
@@ -74,13 +75,51 @@
                 android:textSize="15sp" />
         </RelativeLayout>
 
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_cart"
-            android:layout_above="@id/btnContinue"
-            android:layout_below="@id/rl1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content"
+            android:layout_above="@id/relate"
+            android:layout_below="@id/rl1" />
+
+        <LinearLayout
+            android:id="@+id/relate"
+            android:layout_above="@id/btnContinue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:textColor="@color/black"
+                android:textAlignment="center"
+                android:padding="@dimen/space_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/related"
+                />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_related"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:layout_marginBottom="@dimen/space_10"
+                android:id="@+id/shimmer_view_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                shimmer:duration="500">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <include layout="@layout/data_holder1" />
+                </LinearLayout>
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+        </LinearLayout>
 
         <Button
             android:id="@+id/btnContinue"

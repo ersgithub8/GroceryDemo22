@@ -10,8 +10,6 @@ public class BaseURL {
 
     public static String Share_URL = "https://project2.erstechno.online";
 
-
-
     public  static final String fixpass="Abvf435@ee";
     static final String APP_NAME = "GoGrocer";
     public static final String PREFS_NAME = "GroceryLoginPrefs";

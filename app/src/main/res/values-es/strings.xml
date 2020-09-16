@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="related">Related Products</string>
 
     <string name="or">-OR-</string>
     <string name="go_cart">Go To Cart</string>

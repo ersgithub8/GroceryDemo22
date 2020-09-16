@@ -8,10 +8,15 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.os.Bundle;
 import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,27 +27,38 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.NoConnectionError;
+import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import Adapter.Cart_adapter;
+import Adapter.Product_adapter;
+import Adapter.Product_adapter2;
 import Config.BaseURL;
+import Model.Product_model;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.LoginActivity;
 import gogrocer.tcc.MainActivity;
 import gogrocer.tcc.R;
 import util.ConnectivityReceiver;
+import util.CustomVolleyJsonRequest;
 import util.DatabaseHandler;
 import util.Session_management;
 
@@ -54,9 +70,12 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
 
     private static String TAG = Cart_fragment.class.getSimpleName();
 
-    private RecyclerView rv_cart;
+    ArrayList<Product_model> product_modelList = new ArrayList<>();
+    Product_adapter2 product_adapter;
+    private RecyclerView rv_cart,rv_realted;
     private TextView tv_clear, tv_total, tv_item;
     private RelativeLayout btn_checkout;
+    private ShimmerFrameLayout mShimmerViewContainer;
 
     Button continueshoping;
     private DatabaseHandler db;
@@ -83,7 +102,9 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
         sessionManagement = new Session_management(getActivity());
         sessionManagement.cleardatetime();
 
+        mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
 
+        rv_realted = (RecyclerView) view.findViewById(R.id.rv_related);
         tv_clear = (TextView) view.findViewById(R.id.tv_cart_clear);
         tv_total = (TextView) view.findViewById(R.id.tv_cart_total);
         tv_item = (TextView) view.findViewById(R.id.tv_cart_item);
@@ -93,15 +114,34 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
         continueshoping=view.findViewById(R.id.btnContinue);
         db = new DatabaseHandler(getActivity());
 
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity()) {
 
+            @Override
+            public void smoothScrollToPosition(RecyclerView recyclerView, RecyclerView.State state, int position) {
+                LinearSmoothScroller smoothScroller = new LinearSmoothScroller(getActivity()) {
+                    private static final float SPEED = 2000f;// Change this value (default=25f)
+
+                    @Override
+                    protected float calculateSpeedPerPixel(DisplayMetrics displayMetrics) {
+                        return SPEED / displayMetrics.densityDpi;
+                    }
+                };
+                smoothScroller.setTargetPosition(position);
+                startSmoothScroll(smoothScroller);
+            }
+        };
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        rv_realted.setLayoutManager(layoutManager);
+        rv_realted.setHasFixedSize(true);
+        rv_realted.setItemViewCacheSize(10);
+        rv_realted.setDrawingCacheEnabled(true);
+        rv_realted.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_LOW);
 
         ((MainActivity)getActivity()).bot_cart.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         ((MainActivity)getActivity()).bot_cat.setBackgroundColor(getResources().getColor(R.color.white));
         ((MainActivity)getActivity()).bot_fav.setBackgroundColor(getResources().getColor(R.color.white));
         ((MainActivity)getActivity()).bot_profile.setBackgroundColor(getResources().getColor(R.color.white));
         ((MainActivity)getActivity()).bot_store.setBackgroundColor(getResources().getColor(R.color.white));
-
-
 
 
         ArrayList<HashMap<String, String>> map = db.getCartAll();
@@ -111,6 +151,8 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
         adapter.notifyDataSetChanged();
 
         updateData();
+
+        getRelated();
 
         tv_clear.setOnClickListener(this);
         btn_checkout.setOnClickListener(this);
@@ -125,6 +167,85 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
             }
         });
         return view;
+    }
+
+    private void getRelated() {
+
+        String tag_json_obj = "json_product_req";
+        Map<String, String> params = new HashMap<String, String>();
+
+        CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
+                BaseURL.GET_PRODUCT_URL, params, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d(TAG, response.toString());
+
+                try {
+
+                    Boolean status = response.getBoolean("responce");
+                    if (status) {
+                        mShimmerViewContainer.stopShimmerAnimation();
+                        mShimmerViewContainer.setVisibility(View.GONE);
+                        Gson gson = new Gson();
+                        Type listType = new TypeToken<List<Product_model>>() {
+                        }.getType();
+                        product_modelList = gson.fromJson(response.getString("data"), listType);
+                        product_adapter = new Product_adapter2(product_modelList, getActivity());
+                        rv_realted.setAdapter(product_adapter);
+                        product_adapter.notifyDataSetChanged();
+                        if (getActivity() != null) {
+                            if (product_modelList.isEmpty()) {
+                                //  Toast.makeText(getActivity(), getResources().getString(R.string.no_rcord_found), Toast.LENGTH_SHORT).show();
+                                SweetAlertDialog error=
+                                        new SweetAlertDialog(getActivity(),SweetAlertDialog.ERROR_TYPE)
+                                                .setTitleText("No Data Found")
+                                                .setConfirmButtonBackgroundColor(Color.RED)
+                                                .setConfirmButton("OK", new SweetAlertDialog.OnSweetClickListener() {
+                                                    @Override
+                                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                                        getActivity().onBackPressed();
+                                                    }
+                                                });
+                                error.show();
+                            }
+                        }
+
+                    }else{
+                        mShimmerViewContainer.stopShimmerAnimation();
+                        mShimmerViewContainer.setVisibility(View.GONE);
+                        SweetAlertDialog error=
+                                new SweetAlertDialog(getActivity(),SweetAlertDialog.ERROR_TYPE)
+                                        .setTitleText("No Data Found")
+                                        .setConfirmButtonBackgroundColor(Color.RED)
+                                        .setConfirmButton("OK", new SweetAlertDialog.OnSweetClickListener() {
+                                            @Override
+                                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                                getActivity().onBackPressed();
+                                            }
+                                        });
+                        error.show();
+                    }
+                } catch (JSONException e) {
+//                    loading.dismiss();
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Activity activity=getActivity();
+                    if(activity !=null)
+                        Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+//                    loading.dismiss();
+                }
+            }
+        });
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
     }
 
     @Override
@@ -292,12 +413,16 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
     public void onPause() {
         super.onPause();
         // unregister reciver
+        mShimmerViewContainer.stopShimmerAnimation();
+
         getActivity().unregisterReceiver(mCart);
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        mShimmerViewContainer.startShimmerAnimation();
+
         // register reciver
         getActivity().registerReceiver(mCart, new IntentFilter("Grocery_cart"));
     }
@@ -314,6 +439,5 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
             }
         }
     };
-
 
 }
