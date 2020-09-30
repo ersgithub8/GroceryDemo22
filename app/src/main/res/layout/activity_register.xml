@@ -415,10 +415,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="@dimen/space_5"
-                android:gravity="center"
-                android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
-                android:layout_alignParentBottom="true"
                 android:background="@drawable/bac2">
 
                 <TextView
@@ -426,13 +423,14 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@string/btn_Register"
-                    android:textColor="#fff"
+                    android:textColor="#ffffff"
                     android:paddingTop="12dp"
                     android:paddingBottom="12dp"
-                    android:paddingRight="30dp"
-                    android:paddingLeft="30dp"
-                    android:textSize="17dp"
-                    android:textStyle="bold"/>
+                    android:paddingRight="25dp"
+                    android:paddingLeft="25dp"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    />
 
 
             </RelativeLayout>

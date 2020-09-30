@@ -2,6 +2,7 @@
 <resources>
     <string name="related">Related Products</string>
 
+    <string name="btn_Register">سجل</string>
     <string name="or">-OR-</string>
     <string name="go_cart">Go To Cart</string>
     <string name="address">Address </string>

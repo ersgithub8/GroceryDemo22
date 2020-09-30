@@ -1,6 +1,5 @@
 package Config;
 
-
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -9,6 +8,8 @@ public class BaseURL {
     public static String BASE_URL = "https://project2.erstechno.online/";
 
     public static String Share_URL = "https://project2.erstechno.online";
+
+    public static String Get_Delivery_Store = BASE_URL + "index.php/Api/delivery_charges_rate";
 
     public  static final String fixpass="Abvf435@ee";
     static final String APP_NAME = "GoGrocer";

@@ -37,10 +37,11 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class SplashActivity extends AppCompatActivity {
     public static final int MY_PERMISSIONS_REQUEST_WRITE_FIELS = 102;
-    private AlertDialog dialog;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     String language="";
+
+    private AlertDialog dialog;
 
     private Session_management sessionManagement;
 
@@ -184,7 +185,6 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     public void go_next() {
-
 
         if(sessionManagement.isLoggedIn()) {
         Intent startmain = new Intent(SplashActivity.this, MainActivity.class);
