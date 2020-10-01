@@ -413,8 +413,11 @@ String language;
 
             if (type.contentEquals("update")) {
                 //updateData();
-                deli_charges = intent.getStringExtra("charge");
-                //Toast.makeText(getActivity(), deli_charges, Toast.LENGTH_SHORT).show();
+//                deli_charges = intent.getStringExtra("charge");
+
+                deli_charges =getArguments().getString("delivery_charges");
+
+//                Toast.makeText(getActivity(), getArguments().getString("delivery_charges"), Toast.LENGTH_SHORT).show();
 
                 if (ischarge.equals("1")){
                     Double total = Double.parseDouble(db_cart.getTotalAmount());

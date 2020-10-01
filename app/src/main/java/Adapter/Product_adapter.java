@@ -211,6 +211,7 @@ SharedPreferences preferences;
                 intent.putExtra("stock",modelList.get(position).getStock());
                 intent.putExtra("title",modelList.get(position).getTitle());
                 intent.putExtra("qty",tv_contetiy.getText().toString());
+                intent.putExtra("store_id",modelList.get(position).getStoreid());
 
                 context.startActivity(intent);
             }
@@ -433,7 +434,7 @@ SharedPreferences preferences;
                     map.put("rewards", modelList.get(position).getRewards());
                     map.put("stock", modelList.get(position).getStock());
                     map.put("title", modelList.get(position).getTitle());
-
+                    map.put("store_id",modelList.get(position).getStoreid());
 
 
 

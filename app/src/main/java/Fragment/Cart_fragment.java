@@ -33,10 +33,12 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.daimajia.swipe.util.Attributes;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.bouncycastle.util.Store;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,16 +50,21 @@ import java.util.List;
 import java.util.Map;
 
 import Adapter.Cart_adapter;
+import Adapter.Delivery_get_address_adapter;
 import Adapter.Product_adapter;
 import Adapter.Product_adapter2;
+import Adapter.Socity_adapter;
 import Config.BaseURL;
+import Model.Delivery_address_model;
 import Model.Product_model;
+import Model.Socity_model;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.LoginActivity;
 import gogrocer.tcc.MainActivity;
 import gogrocer.tcc.R;
 import util.ConnectivityReceiver;
+import util.CustomVolleyJsonArrayRequest;
 import util.CustomVolleyJsonRequest;
 import util.DatabaseHandler;
 import util.Session_management;
@@ -77,9 +84,10 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
     private RelativeLayout btn_checkout;
     private ShimmerFrameLayout mShimmerViewContainer;
 
+    ArrayList<String> store_ids = new ArrayList<>();
     Button continueshoping;
     private DatabaseHandler db;
-    String delicharge;
+    String delicharge,Storecharges;
 
     private Session_management sessionManagement;
 
@@ -145,6 +153,7 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
 
 
         ArrayList<HashMap<String, String>> map = db.getCartAll();
+
 
         Cart_adapter adapter = new Cart_adapter(getActivity(), map);
         rv_cart.setAdapter(adapter);
@@ -321,7 +330,6 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
 
 
                         try {
-                            loading.dismiss();
                             // Parsing json array response
                             // loop through each json object
 
@@ -367,20 +375,25 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
 
                             if (!issmall && !isbig) {
                                 if (sessionManagement.isLoggedIn()) {
-                                    Bundle args = new Bundle();
-                                    Fragment fm = new Delivery_fragment();
-                                    args.putString("ischarge",delicharge);
-                                    fm.setArguments(args);
 
-                                    FragmentManager fragmentManager = getFragmentManager();
-                                    fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-                                            .addToBackStack(null).commit();
+
+                                    getDeliveryChargesfromstore();
+
+//                                    Bundle args = new Bundle();
+//                                    Fragment fm = new Delivery_fragment();
+//                                    args.putString("ischarge",delicharge);
+//                                    fm.setArguments(args);
+//
+//                                    FragmentManager fragmentManager = getFragmentManager();
+//                                    fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+//                                            .addToBackStack(null).commit();
                                 } else {
                                     //Toast.makeText(getActivity(), "Please login or regiter.\ncontinue", Toast.LENGTH_SHORT).show();
                                     Intent i = new Intent(getActivity(), LoginActivity.class);
                                     startActivity(i);
                                 }
                             }
+                            loading.dismiss();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -408,6 +421,74 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
         AppController.getInstance().addToRequestQueue(req);
 
     }
+
+    private void getDeliveryChargesfromstore() {
+
+        store_ids.clear();
+        store_ids = db.getColumnStoreId();
+
+        CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.GET,
+                BaseURL.Get_Delivery_Store, null, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d(TAG, response.toString());
+
+                //Toast.makeText(getActivity(),String.valueOf(response), Toast.LENGTH_SHORT).show();
+
+                try {
+                    Boolean status = response.getBoolean("responce");
+                    if (status) {
+                        int charges = 0;
+                        JSONArray jsonArray = response.getJSONArray("data");
+                        for (int i=0;i<jsonArray.length();i++){
+                            JSONObject object = jsonArray.getJSONObject(i);
+
+                            if (store_ids.contains(object.getString("user_id"))){
+                                int tempy = Integer.parseInt(object.getString("delivery_charges"));
+                                charges = charges + tempy;
+//                                Toast.makeText(getActivity(), String.valueOf(charges), Toast.LENGTH_SHORT).show();
+
+                            }
+                        }
+
+                        Storecharges = String.valueOf(charges);
+
+//                        Toast.makeText(getActivity(), Storecharges, Toast.LENGTH_SHORT).show();
+
+                        Bundle args = new Bundle();
+                        Fragment fm = new Delivery_fragment();
+                        args.putString("ischarge",delicharge);
+                        args.putString("delivery_charges",Storecharges);
+                        fm.setArguments(args);
+
+                        FragmentManager fragmentManager = getFragmentManager();
+                        fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                                .addToBackStack(null).commit();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getActivity(), "Network Error", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    if (getActivity() != null) {
+                        Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq, "json_get_address_req");
+
+}
 
     @Override
     public void onPause() {

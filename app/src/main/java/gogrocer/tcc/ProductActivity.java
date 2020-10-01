@@ -49,6 +49,7 @@ public class ProductActivity extends AppCompatActivity {
 //            ,qty
 //            ,image;
 
+    String store_id;
     String productid;
     String product_name;
     String category_id;
@@ -117,6 +118,9 @@ public class ProductActivity extends AppCompatActivity {
 
         dbcart=new DatabaseHandler(this);
 
+        store_id = getIntent().getStringExtra("store_id");
+
+//        Toast.makeText(ProductActivity.this,store_id,Toast.LENGTH_LONG).show();
 
         productid=getIntent().getStringExtra("product_id");
         product_name=getIntent().getStringExtra("product_name");
@@ -238,6 +242,7 @@ public class ProductActivity extends AppCompatActivity {
                 map.put("rewards", rewards);
                 map.put("stock", stock);
                 map.put("title", title);
+                map.put("store_id",store_id);
 
 
                 if (!tv_contetiy.getText().toString().equalsIgnoreCase("0")) {

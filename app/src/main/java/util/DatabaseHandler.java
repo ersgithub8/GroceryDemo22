@@ -5,8 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,6 +33,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public static final String COLUMN_INCREAMENT = "increament";
     public static final String COLUMN_STOCK = "stock";
     public static final String COLUMN_TITLE = "title";
+    public static final String COLUMN_STORE_ID = "store_id";
+
     Context context;
     public DatabaseHandler(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -57,7 +57,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + COLUMN_UNIT + " TEXT NOT NULL, "
                 + COLUMN_INCREAMENT + " DOUBLE NOT NULL, "
                 + COLUMN_STOCK + " DOUBLE NOT NULL, "
-                + COLUMN_TITLE + " TEXT NOT NULL "
+                + COLUMN_TITLE + " TEXT NOT NULL ,"
+                + COLUMN_STORE_ID + " TEXT NOT NULL "
                 + ")";
 
         db.execSQL(exe);
@@ -83,6 +84,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             values.put(COLUMN_TITLE, map.get(COLUMN_TITLE));
             values.put(COLUMN_UNIT, map.get(COLUMN_UNIT));
             values.put(COLUMN_UNIT_VALUE, map.get(COLUMN_UNIT_VALUE));
+            values.put(COLUMN_STORE_ID, map.get(COLUMN_STORE_ID));
             db.insert(CART_TABLE, null, values);
 
             return true;
@@ -164,6 +166,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             map.put(COLUMN_INCREAMENT, cursor.getString(cursor.getColumnIndex(COLUMN_INCREAMENT)));
             map.put(COLUMN_STOCK, cursor.getString(cursor.getColumnIndex(COLUMN_STOCK)));
             map.put(COLUMN_TITLE, cursor.getString(cursor.getColumnIndex(COLUMN_TITLE)));
+            map.put(COLUMN_STORE_ID, cursor.getString(cursor.getColumnIndex(COLUMN_STORE_ID)));
             list.add(map);
             cursor.moveToNext();
         }
@@ -182,6 +185,21 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         } else {
             return "0";
         }
+    }
+
+    public ArrayList<String> getColumnStoreId() {
+        ArrayList<String> list = new ArrayList<>();
+        db = getReadableDatabase();
+        String qry = "Select *  from " + CART_TABLE;
+        Cursor cursor = db.rawQuery(qry, null);
+        cursor.moveToFirst();
+        for (int i = 0; i < cursor.getCount(); i++) {
+//            HashMap<String, String> map = new HashMap<>();
+//            map.put(cursor.getString(cursor.getColumnIndex(COLUMN_STORE_ID)));
+            list.add(cursor.getString(cursor.getColumnIndex(COLUMN_STORE_ID)));
+            cursor.moveToNext();
+        }
+        return list;
     }
 
     public String getFavConcatString() {
@@ -214,9 +232,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
-
-
-
+        db = getWritableDatabase();
+        String upgradeQuery = "ALTER TABLE CART_TABLE ADD COLUMN COLUMN_STORE_ID TEXT";
+       // if (oldVersion == 1 && newVersion == 2)
+            db.execSQL(upgradeQuery);
     }
 
 }
