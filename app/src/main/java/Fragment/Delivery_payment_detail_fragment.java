@@ -30,6 +30,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,6 +61,7 @@ public class Delivery_payment_detail_fragment extends Fragment {
 
     private TextView tv_timeslot, tv_address, tv_total,note,tv_dis,tv_totalamount;
     private LinearLayout btn_order;
+    private static DecimalFormat df = new DecimalFormat("0.00");
 
     Double discount;
     private int checkfo= 0;
@@ -142,7 +144,6 @@ SharedPreferences preferences;
         //tv_item.setText("" + db_cart.getWishlistCount());
         String user_id = sessionManagement.getUserDetails().get(BaseURL.KEY_ID);
 
-        getdiscount(user_id);
 
 //        tv_total.setText(getResources().getString(R.string.tv_cart_item) + db_cart.getCartCount() + "\n" +
 //                getResources().getString(R.string.amount) + db_cart.getTotalAmount() + "\n" +
@@ -155,8 +156,9 @@ SharedPreferences preferences;
                 getResources().getString(R.string.delivery_charge) + deli_charges);
 
 
-
         checkfirstorder(usrid, String.valueOf(total));
+
+        getdiscount(user_id);
 
         btn_order.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -179,7 +181,7 @@ SharedPreferences preferences;
                     }else if (checkfo==1){
                         Fragment fm = new Payment_fragment();
                         Bundle args = new Bundle();
-                        args.putString("total", String.valueOf(total-discount));
+                        args.putString("total", String.valueOf(total));
                         args.putString("getdate", getdate);
                         args.putString("gettime", gettime);
                         args.putString("delivery_charges", String.valueOf(deli_charges));
@@ -210,7 +212,7 @@ SharedPreferences preferences;
         return view;
     }
 
-    private void getdiscount(String user_id) {
+    private void getdiscount(final String user_id) {
         String tag_json_obj = "json_get_address_req";
 
         Map<String, String> params = new HashMap<String, String>();
@@ -226,6 +228,8 @@ SharedPreferences preferences;
                 try {
                     Boolean status = response.getBoolean("responce");
 
+                    //Toast.makeText(getActivity(),user_id,Toast.LENGTH_LONG).show();
+
                     if (status) {
 
                         String temp = response.getString("discount");
@@ -237,10 +241,16 @@ SharedPreferences preferences;
                         total = Double.parseDouble(String.valueOf(famount)) + deli_charges;
 
                         tv_dis.setText(getResources().getString(R.string.vip_dis) + " " +temp);
-
-                        tv_totalamount.setText(getResources().getString(R.string.total_amount) +
-                                String.valueOf(famount) + " + " + deli_charges + " = " + total+ getResources().getString(R.string.currency));
-
+                        if (checkfo == 1){
+                            total = Double.parseDouble(df.format(total - discount));
+                            tv_totalamount.setText(getResources().getString(R.string.Discount)+ discount+"\n"+
+                                    getResources().getString(R.string.total_amount) +
+                                    String.valueOf(famount) + " + " + deli_charges + " - "+discount+ " = " + total+ getResources().getString(R.string.currency));
+                        }
+                        else {
+                            tv_totalamount.setText(getResources().getString(R.string.total_amount) +
+                                    String.valueOf(famount) + " + " + deli_charges + " = " + total + getResources().getString(R.string.currency));
+                        }
                     }
                     else {
 
@@ -248,9 +258,16 @@ SharedPreferences preferences;
 
                         tv_dis.setVisibility(View.GONE);
 
-                        tv_totalamount.setText(getResources().getString(R.string.total_amount) +
-                                db_cart.getTotalAmount() + " + " + deli_charges + " = " + total+ getResources().getString(R.string.currency));
-
+                        if (checkfo == 1){
+                            total = Double.parseDouble(df.format(total - discount));
+                            tv_totalamount.setText(getResources().getString(R.string.Discount)+ discount+"\n"+
+                                    getResources().getString(R.string.total_amount) +
+                                    db_cart.getTotalAmount() + " + " + deli_charges + " - "+discount+ " = " + total + getResources().getString(R.string.currency));
+                        }
+                        else {
+                            tv_totalamount.setText(getResources().getString(R.string.total_amount) +
+                                    db_cart.getTotalAmount() + " + " + deli_charges + " = " + total + getResources().getString(R.string.currency));
+                        }
                     }
                 } catch (JSONException e) {
                     total = Double.parseDouble(db_cart.getTotalAmount()) + deli_charges;
@@ -397,14 +414,13 @@ SharedPreferences preferences;
                         if (status) {
 
                             discount=(Double.parseDouble(total)*30)/100;
-                            Toast.makeText(getActivity(), total+discount, Toast.LENGTH_SHORT).show();
-                            tv_total.setText(getResources().getString(R.string.tv_cart_item) + db_cart.getCartCount() + "\n" +
-                                    getResources().getString(R.string.amount) + db_cart.getTotalAmount() + "\n" +
-                                    getResources().getString(R.string.delivery_charge) + deli_charges + "\n" +
-                                    getResources().getString(R.string.Discount)+ discount+"\n"+
-                                    getResources().getString(R.string.total_amount) +
-                                    db_cart.getTotalAmount() + " + " + deli_charges +"-"+discount+ " = " + (Double.parseDouble(total)-discount)+" "+ getResources().getString(R.string.currency));
-
+                            //Toast.makeText(getActivity(), total+discount, Toast.LENGTH_SHORT).show();
+//                            tv_total.setText(getResources().getString(R.string.tv_cart_item) + db_cart.getCartCount() + "\n" +
+//                                    getResources().getString(R.string.amount) + db_cart.getTotalAmount() + "\n" +
+//                                    getResources().getString(R.string.delivery_charge) + deli_charges + "\n" +
+//                                    getResources().getString(R.string.Discount)+ discount+"\n"+
+//                                    getResources().getString(R.string.total_amount) +
+//                                    db_cart.getTotalAmount() + " + " + deli_charges +"-"+discount+ " = " + (Double.parseDouble(total)-discount)+" "+ getResources().getString(R.string.currency));
 
                                     checkfo=1;
                         }else{
