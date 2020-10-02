@@ -170,6 +170,7 @@ SharedPreferences preferences;
                     args.putString("gettime", gettime);
                     args.putString("getlocationid", getlocation_id);
                     args.putString("getstoreid", getstore_id);
+                    args.putString("delivery_charges", String.valueOf(deli_charges));
                     fm.setArguments(args);
                     FragmentManager fragmentManager = getFragmentManager();
                     fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
@@ -181,6 +182,7 @@ SharedPreferences preferences;
                         args.putString("total", String.valueOf(total-discount));
                         args.putString("getdate", getdate);
                         args.putString("gettime", gettime);
+                        args.putString("delivery_charges", String.valueOf(deli_charges));
                         args.putString("getlocationid", getlocation_id);
                         args.putString("getstoreid", getstore_id);
                         fm.setArguments(args);

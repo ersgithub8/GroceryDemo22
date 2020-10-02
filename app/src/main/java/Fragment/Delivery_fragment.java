@@ -68,7 +68,7 @@ public class Delivery_fragment extends Fragment implements View.OnClickListener 
     private static String TAG = Delivery_fragment.class.getSimpleName();
 
     private TextView tv_afternoon, tv_morning, tv_total, tv_item, tv_socity;
-    private TextView tv_date, tv_time;
+    private TextView tv_date, tv_time,delivery_string;
     private EditText et_address;
     private RelativeLayout btn_checkout, tv_add_adress;
     private RecyclerView rv_address;
@@ -110,6 +110,7 @@ String language;
 
         ischarge=getArguments().getString("ischarge");
 
+        delivery_string = view.findViewById(R.id.show_delivery_charges_string);
         tv_date = (TextView) view.findViewById(R.id.tv_deli_date);
         tv_time = (TextView) view.findViewById(R.id.tv_deli_fromtime);
         tv_add_adress = (RelativeLayout) view.findViewById(R.id.tv_deli_add_address);
@@ -411,11 +412,15 @@ String language;
 
             String type = intent.getStringExtra("type");
 
+            deli_charges =getArguments().getString("delivery_charges");
+
+            delivery_string.setText("Delivery Charges : "+deli_charges+ getActivity().getResources().getString(R.string.currency));
+
+
             if (type.contentEquals("update")) {
                 //updateData();
-//                deli_charges = intent.getStringExtra("charge");
 
-                deli_charges =getArguments().getString("delivery_charges");
+                //deli_charges = intent.getStringExtra("charge");
 
 //                Toast.makeText(getActivity(), getArguments().getString("delivery_charges"), Toast.LENGTH_SHORT).show();
 

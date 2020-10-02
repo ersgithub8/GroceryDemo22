@@ -440,6 +440,7 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
                     Boolean status = response.getBoolean("responce");
                     if (status) {
                         int charges = 0;
+
                         JSONArray jsonArray = response.getJSONArray("data");
                         for (int i=0;i<jsonArray.length();i++){
                             JSONObject object = jsonArray.getJSONObject(i);
@@ -447,9 +448,8 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
                             if (store_ids.contains(object.getString("user_id"))){
                                 int tempy = Integer.parseInt(object.getString("delivery_charges"));
                                 charges = charges + tempy;
-//                                Toast.makeText(getActivity(), String.valueOf(charges), Toast.LENGTH_SHORT).show();
-
                             }
+
                         }
 
                         Storecharges = String.valueOf(charges);
@@ -465,6 +465,11 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
                         FragmentManager fragmentManager = getFragmentManager();
                         fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
                                 .addToBackStack(null).commit();
+
+                        Intent updates = new Intent("Grocery_delivery_charge");
+                        //updates.putExtra("type", "update");
+                        updates.putExtra("charge", Storecharges);
+                        getActivity().sendBroadcast(updates);
 
                     }
                 } catch (JSONException e) {

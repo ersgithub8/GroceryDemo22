@@ -78,7 +78,7 @@ public class Payment_fragment extends Fragment {
     RadioButton rb_Store, rb_Cod, rb_card, rb_Netbanking, rb_paytm;
     CheckBox checkBox_Wallet, checkBox_coupon;
     EditText et_Coupon;
-    String getvalue;
+    String getvalue,deli_charges;
     String text;
     String cp;
     String Used_Wallet_amount;
@@ -184,6 +184,8 @@ public class Payment_fragment extends Fragment {
 
         text=note.getText().toString();
 
+
+        deli_charges = getArguments().getString("delivery_charges");
 
         total_amount = getArguments().getString("total");
         order_total_amount = getArguments().getString("total");
@@ -311,6 +313,7 @@ public class Payment_fragment extends Fragment {
                     jObjP.put("price", map.get("price"));
                     jObjP.put("rewards", map.get("rewards"));
                     jObjP.put("store_id", map.get("increament"));
+                    jObjP.put("delivery_charges", deli_charges);
 
                     passArray.put(jObjP);
                 } catch (JSONException e) {
@@ -346,6 +349,7 @@ public class Payment_fragment extends Fragment {
         params.put("total_ammount",total_amount);
         params.put("payment_method", getvalue);
         params.put("order_note", note1);
+        params.put("delivery_charges", deli_charges);
         params.put("data", passArray.toString());
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
                 BaseURL.ADD_ORDER_URL, params, new Response.Listener<JSONObject>() {

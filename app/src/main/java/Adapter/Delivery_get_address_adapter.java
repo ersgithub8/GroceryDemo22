@@ -179,7 +179,7 @@ public class Delivery_get_address_adapter extends RecyclerSwipeAdapter<Delivery_
 
             Intent updates = new Intent("Grocery_delivery_charge");
             updates.putExtra("type", "update");
-            updates.putExtra("charge", getcharge);
+        //    updates.putExtra("charge", getcharge);
             context.sendBroadcast(updates);
         }
 
