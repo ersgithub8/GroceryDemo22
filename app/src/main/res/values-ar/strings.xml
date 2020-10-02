@@ -250,7 +250,7 @@
     <string name="thank_you">شكراً لك</string>
     <string name="payment">الدفع</string>
     <string name="pay">حالة الطلب</string>
-    <string name="pickup">مكان الدفع</string>
+    <string name="pickup">الدفع عند الاستلام</string>
     <string name="password_too_short">كلمة المرور قصيرة جدا</string>
     <string name="invalide_email_address">عنوان البريد الإلكتروني غير صالح</string>
     <string name="no_internet">أنا آسف! غير متصل بالإنترنت</string>

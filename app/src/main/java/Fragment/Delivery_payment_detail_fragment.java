@@ -136,7 +136,7 @@ SharedPreferences preferences;
         tv_timeslot.setText(getdate + " " + gettime);
         tv_address.setText(getaddress);
 
-//        total = Double.parseDouble(db_cart.getTotalAmount()) + deli_charges;
+        total = Double.parseDouble(db_cart.getTotalAmount()) + deli_charges;
 
         //tv_total.setText("" + db_cart.getTotalAmount());
         //tv_item.setText("" + db_cart.getWishlistCount());

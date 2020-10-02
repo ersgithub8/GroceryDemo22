@@ -414,7 +414,7 @@ String language;
 
             deli_charges =getArguments().getString("delivery_charges");
 
-            delivery_string.setText("Delivery Charges : "+deli_charges+ getActivity().getResources().getString(R.string.currency));
+            delivery_string.setText(getActivity().getResources().getString(R.string.delivery_charge) + deli_charges +" "+ getActivity().getResources().getString(R.string.currency));
 
 
             if (type.contentEquals("update")) {
