@@ -349,6 +349,9 @@ public class Deal_adapter extends RecyclerView.Adapter<Deal_adapter.MyViewHolder
                 intent.putExtra("rewards",mList.getRewards());
                 intent.putExtra("stock",mList.getStock());
                 intent.putExtra("title",mList.getTitle());
+
+                intent.putExtra("store_id",mList.getStore_id());
+
                 if(dbcart.isInCart(mList.getProduct_id())){
                     intent.putExtra("qty",dbcart.getCartItemQty(mList.getProduct_id()));
                 }else{
