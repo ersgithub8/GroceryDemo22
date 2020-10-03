@@ -206,6 +206,7 @@ SharedPreferences preferences;
                 intent.putExtra("stock",modelList.get(position).getStock());
                 intent.putExtra("title",modelList.get(position).getTitle());
                 intent.putExtra("qty",tv_contetiy.getText().toString());
+                intent.putExtra("store_id",modelList.get(position).getStoreid());
 
                 context.startActivity(intent);
             }
