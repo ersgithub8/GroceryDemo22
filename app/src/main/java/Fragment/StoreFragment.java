@@ -132,15 +132,17 @@ public class StoreFragment extends Fragment implements Main_new {
         {
             double laty = Double.parseDouble(lat);
             double longy = Double.parseDouble(longi);
-            //Toast.makeText(getActivity(), city, Toast.LENGTH_SHORT).show();
 
             Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
-//         addresses = null;
+
         try {
             List<Address> addresses = geocoder.getFromLocation(laty, longy, 1);
 
             if(addresses.size()>0) {
-                city = addresses.get(0).getLocality();
+                city = addresses.get(0).getSubAdminArea();
+//                Toast.makeText(getActivity(), city
+//                        , Toast.LENGTH_LONG).show();
+
             }
 
         } catch (IOException e) {
@@ -148,9 +150,9 @@ public class StoreFragment extends Fragment implements Main_new {
         }
 }
 
-        if(city == null){
-            //   city="Lahore";
-        }
+//        if(city == null){
+//            //   city="Lahore";
+//        }
 
         //Toast.makeText(getActivity(), city, Toast.LENGTH_SHORT).show();
 

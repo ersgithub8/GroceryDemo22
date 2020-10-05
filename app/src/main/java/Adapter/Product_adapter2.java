@@ -110,29 +110,29 @@ SharedPreferences preferences;
             } else if (id == R.id.tv_subcat_add) {
                 HashMap<String, String> map = new HashMap<>();
                 preferences = context.getSharedPreferences("lan", MODE_PRIVATE);
-                language=preferences.getString("language","");
+                language = preferences.getString("language", "");
 
 
-    map.put("product_id", modelList.get(position).getProduct_id());
-    map.put("product_name", modelList.get(position).getProduct_name());
-    map.put("category_id", modelList.get(position).getCategory_id());
-    map.put("product_description", modelList.get(position).getProduct_description());
-    map.put("deal_price", modelList.get(position).getDeal_price());
-    map.put("start_date", modelList.get(position).getStart_date());
-    map.put("start_time", modelList.get(position).getStart_time());
-    map.put("end_date", modelList.get(position).getEnd_date());
-    map.put("end_time", modelList.get(position).getEnd_time());
-    map.put("price", modelList.get(position).getPrice());
-    map.put("product_image", modelList.get(position).getProduct_image());
-    map.put("status", modelList.get(position).getStatus());
-    map.put("in_stock", modelList.get(position).getIn_stock());
-    map.put("unit_value", modelList.get(position).getUnit_value());
-    map.put("unit", modelList.get(position).getUnit());
-    map.put("increament", modelList.get(position).getIncreament());
-    map.put("rewards", modelList.get(position).getRewards());
-    map.put("stock", modelList.get(position).getStock());
-    map.put("title", modelList.get(position).getTitle());
-    map.put("store_id", modelList.get(position).getStoreid());
+                map.put("product_id", modelList.get(position).getProduct_id());
+                map.put("product_name", modelList.get(position).getProduct_name());
+                map.put("category_id", modelList.get(position).getCategory_id());
+                map.put("product_description", modelList.get(position).getProduct_description());
+                map.put("deal_price", modelList.get(position).getDeal_price());
+                map.put("start_date", modelList.get(position).getStart_date());
+                map.put("start_time", modelList.get(position).getStart_time());
+                map.put("end_date", modelList.get(position).getEnd_date());
+                map.put("end_time", modelList.get(position).getEnd_time());
+                map.put("price", modelList.get(position).getPrice());
+                map.put("product_image", modelList.get(position).getProduct_image());
+                map.put("status", modelList.get(position).getStatus());
+                map.put("in_stock", modelList.get(position).getIn_stock());
+                map.put("unit_value", modelList.get(position).getUnit_value());
+                map.put("unit", modelList.get(position).getUnit());
+                map.put("increament", modelList.get(position).getIncreament());
+                map.put("rewards", modelList.get(position).getRewards());
+                map.put("stock", modelList.get(position).getStock());
+                map.put("title", modelList.get(position).getTitle());
+                map.put("store_id", modelList.get(position).getStoreid());
 
 
                 if (!tv_contetiy.getText().toString().equalsIgnoreCase("0")) {
@@ -155,61 +155,61 @@ SharedPreferences preferences;
                 tv_reward.setText("" + reward * items);
                 tv_total.setText("" + price * items);
                 ((MainActivity) context).setCartCounter("" + dbcart.getCartCount());
-
-            } else if (id == R.id.iv_subcat_img) {
-                preferences = context.getSharedPreferences("lan", MODE_PRIVATE);
-                language=preferences.getString("language","");
-                Log.d("lang",language);
-//                if (language.contains("english")) {
-//                    showProductDetail(modelList.get(position).getProduct_image(),
-//                            modelList.get(position).getProduct_name(),
-//                            modelList.get(position).getProduct_description(),
-//                            "",
-//                            position, tv_contetiy.getText().toString()
-//                            ,modelList.get(position).getProduct_id());
-//                }else {
-//
-//
-//                    showProductDetail(modelList.get(position).getProduct_image(),
-//                            modelList.get(position).getProduct_name_arb(),
-//                            modelList.get(position).getProduct_description_arb(),
-//                            "",
-//                            position, tv_contetiy.getText().toString()
-//                    ,modelList.get(position).getProduct_id());
-//                }
-
-                Intent intent=new Intent(context, ProductActivity.class);
-                if(language.contains("english")){
-
-                    intent.putExtra("product_name",modelList.get(position).getProduct_name());//TODO
-                    intent.putExtra("description",modelList.get(position).getProduct_description());//TODO
-                }else{
-                    intent.putExtra("product_name",modelList.get(position).getProduct_name_arb());//TODO
-                    intent.putExtra("description",modelList.get(position).getProduct_description_arb());
-
-                }
-                intent.putExtra("product_id",modelList.get(position).getProduct_id());
-                intent.putExtra("category_id",modelList.get(position).getCategory_id());
-                intent.putExtra("deal_price",modelList.get(position).getDeal_price());
-                intent.putExtra("start_date",modelList.get(position).getStart_date());
-                intent.putExtra("start_time",modelList.get(position).getStart_time());
-                intent.putExtra("end_date",modelList.get(position).getEnd_date());
-                intent.putExtra("end_time",modelList.get(position).getEnd_time());
-                intent.putExtra("price",modelList.get(position).getPrice());
-                intent.putExtra("image",modelList.get(position).getProduct_image());
-                intent.putExtra("status",modelList.get(position).getStatus());
-                intent.putExtra("stock",modelList.get(position).getStock());
-                intent.putExtra("unit_value",modelList.get(position).getUnit_value());
-                intent.putExtra("unit",modelList.get(position).getUnit());
-                intent.putExtra("increment",modelList.get(position).getStoreid());
-                intent.putExtra("rewards",modelList.get(position).getRewards());
-                intent.putExtra("stock",modelList.get(position).getStock());
-                intent.putExtra("title",modelList.get(position).getTitle());
-                intent.putExtra("qty",tv_contetiy.getText().toString());
-                intent.putExtra("store_id",modelList.get(position).getStoreid());
-
-                context.startActivity(intent);
             }
+//                else if (id == R.id.iv_subcat_img) {
+//                preferences = context.getSharedPreferences("lan", MODE_PRIVATE);
+//                language=preferences.getString("language","");
+//                Log.d("lang",language);
+////                if (language.contains("english")) {
+////                    showProductDetail(modelList.get(position).getProduct_image(),
+////                            modelList.get(position).getProduct_name(),
+////                            modelList.get(position).getProduct_description(),
+////                            "",
+////                            position, tv_contetiy.getText().toString()
+////                            ,modelList.get(position).getProduct_id());
+////                }else {
+////
+////
+////                    showProductDetail(modelList.get(position).getProduct_image(),
+////                            modelList.get(position).getProduct_name_arb(),
+////                            modelList.get(position).getProduct_description_arb(),
+////                            "",
+////                            position, tv_contetiy.getText().toString()
+////                    ,modelList.get(position).getProduct_id());
+////                }
+//
+//                Intent intent=new Intent(context, ProductActivity.class);
+//                if(language.contains("english")){
+//
+//                    intent.putExtra("product_name",modelList.get(position).getProduct_name());//TODO
+//                    intent.putExtra("description",modelList.get(position).getProduct_description());//TODO
+//                }else{
+//                    intent.putExtra("product_name",modelList.get(position).getProduct_name_arb());//TODO
+//                    intent.putExtra("description",modelList.get(position).getProduct_description_arb());
+//
+//                }
+//                intent.putExtra("product_id",modelList.get(position).getProduct_id());
+//                intent.putExtra("category_id",modelList.get(position).getCategory_id());
+//                intent.putExtra("deal_price",modelList.get(position).getDeal_price());
+//                intent.putExtra("start_date",modelList.get(position).getStart_date());
+//                intent.putExtra("start_time",modelList.get(position).getStart_time());
+//                intent.putExtra("end_date",modelList.get(position).getEnd_date());
+//                intent.putExtra("end_time",modelList.get(position).getEnd_time());
+//                intent.putExtra("price",modelList.get(position).getPrice());
+//                intent.putExtra("image",modelList.get(position).getProduct_image());
+//                intent.putExtra("status",modelList.get(position).getStatus());
+//                intent.putExtra("stock",modelList.get(position).getStock());
+//                intent.putExtra("unit_value",modelList.get(position).getUnit_value());
+//                intent.putExtra("unit",modelList.get(position).getUnit());
+//                intent.putExtra("increment",modelList.get(position).getStoreid());
+//                intent.putExtra("rewards",modelList.get(position).getRewards());
+//                intent.putExtra("stock",modelList.get(position).getStock());
+//                intent.putExtra("title",modelList.get(position).getTitle());
+//                intent.putExtra("qty",tv_contetiy.getText().toString());
+//                intent.putExtra("store_id",modelList.get(position).getStoreid());
+//
+//                context.startActivity(intent);
+//            }
 
         }
     }

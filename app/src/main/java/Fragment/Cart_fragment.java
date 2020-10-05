@@ -8,8 +8,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -62,12 +66,16 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.LoginActivity;
 import gogrocer.tcc.MainActivity;
+import gogrocer.tcc.ProductActivity;
 import gogrocer.tcc.R;
 import util.ConnectivityReceiver;
 import util.CustomVolleyJsonArrayRequest;
 import util.CustomVolleyJsonRequest;
 import util.DatabaseHandler;
+import util.RecyclerTouchListener;
 import util.Session_management;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by Rajesh Dabhi on 26/6/2017.
@@ -175,6 +183,57 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
                         .addToBackStack(null).commit();
             }
         });
+
+
+        rv_realted.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), rv_realted, new RecyclerTouchListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+
+                SharedPreferences preferences = getActivity().getSharedPreferences("lan", MODE_PRIVATE);
+                String language=preferences.getString("language","");
+
+                Intent intent=new Intent(getActivity(), ProductActivity.class);
+                if(language.contains("english")){
+                    intent.putExtra("product_name",product_modelList.get(position).getProduct_name());//TODO
+                    intent.putExtra("description",product_modelList.get(position).getProduct_description());//TODO
+                }else{
+                    intent.putExtra("product_name",product_modelList.get(position).getProduct_name_arb());//TODO
+                    intent.putExtra("description",product_modelList.get(position).getProduct_description_arb());
+
+                }
+                intent.putExtra("product_id",product_modelList.get(position).getProduct_id());
+                intent.putExtra("category_id",product_modelList.get(position).getCategory_id());
+                intent.putExtra("deal_price",product_modelList.get(position).getDeal_price());
+                intent.putExtra("start_date",product_modelList.get(position).getStart_date());
+                intent.putExtra("start_time",product_modelList.get(position).getStart_time());
+                intent.putExtra("end_date",product_modelList.get(position).getEnd_date());
+                intent.putExtra("end_time",product_modelList.get(position).getEnd_time());
+                intent.putExtra("price",product_modelList.get(position).getPrice());
+                intent.putExtra("image",product_modelList.get(position).getProduct_image());
+                intent.putExtra("status",product_modelList.get(position).getStatus());
+                intent.putExtra("stock",product_modelList.get(position).getStock());
+                intent.putExtra("unit_value",product_modelList.get(position).getUnit_value());
+                intent.putExtra("unit",product_modelList.get(position).getUnit());
+                intent.putExtra("increment",product_modelList.get(position).getStoreid());
+                intent.putExtra("rewards",product_modelList.get(position).getRewards());
+                intent.putExtra("stock",product_modelList.get(position).getStock());
+                intent.putExtra("title",product_modelList.get(position).getTitle());
+                intent.putExtra("qty","0");
+                intent.putExtra("store_id",product_modelList.get(position).getStoreid());
+                startActivity(intent);
+
+                Fragment fm = new StoreFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                        .addToBackStack(null).commit();
+
+            }
+            @Override
+            public void onLongItemClick(View view, int position) {
+
+            }
+        }));
+
         return view;
     }
 

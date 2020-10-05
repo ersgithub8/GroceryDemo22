@@ -70,7 +70,7 @@ public class Delivery_payment_detail_fragment extends Fragment {
     private String getdate = "";
     private String getuser_id = "";
     private String getstore_id = "";
-
+    SweetAlertDialog dialog;
     private int deli_charges;
     Double total;
 SharedPreferences preferences;
@@ -155,9 +155,12 @@ SharedPreferences preferences;
                 getResources().getString(R.string.amount) + db_cart.getTotalAmount() + "\n" +
                 getResources().getString(R.string.delivery_charge) + deli_charges);
 
+        dialog=new SweetAlertDialog(getActivity(),SweetAlertDialog.PROGRESS_TYPE)
+                .setTitleText("Loading");
+        dialog.setCancelable(false);
+        dialog.show();
 
         checkfirstorder(usrid, String.valueOf(total));
-
         getdiscount(user_id);
 
         btn_order.setOnClickListener(new View.OnClickListener() {
@@ -269,8 +272,11 @@ SharedPreferences preferences;
                                     db_cart.getTotalAmount() + " + " + deli_charges + " = " + total + getResources().getString(R.string.currency));
                         }
                     }
+                    dialog.dismiss();
+
                 } catch (JSONException e) {
                     total = Double.parseDouble(db_cart.getTotalAmount()) + deli_charges;
+                    dialog.dismiss();
 
                     tv_dis.setVisibility(View.GONE);
 
@@ -287,6 +293,8 @@ SharedPreferences preferences;
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     if (getActivity() != null) {
+                        dialog.dismiss();
+
                         Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -393,7 +401,7 @@ SharedPreferences preferences;
         final SweetAlertDialog alertDialog=new SweetAlertDialog(getActivity(),SweetAlertDialog.PROGRESS_TYPE)
                 .setTitleText("Loading");
         alertDialog.setCancelable(false);
-        alertDialog.show();
+        //alertDialog.show();
 
         String tag_json_obj = "json_category_req";
         Map<String, String> params = new HashMap<String, String>();
