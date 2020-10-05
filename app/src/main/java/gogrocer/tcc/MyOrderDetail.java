@@ -40,6 +40,7 @@ import Adapter.My_order_detail_adapter;
 import Config.BaseURL;
 import Fragment.My_order_detail_fragment;
 import Model.My_order_detail_model;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import util.ConnectivityReceiver;
 import util.CustomVolleyJsonArrayRequest;
 import util.CustomVolleyJsonRequest;
@@ -229,6 +230,9 @@ public class MyOrderDetail extends AppCompatActivity {
      * Method to make json object request where json response starts wtih
      */
     private void makeDeleteOrderRequest(String sale_id, String user_id) {
+        final SweetAlertDialog alertDialog=new SweetAlertDialog(this,SweetAlertDialog.PROGRESS_TYPE).setTitleText("Loading...");
+        alertDialog.setCancelable(false);
+        alertDialog.show();
 
         // Tag used to cancel the request
         String tag_json_obj = "json_delete_order_req";
@@ -250,14 +254,18 @@ public class MyOrderDetail extends AppCompatActivity {
 
                         String msg = response.getString("message");
                         Toast.makeText(MyOrderDetail.this, "" + msg, Toast.LENGTH_SHORT).show();
-
+                        startActivity(new Intent(MyOrderDetail.this,My_Order_activity.class));
+                        finish();
+                        alertDialog.dismiss();
                         // ((MainActivity) getActivity()).onBackPressed();
 
                     } else {
+                        alertDialog.dismiss();alertDialog.dismiss();
                         String error = response.getString("error");
                         Toast.makeText(MyOrderDetail.this, "" + error, Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
+                    alertDialog.dismiss();
                     e.printStackTrace();
                 }
             }
@@ -268,6 +276,7 @@ public class MyOrderDetail extends AppCompatActivity {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(MyOrderDetail.this, getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    alertDialog.dismiss();
                 }
             }
         });

@@ -34,6 +34,7 @@ import java.util.Map;
 import Adapter.My_Pending_Order_adapter;
 import Config.BaseURL;
 import Model.My_Pending_order_model;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.MainActivity;
 import gogrocer.tcc.MyOrderDetail;
@@ -141,11 +142,16 @@ public class My_Pending_Order extends Fragment {
      * Method to make json array request where json response starts wtih
      */
     private void makeGetOrderRequest(String userid) {
+
+        final SweetAlertDialog alertDialog=new SweetAlertDialog(getActivity(),
+                SweetAlertDialog.PROGRESS_TYPE).setTitleText("Loading...");
+        alertDialog.show();
+
         String tag_json_obj = "json_socity_req";
 
         Map<String, String> params = new HashMap<String, String>();
         params.put("user_id", userid);
-        Toast.makeText(getActivity(), i+"", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), i+"", Toast.LENGTH_SHORT).show();
         params.put("status",i+"");
 
         CustomVolleyJsonArrayRequest jsonObjReq = new CustomVolleyJsonArrayRequest(Request.Method.POST,
@@ -165,8 +171,9 @@ public class My_Pending_Order extends Fragment {
                 myPendingOrderAdapter.notifyDataSetChanged();
 
                 if (my_order_modelList.isEmpty()) {
-                    Toast.makeText((My_Order_activity)getActivity(), getResources().getString(R.string.no_rcord_found), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText((My_Order_activity)getActivity(), getResources().getString(R.string.no_rcord_found), Toast.LENGTH_SHORT).show();
                 }
+                alertDialog.dismiss();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -176,6 +183,7 @@ public class My_Pending_Order extends Fragment {
                     Activity activity=getActivity();
                     if(activity !=null)
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    alertDialog.dismiss();
                 }
             }
         });
