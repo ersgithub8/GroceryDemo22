@@ -434,6 +434,7 @@ public class Edit_profile_fragment extends Fragment implements View.OnClickListe
                 ((MainActivity) getActivity()).updateHeader();
 
                 Toast.makeText(getActivity(), getResources().getString(R.string.profile_updated), Toast.LENGTH_SHORT).show();
+                getActivity().onBackPressed();
             } else {
                 Toast.makeText(getActivity(), "" + error_string, Toast.LENGTH_SHORT).show();
             }
