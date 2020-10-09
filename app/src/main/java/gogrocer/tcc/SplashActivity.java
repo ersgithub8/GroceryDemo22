@@ -17,20 +17,38 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
+import Adapter.Store_Adapter;
+import Config.BaseURL;
+import Model.Store_Model;
+import util.CustomVolleyJsonRequest;
 import util.Session_management;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
@@ -40,7 +58,8 @@ public class SplashActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     String language="";
-
+    String city;
+    ArrayList<String> store_ids;
     private AlertDialog dialog;
 
     private Session_management sessionManagement;
@@ -48,6 +67,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        store_ids = new ArrayList<>();
 //        requestWindowFeature(Window.FEATURE_NO_TITLE);
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         sharedPreferences= getSharedPreferences("lan", Context.MODE_PRIVATE);
@@ -185,6 +205,10 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     public void go_next() {
+        getLanguange();
+        getLocation();
+
+
 
         if(sessionManagement.isLoggedIn()) {
         Intent startmain = new Intent(SplashActivity.this, MainActivity.class);
@@ -195,11 +219,67 @@ public class SplashActivity extends AppCompatActivity {
             startActivity(startmain);
             finish();
         }
-        getLanguange();
 
         finish();
 
-        getLocation();
+
+    }
+
+    private void getStore_ids(String citoo) {
+
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("city", citoo);
+
+        CustomVolleyJsonRequest jsonRequest=new CustomVolleyJsonRequest(Request.Method.POST,
+                BaseURL.getStores, params, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                try {
+
+                    if(response !=null && response.length()>0){
+
+                        Boolean status=response.getBoolean("response");
+                        if(status)
+                        {
+                            JSONArray jsonArray = response.getJSONArray("data");
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject object = jsonArray.getJSONObject(i);
+                                store_ids.add(object.getString("user_id"));
+                            }
+
+                            String ids = String.valueOf(store_ids).substring(1, String.valueOf(store_ids).length()-1);
+
+//                            Toast.makeText(SplashActivity.this, ids, Toast.LENGTH_SHORT).show();
+
+                            sharedPreferences= getSharedPreferences("store_ids", Context.MODE_PRIVATE);
+                            editor = sharedPreferences.edit();
+                            editor.putString("store_ids",ids);
+                            editor.apply();
+
+                        }
+                        else {
+
+                        }
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonRequest, "json_stores_req");
+
+
     }
 
     public void openPermissionScreen() {
@@ -250,7 +330,20 @@ public class SplashActivity extends AppCompatActivity {
                                 Double latitude=location.getLatitude();
                                 Double longitude=location.getLongitude();
 
-//                                Toast.makeText(MainActivity.this, latitude+longitude+"", Toast.LENGTH_SHORT).show();
+
+                                Geocoder geocoder = new Geocoder(SplashActivity.this, Locale.getDefault());
+
+                                try {
+                                    List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
+
+                                    if(addresses.size()>0) {
+                                        city = addresses.get(0).getSubAdminArea();
+                                        getStore_ids(city);
+                                    }
+
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
 
                                 leditor.putString("lat",latitude.toString());
                                 leditor.putString("long",longitude.toString());
