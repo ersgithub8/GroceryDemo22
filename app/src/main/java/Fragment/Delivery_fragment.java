@@ -1,5 +1,6 @@
 package Fragment;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -36,6 +37,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -46,6 +48,7 @@ import java.util.List;
 import java.util.Map;
 
 import Adapter.Delivery_get_address_adapter;
+import Adapter.View_time_adapter;
 import Config.BaseURL;
 import Config.SharedPref;
 import Model.Delivery_address_model;
@@ -86,7 +89,7 @@ public class Delivery_fragment extends Fragment implements View.OnClickListener 
     private String getdate = "";
 
     private String deli_charges,ischarge;
-    String store_id;
+    String store_id,B_time;
 String language;
     public Delivery_fragment() {
         // Required empty public constructor
@@ -131,6 +134,13 @@ String language;
         sessionManagement = new Session_management(getActivity());
         String getsocity = sessionManagement.getUserDetails().get(BaseURL.KEY_SOCITY_NAME);
         String getaddress = sessionManagement.getUserDetails().get(BaseURL.KEY_HOUSE);
+
+        //First Time Date
+        DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        Date dateobj = new Date();
+        String stro = df.format(dateobj);
+        makeGetTimeRequest(stro);
+
 
         //tv_socity.setText("Socity Name: " + getsocity);
         //et_address.setText(getaddress);
@@ -210,7 +220,8 @@ String language;
                 fm.setArguments(args);
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-                        .addToBackStack(null).commit();
+                        .addToBackStack(null)
+                        .commit();
             }
         } else if (id == R.id.tv_deli_add_address) {
 
@@ -219,7 +230,8 @@ String language;
             Fragment fm = new Add_delivery_address_fragment();
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-                    .addToBackStack(null).commit();
+                    //.addToBackStack(null)
+            .commit();
 
         }
 
@@ -275,13 +287,13 @@ String language;
 
         boolean cancel = false;
 
-        if (TextUtils.isEmpty(getdate)) {
-            Toast.makeText(getActivity(), getResources().getString(R.string.please_select_date_time), Toast.LENGTH_SHORT).show();
-            cancel = true;
-        } else if (TextUtils.isEmpty(gettime)) {
-            Toast.makeText(getActivity(), getResources().getString(R.string.please_select_date_time), Toast.LENGTH_SHORT).show();
-            cancel = true;
-        }
+//        if (TextUtils.isEmpty(getdate)) {
+//            Toast.makeText(getActivity(), getResources().getString(R.string.please_select_date_time), Toast.LENGTH_SHORT).show();
+//            cancel = true;
+//        } else if (TextUtils.isEmpty(gettime)) {
+//            Toast.makeText(getActivity(), getResources().getString(R.string.please_select_date_time), Toast.LENGTH_SHORT).show();
+//            cancel = true;
+//        }
 
         if (!delivery_address_modelList.isEmpty()) {
             if (adapter.ischeckd()) {
@@ -308,8 +320,24 @@ String language;
 
             Bundle args = new Bundle();
             Fragment fm = new Delivery_payment_detail_fragment();
-            args.putString("getdate", getdate);
-            args.putString("time", gettime);
+            if (getdate.isEmpty()) {
+                DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+                Date dateobj = new Date();
+                String newDateStr = df.format(dateobj);
+                args.putString("getdate", newDateStr);
+            }
+            else {
+                args.putString("getdate", getdate);
+            }
+
+            if (gettime.isEmpty()){
+                args.putString("time", B_time);
+
+            }
+            else {
+                args.putString("time", gettime);
+            }
+
             args.putString("location_id", location_id);
             args.putString("address", address);
             if (ischarge.equals("1")){
@@ -436,5 +464,50 @@ String language;
             }
         }
     };
+
+
+    //For First Date and Time
+    private void makeGetTimeRequest(String date) {
+
+        // Tag used to cancel the request
+        String tag_json_obj = "json_time_req";
+
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("date",date);
+
+        CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
+                BaseURL.GET_TIME_SLOT_URL, params, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d(TAG, response.toString());
+
+                try {
+                    Boolean status = response.getBoolean("responce");
+                    if (status) {
+
+                            B_time = ""+response.getJSONArray("times").get(0);
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Activity activity=getActivity();
+                    if(activity !=null)
+                        Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
 
 }

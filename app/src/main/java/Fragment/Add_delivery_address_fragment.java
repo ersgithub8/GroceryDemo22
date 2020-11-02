@@ -188,8 +188,11 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
                 Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
 //         addresses = null;
                 try {
+
                     List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
                     String final_address=null;
+                    //Toast.makeText(getActivity(), String.valueOf(addresses), Toast.LENGTH_SHORT).show();
+
                     if(addresses.size()>0) {
                         //                        String city = addresses.get(0).getLocality();
 //                        String state = addresses.get(0).getAdminArea();

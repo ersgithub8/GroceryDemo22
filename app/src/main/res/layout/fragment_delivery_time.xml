@@ -18,12 +18,23 @@
         android:text="@string/tv_del_title"
         android:textSize="@dimen/text_size_normal"
         android:textStyle="bold" />
+    <Fonts.LatoBLack
+        android:id="@+id/onlyforpreorder"
+        android:layout_below="@id/txtdelivery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:gravity="start"
+        android:padding="5dp"
+        android:text="@string/onlyforpreorder"
+        android:textSize="@dimen/text_size_normal"
+        />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/linearLayout2"
-        android:layout_below="@+id/txtdelivery"
+        android:layout_below="@+id/onlyforpreorder"
         android:fillViewport="true">
 
         <LinearLayout

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="onlyforpreorder">اختياره فقط للطلبات المسبقة</string>
     <string name="related">منتجات ذات صله</string>
     <string name="or">-أو-</string>
     <string name="get_gps">احصل على العنوان من الموقع</string>

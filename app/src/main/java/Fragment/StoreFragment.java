@@ -136,7 +136,10 @@ public class StoreFragment extends Fragment implements Main_new {
             Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
 
         try {
-            List<Address> addresses = geocoder.getFromLocation(laty, longy, 1);
+            List<Address> addresses = new ArrayList<Address>();
+            addresses = geocoder.getFromLocation(laty, longy, 4);
+
+            //Toast.makeText(getActivity(),String.valueOf(addresses), Toast.LENGTH_SHORT).show();
 
             if(addresses.size()>0) {
                 city = addresses.get(0).getSubAdminArea();
@@ -147,6 +150,7 @@ public class StoreFragment extends Fragment implements Main_new {
 
         } catch (IOException e) {
             e.printStackTrace();
+            //Toast.makeText(getActivity(),String.valueOf(e), Toast.LENGTH_SHORT).show();
         }
 }
 
