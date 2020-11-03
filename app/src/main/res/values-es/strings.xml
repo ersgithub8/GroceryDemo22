@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="related">Related Products</string>
+    <string name="nocharges">Free Shipping over 500 SAR</string>
 
     <string name="onlyforpreorder">Its only select for pre orders</string>
     <string name="btn_Register">سجل</string>

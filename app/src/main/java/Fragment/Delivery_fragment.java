@@ -442,22 +442,19 @@ String language;
 
             deli_charges =getArguments().getString("delivery_charges");
 
-            delivery_string.setText(getActivity().getResources().getString(R.string.delivery_charge) + deli_charges +" "+ getActivity().getResources().getString(R.string.currency));
-
-
             if (type.contentEquals("update")) {
                 //updateData();
-
                 //deli_charges = intent.getStringExtra("charge");
-
 //                Toast.makeText(getActivity(), getArguments().getString("delivery_charges"), Toast.LENGTH_SHORT).show();
 
                 if (ischarge.equals("1")){
                     Double total = Double.parseDouble(db_cart.getTotalAmount());
+                    delivery_string.setText(getActivity().getResources().getString(R.string.nocharges));
 
                     tv_total.setText("" + db_cart.getTotalAmount() + " + " + "0" + " = "  + total+ getActivity().getResources().getString(R.string.currency));
                 }else {
                     Double total = Double.parseDouble(db_cart.getTotalAmount()) + Integer.parseInt(deli_charges);
+                    delivery_string.setText(getActivity().getResources().getString(R.string.delivery_charge) + deli_charges +" "+ getActivity().getResources().getString(R.string.currency));
 
                     tv_total.setText("" + db_cart.getTotalAmount() + " + " + deli_charges + " = " + total + getActivity().getResources().getString(R.string.currency));
                 }

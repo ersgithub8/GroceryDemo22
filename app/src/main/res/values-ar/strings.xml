@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="nocharges">شحن مجاني فوق 500 ريال سعودي</string>
+
     <string name="onlyforpreorder">اختياره فقط للطلبات المسبقة</string>
     <string name="related">منتجات ذات صله</string>
     <string name="or">-أو-</string>

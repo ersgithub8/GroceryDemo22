@@ -235,7 +235,7 @@
                     android:id="@+id/tv_deli_total"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="50" />
+                    android:text="0" />
 
                 <!--<Fonts.LatoBLack
                     android:textColor="#000"
