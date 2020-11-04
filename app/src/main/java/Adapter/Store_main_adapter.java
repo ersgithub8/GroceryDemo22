@@ -3,12 +3,15 @@ package Adapter;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
+import android.provider.SyncStateContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.fragment.app.Fragment.*;
 
 import androidx.annotation.NonNull;
@@ -16,8 +19,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.gson.internal.$Gson$Preconditions;
 
+import Config.BaseURL;
 import Fragment.Product_fragment;
 import Fragment.Main_new;
 import Fragment.StoreFragment;
@@ -55,7 +60,14 @@ public class Store_main_adapter extends RecyclerView.Adapter<Store_main_adapter.
     public void onBindViewHolder(@NonNull Store_VH holder, int position) {
 
         final Store_main_model modellist = store_models.get(position);
-        Glide.with(context).load(modellist.getUser_image()).into(holder.storeimage);
+        Glide.with(context)
+                .load(BaseURL.IMG_PROFILE_URL + modellist.getUser_image())
+                .placeholder(R.drawable.icon)
+                .crossFade()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .dontAnimate()
+                .into(holder.storeimage);
+
         holder.storename.setText(modellist.getStore_name());
 
         if (modellist.getStar() == null){

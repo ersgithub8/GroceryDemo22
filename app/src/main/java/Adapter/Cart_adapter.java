@@ -62,7 +62,7 @@ public class    Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHo
     @Override
     public ProductHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = null;
-        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_search_rv, parent, false);
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.b_row_carty, parent, false);
         return new ProductHolder(view);
     }
 
@@ -94,12 +94,23 @@ public class    Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHo
             @Override
             public void onClick(View view) {
                 int qty = 0;
-                if (!holder.tv_contetiy.getText().toString().equalsIgnoreCase(""))
+                if (!holder.tv_contetiy.getText().toString().equalsIgnoreCase("")) {
                     qty = Integer.valueOf(holder.tv_contetiy.getText().toString());
-
+                }
                 if (qty > 0) {
                     qty = qty - 1;
                     holder.tv_contetiy.setText(String.valueOf(qty));
+
+                    dbHandler.setCart(map, Float.valueOf(holder.tv_contetiy.getText().toString()));
+
+                    Double items = Double.parseDouble(dbHandler.getInCartItemQty(map.get("product_id")));
+                    Double price = Double.parseDouble(map.get("price"));
+                    Double reward = Double.parseDouble(map.get("rewards"));
+                    holder.tv_total.setText("" + price * items);
+                    holder.tv_reward.setText("" + reward * items);
+
+                    updateintent();
+
                 }
 
                 if (holder.tv_contetiy.getText().toString().equalsIgnoreCase("0")) {
@@ -108,7 +119,11 @@ public class    Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHo
                     notifyDataSetChanged();
 
                     updateintent();
+
                 }
+
+                //dbHandler.setCart(map, Float.valueOf(holder.tv_contetiy.getText().toString()));
+
             }
         });
 
@@ -120,6 +135,17 @@ public class    Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHo
                 qty = qty + 1;
 
                 holder.tv_contetiy.setText(String.valueOf(qty));
+
+                //Update Function
+                dbHandler.setCart(map, Float.valueOf(holder.tv_contetiy.getText().toString()));
+
+                Double items = Double.parseDouble(dbHandler.getInCartItemQty(map.get("product_id")));
+                Double price = Double.parseDouble(map.get("price"));
+                Double reward = Double.parseDouble(map.get("rewards"));
+                holder.tv_total.setText("" + price * items);
+                holder.tv_reward.setText("" + reward * items);
+                //   holder.tv_total.setText(activity.getResources().getString(R.string.tv_cart_total) + price * items + " " + activity.getResources().getString(R.string.currency));
+                updateintent();
             }
         });
 

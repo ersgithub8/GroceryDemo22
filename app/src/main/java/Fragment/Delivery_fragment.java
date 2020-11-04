@@ -136,10 +136,21 @@ String language;
         String getaddress = sessionManagement.getUserDetails().get(BaseURL.KEY_HOUSE);
 
         //First Time Date
-        DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-        Date dateobj = new Date();
-        String stro = df.format(dateobj);
-        makeGetTimeRequest(stro);
+
+//        DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+//        Date dateobj = new Date();
+//        String stro = df.format(dateobj);
+//        makeGetTimeRequest(stro);
+//
+//        Calendar current_time = Calendar.getInstance ();
+//        current_time.set(Calendar.HOUR_OF_DAY, current_time.get(Calendar.HOUR_OF_DAY)+1);
+//        Date dateobj2 = current_time.getTime();
+//        Date dateobj3 = new Date();
+//        DateFormat df2 = new SimpleDateFormat("HH:mm a");
+//        String stro2 = df2.format(dateobj3) +" - "+df2.format(dateobj2);
+//        Toast.makeText(getActivity(), stro2, Toast.LENGTH_LONG).show();
+
+        //_____________________________________________________________________
 
 
         //tv_socity.setText("Socity Name: " + getsocity);
@@ -331,8 +342,14 @@ String language;
             }
 
             if (gettime.isEmpty()){
-                args.putString("time", B_time);
 
+                Calendar current_time = Calendar.getInstance ();
+                current_time.set(Calendar.HOUR_OF_DAY, current_time.get(Calendar.HOUR_OF_DAY)+1);
+                Date dateobj2 = current_time.getTime();
+                Date dateobj3 = new Date();
+                DateFormat df2 = new SimpleDateFormat("HH:mm a");
+                B_time = df2.format(dateobj3) +" - "+df2.format(dateobj2);
+                args.putString("time", B_time);
             }
             else {
                 args.putString("time", gettime);

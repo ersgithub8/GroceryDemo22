@@ -77,10 +77,6 @@ import util.Session_management;
 
 import static android.content.Context.MODE_PRIVATE;
 
-/**
- * Created by Rajesh Dabhi on 26/6/2017.
- */
-
 public class Cart_fragment extends Fragment implements View.OnClickListener {
 
     private static String TAG = Cart_fragment.class.getSimpleName();
@@ -500,17 +496,26 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
                     if (status) {
                         int charges = 0;
 
+
                         JSONArray jsonArray = response.getJSONArray("data");
                         for (int i=0;i<jsonArray.length();i++){
                             JSONObject object = jsonArray.getJSONObject(i);
 
                             if (store_ids.contains(object.getString("user_id"))){
-                                int tempy = Integer.parseInt(object.getString("delivery_charges"));
-                                charges = charges + tempy;
+                                //int tempy = Integer.parseInt(object.getString("delivery_charges"));
+                                charges = charges + 1;
                             }
 
                         }
 
+                        //charges calculation
+                        if (charges == 0){
+                            charges = 35;
+                        }
+                        else {
+                            charges = (charges - 1) * 10;
+                            charges = charges + 35;
+                        }
                         Storecharges = String.valueOf(charges);
 
 //                        Toast.makeText(getActivity(), Storecharges, Toast.LENGTH_SHORT).show();
