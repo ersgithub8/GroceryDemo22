@@ -14,6 +14,14 @@
 
     <string name="desiiic">وصف :</string>
 
+
+    <string name="sizecolor">الحجم واللون :</string>
+    <string name="size">بحجم :</string>
+    <string name="color">اللون :</string>
+
+    <string name="productsize" translatable="false">حجم المنتج :  </string>
+    <string name="productcolor" translatable="false">لون المنتج :  </string>
+
     <string name="ratiii">التقييم والمراجعات</string>
 
     <string name="wish">قائمة الرغبات</string>
@@ -59,7 +67,7 @@
     <string name="password">ادخل رقمك السري</string>
     <string name="sign_up"><u>سجل</u></string>
     <string name="sign_upto">يرجى الاشتراك للمتابعة</string>
-    <string name="btn_continueto" ><b>مرحبا بكم في \nمتاجر جي٦</b></string>
+    <string name="btn_continueto" ><b>مرحبا بك في \nمتاجر جي٦</b></string>
     <string name="btn_continueto1" >الرجاء تسجيل الدخول للمتابعة</string>
 
     <string name="create">انشئ حساب؟</string>
@@ -140,6 +148,9 @@
     <string name="use">استخدم</string>
     <string name="currency">ریال</string>
     <string name="cash">الدفع عند الاستلام</string>
+    <string name="paymentmentord" translatable="false">اختار طريقة الدفع</string>
+    <string name="googlepay" translatable="false">جوجل باي</string>
+    <string name="applepay" translatable="false">دفع التفاح</string>
     <string name="checkout">الدفع</string>
     <string name="card">بطاقات</string>
     <string name="promo">رمز ترويجي</string>

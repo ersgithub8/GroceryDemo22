@@ -153,7 +153,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/fav_category"
             android:textAlignment="center"
-            android:text="@string/wish"
+            android:text="@string/fav_cat"
             android:textSize="10sp"
             android:textColor="@color/black"
             />

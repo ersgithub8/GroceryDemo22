@@ -8,6 +8,8 @@ public class Product_model {
 
     String product_id;
     String product_name;
+    String size;
+    String color;
     String category_id;
     String product_description;
     String deal_price;
@@ -44,6 +46,22 @@ public class Product_model {
 
     public void setProduct_id(String product_id) {
         this.product_id = product_id;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 
     public String getProduct_name() {

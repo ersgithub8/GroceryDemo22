@@ -359,12 +359,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:weightSum="2"
                 >
 
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:visibility="gone"
                     android:layout_height="wrap_content"
                     >
                     <com.facebook.login.widget.LoginButton
@@ -391,7 +394,7 @@
                     <com.google.android.gms.common.SignInButton
                         android:id="@+id/gsignin"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:textAlignment="center"

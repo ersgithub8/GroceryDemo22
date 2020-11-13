@@ -1,8 +1,10 @@
 package gogrocer.tcc;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
-import Fragment.Cart_fragment;
+
+import Fragment.Category_Fragment;
 import Fragment.Empty_cart_fragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -12,6 +14,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -52,6 +55,8 @@ public class ProductActivity extends AppCompatActivity {
     String store_id;
     String productid;
     String product_name;
+    String size;
+    String color;
     String category_id;
     String product_description;
     String deal_price;
@@ -72,9 +77,13 @@ public class ProductActivity extends AppCompatActivity {
     String stock;
     String title;
 
+
+    public LinearLayout bot_store,bot_cat,bot_fav,bot_profile;
+    public RelativeLayout bot_cart;
+
     private DatabaseHandler dbcart;
     ImageView iv_image,iv_fav_image,iv_minus,iv_plus,rateall;
-   TextView tv_price, tv_reward, tv_total,tv_title,tv_detail,tv_contetiy,tv_add;
+   TextView tv_price, tv_reward, tv_total,tv_title,tv_detail,tv_contetiy,tv_add,tv_size,tv_color;
    ImageView iv_logo, iv_remove,iv_share;
     RatingBar ratingBar;
     @Override
@@ -99,6 +108,8 @@ public class ProductActivity extends AppCompatActivity {
         iv_minus = (ImageView) findViewById(R.id.iv_subcat_minus);
         iv_plus = (ImageView) findViewById(R.id.iv_subcat_plus);
         tv_title = (TextView) findViewById(R.id.tv_product_detail_title);
+        tv_size = (TextView) findViewById(R.id.size);
+        tv_color = (TextView) findViewById(R.id.color);
         tv_detail = (TextView) findViewById(R.id.tv_product_detail);
         tv_contetiy = (TextView) findViewById(R.id.tv_subcat_contetiy);
         tv_add = (TextView) findViewById(R.id.tv_subcat_add);
@@ -114,6 +125,15 @@ public class ProductActivity extends AppCompatActivity {
         ratingBar=findViewById(R.id.ratingbarprod);
         ratingrl=findViewById(R.id.rl1);
 
+        bot_cat=findViewById(R.id.bot_categories);
+        bot_fav = findViewById(R.id.bot_fav);
+        bot_cart= (RelativeLayout) findViewById(R.id.bot_cart);
+        bot_fav=  findViewById(R.id.bot_fav);
+        bot_store=findViewById(R.id.bot_store);
+        bot_profile=findViewById(R.id.bot_profile);
+
+        appbarmenu();
+
 
 
         dbcart=new DatabaseHandler(this);
@@ -124,6 +144,8 @@ public class ProductActivity extends AppCompatActivity {
 
         productid=getIntent().getStringExtra("product_id");
         product_name=getIntent().getStringExtra("product_name");
+        size=getIntent().getStringExtra("size");
+        color=getIntent().getStringExtra("color");
         category_id=getIntent().getStringExtra("category_id");
 
         product_description=getIntent().getStringExtra("description");
@@ -164,6 +186,8 @@ public class ProductActivity extends AppCompatActivity {
         Double items = Double.parseDouble(dbcart.getInCartItemQty(productid));
 
         tv_title.setText(product_name);
+        tv_size.setText(size);
+        tv_color.setText(color);
         tv_detail.setText(detail);
         tv_contetiy.setText(qty);
         tv_detail.setText(product_description);
@@ -225,6 +249,8 @@ public class ProductActivity extends AppCompatActivity {
 
                 map.put("product_id", productid);
                 map.put("product_name", product_name);
+                map.put("size", size);
+                map.put("color", color);
                 map.put("category_id", category_id);
                 map.put("product_description", product_description);
                 map.put("deal_price", deal_price);
@@ -337,7 +363,6 @@ public class ProductActivity extends AppCompatActivity {
         });
 
     }
-
 
 
 
@@ -533,6 +558,7 @@ public class ProductActivity extends AppCompatActivity {
                         if(rating.equals("null")){
                             ratingrl.setVisibility(View.GONE);
                             ratingBar.setVisibility(View.GONE);
+//                            Toast.makeText(ProductActivity.this, "Rating gone", Toast.LENGTH_SHORT).show();
                         }else
                         {
                             ratingrl.setVisibility(View.VISIBLE);
@@ -559,4 +585,40 @@ public class ProductActivity extends AppCompatActivity {
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
+
+    private void appbarmenu() {
+        bot_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        bot_cat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+            }
+        });
+        bot_store.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        bot_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        bot_fav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+    }
+
 }

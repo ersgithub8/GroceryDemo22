@@ -39,6 +39,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
@@ -82,11 +83,11 @@ import static gogrocer.tcc.AppController.TAG;
 public class StoreFragment extends Fragment implements Main_new {
     private Home_Icon_Adapter menu_adapter;
     private List<Home_Icon_model> menu_models = new ArrayList<>();
-    private SliderLayout banner_slider;
+    private SliderLayout banner_slider,deal_banner;
     RecyclerView stores;
     LinearLayout Search_layout;
     String storeid,getid;
-    ImageView deal;
+    LinearLayout dealday;
     String city;
     private ShimmerFrameLayout mShimmerViewContainer,shimmy;
     private RecyclerView rv_headre_icons,catprod,rv_top_selling;
@@ -106,6 +107,7 @@ public class StoreFragment extends Fragment implements Main_new {
         View view = inflater.inflate(R.layout.fragment_stores, container, false);
 
         banner_slider = (SliderLayout) view.findViewById(R.id.relative_banner);
+        deal_banner = (SliderLayout) view.findViewById(R.id.deal_banner);
         stores=(RecyclerView)view.findViewById(R.id.rv_stores);
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
         shimmy = view.findViewById(R.id.shimmer_view_container2);
@@ -120,10 +122,17 @@ public class StoreFragment extends Fragment implements Main_new {
         rv_top_selling.setItemAnimator(new DefaultItemAnimator());
         rv_top_selling.setNestedScrollingEnabled(false);
 
-        deal=view.findViewById(R.id.dealday);
+        dealday=view.findViewById(R.id.dealday);
 
         makeGetBannerSliderRequest();
+        makeGetBannerSliderRequestdeal();
 
+//        dealday.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Log.d("jhgj","jhsgajhgdjhas");
+//            }
+//        });
         SharedPreferences sharedPreferences=getActivity().getSharedPreferences("location", Context.MODE_PRIVATE);
         String lat, longi;
         lat=sharedPreferences.getString("lat","123");
@@ -160,9 +169,22 @@ public class StoreFragment extends Fragment implements Main_new {
 
         //Toast.makeText(getActivity(), city, Toast.LENGTH_SHORT).show();
 
-        deal.setOnClickListener(new View.OnClickListener() {
+//        dealday.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Bundle args = new Bundle();
+//                Fragment fm = new Deal_Fragemnt();
+//                args.putString("laddan_jaffery", "deals");
+//                fm.setArguments(args);
+//                FragmentManager fragmentManager = getFragmentManager();
+//                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+//                        .addToBackStack(null).commit();
+//            }
+//        });
+        deal_banner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(getActivity(), "banner", Toast.LENGTH_SHORT).show();
                 Bundle args = new Bundle();
                 Fragment fm = new Deal_Fragemnt();
                 args.putString("laddan_jaffery", "deals");
@@ -172,6 +194,8 @@ public class StoreFragment extends Fragment implements Main_new {
                         .addToBackStack(null).commit();
             }
         });
+
+
 //        Toast.makeText(getActivity(), city+"", Toast.LENGTH_SHORT).show();
 
         floatingActionButton = view.findViewById(R.id.fab_id);
@@ -260,6 +284,8 @@ public class StoreFragment extends Fragment implements Main_new {
                 Fragment fm = new Product_fragment();
                 args.putString("cat_id", getid);
                 args.putString("name",menu_models.get(position).getTitle());
+                args.putString("user_email",store_models.get(position).getUser_email());
+                args.putString("user_phone",store_models.get(position).getUser_phone());
                 fm.setArguments(args);
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
@@ -282,6 +308,8 @@ public class StoreFragment extends Fragment implements Main_new {
                 args.putString("storeid", storeid);
                 args.putString("laddan_jaffery", "store");
                 args.putString("name",store_models.get(position).getUser_name());
+                args.putString("user_email",store_models.get(position).getUser_email());
+                args.putString("user_phone",store_models.get(position).getUser_phone());
                 fm.setArguments(args);
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
@@ -391,6 +419,57 @@ public class StoreFragment extends Fragment implements Main_new {
 //                                                .addToBackStack(null).commit();
 //                                    }
 //                                });
+
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(getActivity(),
+                                    "Error: " + e.getMessage(),
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Activity activity=getActivity();
+                    if(activity !=null && isAdded()) {
+                        Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+        AppController.getInstance().addToRequestQueue(req);
+
+    }
+
+    private void makeGetBannerSliderRequestdeal() {
+        JsonArrayRequest req = new JsonArrayRequest(BaseURL.GET_FEAATURED_SLIDER_URL,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.d(TAG, response.toString());
+                        try {
+                            ArrayList<HashMap<String, String>> listarray = new ArrayList<>();
+                            for (int i = 0; i < response.length(); i++) {
+                                JSONObject jsonObject = (JSONObject) response.get(i);
+                                HashMap<String, String> url_maps = new HashMap<String, String>();
+                                url_maps.put("slider_title", jsonObject.getString("slider_title"));
+                                url_maps.put("sub_cat", jsonObject.getString("sub_cat"));
+                                url_maps.put("slider_image", BaseURL.IMG_SLIDER_URL + jsonObject.getString("slider_image"));
+                                listarray.add(url_maps);
+                            }
+                            for (HashMap<String, String> name : listarray) {
+                                CustomSlider textSliderView = new CustomSlider(getActivity());
+                                textSliderView.description(name.get("")).image(name.get("slider_image")).setScaleType(BaseSliderView.ScaleType.Fit);
+                                textSliderView.bundle(new Bundle());
+                                textSliderView.getBundle().putString("extra", name.get("slider_title"));
+                                textSliderView.getBundle().putString("extra", name.get("sub_cat"));
+                                deal_banner.addSlider(textSliderView);
+                                final String sub_cat = (String) textSliderView.getBundle().get("extra");
+
 
                             }
 
@@ -600,17 +679,29 @@ public class StoreFragment extends Fragment implements Main_new {
 
     }
 
+//    @Override
+//    public void OnClick(String id, String name, String store) {
+//
+//
+//    }
+
+
     @Override
-    public void OnClick(String id, String name, String store) {
+    public void OnClick(String id, String name, String store, String user_email, String user_phone) {
         Bundle args = new Bundle();
         Fragment fm = new Product_fragment();
         args.putString("storeid", id);
-        args.putString("laddan_jaffery", "store");
+//        args.putString("laddan_jaffery", "store");
+//        args.putString("name",name);
         args.putString("name",name);
+        args.putString("user_email",user_email);
+        args.putString("user_phone",user_phone);
+//        Toast.makeText(getActivity(), "onclick", Toast.LENGTH_SHORT).show();
+//        args.putString("user_email",store_models.get(position).getUser_email());
+//        args.putString("user_phone",store_models.get(position).getUser_phone());
         fm.setArguments(args);
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
                 .addToBackStack(null).commit();
-
     }
 }

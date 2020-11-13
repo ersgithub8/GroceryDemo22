@@ -64,7 +64,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
     boolean favcheckk=false;
 SharedPreferences preferences;
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public TextView tv_title, tv_price, tv_reward, tv_total, tv_contetiy, tv_add;
+        public TextView tv_title, tv_price, tv_reward, tv_total, tv_contetiy, tv_add,tv_size,tv_color;
         public ImageView iv_logo, iv_plus, iv_minus, iv_remove;
         public Double reward;
 
@@ -72,6 +72,8 @@ SharedPreferences preferences;
             super(view);
 
             tv_title = (TextView) view.findViewById(R.id.tv_subcat_title);
+            tv_size = (TextView) view.findViewById(R.id.size);
+            tv_color = (TextView) view.findViewById(R.id.color);
             tv_price = (TextView) view.findViewById(R.id.tv_subcat_price);
             tv_reward = (TextView) view.findViewById(R.id.tv_reward_point);
             tv_total = (TextView) view.findViewById(R.id.tv_subcat_total);
@@ -120,6 +122,8 @@ SharedPreferences preferences;
 
     map.put("product_id", modelList.get(position).getProduct_id());
     map.put("product_name", modelList.get(position).getProduct_name());
+                map.put("size", modelList.get(position).getSize());
+                map.put("color", modelList.get(position).getColor());
     map.put("category_id", modelList.get(position).getCategory_id());
     map.put("product_description", modelList.get(position).getProduct_description());
     map.put("deal_price", modelList.get(position).getDeal_price());
@@ -187,13 +191,19 @@ SharedPreferences preferences;
                 if(language.contains("english")){
 
                     intent.putExtra("product_name",modelList.get(position).getProduct_name());//TODO
+                    intent.putExtra("size",modelList.get(position).getSize());//TODO
+                    intent.putExtra("color",modelList.get(position).getColor());//TODO
                     intent.putExtra("description",modelList.get(position).getProduct_description());//TODO
                 }else{
                     intent.putExtra("product_name",modelList.get(position).getProduct_name_arb());//TODO
+                    intent.putExtra("size",modelList.get(position).getSize());//TODO
+                    intent.putExtra("color",modelList.get(position).getColor());//TODO
                     intent.putExtra("description",modelList.get(position).getProduct_description_arb());
 
                 }
                 intent.putExtra("product_id",modelList.get(position).getProduct_id());
+                intent.putExtra("size",modelList.get(position).getSize());//TODO
+                intent.putExtra("color",modelList.get(position).getColor());//TODO
                 intent.putExtra("category_id",modelList.get(position).getCategory_id());
                 intent.putExtra("deal_price",modelList.get(position).getDeal_price());
                 intent.putExtra("start_date",modelList.get(position).getStart_date());
@@ -322,7 +332,7 @@ SharedPreferences preferences;
 
 
     ////////////////////////
-    private void showProductDetail(String image, String title, String description, String detail, final int position, String qty
+    private void showProductDetail(String image, String title, String size, String color, String description, String detail, final int position, String qty
     , final String productid) {
 
 
@@ -341,6 +351,8 @@ SharedPreferences preferences;
         final ImageView iv_minus = (ImageView) dialog.findViewById(R.id.iv_subcat_minus);
         final ImageView iv_plus = (ImageView) dialog.findViewById(R.id.iv_subcat_plus);
         TextView tv_title = (TextView) dialog.findViewById(R.id.tv_product_detail_title);
+        TextView tv_size = (TextView) dialog.findViewById(R.id.size);
+        TextView tv_color = (TextView) dialog.findViewById(R.id.color);
         TextView tv_detail = (TextView) dialog.findViewById(R.id.tv_product_detail);
         final TextView tv_contetiy = (TextView) dialog.findViewById(R.id.tv_subcat_contetiy);
         final TextView tv_add = (TextView) dialog.findViewById(R.id.tv_subcat_add);
@@ -362,6 +374,8 @@ SharedPreferences preferences;
         iv_remove = (ImageView) dialog.findViewById(R.id.iv_subcat_remove);
 
         tv_title.setText(title);
+        tv_size.setText(size);
+        tv_color.setText(color);
         tv_detail.setText(detail);
         tv_contetiy.setText(qty);
         tv_detail.setText(description);
@@ -417,6 +431,8 @@ SharedPreferences preferences;
 
                     map.put("product_id", modelList.get(position).getProduct_id());
                     map.put("product_name", modelList.get(position).getProduct_name());
+                map.put("size", modelList.get(position).getSize());
+                map.put("color", modelList.get(position).getColor());
                     map.put("category_id", modelList.get(position).getCategory_id());
                     map.put("product_description", modelList.get(position).getProduct_description());
                     map.put("deal_price", modelList.get(position).getDeal_price());

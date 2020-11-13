@@ -16,6 +16,11 @@
     <string name="go_cart">Go To Cart</string>
 
     <string name="desiiic">Description :</string>
+    <string name="sizecolor" translatable="false">Size and Color :</string>
+    <string name="productsize" translatable="false">Product Size :  </string>
+    <string name="productcolor" translatable="false">Product Color :  </string>
+    <string name="size" translatable="false">Size :</string>
+    <string name="color" translatable="false">Color :</string>
     <string name="ratiii">Rating &amp; Reviews</string>
 
     <string name="vip_dis">VIP Discount : </string>
@@ -155,7 +160,10 @@
     <string name="store" translatable="false">Store Pick Up</string>
     <string name="confirm_order" translatable="false">Confirm</string>
     <string name="pickup" translatable="false">Cash On Delivery</string>
+    <string name="paymentmentord" translatable="false">Select Payment method</string>
     <string name="cash" translatable="false">Cash On Delivery</string>
+    <string name="googlepay" translatable="false">Google Pay</string>
+    <string name="applepay" translatable="false">Apple Pay</string>
     <!-- fragment_cart.xml -->
     <string name="tv_cart_title">Cart</string>
     <string name="debit" translatable="false">Debit / Credit Card</string>

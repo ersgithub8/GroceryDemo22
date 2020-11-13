@@ -324,11 +324,27 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
                 <ImageView
-                    android:id="@+id/dealday"
+                    android:id="@+id/dealda"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:layout_gravity="center_horizontal"
                     android:src="@drawable/dealoftheday"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="210dp"
+                    android:id="@+id/dealday"
+                    android:background="@color/white">
+                    <com.daimajia.slider.library.SliderLayout
+                        android:id="@+id/deal_banner"
+                        android:layout_width="match_parent"
+                        android:layout_height="210dp"
+                        >
+                    </com.daimajia.slider.library.SliderLayout>
+                </LinearLayout>
+
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

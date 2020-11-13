@@ -79,7 +79,7 @@ public class Product_fragment extends Fragment {
     SharedPreferences sharedPreferences;
     String usrid;
     ImageView fav,star;
-    TextView name,Texty;
+    TextView name,Texty,info,des;
     SharedPreferences preferences;
     public Product_fragment() {
     }
@@ -95,6 +95,8 @@ public class Product_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_product, container, false);
 
+
+
         new StoreFragment();
         Texty = view.findViewById(R.id.no_product);
         tab_cat = (TabLayout) view.findViewById(R.id.tab_cat);
@@ -105,6 +107,7 @@ public class Product_fragment extends Fragment {
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
         final String getcat_id = getArguments().getString("cat_id");
 
+
         star = view.findViewById(R.id.imagestar);
 
         relativeLayout = view.findViewById(R.id.tempy);
@@ -114,9 +117,14 @@ public class Product_fragment extends Fragment {
 
         //Toast.makeText(getActivity(), usrid, Toast.LENGTH_SHORT).show();
         name=view.findViewById(R.id.name);
+        info=view.findViewById(R.id.info);
+        des=view.findViewById(R.id.des);
         final String id = getArguments().getString("id");
         storeid=getArguments().getString("storeid");
+//        String names=getArguments().getString("name");
         String names=getArguments().getString("name");
+        String infoo=getArguments().getString("user_email");
+        String dess=getArguments().getString("user_phone");
         String get_deal_id = getArguments().getString("cat_deal");
 
         String get_top_sale_id = getArguments().getString("cat_top_selling");
@@ -128,7 +136,8 @@ public class Product_fragment extends Fragment {
             relativeLayout.setVisibility(View.GONE);
         }
         else if (yeh_to_hoga.equals("store")){
-            star.setVisibility(View.VISIBLE);
+//            star.setVisibility(View.VISIBLE);
+            star.setVisibility(View.GONE);
         }
         else {
         }
@@ -137,6 +146,9 @@ public class Product_fragment extends Fragment {
         ((MainActivity) getActivity()).setTitle(getResources().getString(R.string.tv_product_name));
 
         name.setText(names);
+        info.setText(infoo);
+        des.setText(dess);
+
 
         if (ConnectivityReceiver.isConnected()) {
             //Shop by Catogary

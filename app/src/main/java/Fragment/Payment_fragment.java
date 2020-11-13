@@ -76,6 +76,7 @@ public class Payment_fragment extends Fragment {
     private String getuser_id = "";
     private Double rewards;
     RadioButton rb_Store, rb_Cod, rb_card, rb_Netbanking, rb_paytm;
+
     CheckBox checkBox_Wallet, checkBox_coupon;
     EditText et_Coupon;
     String getvalue,deli_charges;
