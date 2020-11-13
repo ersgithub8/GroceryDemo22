@@ -34,8 +34,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import Config.BaseURL;
+import Fragment.related_interface;
 import Model.Product_model;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import gogrocer.tcc.AppController;
@@ -53,6 +55,7 @@ public class Product_adapter2 extends RecyclerView.Adapter<Product_adapter2.MyVi
     private Context context;
     private DatabaseHandler dbcart;
     String language;
+    related_interface related_interface;
 
     SharedPreferences sharedPreferences;
     String usrid;
@@ -157,26 +160,29 @@ SharedPreferences preferences;
                 ((MainActivity) context).setCartCounter("" + dbcart.getCartCount());
             }
 //                else if (id == R.id.iv_subcat_img) {
+//
+//                Toast.makeText(context, ""+position, Toast.LENGTH_SHORT).show();
+//                    related_interface.OnClick(position);
+
 //                preferences = context.getSharedPreferences("lan", MODE_PRIVATE);
 //                language=preferences.getString("language","");
-//                Log.d("lang",language);
-////                if (language.contains("english")) {
-////                    showProductDetail(modelList.get(position).getProduct_image(),
-////                            modelList.get(position).getProduct_name(),
-////                            modelList.get(position).getProduct_description(),
-////                            "",
-////                            position, tv_contetiy.getText().toString()
-////                            ,modelList.get(position).getProduct_id());
-////                }else {
-////
-////
-////                    showProductDetail(modelList.get(position).getProduct_image(),
-////                            modelList.get(position).getProduct_name_arb(),
-////                            modelList.get(position).getProduct_description_arb(),
-////                            "",
-////                            position, tv_contetiy.getText().toString()
-////                    ,modelList.get(position).getProduct_id());
-////                }
+//                if (language.contains("english")) {
+//                    showProductDetail(modelList.get(position).getProduct_image(),
+//                            modelList.get(position).getProduct_name(),
+//                            modelList.get(position).getProduct_description(),
+//                            "",
+//                            position, tv_contetiy.getText().toString()
+//                            ,modelList.get(position).getProduct_id());
+//                }else {
+//
+//
+//                    showProductDetail(modelList.get(position).getProduct_image(),
+//                            modelList.get(position).getProduct_name_arb(),
+//                            modelList.get(position).getProduct_description_arb(),
+//                            "",
+//                            position, tv_contetiy.getText().toString()
+//                    ,modelList.get(position).getProduct_id());
+//                }
 //
 //                Intent intent=new Intent(context, ProductActivity.class);
 //                if(language.contains("english")){
@@ -209,14 +215,15 @@ SharedPreferences preferences;
 //                intent.putExtra("store_id",modelList.get(position).getStoreid());
 //
 //                context.startActivity(intent);
-//            }
 
+//            }
         }
     }
 
-    public Product_adapter2(List<Product_model> modelList, Context context) {
+    public Product_adapter2(List<Product_model> modelList, Context context,related_interface related_interface) {
         this.modelList = modelList;
         dbcart = new DatabaseHandler(context);
+        this.related_interface=related_interface;
     }
 
     @Override
@@ -229,7 +236,9 @@ SharedPreferences preferences;
     @Override
     public void onBindViewHolder(Product_adapter2.MyViewHolder holder, int position) {
 
-        Collections.shuffle(modelList);
+        Random r = new Random();
+        position = r.nextInt(modelList.size() - 0) + 0;
+//        Toast.makeText(context, ""+i1, Toast.LENGTH_SHORT).show();
 
         Product_model mList = modelList.get(position);
 
@@ -275,6 +284,15 @@ SharedPreferences preferences;
         Double reward = Double.parseDouble(mList.getRewards());
         holder.tv_total.setText("" + price * items);
        holder.tv_reward.setText("" + reward * items);
+
+        final int finalPosition1 = position;
+        holder.iv_logo.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+         //      Toast.makeText(context, ""+ finalPosition1, Toast.LENGTH_SHORT).show();
+               related_interface.OnClick(finalPosition1);
+           }
+       });
 
     }
 

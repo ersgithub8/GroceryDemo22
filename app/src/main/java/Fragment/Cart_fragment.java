@@ -77,7 +77,7 @@ import util.Session_management;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class Cart_fragment extends Fragment implements View.OnClickListener {
+public class Cart_fragment extends Fragment implements View.OnClickListener,related_interface {
 
     private static String TAG = Cart_fragment.class.getSimpleName();
 
@@ -181,54 +181,55 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
         });
 
 
-        rv_realted.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), rv_realted, new RecyclerTouchListener.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-
-                SharedPreferences preferences = getActivity().getSharedPreferences("lan", MODE_PRIVATE);
-                String language=preferences.getString("language","");
-
-                Intent intent=new Intent(getActivity(), ProductActivity.class);
-                if(language.contains("english")){
-                    intent.putExtra("product_name",product_modelList.get(position).getProduct_name());//TODO
-                    intent.putExtra("description",product_modelList.get(position).getProduct_description());//TODO
-                }else{
-                    intent.putExtra("product_name",product_modelList.get(position).getProduct_name_arb());//TODO
-                    intent.putExtra("description",product_modelList.get(position).getProduct_description_arb());
-
-                }
-                intent.putExtra("product_id",product_modelList.get(position).getProduct_id());
-                intent.putExtra("category_id",product_modelList.get(position).getCategory_id());
-                intent.putExtra("deal_price",product_modelList.get(position).getDeal_price());
-                intent.putExtra("start_date",product_modelList.get(position).getStart_date());
-                intent.putExtra("start_time",product_modelList.get(position).getStart_time());
-                intent.putExtra("end_date",product_modelList.get(position).getEnd_date());
-                intent.putExtra("end_time",product_modelList.get(position).getEnd_time());
-                intent.putExtra("price",product_modelList.get(position).getPrice());
-                intent.putExtra("image",product_modelList.get(position).getProduct_image());
-                intent.putExtra("status",product_modelList.get(position).getStatus());
-                intent.putExtra("stock",product_modelList.get(position).getStock());
-                intent.putExtra("unit_value",product_modelList.get(position).getUnit_value());
-                intent.putExtra("unit",product_modelList.get(position).getUnit());
-                intent.putExtra("increment",product_modelList.get(position).getStoreid());
-                intent.putExtra("rewards",product_modelList.get(position).getRewards());
-                intent.putExtra("stock",product_modelList.get(position).getStock());
-                intent.putExtra("title",product_modelList.get(position).getTitle());
-                intent.putExtra("qty","0");
-                intent.putExtra("store_id",product_modelList.get(position).getStoreid());
-                startActivity(intent);
-
-                Fragment fm = new StoreFragment();
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-                        .addToBackStack(null).commit();
-
-            }
-            @Override
-            public void onLongItemClick(View view, int position) {
-
-            }
-        }));
+//        rv_realted.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), rv_realted, new RecyclerTouchListener.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(View view, int position) {
+//
+//                SharedPreferences preferences = getActivity().getSharedPreferences("lan", MODE_PRIVATE);
+//                String language=preferences.getString("language","");
+//
+//                Bundle args = new Bundle();
+//                Fragment fm = new ProductDetailShow();
+//                if(language.contains("spanish")){
+//                    args.putString("product_name",product_modelList.get(position).getProduct_name_arb());
+//                    args.putString("description",product_modelList.get(position).getProduct_description_arb());
+//                }else{
+//                    args.putString("product_name",product_modelList.get(position).getProduct_name());
+//                    args.putString("description",product_modelList.get(position).getProduct_description());
+//                }
+//                args.putString("size",product_modelList.get(position).getSize());
+//                args.putString("color",product_modelList.get(position).getColor());
+//                args.putString("product_id",product_modelList.get(position).getProduct_id());
+//                args.putString("category_id",product_modelList.get(position).getCategory_id());
+//                args.putString("deal_price",product_modelList.get(position).getDeal_price());
+//                args.putString("start_date",product_modelList.get(position).getStart_date());
+//                args.putString("start_time",product_modelList.get(position).getStart_time());
+//                args.putString("end_date",product_modelList.get(position).getEnd_date());
+//                args.putString("end_time",product_modelList.get(position).getEnd_time());
+//                args.putString("price",product_modelList.get(position).getPrice());
+//                args.putString("image",product_modelList.get(position).getProduct_image());
+//                args.putString("status",product_modelList.get(position).getStatus());
+//                args.putString("stock",product_modelList.get(position).getStock());
+//                args.putString("unit_value",product_modelList.get(position).getUnit_value());
+//                args.putString("unit",product_modelList.get(position).getUnit());
+//                args.putString("increment",product_modelList.get(position).getIncreament());
+//                args.putString("rewards",product_modelList.get(position).getRewards());
+//                args.putString("stock",product_modelList.get(position).getStock());
+//                args.putString("title",product_modelList.get(position).getTitle());
+//                args.putString("store_id",product_modelList.get(position).getStoreid());
+//                args.putString("qty","0");
+//
+//                fm.setArguments(args);
+//                FragmentManager fragmentManager = getFragmentManager();
+//                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+//                        .addToBackStack(null).commit();
+//
+//            }
+//            @Override
+//            public void onLongItemClick(View view, int position) {
+//
+//            }
+//        }));
 
         return view;
     }
@@ -255,7 +256,7 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
                         Type listType = new TypeToken<List<Product_model>>() {
                         }.getType();
                         product_modelList = gson.fromJson(response.getString("data"), listType);
-                        product_adapter = new Product_adapter2(product_modelList, getActivity());
+                        product_adapter = new Product_adapter2(product_modelList, getActivity(),Cart_fragment.this);
                         rv_realted.setAdapter(product_adapter);
                         product_adapter.notifyDataSetChanged();
                         if (getActivity() != null) {
@@ -590,4 +591,46 @@ public class Cart_fragment extends Fragment implements View.OnClickListener {
         }
     };
 
+    @Override
+    public void OnClick(int position) {
+        SharedPreferences preferences = getActivity().getSharedPreferences("lan", MODE_PRIVATE);
+                String language=preferences.getString("language","");
+
+                Bundle args = new Bundle();
+                Fragment fm = new ProductDetailShow();
+                if(language.contains("spanish")){
+                    args.putString("product_name",product_modelList.get(position).getProduct_name_arb());
+                    args.putString("description",product_modelList.get(position).getProduct_description_arb());
+                }else{
+                    args.putString("product_name",product_modelList.get(position).getProduct_name());
+                    args.putString("description",product_modelList.get(position).getProduct_description());
+                }
+                args.putString("size",product_modelList.get(position).getSize());
+                args.putString("color",product_modelList.get(position).getColor());
+                args.putString("product_id",product_modelList.get(position).getProduct_id());
+                args.putString("category_id",product_modelList.get(position).getCategory_id());
+                args.putString("deal_price",product_modelList.get(position).getDeal_price());
+                args.putString("start_date",product_modelList.get(position).getStart_date());
+                args.putString("start_time",product_modelList.get(position).getStart_time());
+                args.putString("end_date",product_modelList.get(position).getEnd_date());
+                args.putString("end_time",product_modelList.get(position).getEnd_time());
+                args.putString("price",product_modelList.get(position).getPrice());
+                args.putString("image",product_modelList.get(position).getProduct_image());
+                args.putString("status",product_modelList.get(position).getStatus());
+                args.putString("stock",product_modelList.get(position).getStock());
+                args.putString("unit_value",product_modelList.get(position).getUnit_value());
+                args.putString("unit",product_modelList.get(position).getUnit());
+                args.putString("increment",product_modelList.get(position).getIncreament());
+                args.putString("rewards",product_modelList.get(position).getRewards());
+                args.putString("stock",product_modelList.get(position).getStock());
+                args.putString("title",product_modelList.get(position).getTitle());
+                args.putString("store_id",product_modelList.get(position).getStoreid());
+                args.putString("qty","0");
+
+                fm.setArguments(args);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                        .addToBackStack(null).commit();
+
+    }
 }

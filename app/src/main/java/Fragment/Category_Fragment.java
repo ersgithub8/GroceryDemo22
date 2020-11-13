@@ -2,6 +2,8 @@ package Fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -51,6 +53,7 @@ import gogrocer.tcc.R;
 import util.CustomVolleyJsonRequest;
 import util.RecyclerTouchListener;
 
+import static android.content.Context.MODE_PRIVATE;
 import static gogrocer.tcc.AppController.TAG;
 
 public class Category_Fragment extends Fragment {
@@ -147,6 +150,59 @@ public class Category_Fragment extends Fragment {
 
             }
         }));
+
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new RecyclerTouchListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                
+                SharedPreferences preferences = getActivity().getSharedPreferences("lan", MODE_PRIVATE);
+                String language=preferences.getString("language","");
+
+                Bundle args = new Bundle();
+                Fragment fm = new ProductDetailShow();
+                if(language.contains("spanish")){
+                    args.putString("product_name",product_models.get(position).getProduct_name_arb());
+                    args.putString("description",product_models.get(position).getProduct_description_arb());
+                }else{
+                    args.putString("product_name",product_models.get(position).getProduct_name());
+                    args.putString("description",product_models.get(position).getProduct_description());
+                }
+                args.putString("size",product_models.get(position).getSize());
+                args.putString("color",product_models.get(position).getColor());
+                args.putString("product_id",product_models.get(position).getProduct_id());
+                args.putString("category_id",product_models.get(position).getCategory_id());
+                args.putString("deal_price",product_models.get(position).getDeal_price());
+                args.putString("start_date",product_models.get(position).getStart_date());
+                args.putString("start_time",product_models.get(position).getStart_time());
+                args.putString("end_date",product_models.get(position).getEnd_date());
+                args.putString("end_time",product_models.get(position).getEnd_time());
+                args.putString("price",product_models.get(position).getPrice());
+                args.putString("image",product_models.get(position).getProduct_image());
+                args.putString("status",product_models.get(position).getStatus());
+                args.putString("stock",product_models.get(position).getStock());
+                args.putString("unit_value",product_models.get(position).getUnit_value());
+                args.putString("unit",product_models.get(position).getUnit());
+                args.putString("increment",product_models.get(position).getIncreament());
+                args.putString("rewards",product_models.get(position).getRewards());
+                args.putString("stock",product_models.get(position).getStock());
+                args.putString("title",product_models.get(position).getTitle());
+                args.putString("store_id",product_models.get(position).getStoreid());
+                args.putString("qty","0");
+
+                fm.setArguments(args);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                        .addToBackStack(null).commit();
+
+
+            }
+
+            @Override
+            public void onLongItemClick(View view, int position) {
+
+            }
+        }));
+
 
         return view;
     }

@@ -2,6 +2,8 @@ package Model;
 
 public class Deal_Model {
 
+    String color;
+    String Size;
     String product_id;
     String mrp;
     String product_name;
@@ -238,4 +240,21 @@ public class Deal_Model {
     public void setStore_id(String store_id) {
         this.store_id = store_id;
     }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getSize() {
+        return Size;
+    }
+
+    public void setSize(String size) {
+        Size = size;
+    }
+
 }

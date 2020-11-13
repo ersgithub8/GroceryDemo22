@@ -153,7 +153,6 @@ public class CatProdAdapter extends RecyclerView.Adapter<CatProdAdapter.CartProd
                         Type listType = new TypeToken<List<Store_main_model>>() {
                         }.getType();
                         product_modelList = gson.fromJson(response.getString("data"), listType);
-
                         adapter_product = new Store_main_adapter(context,product_modelList,main_new);
                         recyclerView.setAdapter(adapter_product);
                         adapter_product.notifyDataSetChanged();

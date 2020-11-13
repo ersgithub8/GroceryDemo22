@@ -1,13 +1,17 @@
 package Adapter;
 
 import android.app.Dialog;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import Fragment.ProductDetailShow;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -165,10 +169,12 @@ SharedPreferences preferences;
                 tv_total.setText("" + price * items);
                 ((MainActivity) context).setCartCounter("" + dbcart.getCartCount());
 
-            } else if (id == R.id.iv_subcat_img) {
-                preferences = context.getSharedPreferences("lan", MODE_PRIVATE);
-                language=preferences.getString("language","");
-                Log.d("lang",language);
+            }
+//            else if (id == R.id.iv_subcat_img) {
+//                preferences = context.getSharedPreferences("lan", MODE_PRIVATE);
+//                language=preferences.getString("language","");
+//                Log.d("lang",language);
+
 //                if (language.contains("english")) {
 //                    showProductDetail(modelList.get(position).getProduct_image(),
 //                            modelList.get(position).getProduct_name(),
@@ -187,44 +193,83 @@ SharedPreferences preferences;
 //                    ,modelList.get(position).getProduct_id());
 //                }
 
-                Intent intent=new Intent(context, ProductActivity.class);
-                if(language.contains("english")){
+//                Bundle args = new Bundle();
+//                Fragment fm = new ProductDetailShow();
+//                if(language.contains("spanish")){
+//                    args.putString("product_name",modelList.get(position).getProduct_name_arb());//TODO
+//                    args.putString("description",modelList.get(position).getProduct_description_arb());
+//                    args.putString("size",modelList.get(position).getSize());
+//                    args.putString("color",modelList.get(position).getColor());
+//                }else{
+//                    args.putString("product_name",modelList.get(position).getProduct_name());
+//                    args.putString("description",modelList.get(position).getProduct_description());
+//                    args.putString("size",modelList.get(position).getSize());
+//                    args.putString("color",modelList.get(position).getColor());
+//                }
+//                args.putString("product_id",modelList.get(position).getProduct_id());
+//                args.putString("category_id",modelList.get(position).getCategory_id());
+//                args.putString("deal_price",modelList.get(position).getDeal_price());
+//                args.putString("start_date",modelList.get(position).getStart_date());
+//                args.putString("start_time",modelList.get(position).getStart_time());
+//                args.putString("end_date",modelList.get(position).getEnd_date());
+//                args.putString("end_time",modelList.get(position).getEnd_time());
+//                args.putString("price",modelList.get(position).getPrice());
+//                args.putString("image",modelList.get(position).getProduct_image());
+//                args.putString("status",modelList.get(position).getStatus());
+//                args.putString("stock",modelList.get(position).getStock());
+//                args.putString("unit_value",modelList.get(position).getUnit_value());
+//                args.putString("unit",modelList.get(position).getUnit());
+//                args.putString("increment",modelList.get(position).getIncreament());
+//                args.putString("rewards",modelList.get(position).getRewards());
+//                args.putString("stock",modelList.get(position).getStock());
+//                args.putString("title",modelList.get(position).getTitle());
+//                args.putString("size",modelList.get(position).getSize());
+//                args.putString("store_id",modelList.get(position).getStoreid());
+//                args.putString("qty","0");
+//
+//                fm.setArguments(args);
+//                FragmentManager fragmentManager = getFragmentManager();
+//                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+//                        .addToBackStack(null).commit();
 
-                    intent.putExtra("product_name",modelList.get(position).getProduct_name());//TODO
-                    intent.putExtra("size",modelList.get(position).getSize());//TODO
-                    intent.putExtra("color",modelList.get(position).getColor());//TODO
-                    intent.putExtra("description",modelList.get(position).getProduct_description());//TODO
-                }else{
-                    intent.putExtra("product_name",modelList.get(position).getProduct_name_arb());//TODO
-                    intent.putExtra("size",modelList.get(position).getSize());//TODO
-                    intent.putExtra("color",modelList.get(position).getColor());//TODO
-                    intent.putExtra("description",modelList.get(position).getProduct_description_arb());
 
-                }
-                intent.putExtra("product_id",modelList.get(position).getProduct_id());
-                intent.putExtra("size",modelList.get(position).getSize());//TODO
-                intent.putExtra("color",modelList.get(position).getColor());//TODO
-                intent.putExtra("category_id",modelList.get(position).getCategory_id());
-                intent.putExtra("deal_price",modelList.get(position).getDeal_price());
-                intent.putExtra("start_date",modelList.get(position).getStart_date());
-                intent.putExtra("start_time",modelList.get(position).getStart_time());
-                intent.putExtra("end_date",modelList.get(position).getEnd_date());
-                intent.putExtra("end_time",modelList.get(position).getEnd_time());
-                intent.putExtra("price",modelList.get(position).getPrice());
-                intent.putExtra("image",modelList.get(position).getProduct_image());
-                intent.putExtra("status",modelList.get(position).getStatus());
-                intent.putExtra("stock",modelList.get(position).getStock());
-                intent.putExtra("unit_value",modelList.get(position).getUnit_value());
-                intent.putExtra("unit",modelList.get(position).getUnit());
-                intent.putExtra("increment",modelList.get(position).getStoreid());
-                intent.putExtra("rewards",modelList.get(position).getRewards());
-                intent.putExtra("stock",modelList.get(position).getStock());
-                intent.putExtra("title",modelList.get(position).getTitle());
-                intent.putExtra("qty",tv_contetiy.getText().toString());
-                intent.putExtra("store_id",modelList.get(position).getStoreid());
+     //Move To Activity ...................................................
+//                Intent intent=new Intent(context, ProductActivity.class);
+//                if(language.contains("english")){
+//                    intent.putExtra("product_name",modelList.get(position).getProduct_name());//TODO
+//                    intent.putExtra("size",modelList.get(position).getSize());//TODO
+//                    intent.putExtra("color",modelList.get(position).getColor());//TODO
+//                    intent.putExtra("description",modelList.get(position).getProduct_description());//TODO
+//                }else{
+//                    intent.putExtra("product_name",modelList.get(position).getProduct_name_arb());//TODO
+//                    intent.putExtra("size",modelList.get(position).getSize());//TODO
+//                    intent.putExtra("color",modelList.get(position).getColor());//TODO
+//                    intent.putExtra("description",modelList.get(position).getProduct_description_arb());
+//                }
+//                intent.putExtra("product_id",modelList.get(position).getProduct_id());
+//                intent.putExtra("size",modelList.get(position).getSize());//TODO
+//                intent.putExtra("color",modelList.get(position).getColor());//TODO
+//                intent.putExtra("category_id",modelList.get(position).getCategory_id());
+//                intent.putExtra("deal_price",modelList.get(position).getDeal_price());
+//                intent.putExtra("start_date",modelList.get(position).getStart_date());
+//                intent.putExtra("start_time",modelList.get(position).getStart_time());
+//                intent.putExtra("end_date",modelList.get(position).getEnd_date());
+//                intent.putExtra("end_time",modelList.get(position).getEnd_time());
+//                intent.putExtra("price",modelList.get(position).getPrice());
+//                intent.putExtra("image",modelList.get(position).getProduct_image());
+//                intent.putExtra("status",modelList.get(position).getStatus());
+//                intent.putExtra("stock",modelList.get(position).getStock());
+//                intent.putExtra("unit_value",modelList.get(position).getUnit_value());
+//                intent.putExtra("unit",modelList.get(position).getUnit());
+//                intent.putExtra("increment",modelList.get(position).getStoreid());
+//                intent.putExtra("rewards",modelList.get(position).getRewards());
+//                intent.putExtra("stock",modelList.get(position).getStock());
+//                intent.putExtra("title",modelList.get(position).getTitle());
+//                intent.putExtra("qty",tv_contetiy.getText().toString());
+//                intent.putExtra("store_id",modelList.get(position).getStoreid());
+//                context.startActivity(intent);
 
-                context.startActivity(intent);
-            }
+//            }
 
         }
     }
@@ -431,8 +476,8 @@ SharedPreferences preferences;
 
                     map.put("product_id", modelList.get(position).getProduct_id());
                     map.put("product_name", modelList.get(position).getProduct_name());
-                map.put("size", modelList.get(position).getSize());
-                map.put("color", modelList.get(position).getColor());
+                    map.put("size", modelList.get(position).getSize());
+                    map.put("color", modelList.get(position).getColor());
                     map.put("category_id", modelList.get(position).getCategory_id());
                     map.put("product_description", modelList.get(position).getProduct_description());
                     map.put("deal_price", modelList.get(position).getDeal_price());
@@ -571,8 +616,6 @@ SharedPreferences preferences;
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
-
-
 
     }
     public void addinfav(String userid, final String productid, final ImageView imageView){

@@ -12,10 +12,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import Config.BaseURL;
 import Model.Store_Model;
 import de.hdodenhof.circleimageview.CircleImageView;
 import gogrocer.tcc.R;
@@ -45,7 +47,15 @@ public class Store_Adapter extends RecyclerView.Adapter<Store_Adapter.Store_VH> 
     public void onBindViewHolder(@NonNull Store_VH holder, int position) {
 
         Store_Model modellist=store_models.get(position);
-        Glide.with(context).load(modellist.getUser_image()).into(holder.storeimage);
+
+        Glide.with(context)
+                .load(BaseURL.IMG_PROFILE_URL + modellist.getUser_image())
+                .placeholder(R.drawable.icon)
+                .crossFade()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .dontAnimate()
+                .into(holder.storeimage);
+
         holder.storename.setText(modellist.getUser_name());
 
         if (modellist.getStar() == null){

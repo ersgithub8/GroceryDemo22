@@ -15,6 +15,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -78,12 +79,13 @@ import gogrocer.tcc.WebView;
 import util.CustomVolleyJsonRequest;
 import util.RecyclerTouchListener;
 
+import static android.content.Context.MODE_PRIVATE;
 import static gogrocer.tcc.AppController.TAG;
 
 public class StoreFragment extends Fragment implements Main_new {
     private Home_Icon_Adapter menu_adapter;
     private List<Home_Icon_model> menu_models = new ArrayList<>();
-    private SliderLayout banner_slider,deal_banner;
+    SliderLayout banner_slider,deal_banner;
     RecyclerView stores;
     LinearLayout Search_layout;
     String storeid,getid;
@@ -107,7 +109,8 @@ public class StoreFragment extends Fragment implements Main_new {
         View view = inflater.inflate(R.layout.fragment_stores, container, false);
 
         banner_slider = (SliderLayout) view.findViewById(R.id.relative_banner);
-        deal_banner = (SliderLayout) view.findViewById(R.id.deal_banner);
+        deal_banner = (SliderLayout) view.findViewById(R.id.deal_bannery);
+
         stores=(RecyclerView)view.findViewById(R.id.rv_stores);
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
         shimmy = view.findViewById(R.id.shimmer_view_container2);
@@ -122,17 +125,10 @@ public class StoreFragment extends Fragment implements Main_new {
         rv_top_selling.setItemAnimator(new DefaultItemAnimator());
         rv_top_selling.setNestedScrollingEnabled(false);
 
-        dealday=view.findViewById(R.id.dealday);
 
         makeGetBannerSliderRequest();
         makeGetBannerSliderRequestdeal();
 
-//        dealday.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Log.d("jhgj","jhsgajhgdjhas");
-//            }
-//        });
         SharedPreferences sharedPreferences=getActivity().getSharedPreferences("location", Context.MODE_PRIVATE);
         String lat, longi;
         lat=sharedPreferences.getString("lat","123");
@@ -181,19 +177,6 @@ public class StoreFragment extends Fragment implements Main_new {
 //                        .addToBackStack(null).commit();
 //            }
 //        });
-        deal_banner.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getActivity(), "banner", Toast.LENGTH_SHORT).show();
-                Bundle args = new Bundle();
-                Fragment fm = new Deal_Fragemnt();
-                args.putString("laddan_jaffery", "deals");
-                fm.setArguments(args);
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-                        .addToBackStack(null).commit();
-            }
-        });
 
 
 //        Toast.makeText(getActivity(), city+"", Toast.LENGTH_SHORT).show();
@@ -251,15 +234,17 @@ public class StoreFragment extends Fragment implements Main_new {
 
         catprod.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        make_menu_items1();
+        make_menu_items1();  //Category For Stores
 
-        make_menu_items();
-//        getstores();
-        make_top_selling();
+        //make_menu_items(); //For Categoris , which is not shown in page. So i comment it !!!
 
-//        rv_top_selling.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), rv_top_selling, new RecyclerTouchListener.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(View view, int position) {
+        //getstores();
+
+        make_top_selling(); // In the End , Popular Products Shown
+
+        rv_top_selling.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), rv_top_selling, new RecyclerTouchListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
 //                getid = top_selling_models.get(position).getProduct_id();
 //                Bundle args = new Bundle();
 //                Fragment fm = new Product_fragment();
@@ -268,14 +253,56 @@ public class StoreFragment extends Fragment implements Main_new {
 //                FragmentManager fragmentManager = getFragmentManager();
 //                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
 //                        .addToBackStack(null).commit();
-//
-//            }
-//
-//            @Override
-//            public void onLongItemClick(View view, int position) {
-//
-//            }
-//        }));
+                SharedPreferences preferences = getActivity().getSharedPreferences("lan", MODE_PRIVATE);
+                String language=preferences.getString("language","");
+
+                Bundle args = new Bundle();
+                Fragment fm = new ProductDetailShow();
+                if(language.contains("spanish")){
+                    args.putString("product_name",top_selling_models.get(position).getProduct_name_arb());//TODO
+                    args.putString("description",top_selling_models.get(position).getProduct_description_arb());
+
+                }else{
+                    args.putString("product_name",top_selling_models.get(position).getProduct_name());
+                    args.putString("description",top_selling_models.get(position).getProduct_description());
+                }
+                args.putString("size",top_selling_models.get(position).getSize());
+                args.putString("color",top_selling_models.get(position).getColor());
+
+                args.putString("product_id",top_selling_models.get(position).getProduct_id());
+                args.putString("category_id",top_selling_models.get(position).getCategory_id());
+                args.putString("deal_price",top_selling_models.get(position).getDeal_price());
+                args.putString("start_date",top_selling_models.get(position).getStart_date());
+                args.putString("start_time",top_selling_models.get(position).getStart_time());
+                args.putString("end_date",top_selling_models.get(position).getEnd_date());
+                args.putString("end_time",top_selling_models.get(position).getEnd_time());
+                args.putString("price",top_selling_models.get(position).getPrice());
+                args.putString("image",top_selling_models.get(position).getProduct_image());
+                args.putString("status",top_selling_models.get(position).getStatus());
+                args.putString("stock",top_selling_models.get(position).getStock());
+                args.putString("unit_value",top_selling_models.get(position).getUnit_value());
+                args.putString("unit",top_selling_models.get(position).getUnit());
+                args.putString("increment",top_selling_models.get(position).getIncreament());
+                args.putString("rewards",top_selling_models.get(position).getRewards());
+                args.putString("stock",top_selling_models.get(position).getStock());
+                args.putString("title",top_selling_models.get(position).getTitle());
+                args.putString("store_id",top_selling_models.get(position).getStoreid());
+                args.putString("qty","0");
+
+                fm.setArguments(args);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                        .addToBackStack(null).commit();
+
+
+            }
+
+            @Override
+            public void onLongItemClick(View view, int position) {
+
+            }
+        }));
+
         rv_headre_icons.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), rv_headre_icons, new RecyclerTouchListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -298,6 +325,7 @@ public class StoreFragment extends Fragment implements Main_new {
 
             }
         }));
+
         stores.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), stores, new RecyclerTouchListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -452,24 +480,37 @@ public class StoreFragment extends Fragment implements Main_new {
                     public void onResponse(JSONArray response) {
                         Log.d(TAG, response.toString());
                         try {
-                            ArrayList<HashMap<String, String>> listarray = new ArrayList<>();
+                            ArrayList<HashMap<String, String>> listarray2 = new ArrayList<>();
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject jsonObject = (JSONObject) response.get(i);
                                 HashMap<String, String> url_maps = new HashMap<String, String>();
                                 url_maps.put("slider_title", jsonObject.getString("slider_title"));
                                 url_maps.put("sub_cat", jsonObject.getString("sub_cat"));
                                 url_maps.put("slider_image", BaseURL.IMG_SLIDER_URL + jsonObject.getString("slider_image"));
-                                listarray.add(url_maps);
+                                listarray2.add(url_maps);
                             }
-                            for (HashMap<String, String> name : listarray) {
-                                CustomSlider textSliderView = new CustomSlider(getActivity());
-                                textSliderView.description(name.get("")).image(name.get("slider_image")).setScaleType(BaseSliderView.ScaleType.Fit);
-                                textSliderView.bundle(new Bundle());
-                                textSliderView.getBundle().putString("extra", name.get("slider_title"));
-                                textSliderView.getBundle().putString("extra", name.get("sub_cat"));
-                                deal_banner.addSlider(textSliderView);
-                                final String sub_cat = (String) textSliderView.getBundle().get("extra");
+                            for (HashMap<String, String> name : listarray2) {
+                                CustomSlider textSliderView2 = new CustomSlider(getActivity());
+                                textSliderView2.description(name.get("")).image(name.get("slider_image")).setScaleType(BaseSliderView.ScaleType.Fit);
+                                textSliderView2.bundle(new Bundle());
+                                textSliderView2.getBundle().putString("extra", name.get("slider_title"));
+                                textSliderView2.getBundle().putString("extra", name.get("sub_cat"));
+                                deal_banner.addSlider(textSliderView2);
+//                                final String sub_cat = (String) textSliderView.getBundle().get("extra");
 
+                                textSliderView2.setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
+                                    @Override
+                                    public void onSliderClick(BaseSliderView slider) {
+                                        //   Toast.makeText(getActivity(), "" + sub_cat, Toast.LENGTH_SHORT).show();
+                                        Bundle args = new Bundle();
+                                        Fragment fm = new Deal_Fragemnt();
+                                        args.putString("laddan_jaffery", "deals");
+                                        fm.setArguments(args);
+                                        FragmentManager fragmentManager = getFragmentManager();
+                                        fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                                                .addToBackStack(null).commit();
+                                    }
+                                });
 
                             }
 

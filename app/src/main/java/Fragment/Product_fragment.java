@@ -2,6 +2,7 @@ package Fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -58,6 +59,7 @@ import gogrocer.tcc.R;
 import gogrocer.tcc.Rating;
 import util.ConnectivityReceiver;
 import util.CustomVolleyJsonRequest;
+import util.RecyclerTouchListener;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -90,12 +92,9 @@ public class Product_fragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_product, container, false);
-
-
 
         new StoreFragment();
         Texty = view.findViewById(R.id.no_product);
@@ -228,6 +227,66 @@ public class Product_fragment extends Fragment {
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
+
+        rv_cat.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), rv_cat, new RecyclerTouchListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+//                getid = product_modelList.get(position).getProduct_id();
+//                Bundle args = new Bundle();
+//                Fragment fm = new Product_fragment();
+//                args.putString("cat_top_selling", "2");
+//                fm.setArguments(args);
+//                FragmentManager fragmentManager = getFragmentManager();
+//                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+//                        .addToBackStack(null).commit();
+                SharedPreferences preferences = getActivity().getSharedPreferences("lan", MODE_PRIVATE);
+                String language=preferences.getString("language","");
+
+                Bundle args = new Bundle();
+                Fragment fm = new ProductDetailShow();
+                if(language.contains("spanish")){
+                    args.putString("product_name",product_modelList.get(position).getProduct_name_arb());
+                    args.putString("description",product_modelList.get(position).getProduct_description_arb());
+                }else{
+                    args.putString("product_name",product_modelList.get(position).getProduct_name());
+                    args.putString("description",product_modelList.get(position).getProduct_description());
+                }
+                args.putString("size",product_modelList.get(position).getSize());
+                args.putString("color",product_modelList.get(position).getColor());
+                args.putString("product_id",product_modelList.get(position).getProduct_id());
+                args.putString("category_id",product_modelList.get(position).getCategory_id());
+                args.putString("deal_price",product_modelList.get(position).getDeal_price());
+                args.putString("start_date",product_modelList.get(position).getStart_date());
+                args.putString("start_time",product_modelList.get(position).getStart_time());
+                args.putString("end_date",product_modelList.get(position).getEnd_date());
+                args.putString("end_time",product_modelList.get(position).getEnd_time());
+                args.putString("price",product_modelList.get(position).getPrice());
+                args.putString("image",product_modelList.get(position).getProduct_image());
+                args.putString("status",product_modelList.get(position).getStatus());
+                args.putString("stock",product_modelList.get(position).getStock());
+                args.putString("unit_value",product_modelList.get(position).getUnit_value());
+                args.putString("unit",product_modelList.get(position).getUnit());
+                args.putString("increment",product_modelList.get(position).getIncreament());
+                args.putString("rewards",product_modelList.get(position).getRewards());
+                args.putString("stock",product_modelList.get(position).getStock());
+                args.putString("title",product_modelList.get(position).getTitle());
+                args.putString("store_id",product_modelList.get(position).getStoreid());
+                args.putString("qty","0");
+
+                fm.setArguments(args);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                        .addToBackStack(null).commit();
+
+
+            }
+
+            @Override
+            public void onLongItemClick(View view, int position) {
+
+            }
+        }));
+
 
         return view;
     }

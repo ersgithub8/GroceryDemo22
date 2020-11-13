@@ -2,6 +2,7 @@ package Fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -58,6 +59,9 @@ import gogrocer.tcc.MainActivity;
 import gogrocer.tcc.R;
 import util.ConnectivityReceiver;
 import util.CustomVolleyJsonRequest;
+import util.RecyclerTouchListener;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by Hamza Ali on 26/6/2020.
@@ -174,6 +178,87 @@ public class Search_fragment extends Fragment {
 
             }
         });
+        
+        stores.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), stores, new RecyclerTouchListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+
+                String storeid = store_models.get(position).getUser_id();
+                Bundle args = new Bundle();
+                Fragment fm = new Product_fragment();
+                args.putString("storeid", storeid);
+                args.putString("laddan_jaffery", "store");
+                args.putString("name",store_models.get(position).getUser_name());
+                args.putString("user_email",store_models.get(position).getUser_email());
+                args.putString("user_phone",store_models.get(position).getUser_phone());
+                fm.setArguments(args);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                        .addToBackStack(null).commit();
+                
+            }
+
+            @Override
+            public void onLongItemClick(View view, int position) {
+
+            }
+        }));
+
+        rv_search.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), rv_search, new RecyclerTouchListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+
+                SharedPreferences preferences = getActivity().getSharedPreferences("lan", MODE_PRIVATE);
+                String language=preferences.getString("language","");
+
+                Bundle args = new Bundle();
+                Fragment fm = new ProductDetailShow();
+                if(language.contains("spanish")){
+                    args.putString("product_name",product_modelList.get(position).getProduct_name_arb());//TODO
+                    args.putString("description",product_modelList.get(position).getProduct_description_arb());
+
+                }else{
+                    args.putString("product_name",product_modelList.get(position).getProduct_name());
+                    args.putString("description",product_modelList.get(position).getProduct_description());
+                }
+                args.putString("size",product_modelList.get(position).getSize());
+                args.putString("color",product_modelList.get(position).getColor());
+
+                args.putString("product_id",product_modelList.get(position).getProduct_id());
+                args.putString("category_id",product_modelList.get(position).getCategory_id());
+                args.putString("deal_price",product_modelList.get(position).getDeal_price());
+                args.putString("start_date",product_modelList.get(position).getStart_date());
+                args.putString("start_time",product_modelList.get(position).getStart_time());
+                args.putString("end_date",product_modelList.get(position).getEnd_date());
+                args.putString("end_time",product_modelList.get(position).getEnd_time());
+                args.putString("price",product_modelList.get(position).getPrice());
+                args.putString("image",product_modelList.get(position).getProduct_image());
+                args.putString("status",product_modelList.get(position).getStatus());
+                args.putString("stock",product_modelList.get(position).getStock());
+                args.putString("unit_value",product_modelList.get(position).getUnit_value());
+                args.putString("unit",product_modelList.get(position).getUnit());
+                args.putString("increment",product_modelList.get(position).getIncreament());
+                args.putString("rewards",product_modelList.get(position).getRewards());
+                args.putString("stock",product_modelList.get(position).getStock());
+                args.putString("title",product_modelList.get(position).getTitle());
+                args.putString("store_id",product_modelList.get(position).getStoreid());
+                args.putString("qty","0");
+
+                fm.setArguments(args);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                        .addToBackStack(null).commit();
+
+
+            }
+
+            @Override
+            public void onLongItemClick(View view, int position) {
+
+            }
+        }));
+        
+        
 
         return view;
     }
@@ -279,8 +364,7 @@ public class Search_fragment extends Fragment {
                             Type listtype=new TypeToken<List<Store_Model>>(){
 
                             }.getType();
-
-
+                            
                             store_models=gson.fromJson(response.getString("data"),listtype);
                             store_adapter=new Store_Adapter(getActivity(),store_models);
                             stores.setLayoutManager(new GridLayoutManager(getActivity(),3));

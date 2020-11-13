@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="notavailabe">غير متوفر</string>
     <string name="nocharges">شحن مجاني فوق 500 ريال سعودي</string>
 
     <string name="onlyforpreorder">اختياره فقط للطلبات المسبقة</string>
