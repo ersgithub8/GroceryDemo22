@@ -80,6 +80,7 @@ public class CatProdAdapter extends RecyclerView.Adapter<CatProdAdapter.CartProd
 
     @Override
     public void onBindViewHolder(@NonNull CartProdVH holder, final int position) {
+
         Category_model mList=modelList.get(position);
 
         preferences = context.getSharedPreferences("lan", MODE_PRIVATE);
@@ -87,7 +88,6 @@ public class CatProdAdapter extends RecyclerView.Adapter<CatProdAdapter.CartProd
         if (language.contains("english")) {
             holder.catname.setText(mList.getTitle());
             makeGetProductRequest(mList.getId(),mList.getTitle(),City,holder.catproducts,holder.relativeLayout);
-
         }
         else {
             holder.catname.setText(mList.getArb_title());

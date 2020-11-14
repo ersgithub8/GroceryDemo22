@@ -253,7 +253,7 @@
                     android:id="@+id/textView12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
                     android:text="@string/sizecolor"
                     android:textStyle="bold"
                     android:textColor="#000" />
@@ -272,12 +272,12 @@
                     android:id="@+id/size"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/size_txt"
+                    android:layout_toEndOf="@id/size_txt"
                     android:layout_below="@id/textView12"
-                    android:layout_marginRight="@dimen/space_20"
-                    android:layout_marginLeft="@dimen/space_7"
+                    android:layout_marginEnd="@dimen/space_20"
+                    android:layout_marginStart="@dimen/space_7"
                     android:layout_marginTop="@dimen/space_3"
-                    android:text="size"
+
                     android:textColor="#000" />
 
                 <Fonts.LatoBLack
@@ -295,12 +295,11 @@
                     android:id="@+id/color"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/color_txt"
-                    android:layout_marginLeft="@dimen/space_7"
+                    android:layout_toEndOf="@id/color_txt"
+                    android:layout_marginStart="@dimen/space_7"
                     android:layout_below="@+id/size"
                     android:layout_marginTop="@dimen/space_3"
-                    android:layout_marginRight="@dimen/space_20"
-                    android:text="color"
+                    android:layout_marginEnd="@dimen/space_20"
                     android:textColor="#000" />
             </RelativeLayout>
 
@@ -316,7 +315,7 @@
                     android:id="@+id/textView11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
                     android:textStyle="bold"
                     android:layout_marginTop="@dimen/space_8"
                     android:text="@string/desiiic"

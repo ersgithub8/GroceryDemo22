@@ -138,7 +138,7 @@ public class StoreFragment extends Fragment implements Main_new {
             double laty = Double.parseDouble(lat);
             double longy = Double.parseDouble(longi);
 
-            Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
+            Geocoder geocoder = new Geocoder(getActivity(), Locale.forLanguageTag("en"));
 
         try {
             List<Address> addresses = new ArrayList<Address>();
@@ -177,7 +177,6 @@ public class StoreFragment extends Fragment implements Main_new {
 //                        .addToBackStack(null).commit();
 //            }
 //        });
-
 
 //        Toast.makeText(getActivity(), city+"", Toast.LENGTH_SHORT).show();
 

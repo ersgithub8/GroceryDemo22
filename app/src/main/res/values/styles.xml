@@ -7,9 +7,7 @@
         <item name="colorPrimaryDark">@color/colorAccent</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="windowActionBar">false</item>
-
         <item name="android:fontFamily">@font/kellyslab</item>
-
         <item name="windowNoTitle">true</item>
     </style>
 
@@ -21,6 +19,8 @@
         <item name="windowActionBar">false</item>
         <item name="android:fontFamily">@font/janna</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:layoutDirection">rtl</item>
+
     </style>
 <!--    ratingbar-->
     <style name="customRatingBar"

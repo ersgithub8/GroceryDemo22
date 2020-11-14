@@ -383,7 +383,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Log.d(TAG, response.toString());
 
                 try {
-                    loading.dismiss();
+                    //loading.dismiss();
                     Boolean status = response.getBoolean("responce");
                     if (status) {
                         JSONObject obj = response.getJSONObject("data");
@@ -420,9 +420,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                         Toast.makeText(LoginActivity.this, "" + error, Toast.LENGTH_SHORT).show();
                     }
+                    loading.dismiss();
+
                 } catch (JSONException e) {
                     e.printStackTrace();
-
                     loading.dismiss();
 
                 }
@@ -442,12 +443,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
-
-
-
-
-
-
 
     }
 

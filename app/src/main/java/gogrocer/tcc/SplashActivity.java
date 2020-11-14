@@ -205,10 +205,9 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     public void go_next() {
+
         getLanguange();
         getLocation();
-
-
 
         if(sessionManagement.isLoggedIn()) {
         Intent startmain = new Intent(SplashActivity.this, MainActivity.class);
@@ -294,8 +293,6 @@ public class SplashActivity extends AppCompatActivity {
 
 
     public void getLocation(){
-
-
 
         final SharedPreferences locationss=getSharedPreferences("location",MODE_PRIVATE);
         final SharedPreferences.Editor leditor=locationss.edit();

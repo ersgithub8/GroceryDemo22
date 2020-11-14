@@ -119,8 +119,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void attachBaseContext(Context newBase) {
 
-
-
                 newBase = LocaleHelper.onAttach(newBase);
 
                 super.attachBaseContext(newBase);
@@ -142,6 +140,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         String token = FirebaseInstanceId.getInstance().getToken();
         Log.d("MYTAG", "This is your Firebase token" + token);
+
+        getLanguange();
 
 
          bot_cat=findViewById(R.id.bot_categories);
@@ -926,6 +926,45 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }).executeAsync();
     }
+
+    private void getLanguange() {
+
+        sharedPreferences= getSharedPreferences("lan", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+
+        final String current_lan = sharedPreferences.getString("language",null);
+
+        if (current_lan == null){
+            LocaleHelper.setLocale(getApplicationContext(), "en");
+            getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+
+            editor.putString("language", "english");
+            editor.apply();
+        }
+        else if (current_lan.equals("english")){
+            LocaleHelper.setLocale(getApplicationContext(), "en");
+            getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+
+            editor.putString("language", "english");
+            editor.apply();
+        }
+        else if (current_lan.equals("spanish")){
+            LocaleHelper.setLocale(getApplicationContext(), "ar");
+            getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+
+            editor.putString("language", "spanish");
+            editor.apply();
+        }
+        else {
+            LocaleHelper.setLocale(getApplicationContext(), "en");
+            getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+
+            editor.putString("language", "english");
+            editor.apply();
+        }
+
+    }
+
 
 //    @Override
 //    public void onBackPressed(){
