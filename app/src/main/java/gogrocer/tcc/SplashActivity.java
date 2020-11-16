@@ -226,6 +226,16 @@ public class SplashActivity extends AppCompatActivity {
 
     private void getStore_ids(String citoo) {
 
+        try {
+            if (city == null) {
+                SharedPreferences avy = getSharedPreferences("location", MODE_PRIVATE);
+                city = avy.getString("city", null);
+            }
+        }
+        catch (Exception e){
+
+        }
+
         Map<String, String> params = new HashMap<String, String>();
         params.put("city", citoo);
 
@@ -328,7 +338,7 @@ public class SplashActivity extends AppCompatActivity {
                                 Double longitude=location.getLongitude();
 
 
-                                Geocoder geocoder = new Geocoder(SplashActivity.this, Locale.getDefault());
+                                Geocoder geocoder = new Geocoder(SplashActivity.this, Locale.ENGLISH);
 
                                 try {
                                     List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
@@ -336,6 +346,7 @@ public class SplashActivity extends AppCompatActivity {
                                     if(addresses.size()>0) {
                                         city = addresses.get(0).getSubAdminArea();
                                         getStore_ids(city);
+                                        leditor.putString("city",city);
                                     }
 
                                 } catch (IOException e) {

@@ -167,7 +167,6 @@ public class CatProdAdapter extends RecyclerView.Adapter<CatProdAdapter.CartProd
                         }
                     }else{
 //                        view.setVisibility(View.GONE);
-
                     }
                 } catch (JSONException e) {
 //                    view.setVisibility(View.GONE);
