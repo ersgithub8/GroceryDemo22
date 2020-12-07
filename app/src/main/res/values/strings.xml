@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="musthavereedem">You must have 300 points to redeem</string>
+
     <string name="notavailabe">Not Available</string>
 
     <string name="nocharges">Free Shipping over 500 SAR</string>
@@ -120,7 +122,7 @@
     <string name="retry" translatable="false">Retry Order</string>
     <string name="nav_review" translatable="false">Review Us</string>
     <string name="nav_contact" translatable="false">Contact Us</string>
-    <string name="nav_share" translatable="false">Share app</string>
+    <string name="nav_share" translatable="false">Share App</string>
     <string name="nav_logout" translatable="false">Logout</string>
     <string name="btn_continue" translatable="false"><b>Login</b></string>
     <string name="btn_continueto" ><b>Welcome To\nJ6 Stores</b></string>
@@ -157,7 +159,7 @@
     <string name="tv_reg_address">Address(Required)</string>
     <string name="et_reg_address">Complete Address</string>
     <string name="use" translatable="false">Use</string>
-    <string name="rate" translatable="false">Rate</string>
+    <string name="rate" translatable="false">Rate App</string>
     <string name="feedback" translatable="false">Feedback</string>
     <string name="store" translatable="false">Store Pick Up</string>
     <string name="confirm_order" translatable="false">Confirm</string>
@@ -195,7 +197,7 @@
     <!-- fragment_home.xml -->
     <string name="tv_home_cat">Products</string>
     <string name="tv_home_view">View all ></string>
-    <string name="checkout" translatable="false">Checkout</string>
+    <string name="checkout" translatable="false"> Checkout </string>
     <!-- fragment_Wallet.xml -->
     <string name="tv_app_name">Wallet</string>
     <string name="tv_product_name" translatable="false">Products</string>

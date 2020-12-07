@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="musthavereedem">يجب أن يكون لديك 300 نقطة للاسترداد</string>
     <string name="notavailabe">غير متوفر</string>
     <string name="nocharges">شحن مجاني فوق 500 ريال سعودي</string>
 
@@ -26,7 +27,7 @@
     <string name="ratiii">التقييم والمراجعات</string>
 
     <string name="wish">قائمة الرغبات</string>
-    <string name="vip_dis">خصم كبار الشخصيات : </string>
+    <string name="vip_dis">خصم VIP : </string>
     <string name="maroof">معروف</string>
     <string name="wallet_ammount">مبلغ محفظتي : </string>
     <string name="j6_point">نقاط J6 : </string>
@@ -141,7 +142,7 @@
     <string name="btn_reg_update">تحديث الملف الشخصي</string>
     <string name="et_reg_search"> البحث في المناطق</string>
     <string name="et_sea">اكتب للبحث</string>
-    <string name="rate">قيّم التطبيق</string>
+    <string name="rate">قيم التطبيق</string>
     <string name="feedback" translatable="false">قيّم الخدمات</string>
     <string name="tv_reg_note">ملاحظة: الخدمة متاحة فقط لـ RAJKOT</string>
     <string name="tv_reg_address">العنوان (مطلوب)</string>
@@ -152,7 +153,7 @@
     <string name="paymentmentord" translatable="false">اختار طريقة الدفع</string>
     <string name="googlepay" translatable="false">جوجل باي</string>
     <string name="applepay" translatable="false">دفع التفاح</string>
-    <string name="checkout">الدفع</string>
+    <string name="checkout">  الدفع  </string>
     <string name="card">بطاقات</string>
     <string name="promo">رمز ترويجي</string>
     <string name="coupon">كوبون</string>

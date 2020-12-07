@@ -90,7 +90,7 @@ public class Reward_fragment extends Fragment {
                     }, 5000);
                 }else{
                     SweetAlertDialog sweetAlertDialog=new SweetAlertDialog(getActivity(),SweetAlertDialog.ERROR_TYPE)
-                            .setTitleText("You must have 3000 points to redeem");
+                            .setTitleText(getResources().getString(R.string.musthavereedem));
                     sweetAlertDialog.setConfirmButtonBackgroundColor(Color.RED);
                     sweetAlertDialog.show();
                 }

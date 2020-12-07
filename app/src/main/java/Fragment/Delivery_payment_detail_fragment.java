@@ -421,7 +421,8 @@ SharedPreferences preferences;
                         Boolean status = response.getBoolean("responce");
                         if (status) {
 
-                            discount=(Double.parseDouble(total)*30)/100;
+                            discount=(Double.parseDouble(total)*10)/100;
+
                             //Toast.makeText(getActivity(), total+discount, Toast.LENGTH_SHORT).show();
 //                            tv_total.setText(getResources().getString(R.string.tv_cart_item) + db_cart.getCartCount() + "\n" +
 //                                    getResources().getString(R.string.amount) + db_cart.getTotalAmount() + "\n" +

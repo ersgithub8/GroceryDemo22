@@ -63,14 +63,10 @@ public class Account_Fragment extends Fragment {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
-
     LinearLayout rewards,walletl,rate,share,feedback;
 
-
     TextView name,phone,reward,wallet,contact;
-
     TextView fb,twitter,tele,insta,whatsapp;
-
     TextView terms,privacy,returnp,helpcenter;
     CircleImageView iv_profile;
     ImageView maroof;
@@ -83,7 +79,6 @@ public class Account_Fragment extends Fragment {
         lEnglish = view.findViewById(R.id.eng);
         lSpanish = view.findViewById(R.id.arab);
         maroof = view.findViewById(R.id.maroof_id);
-
 //        Glide.with(getActivity()).load("https://maroof.sa/Business/GetStamp?bid=95194").into(maroof);
 
         contact=view.findViewById(R.id.contact_us);
@@ -112,8 +107,6 @@ public class Account_Fragment extends Fragment {
         wallet=view.findViewById(R.id.wallet);
         walletl=view.findViewById(R.id.llwallet);
         rewards=view.findViewById(R.id.llpoints);
-
-
         terms=view.findViewById(R.id.term);
         privacy=view.findViewById(R.id.privacy);
         returnp=view.findViewById(R.id.ret_policy);
@@ -125,14 +118,11 @@ public class Account_Fragment extends Fragment {
         tele=view.findViewById(R.id.telegram);
         whatsapp=view.findViewById(R.id.whatsapp);
 
-
         ((MainActivity)getActivity()).bot_profile.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         ((MainActivity)getActivity()).bot_cat.setBackgroundColor(getResources().getColor(R.color.white));
         ((MainActivity)getActivity()).bot_fav.setBackgroundColor(getResources().getColor(R.color.white));
         ((MainActivity)getActivity()).bot_cart.setBackgroundColor(getResources().getColor(R.color.white));
         ((MainActivity)getActivity()).bot_store.setBackgroundColor(getResources().getColor(R.color.white));
-
-
 
         sharedPreferences= getActivity().getSharedPreferences("lan", Context.MODE_PRIVATE);
 
@@ -549,14 +539,10 @@ public class Account_Fragment extends Fragment {
 
     }
 
-
-
     public void getRefresrh() {
-        final SweetAlertDialog alertDialog=new SweetAlertDialog(getActivity(),SweetAlertDialog.PROGRESS_TYPE).setTitleText("Loading...")
-                ;
+        final SweetAlertDialog alertDialog=new SweetAlertDialog(getActivity(),SweetAlertDialog.PROGRESS_TYPE).setTitleText("Loading...");
         alertDialog.setCancelable(false);
         alertDialog.show();
-
 
         String user_id = sessionManagement.getUserDetails().get(BaseURL.KEY_ID);
         RequestQueue rq = Volley.newRequestQueue(getActivity());
