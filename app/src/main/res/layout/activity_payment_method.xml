@@ -3,19 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-
             <LinearLayout
+                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -24,10 +26,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:cardUseCompatPadding="true">
-
-
-
+                    >
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -237,7 +236,7 @@
                                             android:layout_alignParentRight="true"
                                             android:layout_marginRight="@dimen/space_12"
                                             android:layout_marginTop="@dimen/space_6"
-                                            android:text="Ram"
+                                            android:text="0"
                                             android:textColor="#000"
                                             android:textSize="@dimen/text_size_normal" />
                                     </LinearLayout>
@@ -301,7 +300,7 @@
                                 android:visibility="gone"
                                 android:layout_marginRight="@dimen/space_4"
                                 android:text="@string/store"
-                                android:textSize="@dimen/text_size_small" />
+                                android:textSize="14sp" />
 
                             <RadioButton
                                 android:id="@+id/use_COD"
@@ -310,7 +309,7 @@
                                 android:layout_marginLeft="@dimen/space_4"
                                 android:layout_marginRight="@dimen/space_4"
                                 android:text="@string/cash"
-                                android:textSize="@dimen/text_size_small" />
+                                android:textSize="14sp" />
 
                             <RadioGroup
                                 android:layout_width="match_parent"
@@ -324,7 +323,7 @@
                                     android:layout_marginLeft="@dimen/space_4"
                                     android:layout_marginRight="@dimen/space_4"
                                     android:text="@string/cash"
-                                    android:textSize="@dimen/text_size_small" />
+                                    android:textSize="14sp" />
 
                                 <RadioButton
                                     android:id="@+id/use_googlepay"
@@ -333,7 +332,7 @@
                                     android:layout_marginLeft="@dimen/space_4"
                                     android:layout_marginRight="@dimen/space_4"
                                     android:text="@string/googlepay"
-                                    android:textSize="@dimen/text_size_small" />
+                                    android:textSize="14sp" />
 
                                 <RadioButton
                                     android:id="@+id/use_applepay"
@@ -342,7 +341,7 @@
                                     android:layout_marginLeft="@dimen/space_4"
                                     android:layout_marginRight="@dimen/space_4"
                                     android:text="@string/applepay"
-                                    android:textSize="@dimen/text_size_small" />
+                                    android:textSize="14sp" />
 
 
                             </RadioGroup>
@@ -512,7 +511,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="100dp"
                             android:hint="@string/nav_note"
-                            android:layout_marginTop="@dimen/space_5"
+                            android:layout_margin="10dp"
                             android:id="@+id/extra_note"
                             android:gravity="top"
                             android:background="@drawable/bg21"
@@ -520,15 +519,12 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-
-
-
-
             </LinearLayout>
 
 
 
             <RelativeLayout
+                android:layout_marginTop="10dp"
                 android:id="@+id/confirm_order"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -541,7 +537,7 @@
                     android:gravity="center"
                     android:text="@string/confirm_order"
                     android:textColor="#fff"
-                    android:textSize="@dimen/text_size_small" />
+                    android:textSize="14sp" />
 
 
             </RelativeLayout>

@@ -104,7 +104,7 @@ public class ProductDetailShow extends Fragment {
 
 
     public LinearLayout bot_store,bot_cat,bot_fav,bot_profile;
-    public RelativeLayout bot_cart;
+    public RelativeLayout bot_cart,relative_size_color;
 
     private DatabaseHandler dbcart;
     ImageView iv_image,iv_fav_image,iv_minus,iv_plus,rateall;
@@ -145,6 +145,7 @@ public class ProductDetailShow extends Fragment {
         iv_logo = (ImageView) view.findViewById(R.id.iv_subcat_img);
         iv_remove = (ImageView) view.findViewById(R.id.iv_subcat_remove);
 
+        relative_size_color = (RelativeLayout) view.findViewById(R.id.rl6);
         Go_Cart = (RelativeLayout) view.findViewById(R.id.btn_cart);
 
         ratingBar = view.findViewById(R.id.ratingbarprod);
@@ -203,6 +204,10 @@ public class ProductDetailShow extends Fragment {
         }
         else {
             tv_color.setText(color);
+        }
+
+        if (size == null && color == null){
+            relative_size_color.setVisibility(View.GONE);
         }
 
 

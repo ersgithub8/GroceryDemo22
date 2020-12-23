@@ -62,8 +62,10 @@ public class My_Order_activity extends AppCompatActivity {
 
         tabLayout.addTab(tabLayout.newTab().setText(getResources().getString(R.string.ToPay)));
         tabLayout.addTab(tabLayout.newTab().setText(getResources().getString(R.string.ToReview)));
-        tabLayout.addTab(tabLayout.newTab().setText(getResources().getString(R.string.PreOrder)));
-//        tabLayout.addTab(tabLayout.newTab().setText(getResources().getString(R.string.returns)));
+
+        //tabLayout.addTab(tabLayout.newTab().setText(getResources().getString(R.string.PreOrder)));
+
+        //        tabLayout.addTab(tabLayout.newTab().setText(getResources().getString(R.string.returns)));
         tabLayout.addTab(tabLayout.newTab().setText(getResources().getString(R.string.cancelations)));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 

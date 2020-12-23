@@ -106,7 +106,6 @@ public class Product_fragment extends Fragment {
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
         final String getcat_id = getArguments().getString("cat_id");
 
-
         star = view.findViewById(R.id.imagestar);
 
         relativeLayout = view.findViewById(R.id.tempy);
@@ -114,18 +113,15 @@ public class Product_fragment extends Fragment {
 
         usrid=sharedPreferences.getString(BaseURL.KEY_ID,"0");
 
-        //Toast.makeText(getActivity(), usrid, Toast.LENGTH_SHORT).show();
         name=view.findViewById(R.id.name);
         info=view.findViewById(R.id.info);
         des=view.findViewById(R.id.des);
         final String id = getArguments().getString("id");
         storeid=getArguments().getString("storeid");
-//        String names=getArguments().getString("name");
         String names=getArguments().getString("name");
-        String infoo=getArguments().getString("user_email");
+
         String dess=getArguments().getString("user_phone");
         String get_deal_id = getArguments().getString("cat_deal");
-
         String get_top_sale_id = getArguments().getString("cat_top_selling");
 
         String yeh_to_hoga = getArguments().getString("laddan_jaffery");
@@ -144,9 +140,11 @@ public class Product_fragment extends Fragment {
         String getcat_title = getArguments().getString("cat_title");
         ((MainActivity) getActivity()).setTitle(getResources().getString(R.string.tv_product_name));
 
+        String infoo=getArguments().getString("user_email");
+
         name.setText(names);
         info.setText(infoo);
-        des.setText(dess);
+        //des.setText(dess);
 
 
         if (ConnectivityReceiver.isConnected()) {

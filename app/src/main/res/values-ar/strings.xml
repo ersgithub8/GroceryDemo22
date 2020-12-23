@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="add_marker">تعيين علامة للموقع</string>
+
+<string name="tv_note">
+        *ملاحظة: سعر ومدة التوصيل تعتمد على عدد وجاهزية المتاجر.
+    </string>
+    <string name="tv_pro_add_address">أضف عنوان التسليم</string>
+
     <string name="musthavereedem">يجب أن يكون لديك 300 نقطة للاسترداد</string>
     <string name="notavailabe">غير متوفر</string>
     <string name="nocharges">شحن مجاني فوق 500 ريال سعودي</string>

@@ -81,17 +81,18 @@ public class Store_main_adapter extends RecyclerView.Adapter<Store_main_adapter.
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Bundle args = new Bundle();
                 Product_fragment fm = new Product_fragment();
                 args.putString("storeid", modellist.getStoer_id());
                 args.putString("laddan_jaffery", "store");
 //                args.putString("name",modellist.getStore_name());
-//                args.putString("name",modellist.getStore_name());
-                args.putString("user_email",modellist.getUser_email());
+
+                args.putString("user_email",modellist.getStore_details());
                 args.putString("user_phone",modellist.getUser_phone());
                 fm.setArguments(args);
 
-                main_new.OnClick(modellist.getStoer_id(),modellist.getStore_name(),modellist.getStore_name(),modellist.getUser_email(),modellist.getUser_phone());
+                main_new.OnClick(modellist.getStoer_id(),modellist.getStore_name(),modellist.getStore_name(),modellist.getStore_details(),modellist.getUser_phone());
             }
         });
 

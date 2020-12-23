@@ -81,7 +81,6 @@ public class Account_Fragment extends Fragment {
         maroof = view.findViewById(R.id.maroof_id);
 //        Glide.with(getActivity()).load("https://maroof.sa/Business/GetStamp?bid=95194").into(maroof);
 
-        contact=view.findViewById(R.id.contact_us);
         top_selling = view.findViewById(R.id.top_selling);
 
         iv_profile=view.findViewById(R.id.iv_header_img);
@@ -111,6 +110,7 @@ public class Account_Fragment extends Fragment {
         privacy=view.findViewById(R.id.privacy);
         returnp=view.findViewById(R.id.ret_policy);
         helpcenter=view.findViewById(R.id.help);
+        contact= (TextView) view.findViewById(R.id.contact_us);
 
         fb=view.findViewById(R.id.fb);
         twitter=view.findViewById(R.id.twitter);
@@ -195,6 +195,15 @@ public class Account_Fragment extends Fragment {
             }
         });
 
+        contact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent email = new Intent(Intent.ACTION_SEND);
+                email.putExtra(Intent.EXTRA_EMAIL, new String[]{"contact@j6stores.com"});
+                email.setType("message/rfc822");
+                startActivity(Intent.createChooser(email, "Choose an Email client :"));
+            }
+        });
 
         walletl.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -233,15 +242,6 @@ public class Account_Fragment extends Fragment {
                 Uri uri = Uri.parse("https://maroof.sa/95194");
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
-            }
-        });
-        contact.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent email = new Intent(Intent.ACTION_SEND);
-                email.putExtra(Intent.EXTRA_EMAIL, new String[]{"contact@j6stores.com"});
-                email.setType("message/rfc822");
-                startActivity(Intent.createChooser(email, "Choose an Email client :"));
             }
         });
 

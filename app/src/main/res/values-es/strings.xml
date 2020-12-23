@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+
+    <string name="add_marker">Set Marker For location</string>
+
+    <string name="tv_note">
+        *Note: The shipping price and time depend on the stores numbers and confirmations.
+    </string>
+    <string name="cash" translatable="false">Cash On Delivery</string>
+    <string name="tv_pro_add_address">أضف عنوان التسليم</string>
     <string name="related">Related Products</string>
     <string name="nocharges">Free Shipping over 500 SAR</string>
 

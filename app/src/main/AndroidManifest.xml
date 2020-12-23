@@ -109,6 +109,11 @@
         <activity android:name=".Paytm" />
         <activity android:name=".networkconnectivity.NoInternetConnection" />
 
+<!--        Map -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAQxL8yN_COAo6NeW-EZbh9aONnPpdlCBY" />
+
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />

@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="add_marker">Set Marker For location</string>
+
+
+    <string name="tv_note">*Note: The shipping price and time depend on the stores numbers and confirmations.
+    </string>
+
+    <string name="tv_pro_add_address">Add Delivery Address</string>
+
     <string name="musthavereedem">You must have 300 points to redeem</string>
 
     <string name="notavailabe">Not Available</string>
@@ -165,7 +173,7 @@
     <string name="confirm_order" translatable="false">Confirm</string>
     <string name="pickup" translatable="false">Cash On Delivery</string>
     <string name="paymentmentord" translatable="false">Select Payment method</string>
-    <string name="cash" translatable="false">Cash On Delivery</string>
+    <string name="cash">Cash On Delivery</string>
     <string name="googlepay" translatable="false">Google Pay</string>
     <string name="applepay" translatable="false">Apple Pay</string>
     <!-- fragment_cart.xml -->
@@ -212,6 +220,7 @@
     <!-- fragment_Reward.xml -->
     <string name="tv_toolbar_name" translatable="false">Rewards</string>
     <!-- row_product_rv.xml -->
+
     <string name="tv_pro_add">Add</string>
     <string name="tv_pro_update">Update</string>
     <string name="tv_pro_price">Price per\u0020</string>

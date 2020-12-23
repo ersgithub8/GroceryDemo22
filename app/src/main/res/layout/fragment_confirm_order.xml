@@ -61,6 +61,7 @@
                         card_view:cardCornerRadius="4dp">
 
                         <LinearLayout
+                            android:visibility="gone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
@@ -252,10 +253,16 @@
                     </androidx.cardview.widget.CardView>
                 </LinearLayout>
 
-
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:padding="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="@string/tv_note"
+                    />
 
             </LinearLayout>
-
 
         </ScrollView>
 
@@ -277,7 +284,7 @@
                 android:layout_marginTop="@dimen/space_5"
                 android:layout_marginBottom="@dimen/space_5"
                 android:textColor="#fff"
-                android:textSize="@dimen/text_size_small"/>
+                android:textSize="14sp"/>
         </LinearLayout>
 
     </RelativeLayout>

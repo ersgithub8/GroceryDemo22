@@ -320,6 +320,7 @@ public class StoreFragment extends Fragment implements Main_new {
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
                         .addToBackStack(null).commit();
+                fragmentManager.popBackStack();
 
             }
 

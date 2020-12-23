@@ -6,6 +6,25 @@ public class Store_main_model {
     String user_email;
     String user_phone;
     String star;
+    String store_details;
+
+    public Store_main_model(String stoer_id, String store_name, String user_email, String user_phone, String star, String store_details, String user_image) {
+        this.stoer_id = stoer_id;
+        this.store_name = store_name;
+        this.user_email = user_email;
+        this.user_phone = user_phone;
+        this.star = star;
+        this.store_details = store_details;
+        this.user_image = user_image;
+    }
+
+    public String getStore_details() {
+        return store_details;
+    }
+
+    public void setStore_details(String store_details) {
+        this.store_details = store_details;
+    }
 
     public String getUser_email() {
         return user_email;
@@ -60,12 +79,4 @@ public class Store_main_model {
     public Store_main_model() {
     }
 
-    public Store_main_model(String stoer_id, String store_name, String user_email, String user_phone, String star, String user_image) {
-        this.stoer_id = stoer_id;
-        this.store_name = store_name;
-        this.user_email = user_email;
-        this.user_phone = user_phone;
-        this.star = star;
-        this.user_image = user_image;
-    }
 }

@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -137,31 +138,31 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
 
         Bundle args = getArguments();
 
-        if (args != null) {
-            getlocation_id = getArguments().getString("location_id");
-            String get_name = getArguments().getString("name");
-            String get_phone = getArguments().getString("mobile");
-            String get_pine = getArguments().getString("pincode");
-            String get_socity_id = getArguments().getString("socity_id");
-            String get_socity_name = getArguments().getString("socity_name");
-            String get_house = getArguments().getString("house");
-
-            if (TextUtils.isEmpty(get_name) && get_name == null) {
-                isEdit = false;
-            } else {
-                isEdit = true;
-
-                Toast.makeText(getActivity(), "edit", Toast.LENGTH_SHORT).show();
-
-                et_name.setText(get_name);
-                et_phone.setText(get_phone);
-                et_pin.setText(get_pine);
-                et_house.setText(get_house);
-                btn_socity.setText(get_socity_name);
-
-                sessionManagement.updateSocity(get_socity_name, get_socity_id);
-            }
-        }
+//        if (args != null) {
+//            getlocation_id = getArguments().getString("location_id");
+//            String get_name = getArguments().getString("name");
+//            String get_phone = getArguments().getString("mobile");
+//            String get_pine = getArguments().getString("pincode");
+//            String get_socity_id = getArguments().getString("socity_id");
+//            String get_socity_name = getArguments().getString("socity_name");
+//            String get_house = getArguments().getString("house");
+//
+//            if (TextUtils.isEmpty(get_name) && get_name == null) {
+//                isEdit = false;
+//            } else {
+//                isEdit = true;
+//
+//                Toast.makeText(getActivity(), "edit", Toast.LENGTH_SHORT).show();
+//
+//                et_name.setText(get_name);
+//                et_phone.setText(get_phone);
+//                et_pin.setText(get_pine);
+//                et_house.setText(get_house);
+//                btn_socity.setText(get_socity_name);
+//
+//                sessionManagement.updateSocity(get_socity_name, get_socity_id);
+//            }
+//        }
 
         if (!TextUtils.isEmpty(getsocity_name)) {
 
@@ -172,39 +173,55 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
         btn_update.setOnClickListener(this);
         btn_socity.setOnClickListener(this);
 
+        try {
+            String addrress = getArguments().getString("Adressy");
+            String map_link = getArguments().getString("map_link");
+            if (map_link.isEmpty()){
+
+            }
+            else {
+                et_address.setText(addrress+"\nGoogle Map Link : "+map_link);
+            }
+
+        }
+        catch (Exception e){
+
+        }
+
         SharedPreferences sharedPreferences=getActivity().getSharedPreferences("location", Context.MODE_PRIVATE);
         lat=sharedPreferences.getString("lat",null);
         longi=sharedPreferences.getString("long",null);
 
-        //Toast.makeText(getActivity(), lat+longi, Toast.LENGTH_SHORT).show();
-
         gps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                double laty = Double.parseDouble(lat);
-//                double longy = Double.parseDouble(longi);
-                //Toast.makeText(getActivity(), city, Toast.LENGTH_SHORT).show();
 
-                Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
-//         addresses = null;
-                try {
+//                Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
+//                try {
+//
+//                    List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
+//                    String final_address=null;
+//
+//                    if(addresses.size()>0) {
+//                        //                        String city = addresses.get(0).getLocality();
+////                        String state = addresses.get(0).getAdminArea();
+////                        String country = addresses.get(0).getCountryName();
+//                        final_address = addresses.get(0).getAddressLine(0);
+//                    }
+//
+//                    et_address.setText(final_address);
+//
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
 
-                    List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
-                    String final_address=null;
-                    //Toast.makeText(getActivity(), String.valueOf(addresses), Toast.LENGTH_SHORT).show();
+                Fragment fm = new Map_fragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                        .addToBackStack(null)
+                        .commit();
 
-                    if(addresses.size()>0) {
-                        //                        String city = addresses.get(0).getLocality();
-//                        String state = addresses.get(0).getAdminArea();
-//                        String country = addresses.get(0).getCountryName();
-                        final_address = addresses.get(0).getAddressLine(0);
-                    }
 
-                    et_address.setText(final_address);
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
             }
         });
 
@@ -240,17 +257,17 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
 
     private void attemptEditProfile() {
 
-        tv_phone.setText(getResources().getString(R.string.receiver_mobile_number));
-        tv_pin.setText(getResources().getString(R.string.tv_reg_pincode));
-        tv_name.setText(getResources().getString(R.string.receiver_name_req));
-        tv_house.setText(getResources().getString(R.string.tv_reg_house));
-        tv_socity.setText(getResources().getString(R.string.tv_reg_socity));
-
-        tv_name.setTextColor(getResources().getColor(R.color.dark_gray));
-        tv_phone.setTextColor(getResources().getColor(R.color.dark_gray));
-        tv_pin.setTextColor(getResources().getColor(R.color.dark_gray));
-        tv_house.setTextColor(getResources().getColor(R.color.dark_gray));
-        tv_socity.setTextColor(getResources().getColor(R.color.dark_gray));
+//        tv_phone.setText(getResources().getString(R.string.receiver_mobile_number));
+//        tv_pin.setText(getResources().getString(R.string.tv_reg_pincode));
+//        tv_name.setText(getResources().getString(R.string.receiver_name_req));
+//        tv_house.setText(getResources().getString(R.string.tv_reg_house));
+//        tv_socity.setText(getResources().getString(R.string.tv_reg_socity));
+//
+//        tv_name.setTextColor(getResources().getColor(R.color.dark_gray));
+//        tv_phone.setTextColor(getResources().getColor(R.color.dark_gray));
+//        tv_pin.setTextColor(getResources().getColor(R.color.dark_gray));
+//        tv_house.setTextColor(getResources().getColor(R.color.dark_gray));
+//        tv_socity.setTextColor(getResources().getColor(R.color.dark_gray));
 
         String getphone = et_phone.getText().toString();
         String getname = et_name.getText().toString();
@@ -280,17 +297,17 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
             cancel = true;
         }
 
-        if (TextUtils.isEmpty(getpin)) {
-            tv_pin.setTextColor(getResources().getColor(R.color.colorPrimary));
-            focusView = et_pin;
-            cancel = true;
-        }
+//        if (TextUtils.isEmpty(getpin)) {
+//            tv_pin.setTextColor(getResources().getColor(R.color.colorPrimary));
+//            focusView = et_pin;
+//            cancel = true;
+//        }
 
-        if (TextUtils.isEmpty(gethouse)) {
-            tv_house.setTextColor(getResources().getColor(R.color.colorPrimary));
-            focusView = et_house;
-            cancel = true;
-        }
+//        if (TextUtils.isEmpty(gethouse)) {
+//            tv_house.setTextColor(getResources().getColor(R.color.colorPrimary));
+//            focusView = et_house;
+//            cancel = true;
+//        }
         if (TextUtils.isEmpty(getAdress)) {
             tv_address.setTextColor(getResources().getColor(R.color.colorPrimary));
             focusView = et_address;
@@ -344,11 +361,12 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
 
         Map<String, String> params = new HashMap<String, String>();
         params.put("user_id", user_id);
-        params.put("pincode", pincode);
+        params.put("pincode", "000");
         params.put("socity_id", socity_id);
         params.put("house_no", house_no);
         params.put("receiver_name", receiver_name);
         params.put("receiver_mobile", receiver_mobile);
+
 
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
                 BaseURL.ADD_ADDRESS_URL, params, new Response.Listener<JSONObject>() {
@@ -362,10 +380,14 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
                     if (status) {
 
                         ((MainActivity) getActivity()).onBackPressed();
+                        FragmentManager fragmentManager = getFragmentManager();
+                        fragmentManager.popBackStack();
+
 
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {

@@ -148,6 +148,7 @@ public class My_Pending_Order extends Fragment {
         alertDialog.show();
 
         String tag_json_obj = "json_socity_req";
+        Toast.makeText(getContext(), i+""+userid, Toast.LENGTH_SHORT).show();
 
         Map<String, String> params = new HashMap<String, String>();
         params.put("user_id", userid);
