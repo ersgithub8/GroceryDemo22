@@ -103,7 +103,6 @@ String language;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_delivery_time, container, false);
 
         ((MainActivity) getActivity()).setTitle(getResources().getString(R.string.delivery));
@@ -357,11 +356,13 @@ String language;
 
             args.putString("location_id", location_id);
             args.putString("address", address);
-            if (ischarge.equals("1")){
-                args.putString("deli_charges", "0");
-            }else {
+
+            //Free Shipping
+//            if (ischarge.equals("1")){
+//                args.putString("deli_charges", "0");
+//            }else {
                 args.putString("deli_charges", deli_charges);
-            }
+            //}
 
             args.putString("store_id", store_id);
             fm.setArguments(args);
