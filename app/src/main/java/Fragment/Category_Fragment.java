@@ -47,6 +47,7 @@ import Adapter.Product_adapter;
 import Config.BaseURL;
 import Model.Home_Icon_model;
 import Model.Product_model;
+import Model.Product_model;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.MainActivity;
 import gogrocer.tcc.R;
@@ -80,8 +81,6 @@ public class Category_Fragment extends Fragment {
 
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
         mShimmerViewContainer1 = view.findViewById(R.id.shimmer_view_container1);
-
-
 
         ((MainActivity)getActivity()).bot_cat.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         ((MainActivity)getActivity()).bot_cart.setBackgroundColor(getResources().getColor(R.color.white));
@@ -186,7 +185,7 @@ public class Category_Fragment extends Fragment {
                 args.putString("rewards",product_models.get(position).getRewards());
                 args.putString("stock",product_models.get(position).getStock());
                 args.putString("title",product_models.get(position).getTitle());
-                args.putString("store_id",product_models.get(position).getStoreid());
+                args.putString("store_id",product_models.get(position).get_Storeid());
                 args.putString("qty","0");
 
                 fm.setArguments(args);

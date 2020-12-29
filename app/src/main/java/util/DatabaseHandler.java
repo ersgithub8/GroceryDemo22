@@ -9,14 +9,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * Created by Rajesh Dabhi on 26/6/2017.
- */
-
 public class DatabaseHandler extends SQLiteOpenHelper {
 
-    private static String DB_NAME = "grocery";
-    private static int DB_VERSION = 3;
+    private static final String DB_NAME = "grocery";
+    private static final int DB_VERSION = 1;
     private SQLiteDatabase db;
 
     public static final String CART_TABLE = "cart";
@@ -34,6 +30,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public static final String COLUMN_STOCK = "stock";
     public static final String COLUMN_TITLE = "title";
     public static final String COLUMN_STORE_ID = "store_id";
+    public static final String COLUMN_Size = "size";
+    public static final String COLUMN_Color = "color";
 
     Context context;
     public DatabaseHandler(Context context) {
@@ -58,7 +56,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + COLUMN_INCREAMENT + " DOUBLE NOT NULL, "
                 + COLUMN_STOCK + " DOUBLE NOT NULL, "
                 + COLUMN_TITLE + " TEXT NOT NULL ,"
-                + COLUMN_STORE_ID + " TEXT NOT NULL "
+                + COLUMN_STORE_ID + " TEXT NOT NULL ,"
+                + COLUMN_Color + " TEXT NOT NULL ,"
+                + COLUMN_Size + " TEXT NOT NULL "
                 + ")";
 
         db.execSQL(exe);
@@ -85,6 +85,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             values.put(COLUMN_UNIT, map.get(COLUMN_UNIT));
             values.put(COLUMN_UNIT_VALUE, map.get(COLUMN_UNIT_VALUE));
             values.put(COLUMN_STORE_ID, map.get(COLUMN_STORE_ID));
+
+            values.put(COLUMN_Size, map.get(COLUMN_Size));
+            values.put(COLUMN_Color, map.get(COLUMN_Color));
+
             db.insert(CART_TABLE, null, values);
 
             return true;
@@ -145,7 +149,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
     }
 
-
     public ArrayList<HashMap<String, String>> getCartAll() {
         ArrayList<HashMap<String, String>> list = new ArrayList<>();
         db = getReadableDatabase();
@@ -167,6 +170,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             map.put(COLUMN_STOCK, cursor.getString(cursor.getColumnIndex(COLUMN_STOCK)));
             map.put(COLUMN_TITLE, cursor.getString(cursor.getColumnIndex(COLUMN_TITLE)));
             map.put(COLUMN_STORE_ID, cursor.getString(cursor.getColumnIndex(COLUMN_STORE_ID)));
+
+            map.put(COLUMN_Size, cursor.getString(cursor.getColumnIndex(COLUMN_Size)));
+            map.put(COLUMN_Color, cursor.getString(cursor.getColumnIndex(COLUMN_Color)));
+
             list.add(map);
             cursor.moveToNext();
         }
@@ -231,11 +238,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
         db = getWritableDatabase();
-        String upgradeQuery = "ALTER TABLE CART_TABLE ADD COLUMN COLUMN_STORE_ID TEXT";
-       // if (oldVersion == 1 && newVersion == 2)
-            db.execSQL(upgradeQuery);
+//        String upgradeQuery = "ALTER TABLE CART_TABLE ADD COLUMN COLUMN_Size TEXT";
+//        String upgradeQuery2 = "ALTER TABLE CART_TABLE ADD COLUMN COLUMN_Color TEXT";
+//
+//        // if (oldVersion == 1 && newVersion == 2)
+//            db.execSQL(upgradeQuery);
+//            db.execSQL(upgradeQuery2);
     }
 
 }

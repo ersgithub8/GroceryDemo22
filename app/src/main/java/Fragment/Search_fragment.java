@@ -241,7 +241,7 @@ public class Search_fragment extends Fragment {
                 args.putString("rewards",product_modelList.get(position).getRewards());
                 args.putString("stock",product_modelList.get(position).getStock());
                 args.putString("title",product_modelList.get(position).getTitle());
-                args.putString("store_id",product_modelList.get(position).getStoreid());
+                args.putString("store_id",product_modelList.get(position).get_Storeid());
                 args.putString("qty","0");
 
                 fm.setArguments(args);

@@ -7,6 +7,7 @@
     android:background="@color/white"
     android:id="@+id/contaner"
     tools:context="gogrocer.tcc.ProductActivity">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,11 +24,6 @@
                 android:layout_gravity="center"
                 app:srcCompat="@drawable/icon"
                 android:layout_centerHorizontal="true"/>
-
-
-
-
-
 
             <!--        <............................../>-->
             <RelativeLayout
@@ -70,20 +66,20 @@
                     android:layout_toStartOf="@id/fav_product"
                     android:weightSum="3">
                     <Fonts.LatoBLack
-                        android:id="@+id/tv_product_detail_title"
+                        android:id="@+id/tv_subcat_price"
                         android:layout_width="0dp"
-                        android:layout_weight="1.7"
+                        android:layout_weight="1.8"
                         android:layout_height="wrap_content"
-                        android:text="TextView"
+                        android:text="@string/currency"
                         android:paddingRight="10dp"
                         android:paddingEnd="10dp"
                         android:textColor="@color/white"
                         android:textSize="16sp"
-                        android:maxLines="1"/>
-
+                        android:maxLines="1"
+                        />
 
                     <Fonts.LatoBLack
-                        android:id="@+id/tv_subcat_price"
+                        android:visibility="gone"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="69 SAR"
@@ -96,9 +92,28 @@
 
                 </LinearLayout>
             </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl3"
+                android:layout_below="@id/rl2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+                <Fonts.LatoBLack
+                    android:id="@+id/tv_product_detail_title"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Name"
+                    android:maxLines="1"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
             <RelativeLayout
                 android:id="@+id/rl4"
-                android:layout_below="@id/rl2"
+                android:layout_below="@id/rl3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/space_10">
@@ -249,58 +264,73 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 >
-                <TextView
-                    android:id="@+id/textView12"
-                    android:layout_width="wrap_content"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="10dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:text="@string/sizecolor"
-                    android:textStyle="bold"
-                    android:textColor="#000" />
-
-                <Fonts.LatoBLack
-                    android:id="@+id/size_txt"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/colorrecycler"
+                    />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_marginTop="30dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_below="@id/colorrecycler"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/textView12"
-                    android:layout_marginTop="@dimen/space_3"
-                    android:text="@string/productsize"
-                    android:textColor="#000" />
+                    android:id="@+id/sizerecyler"
+                    />
+<!--                <TextView-->
+<!--                    android:id="@+id/textView12"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:text="@string/sizecolor"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:textColor="#000" />-->
 
-                <Fonts.LatoBLack
-                    android:id="@+id/size"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toEndOf="@id/size_txt"
-                    android:layout_below="@id/textView12"
-                    android:layout_marginEnd="@dimen/space_20"
-                    android:layout_marginStart="@dimen/space_7"
-                    android:layout_marginTop="@dimen/space_3"
+<!--                <Fonts.LatoBLack-->
+<!--                    android:id="@+id/size_txt"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:layout_below="@+id/textView12"-->
+<!--                    android:layout_marginTop="@dimen/space_3"-->
+<!--                    android:text="@string/productsize"-->
+<!--                    android:textColor="#000" />-->
 
-                    android:textColor="#000" />
+<!--                <Fonts.LatoBLack-->
+<!--                    android:id="@+id/size"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_toEndOf="@id/size_txt"-->
+<!--                    android:layout_below="@id/textView12"-->
+<!--                    android:layout_marginEnd="@dimen/space_20"-->
+<!--                    android:layout_marginStart="@dimen/space_7"-->
+<!--                    android:layout_marginTop="@dimen/space_3"-->
+<!--                    android:textColor="#000" />-->
 
-                <Fonts.LatoBLack
-                    android:id="@+id/color_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/size"
-                    android:layout_marginTop="@dimen/space_3"
-                    android:text="@string/productcolor"
-                    android:textColor="#000" />
+<!--                <Fonts.LatoBLack-->
+<!--                    android:id="@+id/color_txt"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:layout_below="@+id/size"-->
+<!--                    android:layout_marginTop="@dimen/space_3"-->
+<!--                    android:text="@string/productcolor"-->
+<!--                    android:textColor="#000" />-->
 
 
-                <Fonts.LatoBLack
-                    android:id="@+id/color"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toEndOf="@id/color_txt"
-                    android:layout_marginStart="@dimen/space_7"
-                    android:layout_below="@+id/size"
-                    android:layout_marginTop="@dimen/space_3"
-                    android:layout_marginEnd="@dimen/space_20"
-                    android:textColor="#000" />
+<!--                <Fonts.LatoBLack-->
+<!--                    android:id="@+id/color"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_toEndOf="@id/color_txt"-->
+<!--                    android:layout_marginStart="@dimen/space_7"-->
+<!--                    android:layout_below="@+id/size"-->
+<!--                    android:layout_marginTop="@dimen/space_3"-->
+<!--                    android:layout_marginEnd="@dimen/space_20"-->
+<!--                    android:textColor="#000" />-->
+<!--                -->
+
             </RelativeLayout>
 
 
@@ -396,10 +426,5 @@
 
         </RelativeLayout>
     </ScrollView>
-
-<!--    <include-->
-<!--        layout="@layout/app_bar_main"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent" />-->
 
 </RelativeLayout>

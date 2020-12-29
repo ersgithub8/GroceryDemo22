@@ -6,19 +6,14 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
-import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,7 +35,6 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
-import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
@@ -59,20 +53,16 @@ import java.util.Locale;
 import java.util.Map;
 
 import Adapter.CatProdAdapter;
-import Adapter.Category_adapter;
 import Adapter.Home_Icon_Adapter;
 import Adapter.Product_adapter;
 import Adapter.Store_Adapter;
-import Adapter.Top_Selling_Adapter;
 import Config.BaseURL;
 import Model.Category_model;
 import Model.Home_Icon_model;
 import Model.Product_model;
 import Model.Store_Model;
-import Model.Top_Selling_model;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.CustomSlider;
-import gogrocer.tcc.LocaleHelper;
 import gogrocer.tcc.MainActivity;
 import gogrocer.tcc.R;
 import gogrocer.tcc.WebView;
@@ -137,7 +127,6 @@ public class StoreFragment extends Fragment implements Main_new {
         {
             double laty = Double.parseDouble(lat);
             double longy = Double.parseDouble(longi);
-
 
             Geocoder geocoder = new Geocoder(getActivity(), Locale.ENGLISH);
 
@@ -269,8 +258,9 @@ public class StoreFragment extends Fragment implements Main_new {
                     args.putString("product_name",top_selling_models.get(position).getProduct_name());
                     args.putString("description",top_selling_models.get(position).getProduct_description());
                 }
-                args.putString("size",top_selling_models.get(position).getSize());
-                args.putString("color",top_selling_models.get(position).getColor());
+                args.putString("size", String.valueOf(top_selling_models.get(position).getSize()));
+                args.putString("color", String.valueOf(top_selling_models.get(position).getColor()));
+                args.putString("unit_value", String.valueOf(top_selling_models.get(position).getUnit_value()));
 
                 args.putString("product_id",top_selling_models.get(position).getProduct_id());
                 args.putString("category_id",top_selling_models.get(position).getCategory_id());
@@ -283,20 +273,18 @@ public class StoreFragment extends Fragment implements Main_new {
                 args.putString("image",top_selling_models.get(position).getProduct_image());
                 args.putString("status",top_selling_models.get(position).getStatus());
                 args.putString("stock",top_selling_models.get(position).getStock());
-                args.putString("unit_value",top_selling_models.get(position).getUnit_value());
                 args.putString("unit",top_selling_models.get(position).getUnit());
                 args.putString("increment",top_selling_models.get(position).getIncreament());
                 args.putString("rewards",top_selling_models.get(position).getRewards());
                 args.putString("stock",top_selling_models.get(position).getStock());
                 args.putString("title",top_selling_models.get(position).getTitle());
-                args.putString("store_id",top_selling_models.get(position).getStoreid());
+                args.putString("store_id",top_selling_models.get(position).get_Storeid());
                 args.putString("qty","0");
 
                 fm.setArguments(args);
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
                         .addToBackStack(null).commit();
-
 
             }
 

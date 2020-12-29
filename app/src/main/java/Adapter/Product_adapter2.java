@@ -1,5 +1,6 @@
 package Adapter;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -30,6 +31,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -37,7 +39,9 @@ import java.util.Map;
 import java.util.Random;
 
 import Config.BaseURL;
+import Fragment.Cart_fragment;
 import Fragment.related_interface;
+import Model.Product_model;
 import Model.Product_model;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import gogrocer.tcc.AppController;
@@ -61,6 +65,7 @@ public class Product_adapter2 extends RecyclerView.Adapter<Product_adapter2.MyVi
     String usrid;
     boolean favcheckk=false;
 SharedPreferences preferences;
+
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView tv_title, tv_price, tv_reward, tv_total, tv_contetiy, tv_add;
         public ImageView iv_logo, iv_plus, iv_minus, iv_remove;
@@ -129,13 +134,13 @@ SharedPreferences preferences;
                 map.put("product_image", modelList.get(position).getProduct_image());
                 map.put("status", modelList.get(position).getStatus());
                 map.put("in_stock", modelList.get(position).getIn_stock());
-                map.put("unit_value", modelList.get(position).getUnit_value());
+//                map.put("unit_value", modelList.get(position).get);
                 map.put("unit", modelList.get(position).getUnit());
                 map.put("increament", modelList.get(position).getIncreament());
                 map.put("rewards", modelList.get(position).getRewards());
                 map.put("stock", modelList.get(position).getStock());
                 map.put("title", modelList.get(position).getTitle());
-                map.put("store_id", modelList.get(position).getStoreid());
+//                map.put("store_id", modelList.get(position).getStoreid());
 
 
                 if (!tv_contetiy.getText().toString().equalsIgnoreCase("0")) {
@@ -259,31 +264,38 @@ SharedPreferences preferences;
             holder.tv_title.setText(mList.getProduct_name_arb());
 
         }
+
         holder.tv_reward.setText(mList.getRewards());
-        holder.tv_price.setText(
-//                context.getResources().getString(R.string.tv_pro_price) + mList.getUnit_value() + " " +
-//                mList.getUnit() +
-                mList.getPrice()+ context.getResources().getString(R.string.currency));
-        if (Integer.valueOf(modelList.get(position).getStock())<=0){
-            holder.tv_add.setText(R.string.tv_out);
-            holder.tv_add.setTextColor(context.getResources().getColor(R.color.black));
-            holder.tv_add.setBackgroundColor(context.getResources().getColor(R.color.gray));
-            holder.tv_add.setEnabled(false);
-            holder.iv_minus.setEnabled(false);
-            holder.iv_plus.setEnabled(false);
+
+        if (mList.getPrice().contains("|")){
+            String currentString = mList.getPrice();
+            String[] separated = currentString.split("\\|");
+            holder.tv_price.setText(separated[0]+" "+context.getResources().getString(R.string.currency));
+        }
+        else {
+            holder.tv_price.setText(mList.getPrice()+" "+context.getResources().getString(R.string.currency));
         }
 
-        else  if (dbcart.isInCart(mList.getProduct_id())) {
-            holder.tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
-            holder.tv_contetiy.setText(dbcart.getCartItemQty(mList.getProduct_id()));
-        } else {
-            holder.tv_add.setText(context.getResources().getString(R.string.tv_pro_add));
-        }
-        Double items = Double.parseDouble(dbcart.getInCartItemQty(mList.getProduct_id()));
-        Double price = Double.parseDouble(mList.getPrice());
-        Double reward = Double.parseDouble(mList.getRewards());
-        holder.tv_total.setText("" + price * items);
-       holder.tv_reward.setText("" + reward * items);
+//        if (Integer.valueOf(modelList.get(position).getStock())<=0){
+//            holder.tv_add.setText(R.string.tv_out);
+//            holder.tv_add.setTextColor(context.getResources().getColor(R.color.black));
+//            holder.tv_add.setBackgroundColor(context.getResources().getColor(R.color.gray));
+//            holder.tv_add.setEnabled(false);
+//            holder.iv_minus.setEnabled(false);
+//            holder.iv_plus.setEnabled(false);
+//        }
+
+//        else  if (dbcart.isInCart(mList.getProduct_id())) {
+//            holder.tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
+//            holder.tv_contetiy.setText(dbcart.getCartItemQty(mList.getProduct_id()));
+//        } else {
+//            holder.tv_add.setText(context.getResources().getString(R.string.tv_pro_add));
+//        }
+//        Double items = Double.parseDouble(dbcart.getInCartItemQty(mList.getProduct_id()));
+//        Double price = Double.parseDouble(mList.getPrice());
+//        Double reward = Double.parseDouble(mList.getRewards());
+//        holder.tv_total.setText("" + price * items);
+//        holder.tv_reward.setText("" + reward * items);
 
         final int finalPosition1 = position;
         holder.iv_logo.setOnClickListener(new View.OnClickListener() {
@@ -443,15 +455,12 @@ SharedPreferences preferences;
                     map.put("product_image", modelList.get(position).getProduct_image());
                     map.put("status", modelList.get(position).getStatus());
                     map.put("in_stock", modelList.get(position).getIn_stock());
-                    map.put("unit_value", modelList.get(position).getUnit_value());
+                    //map.put("unit_value", modelList.get(position).getUnit_value());
                     map.put("unit", modelList.get(position).getUnit());
-                    map.put("increament", modelList.get(position).getStoreid());
+                    map.put("increament", modelList.get(position).get_Storeid());
                     map.put("rewards", modelList.get(position).getRewards());
                     map.put("stock", modelList.get(position).getStock());
                     map.put("title", modelList.get(position).getTitle());
-
-
-
 
                 if (!tv_contetiy.getText().toString().equalsIgnoreCase("0")) {
                     if (dbcart.isInCart(map.get("product_id"))) {

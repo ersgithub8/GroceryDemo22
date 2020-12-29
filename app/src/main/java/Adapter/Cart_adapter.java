@@ -22,10 +22,6 @@ import util.DatabaseHandler;
 
 import static android.content.Context.MODE_PRIVATE;
 
-/**
- * Created by Rajesh Dabhi on 26/6/2017.
- */
-
 public class    Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHolder> {
     ArrayList<HashMap<String, String>> list;
     Activity activity;
@@ -82,6 +78,15 @@ public class    Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHo
             holder.tv_title.setText(map.get("product_name"));
 
         holder.tv_reward.setText(map.get("rewards"));
+
+        holder.tv_color.setText(activity.getResources().getString(R.string.color)+" "+map.get("color"));
+
+        if (map.get("size").isEmpty()){
+        }
+        else {
+            holder.tv_size.setText(", "+activity.getResources().getString(R.string.size) + " " + map.get("size"));
+        }
+
         holder.tv_price.setText(activity.getResources().getString(R.string.tv_pro_price) +" "+ map.get("unit_value") + " " +
                 map.get("unit") +" " + map.get("price")+" "+activity.getResources().getString(R.string.currency));
         holder.tv_contetiy.setText(map.get("qty"));
@@ -185,11 +190,14 @@ public class    Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHo
 
     class ProductHolder extends RecyclerView.ViewHolder {
         public TextView tv_title, tv_price, tv_reward, tv_total, tv_contetiy, tv_add,
-                tv_unit, tv_unit_value;
+                tv_unit, tv_unit_value,tv_color,tv_size;
         public ImageView iv_logo, iv_plus, iv_minus, iv_remove;
 
         public ProductHolder(View view) {
             super(view);
+
+            tv_color = (TextView) view.findViewById(R.id.tv_color);
+            tv_size = (TextView) view.findViewById(R.id.tv_size);
 
             tv_title = (TextView) view.findViewById(R.id.tv_subcat_title);
             tv_price = (TextView) view.findViewById(R.id.tv_subcat_price);

@@ -1,5 +1,6 @@
 package Adapter;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -45,6 +46,7 @@ import java.util.Map;
 import Config.BaseURL;
 import Model.Home_Icon_model;
 import Model.Product_model;
+import Model.Product_model;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.MainActivity;
@@ -66,7 +68,8 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
     SharedPreferences sharedPreferences;
     String usrid;
     boolean favcheckk=false;
-SharedPreferences preferences;
+    SharedPreferences preferences;
+
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView tv_title, tv_price, tv_reward, tv_total, tv_contetiy, tv_add,tv_size,tv_color;
         public ImageView iv_logo, iv_plus, iv_minus, iv_remove;
@@ -76,8 +79,8 @@ SharedPreferences preferences;
             super(view);
 
             tv_title = (TextView) view.findViewById(R.id.tv_subcat_title);
-            tv_size = (TextView) view.findViewById(R.id.size);
-            tv_color = (TextView) view.findViewById(R.id.color);
+//            tv_size = (TextView) view.findViewById(R.id.size);
+//            tv_color = (TextView) view.findViewById(R.id.color);
             tv_price = (TextView) view.findViewById(R.id.tv_subcat_price);
             tv_reward = (TextView) view.findViewById(R.id.tv_reward_point);
             tv_total = (TextView) view.findViewById(R.id.tv_subcat_total);
@@ -126,8 +129,8 @@ SharedPreferences preferences;
 
     map.put("product_id", modelList.get(position).getProduct_id());
     map.put("product_name", modelList.get(position).getProduct_name());
-                map.put("size", modelList.get(position).getSize());
-                map.put("color", modelList.get(position).getColor());
+    map.put("size", modelList.get(position).getSize());
+    map.put("color", modelList.get(position).getColor());
     map.put("category_id", modelList.get(position).getCategory_id());
     map.put("product_description", modelList.get(position).getProduct_description());
     map.put("deal_price", modelList.get(position).getDeal_price());
@@ -145,8 +148,7 @@ SharedPreferences preferences;
     map.put("rewards", modelList.get(position).getRewards());
     map.put("stock", modelList.get(position).getStock());
     map.put("title", modelList.get(position).getTitle());
-    map.put("store_id", modelList.get(position).getStoreid());
-
+    map.put("store_id", modelList.get(position).get_Storeid());
 
                 if (!tv_contetiy.getText().toString().equalsIgnoreCase("0")) {
                     if (dbcart.isInCart(map.get("product_id"))) {
@@ -308,35 +310,49 @@ SharedPreferences preferences;
         }
         holder.tv_reward.setText(mList.getRewards());
 
-                holder.tv_price.setText(
-//                context.getResources().getString(R.string.tv_pro_price) + mList.getUnit_value() + " " +
-//                mList.getUnit() +
-                mList.getPrice()+ context.getResources().getString(R.string.currency));
+        if (mList.getPrice().contains("|")){
+            String currentString = mList.getPrice();
+            String[] separated = currentString.split("\\|");
+            holder.tv_price.setText(separated[0]+" "+context.getResources().getString(R.string.currency));
+        }
+        else {
+            holder.tv_price.setText(mList.getPrice()+" "+context.getResources().getString(R.string.currency));
+        }
 
         String stockk=modelList.get(position).getStock();
                 if(stockk.equals("")){
                     stockk="0";
                 }
-        if (Integer.valueOf(stockk)<=0){
-            holder.tv_add.setText(R.string.tv_out);
-            holder.tv_add.setTextColor(context.getResources().getColor(R.color.black));
-            holder.tv_add.setBackgroundColor(context.getResources().getColor(R.color.gray));
-            holder.tv_add.setEnabled(false);
-            holder.iv_minus.setEnabled(false);
-            holder.iv_plus.setEnabled(false);
-        }
 
-        else  if (dbcart.isInCart(mList.getProduct_id())) {
-            holder.tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
-            holder.tv_contetiy.setText(dbcart.getCartItemQty(mList.getProduct_id()));
-        } else {
-            holder.tv_add.setText(context.getResources().getString(R.string.tv_pro_add));
-        }
-        Double items = Double.parseDouble(dbcart.getInCartItemQty(mList.getProduct_id()));
-        Double price = Double.parseDouble(mList.getPrice());
-        Double reward = Double.parseDouble(mList.getRewards());
-        holder.tv_total.setText("" + price * items);
-       holder.tv_reward.setText("" + reward * items);
+//                if (Integer.valueOf(stockk)<=0){
+//            holder.tv_add.setText(R.string.tv_out);
+//            holder.tv_add.setTextColor(context.getResources().getColor(R.color.black));
+//            holder.tv_add.setBackgroundColor(context.getResources().getColor(R.color.gray));
+//            holder.tv_add.setEnabled(false);
+//            holder.iv_minus.setEnabled(false);
+//            holder.iv_plus.setEnabled(false);
+//        }
+
+//        else  if (dbcart.isInCart(mList.getProduct_id())) {
+//            holder.tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
+//            holder.tv_contetiy.setText(dbcart.getCartItemQty(mList.getProduct_id()));
+//        } else {
+//            holder.tv_add.setText(context.getResources().getString(R.string.tv_pro_add));
+//        }
+
+//        Double items = Double.parseDouble(dbcart.getInCartItemQty(mList.getProduct_id()));
+//        Double reward = Double.parseDouble(mList.getRewards());
+//        holder.tv_reward.setText("" + reward * items);
+
+//        if (mList.getPrice().contains("|")){
+//            String currentString = mList.getPrice();
+//            String[] separated = currentString.split("\\|");
+//            holder.tv_total.setText(separated[0]);
+//        }
+//        else {
+//            Double price = Double.parseDouble(mList.getPrice());
+//            holder.tv_total.setText("" + price * items);
+//        }
 
     }
 
@@ -396,15 +412,12 @@ SharedPreferences preferences;
         final ImageView iv_minus = (ImageView) dialog.findViewById(R.id.iv_subcat_minus);
         final ImageView iv_plus = (ImageView) dialog.findViewById(R.id.iv_subcat_plus);
         TextView tv_title = (TextView) dialog.findViewById(R.id.tv_product_detail_title);
-        TextView tv_size = (TextView) dialog.findViewById(R.id.size);
-        TextView tv_color = (TextView) dialog.findViewById(R.id.color);
+//        TextView tv_size = (TextView) dialog.findViewById(R.id.size);
+//        TextView tv_color = (TextView) dialog.findViewById(R.id.color);
         TextView tv_detail = (TextView) dialog.findViewById(R.id.tv_product_detail);
         final TextView tv_contetiy = (TextView) dialog.findViewById(R.id.tv_subcat_contetiy);
         final TextView tv_add = (TextView) dialog.findViewById(R.id.tv_subcat_add);
         ratingBar=dialog.findViewById(R.id.ratingbarprod);
-
-
-
 
 
         Double price = Double.parseDouble(modelList.get(position).getPrice());
@@ -419,8 +432,8 @@ SharedPreferences preferences;
         iv_remove = (ImageView) dialog.findViewById(R.id.iv_subcat_remove);
 
         tv_title.setText(title);
-        tv_size.setText(size);
-        tv_color.setText(color);
+//        tv_size.setText(size);
+//        tv_color.setText(color);
         tv_detail.setText(detail);
         tv_contetiy.setText(qty);
         tv_detail.setText(description);
@@ -476,8 +489,8 @@ SharedPreferences preferences;
 
                     map.put("product_id", modelList.get(position).getProduct_id());
                     map.put("product_name", modelList.get(position).getProduct_name());
-                    map.put("size", modelList.get(position).getSize());
-                    map.put("color", modelList.get(position).getColor());
+//                    map.put("size", modelList.get(position).getSize());
+//                    map.put("color", modelList.get(position).getColor());
                     map.put("category_id", modelList.get(position).getCategory_id());
                     map.put("product_description", modelList.get(position).getProduct_description());
                     map.put("deal_price", modelList.get(position).getDeal_price());
@@ -489,13 +502,13 @@ SharedPreferences preferences;
                     map.put("product_image", modelList.get(position).getProduct_image());
                     map.put("status", modelList.get(position).getStatus());
                     map.put("in_stock", modelList.get(position).getIn_stock());
-                    map.put("unit_value", modelList.get(position).getUnit_value());
+                    //map.put("unit_value", modelList.get(position).getUnit_value());
                     map.put("unit", modelList.get(position).getUnit());
-                    map.put("increament", modelList.get(position).getStoreid());
+                    //map.put("increament", modelList.get(position).getStoreid());
                     map.put("rewards", modelList.get(position).getRewards());
                     map.put("stock", modelList.get(position).getStock());
                     map.put("title", modelList.get(position).getTitle());
-                    map.put("store_id",modelList.get(position).getStoreid());
+//                    map.put("store_id",modelList.get(position).getStoreid());
 
 
 

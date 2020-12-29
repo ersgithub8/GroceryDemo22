@@ -50,6 +50,7 @@ import Adapter.Product_adapter;
 import Config.BaseURL;
 import Model.Category_model;
 import Model.Product_model;
+import Model.Product_model;
 import Model.Slider_subcat_model;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import gogrocer.tcc.AppController;
@@ -83,9 +84,9 @@ public class Product_fragment extends Fragment {
     ImageView fav,star;
     TextView name,Texty,info,des;
     SharedPreferences preferences;
+
     public Product_fragment() {
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -268,7 +269,7 @@ public class Product_fragment extends Fragment {
                 args.putString("rewards",product_modelList.get(position).getRewards());
                 args.putString("stock",product_modelList.get(position).getStock());
                 args.putString("title",product_modelList.get(position).getTitle());
-                args.putString("store_id",product_modelList.get(position).getStoreid());
+                args.putString("store_id",product_modelList.get(position).get_Storeid());
                 args.putString("qty","0");
 
                 fm.setArguments(args);
@@ -369,7 +370,7 @@ public class Product_fragment extends Fragment {
 //        final SweetAlertDialog loading=new SweetAlertDialog(getActivity(),SweetAlertDialog.PROGRESS_TYPE);
 //        loading.setCancelable(false);
 //        loading.setTitleText("Loading...");
-//
+
 //        loading.getProgressHelper().setBarColor(getResources().getColor(R.color.green));
 
 //        loading.show();

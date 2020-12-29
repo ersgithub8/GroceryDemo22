@@ -31,11 +31,11 @@ public class Product_model {
     String title;
     String store_id;
 
-    public String getStoreid() {
+    public String get_Storeid() {
         return store_id;
     }
 
-    public void setStoreid(String storeid) {
+    public void set_Storeid(String storeid) {
         this.store_id = storeid;
     }
 

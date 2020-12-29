@@ -1,13 +1,10 @@
  package Fragment;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.NoConnectionError;
@@ -26,56 +23,36 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.bumptech.glide.Glide;
-import com.daimajia.slider.library.SliderLayout;
-import com.daimajia.slider.library.SliderTypes.BaseSliderView;
-import com.facebook.shimmer.ShimmerFrameLayout;
-import com.google.android.material.tabs.TabLayout;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import Adapter.Product_adapter;
+import Adapter.ColorListAdapter;
+import Adapter.SizeListAdapter;
+import Adapter.pro_detail_interface;
 import Config.BaseURL;
-import Model.Category_model;
-import Model.Product_model;
-import Model.Slider_subcat_model;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import gogrocer.tcc.AppController;
-import gogrocer.tcc.CustomSlider;
 import gogrocer.tcc.MainActivity;
-import gogrocer.tcc.ProductActivity;
 import gogrocer.tcc.R;
-import gogrocer.tcc.Rating;
 import gogrocer.tcc.RatingAndReviews;
-import util.ConnectivityReceiver;
 import util.CustomVolleyJsonRequest;
 import util.DatabaseHandler;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class ProductDetailShow extends Fragment {
+public class ProductDetailShow extends Fragment implements pro_detail_interface {
     boolean favcheckk;
     SharedPreferences sharedPreferences,preferences;
     String usrid,language,detail,qty;
     RelativeLayout ratingrl,Go_Cart;
-//            ,productid,product_name,category_id,dealprice,startdate,starttime,endtime,enddate,price,status,instock,
-//            ,title
-//            ,description
-//            ,detail
-//            ,qty
-//            ,image;
 
     String store_id;
     String productid;
@@ -102,16 +79,20 @@ public class ProductDetailShow extends Fragment {
     String stock;
     String title;
 
-
     public LinearLayout bot_store,bot_cat,bot_fav,bot_profile;
     public RelativeLayout bot_cart,relative_size_color;
 
+    RecyclerView colorrecycle,sizerecycle;
     private DatabaseHandler dbcart;
     ImageView iv_image,iv_fav_image,iv_minus,iv_plus,rateall;
     TextView tv_price, tv_reward, tv_total,tv_title,tv_detail,tv_contetiy,tv_add,tv_size,tv_color;
     ImageView iv_logo, iv_remove,iv_share;
     RatingBar ratingBar;
 
+    ArrayList<String> priceList = new ArrayList<>();
+    ArrayList<String> unitvalueList = new ArrayList<>();
+    ArrayList<String> sizeList = new ArrayList<>();
+    ArrayList<String> colorList = new ArrayList<>();
     public ProductDetailShow() {
     }
     @Override
@@ -126,15 +107,14 @@ public class ProductDetailShow extends Fragment {
         sharedPreferences = getActivity().getSharedPreferences("lan", Context.MODE_PRIVATE);
         language = sharedPreferences.getString("language", "");
 
-
         iv_image = (ImageView) view.findViewById(R.id.iv_product_detail_img);
         iv_fav_image = (ImageView) view.findViewById(R.id.fav_product);
         iv_share = (ImageView) view.findViewById(R.id.fav_share);
         iv_minus = (ImageView) view.findViewById(R.id.iv_subcat_minus);
         iv_plus = (ImageView) view.findViewById(R.id.iv_subcat_plus);
         tv_title = (TextView) view.findViewById(R.id.tv_product_detail_title);
-        tv_size = (TextView) view.findViewById(R.id.size);
-        tv_color = (TextView) view.findViewById(R.id.color);
+//        tv_size = (TextView) view.findViewById(R.id.size);
+//        tv_color = (TextView) view.findViewById(R.id.color);
         tv_detail = (TextView) view.findViewById(R.id.tv_product_detail);
         tv_contetiy = (TextView) view.findViewById(R.id.tv_subcat_contetiy);
         tv_add = (TextView) view.findViewById(R.id.tv_subcat_add);
@@ -144,6 +124,8 @@ public class ProductDetailShow extends Fragment {
         tv_total = (TextView) view.findViewById(R.id.tv_subcat_total);
         iv_logo = (ImageView) view.findViewById(R.id.iv_subcat_img);
         iv_remove = (ImageView) view.findViewById(R.id.iv_subcat_remove);
+        colorrecycle = (RecyclerView) view.findViewById(R.id.colorrecycler);
+        sizerecycle = (RecyclerView) view.findViewById(R.id.sizerecyler);
 
         relative_size_color = (RelativeLayout) view.findViewById(R.id.rl6);
         Go_Cart = (RelativeLayout) view.findViewById(R.id.btn_cart);
@@ -181,34 +163,58 @@ public class ProductDetailShow extends Fragment {
         increament = getArguments().getString("increment");
         rewards = getArguments().getString("rewards");
         stock = getArguments().getString("stock");
-
         title = getArguments().getString("title");
-
         qty = getArguments().getString("qty");
-
         store_id = getArguments().getString("store_id");
+
         size = getArguments().getString("size");
         color = getArguments().getString("color");
 
-        //Toast.makeText(getActivity(), size+"-"+color, Toast.LENGTH_SHORT).show();
+        String[] unitArray = unit_value.split("\\|");
+        unitvalueList = new ArrayList<>(Arrays.asList(unitArray));
 
-        if (size == null)
-        {
-            tv_size.setText(R.string.notavailabe);
+        Double price;
+        if (pricee.contains("|")){
+            String currentString = pricee;
+            String[] separated = currentString.split("\\|");
+            priceList = new ArrayList<>(Arrays.asList(separated));
+            price = Double.parseDouble(separated[0]);
         }
         else {
-            tv_size.setText(size);
+            price = Double.parseDouble(pricee);
+            priceList.add(pricee);
         }
+        tv_price.setText(price+" " + getResources().getString(R.string.currency));
+
+
         if (color == null){
-            tv_color.setText(R.string.notavailabe);
-        }
-        else {
-            tv_color.setText(color);
+            colorrecycle.setVisibility(View.GONE);
+            sizerecycle.setVisibility(View.GONE);
+        } else {
+            colorrecycle.setVisibility(View.VISIBLE);
+            String[] colorArray = color.split("\\|");
+            colorList = new ArrayList<>(Arrays.asList(colorArray));
+            setColorListData(colorList,pricee);
         }
 
-        if (size == null && color == null){
-            relative_size_color.setVisibility(View.GONE);
-        }
+        //Toast.makeText(getActivity(), size+"-"+color, Toast.LENGTH_SHORT).show();
+//        if (size == null)
+//        {
+//            tv_size.setText(R.string.notavailabe);
+//        }
+//        else {
+//            tv_size.setText(size);
+//        }
+//        if (color == null){
+//            tv_color.setText(R.string.notavailabe);
+//        }
+//        else {
+//            tv_color.setText(color);
+//        }
+//
+//        if (size == null && color == null){
+//            relative_size_color.setVisibility(View.GONE);
+//        }
 
 
         rateall.setOnClickListener(new View.OnClickListener() {
@@ -220,7 +226,9 @@ public class ProductDetailShow extends Fragment {
                 startActivity(intent);
             }
         });
-        Double price = Double.parseDouble(pricee);
+
+
+        //Double price = Double.parseDouble(pricee);
         Double reward = Double.parseDouble(rewards);
         Double items = Double.parseDouble(dbcart.getInCartItemQty(productid));
 
@@ -235,10 +243,6 @@ public class ProductDetailShow extends Fragment {
                 .crossFade()
                 .into(iv_image);
         tv_reward.setText(rewards);
-        tv_price.setText(
-//                getResources().getString(R.string.tv_pro_price) + unit_value + " " +
-//                unit +
-                pricee + " " + getResources().getString(R.string.currency));
 
         if (stock.equals("")) {
             stock = "0";
@@ -276,14 +280,38 @@ public class ProductDetailShow extends Fragment {
         tv_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if (ColorListAdapter.pos == -1) {
+                    Toast.makeText(getActivity(), "Color Entered", Toast.LENGTH_SHORT).show();
+                } else {
+
+                    if (size.isEmpty()){
+                        addtocart(colorList.get(ColorListAdapter.pos),"");
+                    }
+                    else {
+                        if (SizeListAdapter.sizepos == -1){
+                            Toast.makeText(getActivity(), "Size Entered", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            addtocart(colorList.get(ColorListAdapter.pos),SizeListAdapter.sizevalue);
+                        }
+                    }
+
+                }
+            }
+
+            private void addtocart(String scolor,String ssize) {
                 HashMap<String, String> map = new HashMap<>();
                 preferences = getActivity().getSharedPreferences("lan", MODE_PRIVATE);
                 language = preferences.getString("language", "");
 
+                pricee = priceList.get(ColorListAdapter.pos);
+                unit_value = unitvalueList.get(ColorListAdapter.pos);
+
                 map.put("product_id", productid);
                 map.put("product_name", product_name);
-                map.put("size", size);
-                map.put("color", color);
+                map.put("size", ssize);
+                map.put("color", scolor);
                 map.put("category_id", category_id);
                 map.put("product_description", product_description);
                 map.put("deal_price", deal_price);
@@ -303,7 +331,6 @@ public class ProductDetailShow extends Fragment {
                 map.put("title", title);
                 map.put("store_id", store_id);
 
-
                 if (!tv_contetiy.getText().toString().equalsIgnoreCase("0")) {
                     if (dbcart.isInCart(map.get("product_id"))) {
                         dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
@@ -321,8 +348,6 @@ public class ProductDetailShow extends Fragment {
                 Double price = Double.parseDouble(map.get("price"));
                 tv_total.setText("" + price * items);
                 ((MainActivity) getActivity()).setCartCounter("" + dbcart.getCartCount());
-
-//                notifyItemChanged(position);
 
             }
         });
@@ -397,7 +422,6 @@ public class ProductDetailShow extends Fragment {
 
         return view;
     }
-
 
 
 
@@ -655,8 +679,42 @@ public class ProductDetailShow extends Fragment {
         });
     }
 
+    @Override
+    public void onclick(int position) {
+
+        Toast.makeText(getActivity(), ""+size, Toast.LENGTH_SHORT).show();
+        if (size.isEmpty()){
+         sizerecycle.setVisibility(View.GONE);
+        }
+        else {
+            String[] sizeArray = size.split("\\|");
+            sizeList = new ArrayList<>(Arrays.asList(sizeArray));
+            String tempy = sizeList.get(position);
+            setSizeListData(tempy);
+        }
+
+    }
+
+    private void setSizeListData(String tempy) {
+        sizeList.clear();
+        try {
+            String[] sizeArray = tempy.split(",");
+            sizeList = new ArrayList<>(Arrays.asList(sizeArray));
+            sizerecycle.setVisibility(View.VISIBLE);
+            LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
+            sizerecycle.setLayoutManager(linearLayoutManager);
+            SizeListAdapter topListAdapter = new SizeListAdapter(getActivity(), sizeList);
+            sizerecycle.setAdapter(topListAdapter);
+        }
+        catch (Exception ignored){
+        }
+
+    }
+    private void setColorListData(ArrayList<String> listofcolor, String prize) {
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
+        colorrecycle.setLayoutManager(linearLayoutManager);
+        ColorListAdapter topListAdapter = new ColorListAdapter(getActivity(), listofcolor,prize,tv_price,ProductDetailShow.this);
+        colorrecycle.setAdapter(topListAdapter);
+    }
+
 }
-
-
-
-    

@@ -47,6 +47,7 @@ import Config.BaseURL;
 import Model.Category_model;
 import Model.Home_Icon_model;
 import Model.Product_model;
+import Model.Product_model;
 import Model.Store_Model;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.MainActivity;
@@ -271,7 +272,7 @@ public class Favourite extends Fragment {
                 args.putString("rewards",product_models.get(position).getRewards());
                 args.putString("stock",product_models.get(position).getStock());
                 args.putString("title",product_models.get(position).getTitle());
-                args.putString("store_id",product_models.get(position).getStoreid());
+                args.putString("store_id",product_models.get(position).get_Storeid());
                 args.putString("qty","0");
 
                 fm.setArguments(args);

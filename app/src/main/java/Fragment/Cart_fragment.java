@@ -61,6 +61,7 @@ import Adapter.Socity_adapter;
 import Config.BaseURL;
 import Model.Delivery_address_model;
 import Model.Product_model;
+import Model.Product_model;
 import Model.Socity_model;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import gogrocer.tcc.AppController;
@@ -155,9 +156,7 @@ public class Cart_fragment extends Fragment implements View.OnClickListener,rela
         ((MainActivity)getActivity()).bot_profile.setBackgroundColor(getResources().getColor(R.color.white));
         ((MainActivity)getActivity()).bot_store.setBackgroundColor(getResources().getColor(R.color.white));
 
-
         ArrayList<HashMap<String, String>> map = db.getCartAll();
-
 
         Cart_adapter adapter = new Cart_adapter(getActivity(), map);
         rv_cart.setAdapter(adapter);
@@ -624,7 +623,7 @@ public class Cart_fragment extends Fragment implements View.OnClickListener,rela
                 args.putString("rewards",product_modelList.get(position).getRewards());
                 args.putString("stock",product_modelList.get(position).getStock());
                 args.putString("title",product_modelList.get(position).getTitle());
-                args.putString("store_id",product_modelList.get(position).getStoreid());
+                args.putString("store_id",product_modelList.get(position).get_Storeid());
                 args.putString("qty","0");
 
                 fm.setArguments(args);

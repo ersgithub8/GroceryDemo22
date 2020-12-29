@@ -105,8 +105,8 @@ public class ProductActivity extends AppCompatActivity {
         iv_minus = (ImageView) findViewById(R.id.iv_subcat_minus);
         iv_plus = (ImageView) findViewById(R.id.iv_subcat_plus);
         tv_title = (TextView) findViewById(R.id.tv_product_detail_title);
-        tv_size = (TextView) findViewById(R.id.size);
-        tv_color = (TextView) findViewById(R.id.color);
+//        tv_size = (TextView) findViewById(R.id.size);
+//        tv_color = (TextView) findViewById(R.id.color);
         tv_detail = (TextView) findViewById(R.id.tv_product_detail);
         tv_contetiy = (TextView) findViewById(R.id.tv_subcat_contetiy);
         tv_add = (TextView) findViewById(R.id.tv_subcat_add);
