@@ -159,7 +159,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         cursor.moveToFirst();
         String total = cursor.getString(cursor.getColumnIndex("total_amount"));
         if (total != null) {
-
             return total;
         } else {
             return "0";

@@ -112,7 +112,7 @@
 <!--        Map -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAQxL8yN_COAo6NeW-EZbh9aONnPpdlCBY" />
+            android:value="AIzaSyA5QBupZfYDYDMVGNOC53nGAF7K5FuDa1I" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

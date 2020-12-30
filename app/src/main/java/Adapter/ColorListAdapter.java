@@ -45,13 +45,17 @@ public class ColorListAdapter extends RecyclerView.Adapter<ColorListAdapter.MyVi
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
+        holder.size.setText(listData.get(position));
+
+        try {
         if (listData.get(position).contains(ProductDetailShow.cc)) {
             pos = position;
             anInterface.onclick(position);
             ProductDetailShow.cc = "-1";
         }
+        }
+        catch (Exception ignored){ }
 
-        holder.size.setText(listData.get(position));
         if (position == pos) {
             holder.size.setTextColor(Color.WHITE);
             holder.size.setBackgroundResource(R.color.colorPrimary);

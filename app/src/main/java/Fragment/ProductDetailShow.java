@@ -189,7 +189,7 @@ public class ProductDetailShow extends Fragment implements pro_detail_interface 
         }
         tv_price.setText(price+" " + getResources().getString(R.string.currency));
 
-        if (color == null){
+        if (color == null || color.isEmpty()){
             colorrecycle.setVisibility(View.GONE);
             sizerecycle.setVisibility(View.GONE);
         } else {

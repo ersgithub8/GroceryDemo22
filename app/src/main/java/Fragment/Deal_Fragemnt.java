@@ -76,11 +76,14 @@ public class Deal_Fragemnt extends Fragment {
     SharedPreferences sharedPreferences;
     String usrid;
 
+    TextView textView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_deal, container, false);
+
+        textView = view.findViewById(R.id.no_prod);
 
         banner_slider = (SliderLayout) view.findViewById(R.id.relative_banner);
         rv_cat = (RecyclerView) view.findViewById(R.id.rv_subcategory);
@@ -203,8 +206,8 @@ public class Deal_Fragemnt extends Fragment {
                 try {
                     String status = response.getString("responce");
                     if (status.equals("true")) {
-                        mShimmerViewContainer.stopShimmerAnimation();
-                        mShimmerViewContainer.setVisibility(View.GONE);
+//                        mShimmerViewContainer.stopShimmerAnimation();
+//                        mShimmerViewContainer.setVisibility(View.GONE);
                         Gson gson = new Gson();
                         Type listType = new TypeToken<List<Deal_Model>>() {
                         }.getType();
@@ -246,6 +249,7 @@ public class Deal_Fragemnt extends Fragment {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    textView.setVisibility(View.VISIBLE);
                 }
             }
         }, new Response.ErrorListener() {

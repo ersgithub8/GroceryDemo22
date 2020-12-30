@@ -45,10 +45,13 @@ public class SizeListAdapter extends RecyclerView.Adapter<SizeListAdapter.MyView
 
         holder.size.setText(listData.get(position));
 
-        if (listData.get(position).contains(ProductDetailShow.ss)) {
-            sizepos = position;
-            ProductDetailShow.ss = "-1";
+        try {
+            if (listData.get(position).contains(ProductDetailShow.ss)) {
+                sizepos = position;
+                ProductDetailShow.ss = "-1";
+            }
         }
+        catch (Exception ignored){}
 
         if (position == sizepos) {
             holder.size.setTextColor(Color.WHITE);
