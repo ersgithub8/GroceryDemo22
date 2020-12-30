@@ -205,7 +205,7 @@
                             android:id="@+id/tv_subcat_total"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text=" TextView"
+                            android:text=" 0.0"
                             android:textColor="#000"
                             android:textSize="15sp" />
                         <Fonts.LatoBLack

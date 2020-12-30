@@ -68,7 +68,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public boolean setCart(HashMap<String, String> map, Float Qty) {
         db = getWritableDatabase();
         if (isInCart(map.get(COLUMN_ID))) {
-            db.execSQL("update " + CART_TABLE + " set " + COLUMN_QTY + " = '" + Qty + "' where " + COLUMN_ID + "=" + map.get(COLUMN_ID));
+            db.execSQL("update " + CART_TABLE + " set " + COLUMN_QTY + " = '" + Qty + "' " + "where " + COLUMN_ID + "=" + map.get(COLUMN_ID));
+            db.execSQL("update " + CART_TABLE + " set " + COLUMN_Color + " = '" + map.get(COLUMN_Color) + "' " + "where " + COLUMN_ID + "=" + map.get(COLUMN_ID));
+            db.execSQL("update " + CART_TABLE + " set " + COLUMN_Size + " = '" + map.get(COLUMN_Size) + "' " + "where " + COLUMN_ID + "=" + map.get(COLUMN_ID));
+            db.execSQL("update " + CART_TABLE + " set " + COLUMN_PRICE + " = '" + map.get(COLUMN_PRICE) + "' " + "where " + COLUMN_ID + "=" + map.get(COLUMN_ID));
+
             return false;
         } else {
             ContentValues values = new ContentValues();
@@ -85,7 +89,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             values.put(COLUMN_UNIT, map.get(COLUMN_UNIT));
             values.put(COLUMN_UNIT_VALUE, map.get(COLUMN_UNIT_VALUE));
             values.put(COLUMN_STORE_ID, map.get(COLUMN_STORE_ID));
-
             values.put(COLUMN_Size, map.get(COLUMN_Size));
             values.put(COLUMN_Color, map.get(COLUMN_Color));
 
@@ -106,15 +109,28 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     public String getCartItemQty(String id) {
-
         db = getReadableDatabase();
         String qry = "Select *  from " + CART_TABLE + " where " + COLUMN_ID + " = " + id;
         Cursor cursor = db.rawQuery(qry, null);
         cursor.moveToFirst();
-
         return cursor.getString(cursor.getColumnIndex(COLUMN_QTY));
-
     }
+    public String getCartItemSize(String id) {
+        db = getReadableDatabase();
+        String qry = "Select *  from " + CART_TABLE + " where " + COLUMN_ID + " = " + id;
+        Cursor cursor = db.rawQuery(qry, null);
+        cursor.moveToFirst();
+        return cursor.getString(cursor.getColumnIndex(COLUMN_Size));
+    }
+    public String getCartItemColor(String id) {
+        db = getReadableDatabase();
+        String qry = "Select *  from " + CART_TABLE + " where " + COLUMN_ID + " = " + id;
+        Cursor cursor = db.rawQuery(qry, null);
+        cursor.moveToFirst();
+        return cursor.getString(cursor.getColumnIndex(COLUMN_Color));
+    }
+
+
 
     public String getInCartItemQty(String id) {
         if (isInCart(id)) {

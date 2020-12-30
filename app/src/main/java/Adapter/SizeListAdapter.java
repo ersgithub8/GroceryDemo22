@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import Fragment.ProductDetailShow;
 import gogrocer.tcc.R;
 
 public class SizeListAdapter extends RecyclerView.Adapter<SizeListAdapter.MyViewHolder>{
@@ -44,6 +45,11 @@ public class SizeListAdapter extends RecyclerView.Adapter<SizeListAdapter.MyView
 
         holder.size.setText(listData.get(position));
 
+        if (listData.get(position).contains(ProductDetailShow.ss)) {
+            sizepos = position;
+            ProductDetailShow.ss = "-1";
+        }
+
         if (position == sizepos) {
             holder.size.setTextColor(Color.WHITE);
             holder.size.setBackgroundResource(R.color.colorPrimary);
@@ -51,6 +57,7 @@ public class SizeListAdapter extends RecyclerView.Adapter<SizeListAdapter.MyView
             holder.size.setTextColor(Color.BLACK);
             holder.size.setBackgroundResource(R.color.gray);
         }
+
 
         holder.size.setOnClickListener(new View.OnClickListener() {
             @Override

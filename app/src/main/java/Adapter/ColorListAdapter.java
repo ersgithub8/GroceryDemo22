@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import Fragment.ProductDetailShow;
 import gogrocer.tcc.R;
 
 public class ColorListAdapter extends RecyclerView.Adapter<ColorListAdapter.MyViewHolder>{
@@ -44,8 +45,13 @@ public class ColorListAdapter extends RecyclerView.Adapter<ColorListAdapter.MyVi
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
-        holder.size.setText(listData.get(position));
+        if (listData.get(position).contains(ProductDetailShow.cc)) {
+            pos = position;
+            anInterface.onclick(position);
+            ProductDetailShow.cc = "-1";
+        }
 
+        holder.size.setText(listData.get(position));
         if (position == pos) {
             holder.size.setTextColor(Color.WHITE);
             holder.size.setBackgroundResource(R.color.colorPrimary);
