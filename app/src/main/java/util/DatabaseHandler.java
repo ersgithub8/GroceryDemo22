@@ -72,6 +72,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             db.execSQL("update " + CART_TABLE + " set " + COLUMN_Color + " = '" + map.get(COLUMN_Color) + "' " + "where " + COLUMN_ID + "=" + map.get(COLUMN_ID));
             db.execSQL("update " + CART_TABLE + " set " + COLUMN_Size + " = '" + map.get(COLUMN_Size) + "' " + "where " + COLUMN_ID + "=" + map.get(COLUMN_ID));
             db.execSQL("update " + CART_TABLE + " set " + COLUMN_PRICE + " = '" + map.get(COLUMN_PRICE) + "' " + "where " + COLUMN_ID + "=" + map.get(COLUMN_ID));
+            db.execSQL("update " + CART_TABLE + " set " + COLUMN_UNIT_VALUE + " = '" + map.get(COLUMN_UNIT_VALUE) + "' " + "where " + COLUMN_ID + "=" + map.get(COLUMN_ID));
 
             return false;
         } else {
