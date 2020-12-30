@@ -315,7 +315,8 @@ public class Payment_fragment extends Fragment {
                     jObjP.put("rewards", map.get("rewards"));
                     jObjP.put("store_id", map.get("increament"));
                     jObjP.put("delivery_charges", deli_charges);
-
+                    jObjP.put("color", map.get("color"));
+                    jObjP.put("size", map.get("size"));
                     passArray.put(jObjP);
                 } catch (JSONException e) {
                     e.printStackTrace();
