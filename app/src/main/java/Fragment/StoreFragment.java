@@ -253,7 +253,6 @@ public class StoreFragment extends Fragment implements Main_new {
                 if(language.contains("spanish")){
                     args.putString("product_name",top_selling_models.get(position).getProduct_name_arb());//TODO
                     args.putString("description",top_selling_models.get(position).getProduct_description_arb());
-
                 }else{
                     args.putString("product_name",top_selling_models.get(position).getProduct_name());
                     args.putString("description",top_selling_models.get(position).getProduct_description());
@@ -599,15 +598,10 @@ public class StoreFragment extends Fragment implements Main_new {
     }
 
 
-
-
     private void make_menu_items1() {
         String tag_json_obj = "json_category_req";
         Map<String, String> params = new HashMap<String, String>();
         params.put("parent", "");
-
-       /* if (parent_id != null && parent_id != "") {
-        }*/
 
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
                 BaseURL.GET_CATEGORY_URL, params, new Response.Listener<JSONObject>() {
@@ -666,9 +660,6 @@ public class StoreFragment extends Fragment implements Main_new {
 
         Map<String, String> params = new HashMap<String, String>();
         params.put("parent", "");
-
-       /* if (parent_id != null && parent_id != "") {
-        }*/
 
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
                 BaseURL.GET_TOP_SELLING_PRODUCTS, params, new Response.Listener<JSONObject>() {

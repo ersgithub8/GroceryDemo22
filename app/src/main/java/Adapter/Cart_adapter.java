@@ -90,11 +90,12 @@ public class    Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHo
         holder.tv_price.setText(activity.getResources().getString(R.string.tv_pro_price) +" "+ map.get("unit_value") + " " +
                 map.get("unit") +" " + map.get("price")+" "+activity.getResources().getString(R.string.currency));
         holder.tv_contetiy.setText(map.get("qty"));
-        Double items = Double.parseDouble(dbHandler.getInCartItemQty(map.get("product_id")));
+        Double items = Double.parseDouble(dbHandler.getInCartItemQty(map.get(DatabaseHandler.COLUMN_Primary)));
         Double price = Double.parseDouble(map.get("price"));
         Double reward = Double.parseDouble(map.get("rewards"));
         holder.tv_total.setText("" + price * items);
         holder.tv_reward.setText("" + reward * items);
+
         holder.iv_minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,7 +109,7 @@ public class    Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHo
 
                     dbHandler.setCart(map, Float.valueOf(holder.tv_contetiy.getText().toString()));
 
-                    Double items = Double.parseDouble(dbHandler.getInCartItemQty(map.get("product_id")));
+                    Double items = Double.parseDouble(dbHandler.getInCartItemQty(map.get(DatabaseHandler.COLUMN_Primary)));
                     Double price = Double.parseDouble(map.get("price"));
                     Double reward = Double.parseDouble(map.get("rewards"));
                     holder.tv_total.setText("" + price * items);
@@ -119,7 +120,7 @@ public class    Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHo
                 }
 
                 if (holder.tv_contetiy.getText().toString().equalsIgnoreCase("0")) {
-                    dbHandler.removeItemFromCart(map.get("product_id"));
+                    dbHandler.removeItemFromCart(map.get(DatabaseHandler.COLUMN_Primary));
                     list.remove(position);
                     notifyDataSetChanged();
 
@@ -144,7 +145,7 @@ public class    Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHo
                 //Update Function
                 dbHandler.setCart(map, Float.valueOf(holder.tv_contetiy.getText().toString()));
 
-                Double items = Double.parseDouble(dbHandler.getInCartItemQty(map.get("product_id")));
+                Double items = Double.parseDouble(dbHandler.getInCartItemQty(map.get(DatabaseHandler.COLUMN_Primary)));
                 Double price = Double.parseDouble(map.get("price"));
                 Double reward = Double.parseDouble(map.get("rewards"));
                 holder.tv_total.setText("" + price * items);
@@ -173,7 +174,7 @@ public class    Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHo
         holder.iv_remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dbHandler.removeItemFromCart(map.get("product_id"));
+                dbHandler.removeItemFromCart(map.get(DatabaseHandler.COLUMN_Primary));
                 list.remove(position);
                 notifyDataSetChanged();
 

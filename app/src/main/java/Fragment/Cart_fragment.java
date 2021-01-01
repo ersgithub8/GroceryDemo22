@@ -111,7 +111,6 @@ public class Cart_fragment extends Fragment implements View.OnClickListener,rela
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
         ((MainActivity) getActivity()).setTitle(getResources().getString(R.string.cart));
 
-
         sessionManagement = new Session_management(getActivity());
         sessionManagement.cleardatetime();
 

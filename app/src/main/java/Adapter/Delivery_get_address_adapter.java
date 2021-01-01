@@ -6,6 +6,8 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,6 +38,7 @@ import java.util.Map;
 import Config.BaseURL;
 import Fragment.Add_delivery_address_fragment;
 import Model.Delivery_address_model;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.R;
 import util.ConnectivityReceiver;
@@ -63,6 +66,7 @@ public class Delivery_get_address_adapter extends RecyclerSwipeAdapter<Delivery_
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView tv_address, tv_name, tv_phone, tv_charges;
         public RadioButton rb_select;
+        CardView cardView;
 
         SwipeLayout swipeLayout;
         Button buttonDelete, btn_edit;
@@ -70,6 +74,7 @@ public class Delivery_get_address_adapter extends RecyclerSwipeAdapter<Delivery_
         public MyViewHolder(View view) {
             super(view);
 
+            cardView = (CardView) itemView.findViewById(R.id.card_view);
             swipeLayout = (SwipeLayout) itemView.findViewById(R.id.swipe);
             buttonDelete = (Button) itemView.findViewById(R.id.delete);
             btn_edit = (Button) itemView.findViewById(R.id.edit);
@@ -140,9 +145,7 @@ public class Delivery_get_address_adapter extends RecyclerSwipeAdapter<Delivery_
     public Delivery_get_address_adapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.row_delivery_time_rv_test, parent, false);
-
         context = parent.getContext();
-
         return new Delivery_get_address_adapter.MyViewHolder(itemView);
     }
 
@@ -154,7 +157,6 @@ public class Delivery_get_address_adapter extends RecyclerSwipeAdapter<Delivery_
         holder.tv_phone.setText(mList.getReceiver_mobile());
         holder.tv_name.setText(mList.getReceiver_name());
         holder.tv_charges.setText(mList.getDelivery_charge()+context.getResources().getString(R.string.currency));
-
         holder.rb_select.setChecked(mList.getIscheckd());
         holder.rb_select.setTag(new Integer(position));
 
@@ -165,9 +167,7 @@ public class Delivery_get_address_adapter extends RecyclerSwipeAdapter<Delivery_
 
             lastChecked = holder.rb_select;
             lastCheckedPos = 0;
-
             location_id = modelList.get(0).getLocation_id();
-
             gethouse = modelList.get(0).getHouse_no();
             getname = modelList.get(0).getReceiver_name();
             getphone = modelList.get(0).getReceiver_mobile();
@@ -182,6 +182,16 @@ public class Delivery_get_address_adapter extends RecyclerSwipeAdapter<Delivery_
         //    updates.putExtra("charge", getcharge);
             context.sendBroadcast(updates);
         }
+
+        holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+
+
+                return false;
+            }
+        });
+
 
         holder.swipeLayout.setShowMode(SwipeLayout.ShowMode.LayDown);
 
@@ -202,15 +212,40 @@ public class Delivery_get_address_adapter extends RecyclerSwipeAdapter<Delivery_
         holder.buttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 mItemManger.removeShownLayouts(holder.swipeLayout);
                 /*modelList.remove(position);
                 notifyItemRemoved(position);
                 notifyItemRangeChanged(position, modelList.size());
                 mItemManger.closeAllItems();*/
+                final SweetAlertDialog alertDialog=new SweetAlertDialog(context,SweetAlertDialog.WARNING_TYPE)
+                        .setTitleText(context.getResources().getString(R.string.delete));
+                alertDialog.setCancelable(false);
+                alertDialog.show();
+                alertDialog.setCancelText(context.getResources().getString(R.string.no));
+                alertDialog.setConfirmText(context.getResources().getString(R.string.yes));
+                alertDialog.show();
 
-                if(ConnectivityReceiver.isConnected()){
-                    makeDeleteAddressRequest(mList.getLocation_id(),position);
-                }
+                alertDialog.setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        alertDialog.dismiss();
+                    }
+                });
+                alertDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        //if(ConnectivityReceiver.isConnected()){
+                        makeDeleteAddressRequest(mList.getLocation_id(),position);
+                        alertDialog.dismiss();
+                        notifyDataSetChanged();
+                        //}
+                    }
+                });
+
+//                if(ConnectivityReceiver.isConnected()){
+//                    makeDeleteAddressRequest(mList.getLocation_id(),position);
+//                }
 
             }
         });
@@ -233,7 +268,8 @@ public class Delivery_get_address_adapter extends RecyclerSwipeAdapter<Delivery_
                 fm.setArguments(args);
                 FragmentManager fragmentManager = ((Activity) context).getFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-                        .addToBackStack(null).commit();
+                        .addToBackStack(null)
+                        .commit();
             }
         });
 
@@ -272,9 +308,7 @@ public class Delivery_get_address_adapter extends RecyclerSwipeAdapter<Delivery_
      */
     private void makeDeleteAddressRequest(String location_id,final int position) {
 
-        // Tag used to cancel the request
         String tag_json_obj = "json_delete_address_req";
-
         Map<String, String> params = new HashMap<String, String>();
         params.put("location_id", location_id);
 

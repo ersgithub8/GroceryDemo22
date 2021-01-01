@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -44,6 +45,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import Config.BaseURL;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.MainActivity;
 import gogrocer.tcc.R;
@@ -52,15 +54,12 @@ import util.ConnectivityReceiver;
 import util.CustomVolleyJsonRequest;
 import util.Session_management;
 
-/**
- * Created by Rajesh Dabhi on 6/7/2017.
- */
-
 public class Add_delivery_address_fragment extends Fragment implements View.OnClickListener {
 
     private static String TAG = Add_delivery_address_fragment.class.getSimpleName();
     FusedLocationProviderClient fusedLocationClient;
-
+    public static String value_of_map = "-1";
+    SweetAlertDialog p;
     private EditText et_phone, et_name, et_pin, et_house, et_address;
     private RelativeLayout btn_update;
     private TextView tv_phone, tv_name, tv_pin, tv_house, tv_socity, btn_socity, gps, tv_address;
@@ -70,53 +69,38 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
     private Session_management sessionManagement;
 
     private boolean isEdit = false;
-
     private String getlocation_id;
-
     public Add_delivery_address_fragment() {
         // Required empty public constructor
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add_delivery_address, container, false);
-
         ((MainActivity) getActivity()).setTitle(getResources().getString(R.string.add));
+
+        p = new SweetAlertDialog(getActivity(),SweetAlertDialog.PROGRESS_TYPE);
+        p.setTitle(getResources().getString(R.string.loading));
 
         sessionManagement = new Session_management(getActivity());
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
-
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
         }
-
         fusedLocationClient.getLastLocation()
                 .addOnSuccessListener(new OnSuccessListener<Location>() {
                     @Override
                     public void onSuccess(android.location.Location location) {
-
                         // Got last known location. In some rare situations this can be null.
                         if (location != null) {
-                            // Logic to handle location object
-
                             latitude = location.getLatitude();
                             longitude = location.getLongitude();
-
                             location.reset();
-
                         }
-
                     }
 
                 });
-
 
         et_address = (EditText) view.findViewById(R.id.et_add_address);
         et_phone = (EditText) view.findViewById(R.id.et_add_adres_phone);
@@ -137,56 +121,37 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
         String getsocity_id = sessionManagement.getUserDetails().get(BaseURL.KEY_SOCITY_ID);
 
         Bundle args = getArguments();
+        if (args != null) {
+            getlocation_id = getArguments().getString("location_id");
+            String get_name = getArguments().getString("name");
+            String get_phone = getArguments().getString("mobile");
+            String get_pine = getArguments().getString("pincode");
+            String get_socity_id = getArguments().getString("socity_id");
+            String get_socity_name = getArguments().getString("socity_name");
+            value_of_map = getArguments().getString("house");
 
-//        if (args != null) {
-//            getlocation_id = getArguments().getString("location_id");
-//            String get_name = getArguments().getString("name");
-//            String get_phone = getArguments().getString("mobile");
-//            String get_pine = getArguments().getString("pincode");
-//            String get_socity_id = getArguments().getString("socity_id");
-//            String get_socity_name = getArguments().getString("socity_name");
-//            String get_house = getArguments().getString("house");
-//
-//            if (TextUtils.isEmpty(get_name) && get_name == null) {
-//                isEdit = false;
-//            } else {
-//                isEdit = true;
-//
-//                Toast.makeText(getActivity(), "edit", Toast.LENGTH_SHORT).show();
-//
-//                et_name.setText(get_name);
-//                et_phone.setText(get_phone);
-//                et_pin.setText(get_pine);
-//                et_house.setText(get_house);
-//                btn_socity.setText(get_socity_name);
-//
-//                sessionManagement.updateSocity(get_socity_name, get_socity_id);
-//            }
-//        }
+            if (TextUtils.isEmpty(get_name) && get_name == null) {
+                isEdit = false;
+            } else {
+                isEdit = true;
+                //Toast.makeText(getActivity(), "edit", Toast.LENGTH_SHORT).show();
+                et_name.setText(get_name);
+                et_phone.setText(get_phone);
+                et_pin.setText(get_pine);
+                et_house.setText(value_of_map);
+                btn_socity.setText(get_socity_name);
+
+                sessionManagement.updateSocity(get_socity_name, get_socity_id);
+            }
+        }
 
         if (!TextUtils.isEmpty(getsocity_name)) {
-
             btn_socity.setText(getsocity_name);
             sessionManagement.updateSocity(getsocity_name, getsocity_id);
         }
 
         btn_update.setOnClickListener(this);
         btn_socity.setOnClickListener(this);
-
-        try {
-            String addrress = getArguments().getString("Adressy");
-            String map_link = getArguments().getString("map_link");
-            if (map_link.isEmpty()){
-
-            }
-            else {
-                et_address.setText(addrress+"\nGoogle Map Link : "+map_link);
-            }
-
-        }
-        catch (Exception e){
-
-        }
 
         SharedPreferences sharedPreferences=getActivity().getSharedPreferences("location", Context.MODE_PRIVATE);
         lat=sharedPreferences.getString("lat",null);
@@ -221,10 +186,8 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
                         .addToBackStack(null)
                         .commit();
 
-
             }
         });
-
 
         return view;
     }
@@ -232,15 +195,12 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
     @Override
     public void onClick(View view) {
         int id = view.getId();
-
         if (id == R.id.btn_add_adres_edit) {
             attemptEditProfile();
         } else if (id == R.id.btn_add_adres_socity) {
 
             /*String getpincode = et_pin.getText().toString();
-
             if (!TextUtils.isEmpty(getpincode)) {*/
-
                 Bundle args = new Bundle();
                 Fragment fm = new Socity_fragment();
                 //args.putString("pincode", getpincode);
@@ -251,12 +211,10 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
             /*} else {
                 Toast.makeText(getActivity(), getResources().getString(R.string.please_enter_pincode), Toast.LENGTH_SHORT).show();
             }*/
-
         }
     }
 
     private void attemptEditProfile() {
-
 //        tv_phone.setText(getResources().getString(R.string.receiver_mobile_number));
 //        tv_pin.setText(getResources().getString(R.string.tv_reg_pincode));
 //        tv_name.setText(getResources().getString(R.string.receiver_name_req));
@@ -268,6 +226,7 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
 //        tv_pin.setTextColor(getResources().getColor(R.color.dark_gray));
 //        tv_house.setTextColor(getResources().getColor(R.color.dark_gray));
 //        tv_socity.setTextColor(getResources().getColor(R.color.dark_gray));
+        p.show();
 
         String getphone = et_phone.getText().toString();
         String getname = et_name.getText().toString();
@@ -296,7 +255,6 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
             focusView = et_name;
             cancel = true;
         }
-
 //        if (TextUtils.isEmpty(getpin)) {
 //            tv_pin.setTextColor(getResources().getColor(R.color.colorPrimary));
 //            focusView = et_pin;
@@ -321,18 +279,13 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
         }
 
         if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
             if (focusView != null)
                 focusView.requestFocus();
         } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
 
             if (ConnectivityReceiver.isConnected()) {
 
                 String user_id = sessionManagement.getUserDetails().get(BaseURL.KEY_ID);
-
                 // check internet connection
                 if (ConnectivityReceiver.isConnected()) {
                     if (isEdit) {
@@ -341,6 +294,8 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
                         makeAddAddressRequest(user_id, getpin, getsocity, getAdress, getname, getphone);
                     }
                 }
+            } else {
+                p.dismiss();
             }
         }
     }
@@ -356,9 +311,7 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
     private void makeAddAddressRequest(String user_id, String pincode, String socity_id,
                                        String house_no, String receiver_name, String receiver_mobile) {
 
-        // Tag used to cancel the request
         String tag_json_obj = "json_add_address_req";
-
         Map<String, String> params = new HashMap<String, String>();
         params.put("user_id", user_id);
         params.put("pincode", "000");
@@ -367,26 +320,23 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
         params.put("receiver_name", receiver_name);
         params.put("receiver_mobile", receiver_mobile);
 
-
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
                 BaseURL.ADD_ADDRESS_URL, params, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
                 Log.d(TAG, response.toString());
-
                 try {
                     Boolean status = response.getBoolean("responce");
                     if (status) {
-
                         ((MainActivity) getActivity()).onBackPressed();
-                        FragmentManager fragmentManager = getFragmentManager();
-                        fragmentManager.popBackStack();
-
+                        value_of_map = "-1";
+                        p.dismiss();
 
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    p.dismiss();
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -398,22 +348,17 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Activity activity=getActivity();
                     if(activity !=null)
+                        p.dismiss();
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
-        // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
 
-    /**
-     * Method to make json object request where json response starts wtih
-     */
     private void makeEditAddressRequest(String location_id, String pincode, String socity_id,
                                         String house_no, String receiver_name, String receiver_mobile) {
 
-        // Tag used to cancel the request
         String tag_json_obj = "json_edit_address_req";
 
         Map<String, String> params = new HashMap<String, String>();
@@ -434,15 +379,17 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
                 try {
                     Boolean status = response.getBoolean("responce");
                     if (status) {
-
                         String msg = response.getString("data");
                         Toast.makeText(getActivity(), "" + msg, Toast.LENGTH_SHORT).show();
-
+                        value_of_map = "-1";
                         ((MainActivity) getActivity()).onBackPressed();
+                        p.dismiss();
 
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    p.dismiss();
+
                 }
             }
         }, new Response.ErrorListener() {
@@ -453,13 +400,29 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Activity activity=getActivity();
                     if(activity !=null)
+                        p.dismiss();
+
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        try {
+            if (value_of_map == "-1"){
+
+            }
+            else {
+                et_address.setText(value_of_map);
+            }
+        }
+        catch (Exception ignored){
+        }
+
+    }
 }

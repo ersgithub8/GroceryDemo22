@@ -145,7 +145,6 @@ public class Favourite extends Fragment {
                       rv_store.setVisibility(View.VISIBLE);
                       mShimmerViewContainer.setVisibility(View.VISIBLE);
                       mShimmerViewContainer.startShimmerAnimation();
-
                       makestore(usrid);
                         }
                 });

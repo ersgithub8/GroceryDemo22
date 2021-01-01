@@ -18,13 +18,10 @@ import gogrocer.tcc.R;
 public class SizeListAdapter extends RecyclerView.Adapter<SizeListAdapter.MyViewHolder>{
     ArrayList<String> listData;
     Context context;
-    TextView textView;
     public static int sizepos;
     public static String sizevalue;
 
-    String pricee;
-    pro_detail_interface anInterface;
-    ArrayList<String> prizeList = new ArrayList<>();
+    int x = -1;
 
     public SizeListAdapter(Context context, ArrayList<String> listData) {
         this.context = context;
@@ -46,9 +43,16 @@ public class SizeListAdapter extends RecyclerView.Adapter<SizeListAdapter.MyView
         holder.size.setText(listData.get(position));
 
         try {
-            if (listData.get(position).contains(ProductDetailShow.ss)) {
-                sizepos = position;
-                ProductDetailShow.ss = "-1";
+            if (x == -1) {
+                if (listData.get(position).contains(listData.get(0))) {
+                    sizepos = position;
+                    sizevalue = listData.get(position);
+                    ProductDetailShow.ss = "-1";
+                    x++;
+                }
+            }
+            else {
+                x++;
             }
         }
         catch (Exception ignored){}
@@ -61,14 +65,13 @@ public class SizeListAdapter extends RecyclerView.Adapter<SizeListAdapter.MyView
             holder.size.setBackgroundResource(R.color.gray);
         }
 
-
         holder.size.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 sizepos = position;
                 sizevalue = listData.get(position);
-//                anInterface.onclick(position);
                 notifyDataSetChanged();
+
             }
         });
 

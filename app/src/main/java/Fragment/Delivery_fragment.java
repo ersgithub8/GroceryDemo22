@@ -62,14 +62,9 @@ import util.Session_management;
 
 import static android.content.Context.MODE_PRIVATE;
 
-/**
- * Created by Rajesh Dabhi on 27/6/2017.
- */
-
 public class Delivery_fragment extends Fragment implements View.OnClickListener {
 
     private static String TAG = Delivery_fragment.class.getSimpleName();
-
     private TextView tv_afternoon, tv_morning, tv_total, tv_item, tv_socity;
     private TextView tv_date, tv_time,delivery_string;
     private EditText et_address;
@@ -78,19 +73,17 @@ public class Delivery_fragment extends Fragment implements View.OnClickListener 
 
     private Delivery_get_address_adapter adapter;
     private List<Delivery_address_model> delivery_address_modelList = new ArrayList<>();
-
     private DatabaseHandler db_cart;
     SharedPreferences preferences;
     private Session_management sessionManagement;
 
     private int mYear, mMonth, mDay, mHour, mMinute;
-
     private String gettime = "";
     private String getdate = "";
 
     private String deli_charges,ischarge;
     String store_id,B_time;
-String language;
+    String language;
     public Delivery_fragment() {
         // Required empty public constructor
     }
@@ -109,7 +102,6 @@ String language;
 
         store_id = SharedPref.getString(getActivity(), BaseURL.STORE_ID);
         preferences = getActivity().getSharedPreferences("lan", MODE_PRIVATE);
-
         ischarge=getArguments().getString("ischarge");
 
         delivery_string = view.findViewById(R.id.show_delivery_charges_string);
@@ -236,15 +228,13 @@ String language;
         } else if (id == R.id.tv_deli_add_address) {
 
             sessionManagement.updateSocity("", "");
-
+            Add_delivery_address_fragment.value_of_map = "-1";
             Fragment fm = new Add_delivery_address_fragment();
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-                    //.addToBackStack(null)
+            .addToBackStack(null)
             .commit();
-
         }
-
     }
 
     private void getdate() {

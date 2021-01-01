@@ -171,24 +171,16 @@ public class Deal_Fragemnt extends Fragment {
                     FragmentManager fragmentManager = getFragmentManager();
                     fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
                             .addToBackStack(null).commit();
-
-
                 }
 
                 @Override
                 public void onLongItemClick(View view, int position) {
-
                 }
             }));
 
-
-
         }
-
-
         return view;
     }
-
 
     //Get Shop By Catogary Products
     private void makeDealRequest() {

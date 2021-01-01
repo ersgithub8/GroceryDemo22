@@ -22,6 +22,7 @@ public class ColorListAdapter extends RecyclerView.Adapter<ColorListAdapter.MyVi
     TextView textView;
     public static int pos;
     String pricee;
+    int x = -1;
     pro_detail_interface anInterface;
     ArrayList<String> prizeList = new ArrayList<>();
 
@@ -48,11 +49,17 @@ public class ColorListAdapter extends RecyclerView.Adapter<ColorListAdapter.MyVi
         holder.size.setText(listData.get(position));
 
         try {
-        if (listData.get(position).contains(ProductDetailShow.cc)) {
-            pos = position;
-            anInterface.onclick(position);
-            ProductDetailShow.cc = "-1";
-        }
+            if (x == -1) {
+                if (listData.get(position).contains(listData.get(0))) {
+                    pos = position;
+                    anInterface.onclick(position);
+                    ProductDetailShow.cc = "-1";
+                    x++;
+                }
+            }
+            else {
+                x++;
+            }
         }
         catch (Exception ignored){ }
 
@@ -80,6 +87,7 @@ public class ColorListAdapter extends RecyclerView.Adapter<ColorListAdapter.MyVi
                 textView.setText(prizeList.get(position)+" "+context.getResources().getString(R.string.currency));
                 anInterface.onclick(position);
                 notifyDataSetChanged();
+
             }
         });
 

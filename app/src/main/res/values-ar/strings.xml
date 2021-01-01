@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="loading">جار التحميل…</string>
+    <string name="select_quan">حدد الكمية</string>
     <string name="select_color">إختر لون</string>
     <string name="select_size">أختر الحجم</string>
 

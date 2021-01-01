@@ -13,10 +13,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "grocery";
     private static final int DB_VERSION = 1;
+    int incremt = 1;
     private SQLiteDatabase db;
 
     public static final String CART_TABLE = "cart";
 
+    public static final String COLUMN_Primary = "primary_key";
     public static final String COLUMN_ID = "product_id";
     public static final String COLUMN_QTY = "qty";
     public static final String COLUMN_IMAGE = "product_image";
@@ -44,7 +46,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         this.db = db;
 
         String exe = "CREATE TABLE IF NOT EXISTS " + CART_TABLE
-                + "(" + COLUMN_ID + " integer primary key, "
+                + "(" + COLUMN_Primary + " integer primary key autoincrement, "
+                + COLUMN_ID + " TEXT NOT NULL, "
                 + COLUMN_QTY + " DOUBLE NOT NULL,"
                 + COLUMN_IMAGE + " TEXT NOT NULL, "
                 + COLUMN_CAT_ID + " TEXT NOT NULL, "
@@ -58,7 +61,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + COLUMN_TITLE + " TEXT NOT NULL ,"
                 + COLUMN_STORE_ID + " TEXT NOT NULL ,"
                 + COLUMN_Color + " TEXT NOT NULL ,"
-                + COLUMN_Size + " TEXT NOT NULL "
+                + COLUMN_Size + " TEXT "
                 + ")";
 
         db.execSQL(exe);
@@ -67,16 +70,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public boolean setCart(HashMap<String, String> map, Float Qty) {
         db = getWritableDatabase();
-        if (isInCart(map.get(COLUMN_ID))) {
-            db.execSQL("update " + CART_TABLE + " set " + COLUMN_QTY + " = '" + Qty + "' " + "where " + COLUMN_ID + "=" + map.get(COLUMN_ID));
-            db.execSQL("update " + CART_TABLE + " set " + COLUMN_Color + " = '" + map.get(COLUMN_Color) + "' " + "where " + COLUMN_ID + "=" + map.get(COLUMN_ID));
-            db.execSQL("update " + CART_TABLE + " set " + COLUMN_Size + " = '" + map.get(COLUMN_Size) + "' " + "where " + COLUMN_ID + "=" + map.get(COLUMN_ID));
-            db.execSQL("update " + CART_TABLE + " set " + COLUMN_PRICE + " = '" + map.get(COLUMN_PRICE) + "' " + "where " + COLUMN_ID + "=" + map.get(COLUMN_ID));
-            db.execSQL("update " + CART_TABLE + " set " + COLUMN_UNIT_VALUE + " = '" + map.get(COLUMN_UNIT_VALUE) + "' " + "where " + COLUMN_ID + "=" + map.get(COLUMN_ID));
+
+        if (isInCart(map.get(COLUMN_Primary))) {
+            db.execSQL("update " + CART_TABLE + " set " + COLUMN_QTY + " = '" + Qty + "' " + "where " + COLUMN_Primary + "=" + map.get(COLUMN_Primary));
+//            db.execSQL("update " + CART_TABLE + " set " + COLUMN_Color + " = '" + map.get(COLUMN_Color) + "' " + "where " + COLUMN_ID + "=" + map.get(COLUMN_ID));
+//            db.execSQL("update " + CART_TABLE + " set " + COLUMN_Size + " = '" + map.get(COLUMN_Size) + "' " + "where " + COLUMN_ID + "=" + map.get(COLUMN_ID));
+//            db.execSQL("update " + CART_TABLE + " set " + COLUMN_PRICE + " = '" + map.get(COLUMN_PRICE) + "' " + "where " + COLUMN_ID + "=" + map.get(COLUMN_ID));
+//            db.execSQL("update " + CART_TABLE + " set " + COLUMN_UNIT_VALUE + " = '" + map.get(COLUMN_UNIT_VALUE) + "' " + "where " + COLUMN_ID + "=" + map.get(COLUMN_ID));
 
             return false;
-        } else {
+        }
+        else {
+
             ContentValues values = new ContentValues();
+            //values.put(COLUMN_Primary, incremt);
             values.put(COLUMN_ID, map.get(COLUMN_ID));
             values.put(COLUMN_QTY, Qty);
             values.put(COLUMN_CAT_ID, map.get(COLUMN_CAT_ID));
@@ -101,7 +108,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public boolean isInCart(String id) {
         db = getReadableDatabase();
-        String qry = "Select *  from " + CART_TABLE + " where " + COLUMN_ID + " = " + id;
+        String qry = "Select *  from " + CART_TABLE + " where " + COLUMN_Primary + " = " + id;
         Cursor cursor = db.rawQuery(qry, null);
         cursor.moveToFirst();
         if (cursor.getCount() > 0) return true;
@@ -111,7 +118,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public String getCartItemQty(String id) {
         db = getReadableDatabase();
-        String qry = "Select *  from " + CART_TABLE + " where " + COLUMN_ID + " = " + id;
+        String qry = "Select *  from " + CART_TABLE + " where " + COLUMN_Primary + " = " + id;
         Cursor cursor = db.rawQuery(qry, null);
         cursor.moveToFirst();
         return cursor.getString(cursor.getColumnIndex(COLUMN_QTY));
@@ -136,7 +143,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public String getInCartItemQty(String id) {
         if (isInCart(id)) {
             db = getReadableDatabase();
-            String qry = "Select *  from " + CART_TABLE + " where " + COLUMN_ID + " = " + id;
+            String qry = "Select *  from " + CART_TABLE + " where " + COLUMN_Primary + " = " + id;
             Cursor cursor = db.rawQuery(qry, null);
             cursor.moveToFirst();
             return cursor.getString(cursor.getColumnIndex(COLUMN_QTY));
@@ -173,6 +180,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         cursor.moveToFirst();
         for (int i = 0; i < cursor.getCount(); i++) {
             HashMap<String, String> map = new HashMap<>();
+            map.put(COLUMN_Primary, cursor.getString(cursor.getColumnIndex(COLUMN_Primary)));
             map.put(COLUMN_ID, cursor.getString(cursor.getColumnIndex(COLUMN_ID)));
             map.put(COLUMN_QTY, cursor.getString(cursor.getColumnIndex(COLUMN_QTY)));
             map.put(COLUMN_IMAGE, cursor.getString(cursor.getColumnIndex(COLUMN_IMAGE)));
@@ -249,7 +257,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public void removeItemFromCart(String id) {
         db = getReadableDatabase();
-        db.execSQL("delete from " + CART_TABLE + " where " + COLUMN_ID + " = " + id);
+        db.execSQL("delete from " + CART_TABLE + " where " + COLUMN_Primary + " = " + id);
     }
 
     @Override

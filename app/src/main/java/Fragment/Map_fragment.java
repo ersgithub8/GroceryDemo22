@@ -43,7 +43,6 @@ import gogrocer.tcc.R;
 
 import static android.content.Context.MODE_PRIVATE;
 
-
 public class Map_fragment extends Fragment {
     LatLng sydney;
     GoogleMap googleMap;
@@ -136,15 +135,12 @@ public class Map_fragment extends Fragment {
 //                        String country = addresses.get(0).getCountryName();
                         final_address = addresses.get(0).getAddressLine(0);
                     }
-                    Bundle args = new Bundle();
-                    Fragment fm = new Add_delivery_address_fragment();
-                    args.putString("Adressy", final_address);
-                    args.putString("map_link","https://maps.google.com/?q="+sydney.latitude+","+sydney.longitude);
-                    fm.setArguments(args);
-                    FragmentManager fragmentManager = getFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
-                            //.addToBackStack(null)
-                            .commit();
+
+                    Add_delivery_address_fragment.value_of_map = final_address+
+                            "\nGoogle Map Link : "+"https://maps.google.com/?q="+sydney.latitude+","+sydney.longitude;
+
+                    ((MainActivity) getActivity()).onBackPressed();
+
 
 
                 } catch (IOException e) {
