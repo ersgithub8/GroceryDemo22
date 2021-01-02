@@ -87,7 +87,6 @@ public class ColorListAdapter extends RecyclerView.Adapter<ColorListAdapter.MyVi
                 textView.setText(prizeList.get(position)+" "+context.getResources().getString(R.string.currency));
                 anInterface.onclick(position);
                 notifyDataSetChanged();
-
             }
         });
 

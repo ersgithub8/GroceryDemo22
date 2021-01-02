@@ -79,12 +79,17 @@ public class    Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHo
 
         holder.tv_reward.setText(map.get("rewards"));
 
-        holder.tv_color.setText(activity.getResources().getString(R.string.color)+" "+map.get("color"));
-
-        if (map.get("size").isEmpty()){
+        if (map.get("color").contains("-")){
+            holder.tv_color.setVisibility(View.GONE);
         }
         else {
-            holder.tv_size.setText(", "+activity.getResources().getString(R.string.size) + " " + map.get("size"));
+            holder.tv_color.setText(activity.getResources().getString(R.string.color) + " " + map.get("color"));
+        }
+        if (map.get("size").isEmpty()){
+            holder.tv_size.setVisibility(View.GONE);
+        }
+        else {
+            holder.tv_size.setText("     "+activity.getResources().getString(R.string.size) + " " + map.get("size"));
         }
 
         holder.tv_price.setText(activity.getResources().getString(R.string.tv_pro_price) +" "+ map.get("unit_value") + " " +

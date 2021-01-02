@@ -87,7 +87,7 @@ public class ProductDetailShow extends Fragment implements pro_detail_interface 
     RecyclerView colorrecycle,sizerecycle;
     private DatabaseHandler dbcart;
     ImageView iv_image,iv_fav_image,iv_minus,iv_plus,rateall;
-    TextView tv_price, tv_reward, tv_total,tv_title,tv_detail,tv_contetiy,tv_add,tv_size;
+    TextView tv_price, tv_reward, tv_total,tv_title,tv_detail,tv_contetiy,tv_add,tv_size,tv_color;
     ImageView iv_logo, iv_remove,iv_share;
     RatingBar ratingBar;
 
@@ -103,7 +103,7 @@ public class ProductDetailShow extends Fragment implements pro_detail_interface 
     }
     
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, final Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.activity_product, container, false);
         sharedPreferences = getActivity().getSharedPreferences("lan", Context.MODE_PRIVATE);
@@ -116,7 +116,7 @@ public class ProductDetailShow extends Fragment implements pro_detail_interface 
         iv_plus = (ImageView) view.findViewById(R.id.iv_subcat_plus);
         tv_title = (TextView) view.findViewById(R.id.tv_product_detail_title);
         tv_size = (TextView) view.findViewById(R.id.size_text);
-//        tv_color = (TextView) view.findViewById(R.id.color);
+        tv_color = (TextView) view.findViewById(R.id.color_text);
         tv_detail = (TextView) view.findViewById(R.id.tv_product_detail);
         tv_contetiy = (TextView) view.findViewById(R.id.tv_subcat_contetiy);
         tv_add = (TextView) view.findViewById(R.id.tv_subcat_add);
@@ -189,20 +189,29 @@ public class ProductDetailShow extends Fragment implements pro_detail_interface 
         tv_price.setText(price+" " + getResources().getString(R.string.currency));
 
         if (color == null || color.isEmpty()){
+            tv_color.setVisibility(View.GONE);
             colorrecycle.setVisibility(View.GONE);
             tv_size.setVisibility(View.GONE);
             sizerecycle.setVisibility(View.GONE);
-        } else {
+        }
+        else {
             colorrecycle.setVisibility(View.VISIBLE);
+            tv_color.setVisibility(View.VISIBLE);
             String[] colorArray = color.split("\\|");
             colorList = new ArrayList<>(Arrays.asList(colorArray));
+            if (color.contains("-")){
+                colorrecycle.setVisibility(View.INVISIBLE);
+                tv_color.setVisibility(View.GONE);
+                ViewGroup.LayoutParams params=colorrecycle.getLayoutParams();
+                params.height=0;
+                colorrecycle.setLayoutParams(params);
+            }
             setColorListData(colorList,pricee);
         }
 
         rateall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(getActivity(), RatingAndReviews.class);
                 intent.putExtra("prod_id", productid);
                 startActivity(intent);
@@ -264,8 +273,6 @@ public class ProductDetailShow extends Fragment implements pro_detail_interface 
 //            tv_add.setText(getResources().getString(R.string.tv_pro_add));
 //        }
 
-
-
         tv_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -282,6 +289,7 @@ public class ProductDetailShow extends Fragment implements pro_detail_interface 
             }
 
             private void addtocart(String scolor,String ssize) {
+
                 HashMap<String, String> map = new HashMap<>();
                 preferences = getActivity().getSharedPreferences("lan", MODE_PRIVATE);
                 language = preferences.getString("language", "");
@@ -317,9 +325,21 @@ public class ProductDetailShow extends Fragment implements pro_detail_interface 
 //                        dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
 //                        tv_add.setText(getResources().getString(R.string.tv_pro_update));
 //                    } else {
-                        dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
-                        tv_add.setText(getResources().getString(R.string.tv_pro_add));
-                        tv_contetiy.setText("0");
+                    dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
+                    SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(getActivity(),SweetAlertDialog.SUCCESS_TYPE);
+                    sweetAlertDialog.setTitle(getResources().getString(R.string.add_to_cart));
+                    sweetAlertDialog.show();
+                    sweetAlertDialog.setCancelable(false);
+                    sweetAlertDialog.setConfirmText(getResources().getString(R.string.ok));
+                    sweetAlertDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                            sweetAlertDialog.dismiss();
+                        }
+                    });
+
+                    tv_add.setText(getResources().getString(R.string.tv_pro_add));
+                    tv_contetiy.setText("0");
                     //}
                 } else {
                     Toast.makeText(getActivity(), getResources().getString(R.string.select_quan), Toast.LENGTH_SHORT).show();
@@ -561,7 +581,6 @@ public class ProductDetailShow extends Fragment implements pro_detail_interface 
 
             @Override
             public void onErrorResponse(VolleyError error) {
-
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 }
@@ -573,13 +592,10 @@ public class ProductDetailShow extends Fragment implements pro_detail_interface 
 
     }
     private void saverating(String productid, final RatingBar ratingBar) {
-
-        // Tag used to cancel the request
         String tag_json_obj = "json_edit_address_req";
 
         Map<String, String> params = new HashMap<String, String>();
         params.put("prod_id", productid);
-
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
                 BaseURL.getrating, params, new Response.Listener<JSONObject>() {
 
@@ -671,10 +687,12 @@ public class ProductDetailShow extends Fragment implements pro_detail_interface 
         }
 
         if (size.isEmpty()){
-            tv_size.setVisibility(View.GONE);
+         tv_size.setVisibility(View.GONE);
          sizerecycle.setVisibility(View.GONE);
         }
         else {
+            tv_size.setVisibility(View.VISIBLE);
+            sizerecycle.setVisibility(View.VISIBLE);
             if (size.contains("|")) {
                 String[] sizeArray = size.split("\\|");
                 sizeList = new ArrayList<>(Arrays.asList(sizeArray));
