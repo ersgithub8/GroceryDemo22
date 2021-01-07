@@ -34,8 +34,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import Adapter.SizeyListAdapter;
 import Adapter.ColorListAdapter;
-import Adapter.SizeListAdapter;
 import Adapter.pro_detail_interface;
 import Config.BaseURL;
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -171,7 +171,6 @@ public class ProductDetailShow extends Fragment implements pro_detail_interface 
 
         size = getArguments().getString("size");
         color = getArguments().getString("color");
-
         String[] unitArray = unit_value.split("\\|");
         unitvalueList = new ArrayList<>(Arrays.asList(unitArray));
 
@@ -188,7 +187,7 @@ public class ProductDetailShow extends Fragment implements pro_detail_interface 
         }
         tv_price.setText(price+" " + getResources().getString(R.string.currency));
 
-        if (color == null || color.isEmpty()){
+        if (size == null || size.isEmpty()){
             tv_color.setVisibility(View.GONE);
             colorrecycle.setVisibility(View.GONE);
             tv_size.setVisibility(View.GONE);
@@ -196,12 +195,12 @@ public class ProductDetailShow extends Fragment implements pro_detail_interface 
         }
         else {
             colorrecycle.setVisibility(View.VISIBLE);
-            tv_color.setVisibility(View.VISIBLE);
-            String[] colorArray = color.split("\\|");
+            tv_size.setVisibility(View.VISIBLE);
+            String[] colorArray = size.split("\\|");
             colorList = new ArrayList<>(Arrays.asList(colorArray));
-            if (color.contains("-")){
+            if (size.contains("Free")){
                 colorrecycle.setVisibility(View.INVISIBLE);
-                tv_color.setVisibility(View.GONE);
+                tv_size.setVisibility(View.GONE);
                 ViewGroup.LayoutParams params=colorrecycle.getLayoutParams();
                 params.height=0;
                 colorrecycle.setLayoutParams(params);
@@ -256,46 +255,44 @@ public class ProductDetailShow extends Fragment implements pro_detail_interface 
             cc = "-1";
             ss = "-1";
         }
-
         tv_reward.setText("" + reward * items);
-
-//        if (Integer.valueOf(stock) <= 0) {
-//            tv_add.setText(R.string.tv_out);
-//            tv_add.setTextColor(getResources().getColor(R.color.black));
-//            tv_add.setBackgroundColor(getResources().getColor(R.color.gray));
-//            tv_add.setEnabled(false);
-//            iv_minus.setEnabled(false);
-//            iv_plus.setEnabled(false);
-//        } else if (dbcart.isInCart(productid)) {
-//            tv_add.setText(getResources().getString(R.string.tv_pro_update));
-//            tv_contetiy.setText(dbcart.getCartItemQty(productid));
-//        } else {
-//            tv_add.setText(getResources().getString(R.string.tv_pro_add));
-//        }
 
         tv_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    if (size.isEmpty()){
-                        addtocart(colorList.get(ColorListAdapter.pos),"");
-                    } else {
-                        if (SizeListAdapter.sizepos == -1){
-                            Toast.makeText(getActivity(), getResources().getString(R.string.select_size), Toast.LENGTH_SHORT).show();
+
+                    if (color == null || color.isEmpty()){
+
+                        //For Deal Products
+                        if(color == null && size == null){
+                            tv_color.setVisibility(View.GONE);
+                            colorrecycle.setVisibility(View.GONE);
+                            tv_size.setVisibility(View.GONE);
+                            sizerecycle.setVisibility(View.GONE);
+                            addtocart("", "");
                         }
                         else {
-                            addtocart(colorList.get(ColorListAdapter.pos),sizeList.get(SizeListAdapter.sizepos));
+                            addtocart(colorList.get(SizeyListAdapter.pos), "");
+                        }
+                    } else {
+                        if (ColorListAdapter.sizepos == -1){
+                            Toast.makeText(getActivity(), getResources().getString(R.string.select_color), Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            addtocart(colorList.get(SizeyListAdapter.pos),sizeList.get(ColorListAdapter.sizepos));
                         }
                     }
+
+
             }
 
-            private void addtocart(String scolor,String ssize) {
-
+            private void addtocart(String ssize,String scolor) {
                 HashMap<String, String> map = new HashMap<>();
                 preferences = getActivity().getSharedPreferences("lan", MODE_PRIVATE);
                 language = preferences.getString("language", "");
 
-                pricee = priceList.get(ColorListAdapter.pos);
-                unit_value = unitvalueList.get(ColorListAdapter.pos);
+                pricee = priceList.get(SizeyListAdapter.pos);
+                unit_value = unitvalueList.get(SizeyListAdapter.pos);
 
                 map.put("product_id", productid);
                 map.put("product_name", product_name);
@@ -686,21 +683,21 @@ public class ProductDetailShow extends Fragment implements pro_detail_interface 
         catch (Exception ignored){
         }
 
-        if (size.isEmpty()){
-         tv_size.setVisibility(View.GONE);
+        if (color.isEmpty()){
+         tv_color.setVisibility(View.GONE);
          sizerecycle.setVisibility(View.GONE);
         }
         else {
-            tv_size.setVisibility(View.VISIBLE);
+            tv_color.setVisibility(View.VISIBLE);
             sizerecycle.setVisibility(View.VISIBLE);
-            if (size.contains("|")) {
-                String[] sizeArray = size.split("\\|");
+            if (color.contains("|")) {
+                String[] sizeArray = color.split("\\|");
                 sizeList = new ArrayList<>(Arrays.asList(sizeArray));
                 String tempy = sizeList.get(position);
                 setSizeListData(tempy);
             }
             else {
-                setSizeListData(size);
+                setSizeListData(color);
             }
         }
 
@@ -711,11 +708,11 @@ public class ProductDetailShow extends Fragment implements pro_detail_interface 
         try {
             String[] sizeArray = tempy.split(",");
             sizeList = new ArrayList<>(Arrays.asList(sizeArray));
-            tv_size.setVisibility(View.VISIBLE);
+            tv_color.setVisibility(View.VISIBLE);
             sizerecycle.setVisibility(View.VISIBLE);
             LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
             sizerecycle.setLayoutManager(linearLayoutManager);
-            SizeListAdapter topListAdapter = new SizeListAdapter(getActivity(), sizeList);
+            ColorListAdapter topListAdapter = new ColorListAdapter(getActivity(), sizeList);
             sizerecycle.setAdapter(topListAdapter);
         }
         catch (Exception ignored){
@@ -725,7 +722,7 @@ public class ProductDetailShow extends Fragment implements pro_detail_interface 
     private void setColorListData(ArrayList<String> listofcolor, String prize) {
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
         colorrecycle.setLayoutManager(linearLayoutManager);
-        ColorListAdapter topListAdapter = new ColorListAdapter(getActivity(), listofcolor,prize,tv_price,ProductDetailShow.this);
+        SizeyListAdapter topListAdapter = new SizeyListAdapter(getActivity(), listofcolor,prize,tv_price,ProductDetailShow.this);
         colorrecycle.setAdapter(topListAdapter);
     }
 

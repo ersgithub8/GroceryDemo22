@@ -335,6 +335,7 @@
                                     android:textSize="14sp" />
 
                                 <RadioButton
+                                    android:visibility="gone"
                                     android:id="@+id/use_applepay"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"

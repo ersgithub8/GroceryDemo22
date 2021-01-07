@@ -198,8 +198,6 @@ public class Deal_Fragemnt extends Fragment {
                 try {
                     String status = response.getString("responce");
                     if (status.equals("true")) {
-//                        mShimmerViewContainer.stopShimmerAnimation();
-//                        mShimmerViewContainer.setVisibility(View.GONE);
                         Gson gson = new Gson();
                         Type listType = new TypeToken<List<Deal_Model>>() {
                         }.getType();
@@ -207,6 +205,9 @@ public class Deal_Fragemnt extends Fragment {
                         deal_product = new Deal_adapter(product_modelList, getActivity());
                         rv_cat.setAdapter(deal_product);
                         deal_product.notifyDataSetChanged();
+                        mShimmerViewContainer.stopShimmerAnimation();
+                        mShimmerViewContainer.setVisibility(View.GONE);
+
                         if (getActivity() != null) {
                             if (product_modelList.isEmpty()) {
                                 //  Toast.makeText(getActivity(), getResources().getString(R.string.no_rcord_found), Toast.LENGTH_SHORT).show();
@@ -223,7 +224,6 @@ public class Deal_Fragemnt extends Fragment {
                                 error.show();
                             }
                         }
-
                     } else {
                         mShimmerViewContainer.stopShimmerAnimation();
                         mShimmerViewContainer.setVisibility(View.GONE);
@@ -249,6 +249,9 @@ public class Deal_Fragemnt extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
+                mShimmerViewContainer.stopShimmerAnimation();
+                mShimmerViewContainer.setVisibility(View.GONE);
+                Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Activity activity=getActivity();
                     if(activity !=null)

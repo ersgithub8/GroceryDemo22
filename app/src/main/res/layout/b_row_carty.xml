@@ -135,13 +135,6 @@
                 android:layout_marginBottom="2dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
-                <Fonts.LatoBLack
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="3dp"
-                    android:id="@+id/tv_color"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_small" />
 
                 <Fonts.LatoBLack
                     android:id="@+id/tv_size"
@@ -150,6 +143,14 @@
                     android:layout_margin="3dp"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_small" />
+                <Fonts.LatoBLack
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:id="@+id/tv_color"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_small" />
+
 
             </LinearLayout>
 

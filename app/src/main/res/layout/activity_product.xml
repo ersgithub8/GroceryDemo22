@@ -267,26 +267,8 @@
                 >
                 <TextView
                     android:visibility="gone"
-                    android:id="@+id/color_text"
-                    android:layout_marginTop="-10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/color"
-                    android:padding="10dp"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:maxLines="1"
-                    />
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_below="@id/color_text"
-                    android:layout_marginStart="10dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/colorrecycler"
-                    />
-                <TextView
-                    android:layout_below="@id/colorrecycler"
                     android:id="@+id/size_text"
+                    android:layout_marginTop="-10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/size"
@@ -296,9 +278,27 @@
                     android:maxLines="1"
                     />
                 <androidx.recyclerview.widget.RecyclerView
-                    android:layout_marginStart="10dp"
                     android:layout_width="match_parent"
                     android:layout_below="@id/size_text"
+                    android:layout_marginStart="10dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/colorrecycler"
+                    />
+                <TextView
+                    android:layout_below="@id/colorrecycler"
+                    android:id="@+id/color_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/color"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:maxLines="1"
+                    />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_marginStart="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_below="@id/color_text"
                     android:layout_height="wrap_content"
                     android:id="@+id/sizerecyler"
                     />

@@ -60,7 +60,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + COLUMN_STOCK + " DOUBLE NOT NULL, "
                 + COLUMN_TITLE + " TEXT NOT NULL ,"
                 + COLUMN_STORE_ID + " TEXT NOT NULL ,"
-                + COLUMN_Color + " TEXT NOT NULL ,"
+                + COLUMN_Color + " TEXT ,"
                 + COLUMN_Size + " TEXT "
                 + ")";
 

@@ -2,7 +2,6 @@ package Adapter;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,6 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import Fragment.ProductDetailShow;
 import gogrocer.tcc.R;
@@ -19,20 +17,15 @@ import gogrocer.tcc.R;
 public class ColorListAdapter extends RecyclerView.Adapter<ColorListAdapter.MyViewHolder>{
     ArrayList<String> listData;
     Context context;
-    TextView textView;
-    public static int pos;
-    String pricee;
-    int x = -1;
-    pro_detail_interface anInterface;
-    ArrayList<String> prizeList = new ArrayList<>();
+    public static int sizepos;
+    public static String sizevalue;
 
-    public ColorListAdapter(Context context, ArrayList<String> listData,String pricee,TextView textView,pro_detail_interface anInterface) {
+    int x = -1;
+
+    public ColorListAdapter(Context context, ArrayList<String> listData) {
         this.context = context;
         this.listData = listData;
-        this.pricee=pricee;
-        this.textView = textView;
-        this.anInterface=anInterface;
-        pos = -1;
+        sizepos = -1;
     }
 
     @Override
@@ -51,9 +44,9 @@ public class ColorListAdapter extends RecyclerView.Adapter<ColorListAdapter.MyVi
         try {
             if (x == -1) {
                 if (listData.get(position).contains(listData.get(0))) {
-                    pos = position;
-                    anInterface.onclick(position);
-                    ProductDetailShow.cc = "-1";
+                    sizepos = position;
+                    sizevalue = listData.get(position);
+                    ProductDetailShow.ss = "-1";
                     x++;
                 }
             }
@@ -61,9 +54,9 @@ public class ColorListAdapter extends RecyclerView.Adapter<ColorListAdapter.MyVi
                 x++;
             }
         }
-        catch (Exception ignored){ }
+        catch (Exception ignored){}
 
-        if (position == pos) {
+        if (position == sizepos) {
             holder.size.setTextColor(Color.WHITE);
             holder.size.setBackgroundResource(R.color.colorPrimary);
         } else {
@@ -71,22 +64,13 @@ public class ColorListAdapter extends RecyclerView.Adapter<ColorListAdapter.MyVi
             holder.size.setBackgroundResource(R.color.gray);
         }
 
-        if (pricee.contains("|")){
-            String currentString = pricee;
-            String[] separated = currentString.split("\\|");
-            prizeList = new ArrayList<>(Arrays.asList(separated));
-        }
-        else {
-            prizeList.add(pricee);
-        }
-
         holder.size.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                pos = position;
-                textView.setText(prizeList.get(position)+" "+context.getResources().getString(R.string.currency));
-                anInterface.onclick(position);
+                sizepos = position;
+                sizevalue = listData.get(position);
                 notifyDataSetChanged();
+
             }
         });
 

@@ -15,18 +15,23 @@ import java.util.Arrays;
 import Fragment.ProductDetailShow;
 import gogrocer.tcc.R;
 
-public class SizeListAdapter extends RecyclerView.Adapter<SizeListAdapter.MyViewHolder>{
+public class SizeyListAdapter extends RecyclerView.Adapter<SizeyListAdapter.MyViewHolder>{
     ArrayList<String> listData;
     Context context;
-    public static int sizepos;
-    public static String sizevalue;
-
+    TextView textView;
+    public static int pos;
+    String pricee;
     int x = -1;
+    pro_detail_interface anInterface;
+    ArrayList<String> prizeList = new ArrayList<>();
 
-    public SizeListAdapter(Context context, ArrayList<String> listData) {
+    public SizeyListAdapter(Context context, ArrayList<String> listData, String pricee, TextView textView, pro_detail_interface anInterface) {
         this.context = context;
         this.listData = listData;
-        sizepos = -1;
+        this.pricee=pricee;
+        this.textView = textView;
+        this.anInterface=anInterface;
+        pos = -1;
     }
 
     @Override
@@ -45,9 +50,9 @@ public class SizeListAdapter extends RecyclerView.Adapter<SizeListAdapter.MyView
         try {
             if (x == -1) {
                 if (listData.get(position).contains(listData.get(0))) {
-                    sizepos = position;
-                    sizevalue = listData.get(position);
-                    ProductDetailShow.ss = "-1";
+                    pos = position;
+                    anInterface.onclick(position);
+                    ProductDetailShow.cc = "-1";
                     x++;
                 }
             }
@@ -55,9 +60,9 @@ public class SizeListAdapter extends RecyclerView.Adapter<SizeListAdapter.MyView
                 x++;
             }
         }
-        catch (Exception ignored){}
+        catch (Exception ignored){ }
 
-        if (position == sizepos) {
+        if (position == pos) {
             holder.size.setTextColor(Color.WHITE);
             holder.size.setBackgroundResource(R.color.colorPrimary);
         } else {
@@ -65,13 +70,22 @@ public class SizeListAdapter extends RecyclerView.Adapter<SizeListAdapter.MyView
             holder.size.setBackgroundResource(R.color.gray);
         }
 
+        if (pricee.contains("|")){
+            String currentString = pricee;
+            String[] separated = currentString.split("\\|");
+            prizeList = new ArrayList<>(Arrays.asList(separated));
+        }
+        else {
+            prizeList.add(pricee);
+        }
+
         holder.size.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sizepos = position;
-                sizevalue = listData.get(position);
+                pos = position;
+                textView.setText(prizeList.get(position)+" "+context.getResources().getString(R.string.currency));
+                anInterface.onclick(position);
                 notifyDataSetChanged();
-
             }
         });
 

@@ -72,7 +72,7 @@ public class BaseURL {
     public static String SAVE_STORE_RATING = BASE_URL + "index.php/Api/save_stars_stores";
     
     //deals
-    public static String DEALS = BASE_URL + "index.php/Api/deal_product";
+    public static String DEALS = BASE_URL + "index.php/api/deal_product";
 
     public static String GET_CATEGORY_URL = BASE_URL + "index.php/api/get_categories";
     public static String GET_SLIDER_CATEGORY_URL = BASE_URL + "index.php/api/get_sub_cat";
@@ -80,7 +80,6 @@ public class BaseURL {
     public static String COUPON_CODE = BASE_URL + "index.php/api/get_coupons";
 
     //Home PAGE
-
     public static String GET_MENU_PRODUCTS = BASE_URL + "index.php/api/icon";
     public static String GET_MENU_ICON_PRODUCT_URL = BASE_URL + "index.php/api/get_header_products";
     public static String GET_DEAL_OF_DAY_PRODUCTS = BASE_URL + "index.php/api/deal_product";

@@ -35,6 +35,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -236,7 +238,7 @@ public class Deal_adapter extends RecyclerView.Adapter<Deal_adapter.MyViewHolder
 
         if (mList.getStatus().equals("1")) {
 
-            holder.offer_product_prize.setText(context.getResources().getString(R.string.currency) + mList.getDeal_price());
+            holder.offer_product_prize.setText(mList.getDeal_price()+" "+context.getResources().getString(R.string.currency));
             holder.offer_product_prize.setTextColor(context.getResources().getColor(R.color.green));
             holder.offer_textview.setTextColor(context.getResources().getColor(R.color.green));
 //            holder.end_time.setText(mList.getEnd_time());
@@ -279,9 +281,30 @@ public class Deal_adapter extends RecyclerView.Adapter<Deal_adapter.MyViewHolder
                 holder.end_time.setText("وقت النهاية : تنقضي");
                 holder.end_time.setTextColor(context.getResources().getColor(R.color.color_3));
             }
-
         }
 
+        else {
+            holder.offer_product_prize.setText(mList.getDeal_price()+" "+context.getResources().getString(R.string.currency));
+            holder.offer_product_prize.setTextColor(context.getResources().getColor(R.color.green));
+            holder.offer_textview.setTextColor(context.getResources().getColor(R.color.green));
+//            holder.end_time.setText(mList.getEnd_time());
+//            holder.end_time.setTextColor(context.getResources().getColor(R.color.green));
+
+            if (language == null){
+                holder.end_time.setText("End Time : ".concat(mList.getEnd_time()));
+//                holder.end_time.setTextColor(context.getResources().getColor(R.color.green));
+            }
+            if (language.contains("english")) {
+                holder.end_time.setText("End Time : ".concat(mList.getEnd_time()));
+//                holder.end_time.setTextColor(context.getResources().getColor(R.color.green));
+
+            }
+            else {
+                holder.end_time.setText("وقت النهاية : ".concat(mList.getEnd_time()));
+//                holder.end_time.setTextColor(context.getResources().getColor(R.color.green));
+            }
+
+        }
 
         Glide.with(context)
                 .load(BaseURL.IMG_PRODUCT_URL + mList.getProduct_image())
@@ -290,18 +313,27 @@ public class Deal_adapter extends RecyclerView.Adapter<Deal_adapter.MyViewHolder
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .dontAnimate()
                 .into(holder.image);
-        holder.product_prize.setText(context.getResources().getString(R.string.currency) + mList.getPrice());
+
+        if (mList.getPrice().contains("|")){
+            String currentString = mList.getPrice();
+            String[] separated = currentString.split("\\|");
+            holder.product_prize.setText(separated[0]+" "+context.getResources().getString(R.string.currency));
+        }
+        else {
+            holder.product_prize.setText(mList.getPrice()+" "+context.getResources().getString(R.string.currency));
+        }
+
         if (language == null){
             holder.product_nmae.setText(mList.getProduct_name());
-            holder.product_prize.setText( context.getResources().getString(R.string.currency) + mList.getPrice());
+        //    holder.product_prize.setText( context.getResources().getString(R.string.currency) + mList.getPrice());
         }
         if (language.contains("english")) {
             holder.product_nmae.setText(mList.getProduct_name());
-            holder.product_prize.setText( context.getResources().getString(R.string.currency) + mList.getPrice());
+        //    holder.product_prize.setText( context.getResources().getString(R.string.currency) + mList.getPrice());
         }
         else {
             holder.product_nmae.setText(mList.getProduct_name_arb());
-            holder.product_prize.setText(context.getResources().getString(R.string.currency) + mList.getPrice());
+        //    holder.product_prize.setText(context.getResources().getString(R.string.currency) + mList.getPrice());
         }
         holder.start_time.setText(mList.getStart_time());
 
@@ -331,6 +363,8 @@ public class Deal_adapter extends RecyclerView.Adapter<Deal_adapter.MyViewHolder
                     intent.putExtra("description",mList.getProduct_description_arb());
 
                 }
+                intent.putExtra("size",mList.getColor());
+                intent.putExtra("color",mList.getSize());
 
                 intent.putExtra("product_id",mList.getProduct_id());
                 intent.putExtra("category_id",mList.getCategory_id());
