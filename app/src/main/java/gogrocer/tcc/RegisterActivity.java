@@ -368,13 +368,10 @@ public class RegisterActivity extends AppCompatActivity {
                 intent.putExtra("phone",getphone);
                 String refer=et_refer.getText().toString();
                 if(refer.isEmpty()){
-//                    Toast.makeText(this, "adasdas", Toast.LENGTH_SHORT).show();
                     refer="";
                 }
                 intent.putExtra("referalcode",refer);
-
                 startActivity(intent);
-
 //                makeRegisterRequest(getname, getphone, getemail, getpassword);
             }
         }

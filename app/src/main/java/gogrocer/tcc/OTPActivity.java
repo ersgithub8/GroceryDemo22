@@ -104,17 +104,13 @@ public class OTPActivity extends AppCompatActivity {
         final SweetAlertDialog loading=new SweetAlertDialog(OTPActivity.this,SweetAlertDialog.PROGRESS_TYPE);
         loading.setCancelable(false);
         loading.setTitleText("Loading...");
-
         loading.getProgressHelper().setBarColor(getResources().getColor(R.color.green));
-
         loading.show();
-
 
         // Tag used to cancel the request
         String tag_json_obj = "json_register_req";
 
         Map<String, String> params = new HashMap<String, String>();
-
         params.put("phone", phone);
 
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
@@ -122,7 +118,6 @@ public class OTPActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(JSONObject response) {
-//                Log.d(TAG, response.toString());
 
                 try {
                     loading.dismiss();
@@ -130,8 +125,7 @@ public class OTPActivity extends AppCompatActivity {
                     if (status) {
 
                         code = response.getString("code");
-                        Toast.makeText(OTPActivity.this, code, Toast.LENGTH_SHORT).show();
-//                        Toast.makeText(OTPActivity.this, "" + msg, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(OTPActivity.this, code, Toast.LENGTH_SHORT).show();
 
                     } else {
                         String error = response.getString("error");
@@ -158,7 +152,6 @@ public class OTPActivity extends AppCompatActivity {
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
     }
-
 
     private void makeRegisterRequest(String name, String mobile,
                                      String email, String password) {
