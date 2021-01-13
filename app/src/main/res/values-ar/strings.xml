@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="wanttoadd">أضف هذه الفئة إلى قائمة الرغبات؟</string>
+    <string name="b_discount_first">خصم الطلب الأول</string>
 
+
+    <string name="tax">الضريبة </string>
+    <string name="bill">الفاتورة</string>
+    <string name="price">السعر</string>
+    <string name="detail">التفاصيل</string>
+    <string name="delivery_charge_new">تكاليف الشحن</string>
+    <string name="wanttoadd">أضف هذه الفئة إلى قائمة الرغبات؟</string>
     <string name="add_to_cart">أضيف إلى عربة التسوق بنجاح</string>
     <string name="select_one">رجاءا اختر واحدة</string>
-
     <string name="ok">حسنا</string>
     <string name="loading">جار التحميل…</string>
     <string name="select_quan">حدد الكمية</string>
@@ -40,11 +46,12 @@
 
     <string name="productsize" translatable="false">حجم المنتج :  </string>
     <string name="productcolor" translatable="false">لون المنتج :  </string>
+    <string name="b_total">السعر الإجمالي</string>
 
     <string name="ratiii">التقييم والمراجعات</string>
 
     <string name="wish">قائمة الرغبات</string>
-    <string name="vip_dis">خصم VIP : </string>
+    <string name="vip_dis">الخصم VIP</string>
     <string name="maroof">معروف</string>
     <string name="wallet_ammount">مبلغ محفظتي : </string>
     <string name="j6_point">نقاط J6 : </string>

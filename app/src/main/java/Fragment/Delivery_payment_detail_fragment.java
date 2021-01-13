@@ -50,7 +50,6 @@ import util.DatabaseHandler;
 import util.Session_management;
 
 import static android.content.Context.MODE_PRIVATE;
-
 /**
  * Created by Bilal Tahir on 25/8/2020.
  */
@@ -58,11 +57,9 @@ import static android.content.Context.MODE_PRIVATE;
 public class Delivery_payment_detail_fragment extends Fragment {
 
     private static String TAG = Delivery_payment_detail_fragment.class.getSimpleName();
-
     private TextView tv_timeslot, tv_address, tv_total,note,tv_dis,tv_totalamount;
     private LinearLayout btn_order;
     private static DecimalFormat df = new DecimalFormat("0.00");
-
     Double discount;
     private int checkfo= 0;
     private String getlocation_id = "";
@@ -70,36 +67,41 @@ public class Delivery_payment_detail_fragment extends Fragment {
     private String getdate = "";
     private String getuser_id = "";
     private String getstore_id = "";
-    SweetAlertDialog dialog;
+    SweetAlertDialog progress_dialoge;
     private int deli_charges;
     Double total;
-SharedPreferences preferences;
+    SharedPreferences preferences;
     private DatabaseHandler db_cart;
     private Session_management sessionManagement;
-
     SharedPreferences sharedPreferences;
     String usrid;
-    public Delivery_payment_detail_fragment() {
-        // Required empty public constructor
-    }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+    TextView item_quantity,item_price,item_deliverycharges,item_tax,item_vip,item_firstorder,item_total,item_vip_text;
 
+    public Delivery_payment_detail_fragment() { }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_confirm_order, container, false);
-
+        View view = inflater.inflate(R.layout.fragment_confirm_bill, container, false);
         ((MainActivity) getActivity()).setTitle(getResources().getString(R.string.payment));
+
+        progress_dialoge=new SweetAlertDialog(getActivity(),SweetAlertDialog.PROGRESS_TYPE)
+                .setTitleText("Loading");
+        progress_dialoge.setCancelable(false);
+        progress_dialoge.show();
+
+        item_vip_text=view.findViewById(R.id.item_vip_text);
+        item_deliverycharges = view.findViewById(R.id.item_deliverycharges);
+        item_quantity = view.findViewById(R.id.item_quantity);
+        item_price = view.findViewById(R.id.item_price);
+        item_deliverycharges = view.findViewById(R.id.item_deliverycharges);
+        item_tax = view.findViewById(R.id.item_tax);
+        item_vip = view.findViewById(R.id.item_vip);
+        item_firstorder = view.findViewById(R.id.item_firstorder);
+        item_total = view.findViewById(R.id.item_total);
 
         db_cart = new DatabaseHandler(getActivity());
         sessionManagement = new Session_management(getActivity());
-
-
 
         tv_timeslot = (TextView) view.findViewById(R.id.textTimeSlot);
         tv_address = (TextView) view.findViewById(R.id.txtAddress);
@@ -136,14 +138,14 @@ SharedPreferences preferences;
         final String getaddress = getArguments().getString("address");
 
         tv_timeslot.setText(getdate + " " + gettime);
-        tv_address.setText(getaddress);
 
+        tv_address.setText(getaddress);
         total = Double.parseDouble(db_cart.getTotalAmount()) + deli_charges;
 
         //tv_total.setText("" + db_cart.getTotalAmount());
         //tv_item.setText("" + db_cart.getWishlistCount());
-        String user_id = sessionManagement.getUserDetails().get(BaseURL.KEY_ID);
 
+        String user_id = sessionManagement.getUserDetails().get(BaseURL.KEY_ID);
 
 //        tv_total.setText(getResources().getString(R.string.tv_cart_item) + db_cart.getCartCount() + "\n" +
 //                getResources().getString(R.string.amount) + db_cart.getTotalAmount() + "\n" +
@@ -151,16 +153,16 @@ SharedPreferences preferences;
 //                getResources().getString(R.string.total_amount) +
 //                db_cart.getTotalAmount() + " + " + deli_charges + " = " + total+ getResources().getString(R.string.currency));
 
-        tv_total.setText(getResources().getString(R.string.tv_cart_item) + db_cart.getCartCount() + "\n" +
-                getResources().getString(R.string.amount) + db_cart.getTotalAmount() + "\n" +
-                getResources().getString(R.string.delivery_charge) + deli_charges);
+//        tv_total.setText(getResources().getString(R.string.tv_cart_item) + db_cart.getCartCount() + "\n" +
+//                getResources().getString(R.string.amount) + db_cart.getTotalAmount() + "\n" +
+//                getResources().getString(R.string.delivery_charge) + deli_charges);
 
-        dialog=new SweetAlertDialog(getActivity(),SweetAlertDialog.PROGRESS_TYPE)
-                .setTitleText("Loading");
-        dialog.setCancelable(false);
-        dialog.show();
+        item_deliverycharges.setText(String.valueOf(deli_charges));
+        item_price.setText(db_cart.getTotalAmount());
+        item_quantity.setText(getResources().getString(R.string.tv_cart_item) + db_cart.getCartCount());
 
         checkfirstorder(usrid, String.valueOf(total));
+
         getdiscount(user_id);
 
         btn_order.setOnClickListener(new View.OnClickListener() {
@@ -218,97 +220,6 @@ SharedPreferences preferences;
         });
 
         return view;
-    }
-
-    private void getdiscount(final String user_id) {
-        String tag_json_obj = "json_get_address_req";
-
-        Map<String, String> params = new HashMap<String, String>();
-        params.put("user_id", user_id);
-
-        CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
-                BaseURL.GET_VIP_DISCOUNT, params, new Response.Listener<JSONObject>() {
-
-            @Override
-            public void onResponse(JSONObject response) {
-                Log.d(TAG, response.toString());
-
-                try {
-                    Boolean status = response.getBoolean("responce");
-
-                    //Toast.makeText(getActivity(),user_id,Toast.LENGTH_LONG).show();
-
-                    if (status) {
-
-                        String temp = response.getString("discount");
-                        String dis = temp.replace("%","");
-                        float f1 = Float.parseFloat(dis)/100;
-                        float amount= Float.parseFloat(db_cart.getTotalAmount());
-                        float famount=amount-(amount*f1);
-
-                        total = Double.parseDouble(String.valueOf(famount)) + deli_charges;
-
-                        tv_dis.setText(getResources().getString(R.string.vip_dis) + " " +temp);
-                        if (checkfo == 1){
-                            total = Double.parseDouble(df.format(total - discount));
-                            tv_totalamount.setText(getResources().getString(R.string.Discount)+ discount+"\n"+
-                                    getResources().getString(R.string.total_amount) +
-                                    String.valueOf(famount) + " + " + deli_charges + " - "+discount+ " = " + total+ getResources().getString(R.string.currency));
-                        }
-                        else {
-                            tv_totalamount.setText(getResources().getString(R.string.total_amount) +
-                                    String.valueOf(famount) + " + " + deli_charges + " = " + total + getResources().getString(R.string.currency));
-                        }
-                    }
-                    else {
-
-                        total = Double.parseDouble(db_cart.getTotalAmount()) + deli_charges;
-
-                        tv_dis.setVisibility(View.GONE);
-
-                        if (checkfo == 1){
-                            total = Double.parseDouble(df.format(total - discount));
-                            tv_totalamount.setText(getResources().getString(R.string.Discount)+ discount+"\n"+
-                                    getResources().getString(R.string.total_amount) +
-                                    db_cart.getTotalAmount() + " + " + deli_charges + " - "+discount+ " = " + total + getResources().getString(R.string.currency));
-                        }
-                        else {
-                            tv_totalamount.setText(getResources().getString(R.string.total_amount) +
-                                    db_cart.getTotalAmount() + " + " + deli_charges + " = " + total + getResources().getString(R.string.currency));
-                        }
-                    }
-                    dialog.dismiss();
-
-                } catch (JSONException e) {
-                    total = Double.parseDouble(db_cart.getTotalAmount()) + deli_charges;
-                    dialog.dismiss();
-
-                    tv_dis.setVisibility(View.GONE);
-
-                    tv_totalamount.setText(getResources().getString(R.string.total_amount) +
-                            db_cart.getTotalAmount() + " + " + deli_charges + " = " + total+ getResources().getString(R.string.currency));
-
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.d(TAG, "Error: " + error.getMessage());
-                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-                    if (getActivity() != null) {
-                        dialog.dismiss();
-
-                        Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-        });
-
-        // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
-
     }
 
 //    private void attemptOrder() {
@@ -401,10 +312,8 @@ SharedPreferences preferences;
 //    }
 
 
-
     public void checkfirstorder(String userid, final String total){
-        final SweetAlertDialog alertDialog=new SweetAlertDialog(getActivity(),SweetAlertDialog.PROGRESS_TYPE)
-                .setTitleText("Loading");
+        final SweetAlertDialog alertDialog=new SweetAlertDialog(getActivity(),SweetAlertDialog.PROGRESS_TYPE).setTitleText("Loading");
         alertDialog.setCancelable(false);
         //alertDialog.show();
 
@@ -418,8 +327,6 @@ SharedPreferences preferences;
 
             @Override
             public void onResponse(JSONObject response) {
-
-
                 try {
                     alertDialog.dismiss();
                     if (response != null && response.length() > 0) {
@@ -427,6 +334,8 @@ SharedPreferences preferences;
                         if (status) {
 
                             discount=(Double.parseDouble(total)*10)/100;
+                            item_firstorder.setText("-"+String.valueOf(discount));
+                            item_firstorder.setTextColor(getResources().getColor(R.color.red_btn_bg_color));
 
                             //Toast.makeText(getActivity(), total+discount, Toast.LENGTH_SHORT).show();
 //                            tv_total.setText(getResources().getString(R.string.tv_cart_item) + db_cart.getCartCount() + "\n" +
@@ -435,7 +344,6 @@ SharedPreferences preferences;
 //                                    getResources().getString(R.string.Discount)+ discount+"\n"+
 //                                    getResources().getString(R.string.total_amount) +
 //                                    db_cart.getTotalAmount() + " + " + deli_charges +"-"+discount+ " = " + (Double.parseDouble(total)-discount)+" "+ getResources().getString(R.string.currency));
-
                                     checkfo=1;
                         }else{
                                     checkfo=2;
@@ -458,9 +366,6 @@ SharedPreferences preferences;
                     if(activity !=null)
                     Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
 
-
-
-
                     checkfo
                             =0;
                 }
@@ -471,4 +376,109 @@ SharedPreferences preferences;
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 
     }
+
+
+    private void getdiscount(final String user_id) {
+        String tag_json_obj = "json_get_address_req";
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("user_id", user_id);
+        CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
+                BaseURL.GET_VIP_DISCOUNT, params, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d(TAG, response.toString());
+
+                try {
+                    Boolean status = response.getBoolean("responce");
+
+                    if (status) {
+
+                        String temp = response.getString("discount");
+                        item_vip_text.setText(getResources().getString(R.string.vip_dis)+" "+temp);
+
+                        String dis = temp.replace("%","");
+                        float f1 = Float.parseFloat(dis)/100;
+                        float amount= Float.parseFloat(db_cart.getTotalAmount());
+                        float famount=amount-(amount*f1);
+
+                        total = Double.parseDouble(String.valueOf(famount)) + deli_charges;
+
+                        tv_dis.setText(getResources().getString(R.string.vip_dis) + " " +temp);
+
+                        item_vip.setText("-"+String.valueOf(amount*f1));
+                        item_vip.setTextColor(getResources().getColor(R.color.red_btn_bg_color));
+
+                        if (checkfo == 1){
+                            total = Double.parseDouble(df.format(total - discount));
+                            tv_totalamount.setText(getResources().getString(R.string.Discount)+ discount+"\n"+
+                                    getResources().getString(R.string.total_amount) +
+                                    String.valueOf(famount) + " + " + deli_charges + " - "+discount+ " = " + total+ getResources().getString(R.string.currency));
+
+                            item_total.setText(String.valueOf(total));
+
+                        }
+                        else {
+                            tv_totalamount.setText(getResources().getString(R.string.total_amount) +
+                                    String.valueOf(famount) + " + " + deli_charges + " = " + total + getResources().getString(R.string.currency));
+                            item_total.setText(String.valueOf(total));
+
+                        }
+                    }
+                    else {
+
+                        total = Double.parseDouble(db_cart.getTotalAmount()) + deli_charges;
+
+                        tv_dis.setVisibility(View.GONE);
+
+                        if (checkfo == 1){
+                            total = Double.parseDouble(df.format(total - discount));
+                            tv_totalamount.setText(getResources().getString(R.string.Discount)+ discount+"\n"+
+                                    getResources().getString(R.string.total_amount) +
+                                    db_cart.getTotalAmount() + " + " + deli_charges + " - "+discount+ " = " + total + getResources().getString(R.string.currency));
+
+                            item_total.setText(String.valueOf(total));
+                        }
+                        else {
+
+                            tv_totalamount.setText(getResources().getString(R.string.total_amount) +
+                                    db_cart.getTotalAmount() + " + " + deli_charges + " = " + total + getResources().getString(R.string.currency));
+
+                            item_total.setText(String.valueOf(total));
+                        }
+                    }
+
+                    progress_dialoge.dismiss();
+
+                } catch (JSONException e) {
+                    total = Double.parseDouble(db_cart.getTotalAmount()) + deli_charges;
+                    item_total.setText(String.valueOf(total));
+                    tv_dis.setVisibility(View.GONE);
+                    tv_totalamount.setText(getResources().getString(R.string.total_amount) +
+                            db_cart.getTotalAmount() + " + " + deli_charges + " = " + total+ getResources().getString(R.string.currency));
+
+                    progress_dialoge.dismiss();
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+
+                progress_dialoge.dismiss();
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    if (getActivity() != null) {
+                        Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+
+    }
+
 }

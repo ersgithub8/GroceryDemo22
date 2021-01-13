@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="b_discount_first">First Order Disc.</string>
+
+
+    <string name="b_total">Total Price</string>
+    <string name="price">Price</string>
+    <string name="detail">Detail</string>
+    <string name="tax">Tax</string>
+    <string name="bill">Bill</string>
+    <string name="delivery_charge_new">Delivery Charges</string>
     <string name="wanttoadd">Add this category into wishlist?</string>
-
-
     <string name="select_one">Please Select One</string>
     <string name="add_to_cart">Add to Cart Successfully</string>
     <string name="ok">OK</string>
@@ -37,7 +44,7 @@
     <string name="color" translatable="false">Color :</string>
     <string name="ratiii">Rating &amp; Reviews</string>
 
-    <string name="vip_dis">VIP Discount : </string>
+    <string name="vip_dis">VIP Discount</string>
     <string name="maroof">Maroof</string>
     <string name="wish">Wishlist</string>
 
