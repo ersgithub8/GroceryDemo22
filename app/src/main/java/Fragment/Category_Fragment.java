@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +49,7 @@ import Config.BaseURL;
 import Model.Home_Icon_model;
 import Model.Product_model;
 import Model.Product_model;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.MainActivity;
 import gogrocer.tcc.R;
@@ -65,6 +67,7 @@ public class Category_Fragment extends Fragment {
     private TextView textView;
     Inerface inerface;
 
+    String userid;
     View viewb;
     Product_adapter product_adapter;
     List<Product_model> product_models=new ArrayList<>();
@@ -78,6 +81,9 @@ public class Category_Fragment extends Fragment {
 
         textView = (TextView) view.findViewById(R.id.no_product);
         recyclerView = (RecyclerView) view.findViewById(R.id.rect);
+
+        SharedPreferences sharedPreferences=getActivity().getSharedPreferences(BaseURL.PREFS_NAME,MODE_PRIVATE);
+        userid=sharedPreferences.getString(BaseURL.KEY_ID,"0");
 
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
         mShimmerViewContainer1 = view.findViewById(R.id.shimmer_view_container1);
@@ -137,15 +143,32 @@ public class Category_Fragment extends Fragment {
                     viewb=view;
                 }
                 }
-
-
-
-//                view.setPressed(true);/
-
             }
 
             @Override
-            public void onLongItemClick(View view, int position) {
+            public void onLongItemClick(View view, final int position) {
+
+                final SweetAlertDialog dialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.CUSTOM_IMAGE_TYPE);
+                dialog.setTitleText(getResources().getString(R.string.wanttoadd));
+                dialog.setCustomImage(R.drawable.heartf);
+                dialog.setConfirmText(getResources().getString(R.string.tv_pro_add));
+                dialog.setCancelText(getResources().getString(R.string.Remove));
+                dialog.show();
+
+                dialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        dialog.dismiss();
+                        addinfavcat(userid,menu_models.get(position).getId());
+                    }
+                });
+                dialog.setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        removefromfavcat(userid,menu_models.get(position).getId());
+                        dialog.dismiss();
+                    }
+                });
 
             }
         }));
@@ -341,4 +364,96 @@ public class Category_Fragment extends Fragment {
         mShimmerViewContainer1.stopShimmerAnimation();
     }
 
+    public void addinfavcat(String userid, final String productid){
+
+        final SweetAlertDialog loading=new SweetAlertDialog(getActivity(),SweetAlertDialog.PROGRESS_TYPE)
+        .setTitleText("Adding in Favourite");
+        loading.setCancelable(false);
+        loading.show();
+
+        String tag_json_obj = "json_category_req";
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("user_id", userid);
+        params.put("cat_id",productid);
+
+        CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
+                BaseURL.addfavouratecat, params, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    loading.dismiss();
+                    Boolean status = response.getBoolean("response");
+                    if (status) {
+                        Toast.makeText(getActivity(), response.getString("msg"), Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(getActivity(), response.getString("msg"), Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    loading.dismiss();
+                    Toast.makeText(getActivity(), e+"", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                loading.dismiss();
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
+
+    public void removefromfavcat(String userid, String productid){
+        final SweetAlertDialog loading=new SweetAlertDialog(getActivity(),SweetAlertDialog.PROGRESS_TYPE)
+        .setTitleText("Removing From Favourite");
+        loading.setCancelable(false);
+        loading.show();
+        String tag_json_obj = "json_category_req";
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("user_id", userid);
+        params.put("cat_id",productid);
+
+        CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
+                BaseURL.removefavouratecat, params, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    loading.dismiss();
+                    Boolean status = response.getBoolean("response");
+                    if (status) {
+                        loading.dismiss();
+                        Toast.makeText(getActivity(), response.getString("data"), Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        loading.dismiss();
+                    }
+
+                } catch (JSONException e) {
+                    loading.dismiss();
+                    e.printStackTrace();
+                    Toast.makeText(getActivity(), e+"", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Activity activity=getActivity();
+                    loading.dismiss();
+                    if(activity !=null)
+                        Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+                    loading.dismiss();
+                }
+            }
+        });
+        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+    }
 }

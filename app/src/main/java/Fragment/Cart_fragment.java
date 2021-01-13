@@ -464,7 +464,7 @@ public class Cart_fragment extends Fragment implements View.OnClickListener,rela
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Activity activity=getActivity();
                     if(activity != null && isAdded())
-                    Toast.makeText(getActivity(), "Connection Time out", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
 
                     loading.dismiss();
                 }

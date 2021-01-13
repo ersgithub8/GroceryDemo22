@@ -61,6 +61,7 @@ import Model.Category_model;
 import Model.Home_Icon_model;
 import Model.Product_model;
 import Model.Store_Model;
+import Model.Store_main_model;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.CustomSlider;
 import gogrocer.tcc.MainActivity;
@@ -83,7 +84,7 @@ public class StoreFragment extends Fragment implements Main_new {
     String city;
     private ShimmerFrameLayout mShimmerViewContainer,shimmy;
     private RecyclerView rv_headre_icons,catprod,rv_top_selling;
-    List<Store_Model> store_models=new ArrayList<>();
+    List<Store_main_model> store_models=new ArrayList<>();
     Store_Adapter store_adapter;
     FloatingActionButton floatingActionButton;
     TextView t1,t2;
@@ -301,7 +302,7 @@ public class StoreFragment extends Fragment implements Main_new {
                 Fragment fm = new Product_fragment();
                 args.putString("cat_id", getid);
                 args.putString("name",menu_models.get(position).getTitle());
-                args.putString("user_email",store_models.get(position).getUser_email());
+                args.putString("user_email",store_models.get(position).getStore_details());
                 args.putString("user_phone",store_models.get(position).getUser_phone());
                 fm.setArguments(args);
                 FragmentManager fragmentManager = getFragmentManager();
@@ -321,13 +322,13 @@ public class StoreFragment extends Fragment implements Main_new {
             @Override
             public void onItemClick(View view, int position) {
 
-                storeid = store_models.get(position).getUser_id();
+                storeid = store_models.get(position).getStoer_id();
                 Bundle args = new Bundle();
                 Fragment fm = new Product_fragment();
                 args.putString("storeid", storeid);
                 args.putString("laddan_jaffery", "store");
-                args.putString("name",store_models.get(position).getUser_name());
-                args.putString("user_email",store_models.get(position).getUser_email());
+                args.putString("name",store_models.get(position).getStore_name());
+                args.putString("user_email",store_models.get(position).getStore_details());
                 args.putString("user_phone",store_models.get(position).getUser_phone());
                 fm.setArguments(args);
                 FragmentManager fragmentManager = getFragmentManager();
@@ -365,7 +366,7 @@ public class StoreFragment extends Fragment implements Main_new {
                         {
                             t1.setVisibility(View.VISIBLE);
                             Gson gson=new Gson();
-                            Type listtype=new TypeToken<List<Store_Model>>(){
+                            Type listtype=new TypeToken<List<Store_main_model>>(){
 
                             }.getType();
 
@@ -374,11 +375,7 @@ public class StoreFragment extends Fragment implements Main_new {
                             stores.setLayoutManager(new GridLayoutManager(getActivity(),3));
                             stores.setAdapter(store_adapter);
                             store_adapter.notifyDataSetChanged();
-
                         }
-
-
-
                     }
                 }catch (Exception e){
                     e.printStackTrace();

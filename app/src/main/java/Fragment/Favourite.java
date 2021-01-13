@@ -49,6 +49,7 @@ import Model.Home_Icon_model;
 import Model.Product_model;
 import Model.Product_model;
 import Model.Store_Model;
+import Model.Store_main_model;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.MainActivity;
 import gogrocer.tcc.R;
@@ -76,7 +77,7 @@ public class Favourite extends Fragment {
     private List<Home_Icon_model> menu_models = new ArrayList<>();
 
     private List<Product_model> product_models = new ArrayList<>();
-    private List<Store_Model> store_models = new ArrayList<>();
+    private List<Store_main_model> store_models = new ArrayList<>();
     private List<Category_model> category_models = new ArrayList<>();
 
     @Override
@@ -215,12 +216,12 @@ public class Favourite extends Fragment {
             @Override
             public void onItemClick(View view, int position) {
                 String storeid;
-                storeid = store_models.get(position).getUser_id();
+                storeid = store_models.get(position).getStoer_id();
                 Bundle args = new Bundle();
                 Fragment fm = new Product_fragment();
                 args.putString("storeid", storeid);
                 args.putString("laddan_jaffery", "store");
-                args.putString("user_email",store_models.get(position).getUser_email());
+                args.putString("user_email",store_models.get(position).getStore_details());
                 args.putString("user_phone",store_models.get(position).getUser_phone());
                 args.putString("name",store_models.get(position).getUser_name());
                 fm.setArguments(args);
@@ -372,7 +373,7 @@ public class Favourite extends Fragment {
                             mShimmerViewContainer.setVisibility(View.GONE);
 
                             Gson gson = new Gson();
-                            Type listType = new TypeToken<List<Store_Model>>() {
+                            Type listType = new TypeToken<List<Store_main_model>>() {
                             }.getType();
                             store_models = gson.fromJson(response.getString("data"), listType);
                             store_adapter = new Store_Adapter(getActivity(),store_models);

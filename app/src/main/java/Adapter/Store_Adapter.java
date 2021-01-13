@@ -19,15 +19,16 @@ import java.util.List;
 
 import Config.BaseURL;
 import Model.Store_Model;
+import Model.Store_main_model;
 import de.hdodenhof.circleimageview.CircleImageView;
 import gogrocer.tcc.R;
 
 public class Store_Adapter extends RecyclerView.Adapter<Store_Adapter.Store_VH> {
 
-    List<Store_Model> store_models;
+    List<Store_main_model> store_models;
     Context context;
     float rate;
-    public Store_Adapter(Context context,List<Store_Model> store_models) {
+    public Store_Adapter(Context context,List<Store_main_model> store_models) {
         this.store_models = store_models;
         this.context=context;
 //        this.context = context;
@@ -46,7 +47,7 @@ public class Store_Adapter extends RecyclerView.Adapter<Store_Adapter.Store_VH> 
     @Override
     public void onBindViewHolder(@NonNull Store_VH holder, int position) {
 
-        Store_Model modellist=store_models.get(position);
+        Store_main_model modellist=store_models.get(position);
 
         Glide.with(context)
                 .load(BaseURL.IMG_PROFILE_URL + modellist.getUser_image())
@@ -58,13 +59,13 @@ public class Store_Adapter extends RecyclerView.Adapter<Store_Adapter.Store_VH> 
 
         holder.storename.setText(modellist.getUser_name());
 
-        if (modellist.getStar() == null){
-            rate = 0;
-        }
-        else {
-            rate = Float.parseFloat(modellist.getStar());
-        }
-        holder.ratingBar.setRating(rate);
+//        if (modellist.getStar() == null){
+//            rate = 0;
+//        }
+//        else {
+//            rate = Float.parseFloat(modellist.getStar());
+//        }
+        //holder.ratingBar.setRating(rate);
 
     }
 

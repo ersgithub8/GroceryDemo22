@@ -133,7 +133,7 @@ SharedPreferences preferences;
         getlocation_id = getArguments().getString("location_id");
         getstore_id = getArguments().getString("store_id");
         deli_charges = Integer.parseInt(getArguments().getString("deli_charges"));
-        String getaddress = getArguments().getString("address");
+        final String getaddress = getArguments().getString("address");
 
         tv_timeslot.setText(getdate + " " + gettime);
         tv_address.setText(getaddress);
@@ -195,12 +195,16 @@ SharedPreferences preferences;
                         fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
                                 .addToBackStack(null).commit();
                         SharedPref.putString(getActivity(),BaseURL.TOTAL_AMOUNT, String.valueOf(total-discount));
-                    }else{
-                        SweetAlertDialog dialog=new SweetAlertDialog(getActivity(),SweetAlertDialog.ERROR_TYPE).setTitleText("Something went wrong try again later")
-                                .setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
+                    }
+                    else{
+                        final SweetAlertDialog dialog=new SweetAlertDialog(getActivity(),SweetAlertDialog.ERROR_TYPE);
+                                dialog.setTitleText(getResources().getString(R.string.connection_time_out))
+                                .setConfirmButton(getResources().getString(R.string.ok)
+                                        , new SweetAlertDialog.OnSweetClickListener() {
                                     @Override
                                     public void onClick(SweetAlertDialog sweetAlertDialog) {
                                         getActivity().onBackPressed();
+                                        dialog.dismiss();
                                     }
                                 });
                         dialog.setCancelable(false);
@@ -208,6 +212,7 @@ SharedPreferences preferences;
                     }
                 } else {
                     ((MainActivity) getActivity()).onNetworkConnectionChanged(false);
+                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                 }
             }
         });

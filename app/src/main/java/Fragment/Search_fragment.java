@@ -53,6 +53,7 @@ import Adapter.SuggestionAdapter;
 import Config.BaseURL;
 import Model.Product_model;
 import Model.Store_Model;
+import Model.Store_main_model;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import gogrocer.tcc.AppController;
 import gogrocer.tcc.MainActivity;
@@ -83,7 +84,7 @@ public class Search_fragment extends Fragment {
     private Product_adapter adapter_product;
 
     private TextView Texty;
-    List<Store_Model> store_models=new ArrayList<>();
+    List<Store_main_model> store_models=new ArrayList<>();
     Store_Adapter store_adapter;
     RadioButton store,product;
 
@@ -183,13 +184,13 @@ public class Search_fragment extends Fragment {
             @Override
             public void onItemClick(View view, int position) {
 
-                String storeid = store_models.get(position).getUser_id();
+                String storeid = store_models.get(position).getStoer_id();
                 Bundle args = new Bundle();
                 Fragment fm = new Product_fragment();
                 args.putString("storeid", storeid);
                 args.putString("laddan_jaffery", "store");
                 args.putString("name",store_models.get(position).getUser_name());
-                args.putString("user_email",store_models.get(position).getUser_email());
+                args.putString("user_email",store_models.get(position).getStore_details());
                 args.putString("user_phone",store_models.get(position).getUser_phone());
                 fm.setArguments(args);
                 FragmentManager fragmentManager = getFragmentManager();
@@ -361,10 +362,9 @@ public class Search_fragment extends Fragment {
                         if(status)
                         {
                             Gson gson=new Gson();
-                            Type listtype=new TypeToken<List<Store_Model>>(){
+                            Type listtype=new TypeToken<List<Store_main_model>>(){
 
                             }.getType();
-                            
                             store_models=gson.fromJson(response.getString("data"),listtype);
                             store_adapter=new Store_Adapter(getActivity(),store_models);
                             stores.setLayoutManager(new GridLayoutManager(getActivity(),3));

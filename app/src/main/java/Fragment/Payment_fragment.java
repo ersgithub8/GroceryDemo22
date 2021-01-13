@@ -60,6 +60,7 @@ import util.DatabaseHandler;
 import util.Session_management;
 
 import static Config.BaseURL.PREFS_NAME;
+import static Config.BaseURL.getallrating;
 import static com.android.volley.VolleyLog.TAG;
 
 
@@ -91,6 +92,7 @@ public class Payment_fragment extends Fragment {
     EditText note;
     LinearLayout Promo_code_layout, Coupon_and_wallet;
     RelativeLayout Apply_Coupon_Code, Relative_used_wallet, Relative_used_coupon;
+    SweetAlertDialog dialog;
 
     public Payment_fragment() {
 
@@ -114,6 +116,8 @@ public class Payment_fragment extends Fragment {
         ((MainActivity) getActivity()).setTitle(getResources().getString(R.string.payment));
 
         Prefrence_TotalAmmount = SharedPref.getString(getActivity(), BaseURL.TOTAL_AMOUNT);
+        dialog=new SweetAlertDialog(getActivity(),SweetAlertDialog.PROGRESS_TYPE);
+        dialog.setTitleText("Loading...");
 
         note=view.findViewById(R.id.extra_note);
         radioGroup = (RadioGroup) view.findViewById(R.id.radio_group);
@@ -126,6 +130,7 @@ public class Payment_fragment extends Fragment {
             }
         });
 
+        confirm = (RelativeLayout) view.findViewById(R.id.confirm_order);
 
         Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "Font/Bold.ttf");
         checkBox_Wallet = (CheckBox) view.findViewById(R.id.use_wallet);
@@ -264,8 +269,6 @@ public class Payment_fragment extends Fragment {
             }
         });
 
-
-        confirm = (RelativeLayout) view.findViewById(R.id.confirm_order);
         confirm.setOnClickListener(new View.OnClickListener()
 
         {
@@ -276,7 +279,6 @@ public class Payment_fragment extends Fragment {
 //                    confirm.setEnabled(false);
                     if (checkBox_Wallet.isChecked()){
                         getuser_id = sessionManagement.getUserDetails().get(BaseURL.KEY_ID);
-
                         Usewalletfororder(getuser_id,Used_Wallet_amount);
                         checked();
 
@@ -286,11 +288,9 @@ public class Payment_fragment extends Fragment {
 
                     }
 
-
-
                 } else {
+                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
                     confirm.setEnabled(true);
-
                     ((MainActivity) getActivity()).onNetworkConnectionChanged(false);
                 }
             }
@@ -299,6 +299,7 @@ public class Payment_fragment extends Fragment {
     }
 
     private void attemptOrder() {
+        dialog.show();
         ArrayList<HashMap<String, String>> items = db_cart.getCartAll();
         rewards = Double.parseDouble(db_cart.getColumnRewards());
         if (items.size() > 0) {
@@ -320,6 +321,7 @@ public class Payment_fragment extends Fragment {
                     passArray.put(jObjP);
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    dialog.dismiss();
                 }
             }
 
@@ -334,6 +336,10 @@ public class Payment_fragment extends Fragment {
     makeAddOrderRequest(text,getdate, gettime, getuser_id, getlocation_id, getstore_id, passArray);
 
 
+            }
+            else {
+                dialog.dismiss();
+                Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -360,6 +366,7 @@ public class Payment_fragment extends Fragment {
                 Log.d(TAG, response.toString());
 
                 try {
+                    dialog.dismiss();
                     Boolean status = response.getBoolean("responce");
                     if (status) {
                         String msg = response.getString("data");
@@ -576,95 +583,89 @@ public class Payment_fragment extends Fragment {
         } else {
             Toast.makeText(getActivity(), "Somthing Went Wrong", Toast.LENGTH_SHORT).show();
         }
-
     }
-
 
     private void checked() {
         if (checkBox_Wallet.isChecked()) {
             if (rb_Store.isChecked() || rb_Cod.isChecked()) {
                 attemptOrder();
             } else {
-                Toast.makeText(getActivity(), "Please Select One", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+                Toast.makeText(getActivity(), getResources().getString(R.string.select_one), Toast.LENGTH_SHORT).show();
             }
-
         }
-        if (rb_Store.isChecked()) {
+//        if (rb_Store.isChecked()) {
+//            attemptOrder();
+//        }
+        else if (rb_Cod.isChecked()) {
             attemptOrder();
         }
-        if (rb_Cod.isChecked()) {
-
-            attemptOrder();
+//        if (rb_card.isChecked()) {
+//            Intent myIntent = new Intent(getActivity(), PaymentGatWay.class);
+//            if (checkBox_Wallet.isChecked()) {
+//                myIntent.putExtra("total", total_amount);
+//            } else {
+//                myIntent.putExtra("total", Prefrence_TotalAmmount);
+//                myIntent.putExtra("getdate", getdate);
+//                myIntent.putExtra("gettime", gettime);
+//                myIntent.putExtra("getlocationid", getlocation_id);
+//                myIntent.putExtra("getstoreid", getstore_id);
+//                myIntent.putExtra("getpaymentmethod", getvalue);
+//            }
+//            getActivity().startActivity(myIntent);
+//        }
+//        if (rb_Netbanking.isChecked()) {
+//            Intent myIntent1 = new Intent(getActivity(), PaymentGatWay.class);
+//            if (checkBox_Wallet.isChecked()) {
+//                myIntent1.putExtra("total", total_amount);
+//
+//            } else {
+//                myIntent1.putExtra("total", Prefrence_TotalAmmount);
+//                myIntent1.putExtra("getdate", getdate);
+//                myIntent1.putExtra("gettime", gettime);
+//                myIntent1.putExtra("getlocationid", getlocation_id);
+//                myIntent1.putExtra("getstoreid", getstore_id);
+//                myIntent1.putExtra("getpaymentmethod", getvalue);
+//            }
+//            getActivity().startActivity(myIntent1);
+//        }
+//               if (rb_paytm.isChecked()) {
+//            Intent myIntent1 = new Intent(getActivity(), Paytm.class);
+//            if (checkBox_Wallet.isChecked()) {
+//                myIntent1.putExtra("total", total_amount);
+//
+//            } else {
+//                myIntent1.putExtra("total", Prefrence_TotalAmmount);
+//                myIntent1.putExtra("getdate", getdate);
+//                myIntent1.putExtra("gettime", gettime);
+//                myIntent1.putExtra("getlocationid", getlocation_id);
+//                myIntent1.putExtra("getstoreid", getstore_id);
+//                myIntent1.putExtra("getpaymentmethod", getvalue);
+//            }
+//            getActivity().startActivity(myIntent1);
+//
+//        }
+//        if (checkBox_coupon.isChecked()) {
+//            if (rb_Store.isChecked() || rb_Cod.isChecked()) {
+//                attemptOrder();
+//            } else {
+//                dialog.dismiss();
+//                Activity activity=getActivity();
+//                if(activity !=null)
+//                Toast.makeText(getActivity(),getResources().getString(R.string.select_one),Toast.LENGTH_SHORT).show();
+//            }
+//        }
+        else {
+            Toast.makeText(getActivity(), getResources().getString(R.string.select_one), Toast.LENGTH_SHORT).show();
         }
-        if (rb_card.isChecked()) {
-            Intent myIntent = new Intent(getActivity(), PaymentGatWay.class);
-            if (checkBox_Wallet.isChecked()) {
-                myIntent.putExtra("total", total_amount);
-            } else {
-                myIntent.putExtra("total", Prefrence_TotalAmmount);
-                myIntent.putExtra("getdate", getdate);
-                myIntent.putExtra("gettime", gettime);
-                myIntent.putExtra("getlocationid", getlocation_id);
-                myIntent.putExtra("getstoreid", getstore_id);
-                myIntent.putExtra("getpaymentmethod", getvalue);
-            }
-            getActivity().startActivity(myIntent);
-        }
-        if (rb_Netbanking.isChecked()) {
-            Intent myIntent1 = new Intent(getActivity(), PaymentGatWay.class);
-            if (checkBox_Wallet.isChecked()) {
-                myIntent1.putExtra("total", total_amount);
-
-            } else {
-                myIntent1.putExtra("total", Prefrence_TotalAmmount);
-                myIntent1.putExtra("getdate", getdate);
-                myIntent1.putExtra("gettime", gettime);
-                myIntent1.putExtra("getlocationid", getlocation_id);
-                myIntent1.putExtra("getstoreid", getstore_id);
-                myIntent1.putExtra("getpaymentmethod", getvalue);
-            }
-            getActivity().startActivity(myIntent1);
-        }
-               if (rb_paytm.isChecked()) {
-            Intent myIntent1 = new Intent(getActivity(), Paytm.class);
-            if (checkBox_Wallet.isChecked()) {
-                myIntent1.putExtra("total", total_amount);
-
-            } else {
-                myIntent1.putExtra("total", Prefrence_TotalAmmount);
-                myIntent1.putExtra("getdate", getdate);
-                myIntent1.putExtra("gettime", gettime);
-                myIntent1.putExtra("getlocationid", getlocation_id);
-                myIntent1.putExtra("getstoreid", getstore_id);
-                myIntent1.putExtra("getpaymentmethod", getvalue);
-            }
-            getActivity().startActivity(myIntent1);
-
-        }
-        if (checkBox_coupon.isChecked()) {
-            if (rb_Store.isChecked() || rb_Cod.isChecked()) {
-                attemptOrder();
-            } else {
-                Activity activity=getActivity();
-                if(activity !=null)
-                Toast.makeText(getActivity(), "Select Store Or Cod", Toast.LENGTH_SHORT).show();
-            }
-
-
-        }
-
-
 
     }
 
-
-
     public void getRefresrh(final String msg, final String msg_arb) {
-        final SweetAlertDialog alertDialog=new SweetAlertDialog(getActivity(),SweetAlertDialog.PROGRESS_TYPE).setTitleText("Loading...")
-                ;
+        final SweetAlertDialog alertDialog=new SweetAlertDialog(getActivity(),SweetAlertDialog.PROGRESS_TYPE)
+        .setTitleText("Please Wait...");
         alertDialog.setCancelable(false);
         alertDialog.show();
-
 
         String user_id = sessionManagement.getUserDetails().get(BaseURL.KEY_ID);
         RequestQueue rq = Volley.newRequestQueue(getActivity());
@@ -688,8 +689,6 @@ public class Payment_fragment extends Fragment {
 
                                 editor.putString(BaseURL.KEY_WALLET_Ammount,wallet_amount);
                                 editor.apply();
-
-
 
                                 Intent myIntent = new Intent((MainActivity)getActivity(), ThanksActivity.class);
                                 myIntent.putExtra("msg", msg);

@@ -79,7 +79,7 @@ public class Reward_fragment extends Fragment {
         Reedeem_Points.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Integer.parseInt(Rewards_Points.getText().toString()) >1000) {
+                if(Integer.parseInt(Rewards_Points.getText().toString()) >300) {
                     Shift_Reward_to_WAllet();
                     gifImageView.setVisibility(View.VISIBLE);
                     final View myview = gifImageView;
@@ -247,11 +247,9 @@ public class Reward_fragment extends Fragment {
     }
 
     public void getRefresrh() {
-        final SweetAlertDialog alertDialog=new SweetAlertDialog(getActivity(),SweetAlertDialog.PROGRESS_TYPE).setTitleText("Loading...")
-                ;
+        final SweetAlertDialog alertDialog=new SweetAlertDialog(getActivity(),SweetAlertDialog.PROGRESS_TYPE).setTitleText("Loading...");
         alertDialog.setCancelable(false);
         alertDialog.show();
-
 
         String user_id = sessionManagement.getUserDetails().get(BaseURL.KEY_ID);
         RequestQueue rq = Volley.newRequestQueue(getActivity());
@@ -270,19 +268,17 @@ public class Reward_fragment extends Fragment {
                                 SharedPreferences.Editor editor;
 
                                 pref = getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-
                                 editor = pref.edit();
 
                                 editor.putString(BaseURL.KEY_WALLET_Ammount,wallet_amount);
                                 editor.apply();
-
-
 
 //                                Intent myIntent = new Intent((MainActivity)getActivity(), ThanksActivity.class);
 //                                myIntent.putExtra("msg", msg);
 //                                myIntent.putExtra("msgarb",msg_arb);
 //                                startActivity(myIntent);
 //                                getActivity().finish();
+                                getRewards();
 
                             } else {
                                 // Toast.makeText(DashboardPage.this, "" + jObj.optString("msg"), Toast.LENGTH_LONG).show();

@@ -147,7 +147,6 @@ public class BaseURL {
     public static final String addfavourate=BASE_URL+"index.php/Api/save_f_products";
     public static final String removefavourate=BASE_URL+"index.php/Api/delete_f_products";
 
-
     public static final String addfavouratecat=BASE_URL+"index.php/Api/favourite_category";
     public static final String removefavouratecat=BASE_URL+"index.php/Api/delete_f_cat";
 

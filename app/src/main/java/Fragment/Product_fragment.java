@@ -111,7 +111,6 @@ public class Product_fragment extends Fragment {
 
         relativeLayout = view.findViewById(R.id.tempy);
         sharedPreferences=getActivity().getSharedPreferences(BaseURL.PREFS_NAME,MODE_PRIVATE);
-
         usrid=sharedPreferences.getString(BaseURL.KEY_ID,"0");
 
         name=view.findViewById(R.id.name);

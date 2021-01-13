@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="add_to_cart">أضف إلى عربة التسوق بنجاح</string>
+
+    <string name="wanttoadd">أضف هذه الفئة إلى قائمة الرغبات؟</string>
+
+    <string name="add_to_cart">أضيف إلى عربة التسوق بنجاح</string>
+    <string name="select_one">رجاءا اختر واحدة</string>
 
     <string name="ok">حسنا</string>
     <string name="loading">جار التحميل…</string>
@@ -240,7 +244,7 @@
     <string name="delivery_date">تاريخ التسليم:</string>
     <string name="please_select_date">يرجى تحديد التاريخ</string>
     <string name="no_rcord_found">تم العثور على أي سجل</string>
-    <string name="connection_time_out">وقت الاتصال تنتهي</string>
+    <string name="connection_time_out">لا يوجد إنترنت</string>
     <string name="add_delivery_address">أضف عنوان التسليم</string>
     <string name="order_now">اطلب الآن</string>
     <string name="payment_detail">تفاصيل الدفع</string>

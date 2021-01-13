@@ -87,7 +87,6 @@ public class Store_main_adapter extends RecyclerView.Adapter<Store_main_adapter.
                 args.putString("storeid", modellist.getStoer_id());
                 args.putString("laddan_jaffery", "store");
 //                args.putString("name",modellist.getStore_name());
-
                 args.putString("user_email",modellist.getStore_details());
                 args.putString("user_phone",modellist.getUser_phone());
                 fm.setArguments(args);

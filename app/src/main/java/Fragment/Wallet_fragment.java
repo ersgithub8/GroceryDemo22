@@ -42,8 +42,6 @@ public class Wallet_fragment extends Fragment {
     private static String TAG = Wallet_fragment.class.getSimpleName();
 
     TextView Wallet_Ammount;
-
-
     SharedPreferences pref;
     SharedPreferences.Editor editor;
     RelativeLayout Recharge_Wallet;
