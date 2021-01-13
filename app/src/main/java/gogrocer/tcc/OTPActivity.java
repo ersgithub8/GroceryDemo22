@@ -125,7 +125,7 @@ public class OTPActivity extends AppCompatActivity {
                     if (status) {
 
                         code = response.getString("code");
-                        //Toast.makeText(OTPActivity.this, code, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(OTPActivity.this, code, Toast.LENGTH_SHORT).show();
 
                     } else {
                         String error = response.getString("error");

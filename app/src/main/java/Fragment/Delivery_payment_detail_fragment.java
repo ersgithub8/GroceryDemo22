@@ -321,23 +321,21 @@ public class Delivery_payment_detail_fragment extends Fragment {
         Map<String, String> params = new HashMap<String, String>();
         params.put("user_id", userid);
         params.put("total_amount",total);
-
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
                 BaseURL.checkfirstorder, params, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    alertDialog.dismiss();
+//                    alertDialog.dismiss();
                     if (response != null && response.length() > 0) {
                         Boolean status = response.getBoolean("responce");
-                        if (status) {
 
+                        if (status) {
                             discount=(Double.parseDouble(total)*10)/100;
                             item_firstorder.setText("-"+String.valueOf(discount));
                             item_firstorder.setTextColor(getResources().getColor(R.color.red_btn_bg_color));
 
-                            //Toast.makeText(getActivity(), total+discount, Toast.LENGTH_SHORT).show();
 //                            tv_total.setText(getResources().getString(R.string.tv_cart_item) + db_cart.getCartCount() + "\n" +
 //                                    getResources().getString(R.string.amount) + db_cart.getTotalAmount() + "\n" +
 //                                    getResources().getString(R.string.delivery_charge) + deli_charges + "\n" +
@@ -478,7 +476,6 @@ public class Delivery_payment_detail_fragment extends Fragment {
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
-
     }
 
 }
