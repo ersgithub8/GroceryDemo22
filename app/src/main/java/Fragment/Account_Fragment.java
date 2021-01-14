@@ -106,6 +106,7 @@ public class Account_Fragment extends Fragment {
         wallet=view.findViewById(R.id.wallet);
         walletl=view.findViewById(R.id.llwallet);
         rewards=view.findViewById(R.id.llpoints);
+        //pages
         terms=view.findViewById(R.id.term);
         privacy=view.findViewById(R.id.privacy);
         returnp=view.findViewById(R.id.ret_policy);
@@ -198,10 +199,18 @@ public class Account_Fragment extends Fragment {
         contact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent email = new Intent(Intent.ACTION_SEND);
-                email.putExtra(Intent.EXTRA_EMAIL, new String[]{"contact@j6stores.com"});
-                email.setType("message/rfc822");
-                startActivity(Intent.createChooser(email, "Choose an Email client :"));
+//                Intent email = new Intent(Intent.ACTION_SEND);
+//                email.putExtra(Intent.EXTRA_EMAIL, new String[]{"contact@j6stores.com"});
+//                email.setType("message/rfc822");
+//                startActivity(Intent.createChooser(email, "Choose an Email client :"));
+                Bundle args = new Bundle();
+                Fragment fm = new Terms_and_Condition_fragment();
+                args.putString("url", BaseURL.contactus);
+                args.putString("title", getResources().getString(R.string.nav_contact));
+                fm.setArguments(args);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                        .addToBackStack(null).commit();
             }
         });
 
@@ -217,11 +226,9 @@ public class Account_Fragment extends Fragment {
         terms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Bundle args = new Bundle();
                 Fragment fm = new Terms_and_Condition_fragment();
-
-                args.putString("url", BaseURL.GET_TERMS_URL);
+                args.putString("url", BaseURL.termsandcondition);
                 args.putString("title", getResources().getString(R.string.nav_terms));
                         fm.setArguments(args);
                 FragmentManager fragmentManager = getFragmentManager();
@@ -232,6 +239,14 @@ public class Account_Fragment extends Fragment {
         privacy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bundle args = new Bundle();
+                Fragment fm = new Terms_and_Condition_fragment();
+                args.putString("url", BaseURL.privacypolicy);
+                args.putString("title", getResources().getString(R.string.privacy));
+                fm.setArguments(args);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                        .addToBackStack(null).commit();
 
             }
         });
@@ -249,12 +264,29 @@ public class Account_Fragment extends Fragment {
         helpcenter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), WebView.class));
+//                startActivity(new Intent(getActivity(), WebView.class));
+                Bundle args = new Bundle();
+                Fragment fm = new Terms_and_Condition_fragment();
+                args.putString("url", BaseURL.helpcentre);
+                args.putString("title", getResources().getString(R.string.help_centre));
+                fm.setArguments(args);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                        .addToBackStack(null).commit();
+
             }
         });
         returnp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bundle args = new Bundle();
+                Fragment fm = new Terms_and_Condition_fragment();
+                args.putString("url", BaseURL.returnpolicy);
+                args.putString("title", getResources().getString(R.string.return_p));
+                fm.setArguments(args);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.contentPanel, fm)
+                        .addToBackStack(null).commit();
             }
         });
 

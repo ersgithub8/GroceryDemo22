@@ -8,8 +8,6 @@ public class BaseURL {
     public static String BASE_URL = "https://project2.erstechno.online/";
     public static String Share_URL = "https://project2.erstechno.online";
 
-    public static String Get_Delivery_Store = BASE_URL + "index.php/Api/delivery_charges_rate";
-
     public  static final String fixpass="Abvf435@ee";
     static final String APP_NAME = "GoGrocer";
     public static final String PREFS_NAME = "GroceryLoginPrefs";
@@ -36,7 +34,6 @@ public class BaseURL {
     public static final String KEY_REFERID="refer_id";
 
     //Store Selection
-
     public static final String KEY_STORE_COUNT = "STORE_COUNT";
     public static final String KEY_NOTIFICATION_COUNT = "NOTIFICATION_COUNT";
 
@@ -45,15 +42,20 @@ public class BaseURL {
     public static final String TOPIC_GLOBAL = "global";
     public static final int NOTIFICATION_ID = 100;
     public static final int NOTIFICATION_ID_BIG_IMAGE = 101;
-
-
     public static final String KEY_PASSWORD = "password";
 
     //City and Store Id
     public static final String CITY_ID = "CITY_ID";
     public static final String STORE_ID = "STORE_ID";
 
+    // pages list
+    public static String termsandcondition = BASE_URL + "index.php/Api/terms/terms-and-conditions";
+    public static String privacypolicy = BASE_URL + "index.php/Api/terms/privacy-policy";
+    public static String contactus = BASE_URL + "index.php/Api/terms/contact-us";
+    public static String returnpolicy = BASE_URL + "index.php/Api/terms/return-policy";
+    public static String helpcentre = BASE_URL + "index.php/Api/terms/help-center";
 
+    //Images
     public static String IMG_SLIDER_URL = BASE_URL + "uploads/sliders/";
     public static String IMG_CATEGORY_URL = BASE_URL + "uploads/category/";
     public static String IMG_PRODUCT_URL = BASE_URL + "uploads/products/";
@@ -95,8 +97,6 @@ public class BaseURL {
 
     public static String GET_SUPPORT_URL = BASE_URL + "index.php/api/support";
 
-    public static String GET_TERMS_URL = BASE_URL + "index.php/api/terms";
-
     public static String GET_TIME_SLOT_URL = BASE_URL + "index.php/api/get_time_slot";
 
     public static String LOGIN_URL = BASE_URL + "index.php/api/login";
@@ -106,6 +106,8 @@ public class BaseURL {
     public static String GET_SOCITY_URL = BASE_URL + "index.php/api/get_society";
 
     public static String EDIT_PROFILE_URL = BASE_URL + "index.php/api/update_userdata";
+    public static String Get_Delivery_Store = BASE_URL + "index.php/Api/delivery_charges_rate";
+    public static String GET_TERMS_URL = BASE_URL + "index.php/api/terms";
 
     public static String ADD_ORDER_URL = BASE_URL + "index.php/api/send_order";
     public static String Wallet_CHECKOUT = BASE_URL + "index.php/api/wallet_at_checkout";
