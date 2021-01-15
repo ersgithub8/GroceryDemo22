@@ -398,12 +398,30 @@ public class Account_Fragment extends Fragment {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sessionManagement.logoutSession();
-                disconnectFromFacebook();
-                getActivity().finish();
-                new DatabaseHandler(getActivity()).clearCart();
-                Intent i=new Intent(getActivity(),LoginActivity.class);
-                startActivity(i);
+
+                final SweetAlertDialog dialog = new SweetAlertDialog(getActivity(),SweetAlertDialog.WARNING_TYPE);
+                dialog.setCancelText(getResources().getString(R.string.no));
+                dialog.setConfirmText(getResources().getString(R.string.yes));
+                dialog.setTitle(getResources().getString(R.string.surety));
+                dialog.show();
+                dialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        sessionManagement.logoutSession();
+                        disconnectFromFacebook();
+                        getActivity().finish();
+                        new DatabaseHandler(getActivity()).clearCart();
+                        Intent i=new Intent(getActivity(),LoginActivity.class);
+                        startActivity(i);
+                        dialog.dismiss();
+                    }
+                });
+                dialog.setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        dialog.dismiss();
+                    }
+                });
             }
         });
 

@@ -10,7 +10,6 @@
     >
 
     <RelativeLayout
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
@@ -318,6 +317,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_gravity="center"
             android:gravity="center"
             android:weightSum="2"
             >
@@ -331,12 +331,11 @@
                 <com.facebook.login.widget.LoginButton
                     xmlns:facebook="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/loginfb"
-
+                    android:layout_marginTop="25dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginLeft="15dp"
                     android:paddingTop="12dp"
                     android:paddingBottom="12dp"
-                    android:layout_centerVertical="true"
                     facebook:com_facebook_login_text="Facebook"
                     android:layout_centerHorizontal="true"
                     android:layout_width="match_parent"
@@ -353,7 +352,7 @@
                 <com.google.android.gms.common.SignInButton
                     android:id="@+id/gsignin"
                     android:layout_centerHorizontal="true"
-
+                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:textAlignment="center"
@@ -368,7 +367,6 @@
         <LinearLayout
             android:id="@+id/temp1"
             android:layout_below="@id/aar2"
-
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginLeft="40dp"

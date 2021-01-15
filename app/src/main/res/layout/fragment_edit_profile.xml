@@ -6,8 +6,6 @@
     android:background="@drawable/login_bg"
     android:orientation="vertical">
 
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -59,7 +57,7 @@
                 android:padding="@dimen/space_10"
                 android:textColorHint="@color/black"
                 android:drawablePadding="@dimen/space_10"
-                android:drawableLeft="@drawable/person"
+                android:drawableStart="@drawable/person"
                 android:ems="10"
                 android:inputType="text" />
 
@@ -121,7 +119,6 @@
 
             </LinearLayout>
 
-
             <EditText
                 android:id="@+id/et_pro_email"
                 android:layout_width="match_parent"
@@ -172,23 +169,21 @@
             <RelativeLayout
                 android:id="@+id/btn_pro_edit"
                 android:layout_width="200dp"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="12dp"
                 android:background="@drawable/bac2"
-                android:padding="12dp">
+                android:padding="10dp">
 
                 <Fonts.LatoBLack
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
                     android:text="@string/continue_bt"
                     android:textColor="#fff"
-                    android:textSize="@dimen/text_size_small"/>
-
-
-
-
+                    android:textSize="14sp"/>
 
             </RelativeLayout>
         </LinearLayout>

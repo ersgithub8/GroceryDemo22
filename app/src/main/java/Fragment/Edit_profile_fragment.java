@@ -104,6 +104,7 @@ public class Edit_profile_fragment extends Fragment implements View.OnClickListe
         btn_update = (RelativeLayout) view.findViewById(R.id.btn_pro_edit);
         //btn_socity = (TextView) view.findViewById(R.id.btn_pro_socity);
 
+        et_email.setEnabled(false);
         String getemail = sessionManagement.getUserDetails().get(BaseURL.KEY_EMAIL);
         String getimage = sessionManagement.getUserDetails().get(BaseURL.KEY_IMAGE);
         String getname = sessionManagement.getUserDetails().get(BaseURL.KEY_NAME);

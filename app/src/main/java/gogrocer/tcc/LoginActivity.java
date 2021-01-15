@@ -86,18 +86,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     LoginButton loginButton;
     GoogleSignInClient googleSignInClient;
     CallbackManager callbackManager;
-
-
-
     String token;
 
     String first_names="",last_names="",email="",id="",imgurl="",phone="";
-    //---------------------------------------
-
     String language="";
     @Override
     protected void attachBaseContext(Context newBase) {
-
         newBase = LocaleHelper.onAttach(newBase);
         super.attachBaseContext(newBase);
     }
@@ -105,7 +99,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // remove title
 
         sharedPreferences= getSharedPreferences("lan", Context.MODE_PRIVATE);
         language=sharedPreferences.getString("language",null);
@@ -116,7 +109,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             setTheme(R.style.AppTheme);
         }
         setContentView(R.layout.activity_login);
-
 
         token = FirebaseInstanceId.getInstance().getToken();
 
@@ -136,9 +128,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btn_register.setOnClickListener(this);
         btn_forgot.setOnClickListener(this);
 
-
-
-
         disconnectFromFacebook();
         //-----------------------------------------------------------------------
         signInButton=findViewById(R.id.gsignin);
@@ -148,12 +137,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //        reference= FirebaseDatabase.getInstance().getReference();
 
         TextView textView = (TextView) signInButton.getChildAt(0);
-        textView.setText(" Google");
+        textView.setText("Google");
 
         callbackManager=CallbackManager.Factory.create();
-
         sharedPreferences= getSharedPreferences("lan", Context.MODE_PRIVATE);
-
 
 //        editor.putString("language","english");
 

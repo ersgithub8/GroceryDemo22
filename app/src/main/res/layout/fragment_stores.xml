@@ -12,20 +12,15 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="57dp"
-        android:layout_gravity="bottom"
         android:background="@color/green"
-        android:gravity="bottom"
         >
-
         <LinearLayout
             android:id="@+id/search_layout"
             android:layout_width="0dp"
             android:layout_weight="70"
             android:layout_height="match_parent"
-            android:layout_alignParentBottom="true"
             android:layout_marginBottom="8dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
+            android:layout_marginStart="12dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/back_border"
             android:orientation="horizontal">
@@ -34,7 +29,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_margin="8dp"
                 android:gravity="center_vertical">
 
                 <ImageView
@@ -42,18 +36,16 @@
                     android:id="@+id/lens"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
                     android:src="@drawable/lens" />
 
                 <TextView
-
                     android:fontFamily="@font/bold"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="@dimen/space_4"
+                    android:layout_marginStart="8dp"
                     android:layout_toEndOf="@+id/lens"
-                    android:gravity="top"
+                    android:gravity="center_vertical"
                     android:text="@string/searchtext2"
                     android:textColor="@color/dark_gray"
                     android:textSize="12sp" />
@@ -66,7 +58,7 @@
             android:layout_gravity="center"
             android:layout_width="0dp"
             android:layout_weight="10"
-            android:gravity="center"
+            android:gravity="center_horizontal"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:textSize="25sp"

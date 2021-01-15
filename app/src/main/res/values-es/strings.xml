@@ -6,6 +6,7 @@
     <string name="b_total">Total Price</string>
 
     <string name="b_discount_first">First Order Disc.</string>
+    <string name="surety">Are you sure?</string>
 
     <string name="bill">الفاتورة</string>
     <string name="add_to_cart">Add to Cart Successfully</string>

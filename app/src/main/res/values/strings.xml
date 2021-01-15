@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="surety">Are you sure?</string>
+
     <string name="b_discount_first">First Order Disc.</string>
-
-
     <string name="b_total">Total Price</string>
     <string name="price">Price</string>
     <string name="detail">Detail</string>
@@ -26,16 +26,12 @@
     <string name="notavailabe">Not Available</string>
     <string name="nocharges">Free Shipping over 500 SAR</string>
     <string name="onlyforpreorder">Its only select for pre orders</string>
-
     <string name="related">Related Products</string>
-
     <string name="or">-OR-</string>
     <string name="get_gps">Get Address From Location</string>
     <string name="address">Address </string>
-
     <string name="go_shop">Go Shop Now</string>
     <string name="go_cart">Go To Cart</string>
-
     <string name="desiiic">Description :</string>
     <string name="sizecolor" translatable="false">Size and Color :</string>
     <string name="productsize" translatable="false">Product Size :  </string>
