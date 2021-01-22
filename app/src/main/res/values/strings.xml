@@ -365,7 +365,7 @@
     <string name="VIP">Special Members</string>
     <string name="FreeShipping">Free Shiping\n500 SAR</string>
 
-    <string name="agree">Agree on our Terms and Conditions</string>
+    <string name="agree">Agree on our  <u>Terms and Conditions</u> </string>
 
 
     <string name="ToPay">To Pay</string>

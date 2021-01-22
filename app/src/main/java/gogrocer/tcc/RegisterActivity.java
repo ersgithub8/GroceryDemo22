@@ -65,7 +65,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private TextInputEditText et_phone, et_name, et_password, et_email,et_refer;
     private RelativeLayout btn_register;
-    private TextView tv_phone, tv_name, tv_password, tv_email,lEnglish,lSpanish;
+    private TextView tv_phone, tv_name, tv_password, tv_email,lEnglish,lSpanish,Agreed;
 
     CheckBox checkBox;
     SharedPreferences sharedPreferences;
@@ -115,12 +115,19 @@ public class RegisterActivity extends AppCompatActivity {
 
         checkBox=findViewById(R.id.checkbox1);
 
+        Agreed = (TextView) findViewById(R.id.agree);
         tv_password = (TextView) findViewById(R.id.tv_reg_password);
         tv_phone = (TextView) findViewById(R.id.tv_reg_phone);
         tv_name = (TextView) findViewById(R.id.tv_reg_name);
         tv_email = (TextView) findViewById(R.id.tv_reg_email);
         btn_register = (RelativeLayout) findViewById(R.id.btnRegister);
 
+        Agreed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(RegisterActivity.this,Agreed_Activtiy.class));
+            }
+        });
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -125,6 +125,34 @@ public class Account_Fragment extends Fragment {
         ((MainActivity)getActivity()).bot_cart.setBackgroundColor(getResources().getColor(R.color.white));
         ((MainActivity)getActivity()).bot_store.setBackgroundColor(getResources().getColor(R.color.white));
 
+        feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Uri uri = Uri.parse("https://www.j6stores.com/feedback");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+            }
+        });
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT,
+                        "Hey check out this app at: https://play.google.com/store/apps/details?id="
+                                +getApplicationContext().getPackageName());
+                sendIntent.setType("text/plain");
+                startActivity(sendIntent);
+            }
+        });
+        rate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("http://play.google.com/store/apps/details?id="+getApplicationContext().getPackageName())));
+            }
+        });
+
         sharedPreferences= getActivity().getSharedPreferences("lan", Context.MODE_PRIVATE);
 
         final String current_lan = sharedPreferences.getString("language",null);

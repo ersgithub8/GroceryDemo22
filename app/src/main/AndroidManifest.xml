@@ -30,6 +30,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".OTPActivity" />
+        <activity android:name=".Agreed_Activtiy" />
         <activity android:name=".RatingAndReviews" />
         <activity android:name=".ProductActivity" />
         <activity android:name=".Rating" />

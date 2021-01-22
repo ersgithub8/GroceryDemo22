@@ -361,8 +361,7 @@
     <string name="VIP">الأعضاء الخاصون</string>
     <string name="FreeShipping">الشحن مجانا \n  ريال 500</string>
 
-
-    <string name="agree">وافق على الشروط والأحكام الخاصة بنا</string>
+    <string name="agree"> وافق على<u>الشروط والأحكام</u> الخاصة بنا </string>
 
     <string name="ToPay">للدفع</string>
     <string name="ToReview">للمراجعة</string>
