@@ -5,6 +5,8 @@
     <string name="detail">Detail</string>
     <string name="b_total">Total Price</string>
 
+    <string name="the_product">Product</string>
+    <string name="quantity">Quantity</string>
     <string name="b_discount_first">First Order Disc.</string>
     <string name="surety">Are you sure?</string>
 

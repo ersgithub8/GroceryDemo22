@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="the_product">المنتج</string>
+    <string name="quantity">الكمية</string>
     <string name="b_discount_first">خصم الطلب الأول</string>
 
     <string name="surety">هل أنت واثق؟</string>

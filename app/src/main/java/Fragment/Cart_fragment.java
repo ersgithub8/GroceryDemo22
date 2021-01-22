@@ -124,6 +124,7 @@ public class Cart_fragment extends Fragment implements View.OnClickListener,rela
         rv_cart = (RecyclerView) view.findViewById(R.id.rv_cart);
         rv_cart.setLayoutManager(new LinearLayoutManager(getActivity()));
         continueshoping=view.findViewById(R.id.btnContinue);
+
         db = new DatabaseHandler(getActivity());
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity()) {
@@ -156,7 +157,6 @@ public class Cart_fragment extends Fragment implements View.OnClickListener,rela
         ((MainActivity)getActivity()).bot_store.setBackgroundColor(getResources().getColor(R.color.white));
 
         ArrayList<HashMap<String, String>> map = db.getCartAll();
-
         Cart_adapter adapter = new Cart_adapter(getActivity(), map);
         rv_cart.setAdapter(adapter);
         adapter.notifyDataSetChanged();

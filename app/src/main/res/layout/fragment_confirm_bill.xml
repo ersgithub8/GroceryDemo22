@@ -124,12 +124,17 @@
                         app:cardElevation="@dimen/space_3"
                         app:cardUseCompatPadding="true"
                         card_view:cardCornerRadius="4dp">
-
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            >
                     <TableLayout
                         android:id="@+id/simpleTableLayout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:stretchColumns="*">
+                        android:stretchColumns="*"
+                        >
 
                         <TextView
                             android:background="@color/colorPrimary"
@@ -141,23 +146,38 @@
                             android:textColor="@color/white"
                             android:textSize="18sp"
                             />
+
                         <TableRow
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
                             <TextView
+                                android:layout_weight="1"
                                 android:background="@drawable/cell_shape"
                                 android:gravity="center_horizontal"
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:padding="12dp"
-                                android:text="@string/detail"
+                                android:text="@string/the_product"
                                 android:textColor="#000"
                                 android:textSize="14sp"
                                 />
                             <TextView
+                                android:layout_weight="1"
+                                android:background="@drawable/cell_shape"
+                                android:gravity="center_horizontal"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:padding="12dp"
+                                android:text="@string/quantity"
+                                android:textColor="#000"
+                                android:textSize="14sp"
+                                />
+
+                            <TextView
+                                android:layout_weight="1"
                                 android:background="@drawable/cell_shape"
                                 android:gravity="center"
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:padding="12dp"
                                 android:text="@string/price"
@@ -165,10 +185,25 @@
                                 android:textSize="14sp"
                                 />
                         </TableRow>
+                    </TableLayout>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/recyler_id"
+                                />
+
+                        <TableLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:stretchColumns="*"
+                            >
 
                         <TableRow
+                            android:visibility="gone"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            >
                             <TextView
                                 android:id="@+id/item_quantity"
                                 android:background="@drawable/cell_shape"
@@ -191,26 +226,30 @@
                                 android:textColor="#000"
                                 android:textSize="14sp"
                                 />
+
                         </TableRow>
 
                         <TableRow
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
                             <TextView
+                                android:layout_weight="2"
                                 android:background="@drawable/cell_shape"
                                 android:gravity="center"
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:padding="12dp"
                                 android:text="@string/delivery_charge_new"
                                 android:textColor="#000"
                                 android:textSize="14sp"
                                 />
+
                             <TextView
+                                android:layout_weight="1"
                                 android:id="@+id/item_deliverycharges"
                                 android:background="@drawable/cell_shape"
                                 android:gravity="end"
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:padding="12dp"
                                 android:text="00.00"
@@ -223,9 +262,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
                             <TextView
+                                android:layout_weight="2"
                                 android:background="@drawable/cell_shape"
                                 android:gravity="center"
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:padding="12dp"
                                 android:text="@string/tax"
@@ -233,10 +273,11 @@
                                 android:textSize="14sp"
                                 />
                             <TextView
+                                android:layout_weight="1"
                                 android:id="@+id/item_tax"
                                 android:background="@drawable/cell_shape"
                                 android:gravity="end"
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:padding="12dp"
                                 android:text="00.00"
@@ -249,10 +290,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
                             <TextView
+                                android:layout_weight="2"
                                 android:id="@+id/item_vip_text"
                                 android:background="@drawable/cell_shape"
                                 android:gravity="center"
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:padding="12dp"
                                 android:text="@string/vip_dis"
@@ -260,10 +302,11 @@
                                 android:textSize="14sp"
                                 />
                             <TextView
+                                android:layout_weight="1"
                                 android:id="@+id/item_vip"
                                 android:background="@drawable/cell_shape"
                                 android:gravity="end"
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:padding="12dp"
                                 android:text="00.00"
@@ -276,9 +319,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
                             <TextView
+                                android:layout_weight="2"
                                 android:background="@drawable/cell_shape"
                                 android:gravity="center"
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:padding="12dp"
                                 android:text="@string/b_discount_first"
@@ -286,10 +330,11 @@
                                 android:textSize="14sp"
                                 />
                             <TextView
+                                android:layout_weight="1"
                                 android:id="@+id/item_firstorder"
                                 android:background="@drawable/cell_shape"
                                 android:gravity="end"
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:padding="12dp"
                                 android:text="00.00"
@@ -302,9 +347,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
                             <TextView
+                                android:layout_weight="2"
                                 android:background="@drawable/cell_shape"
                                 android:gravity="center"
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:padding="16dp"
                                 android:text="@string/b_total"
@@ -312,10 +358,11 @@
                                 android:textSize="16sp"
                                 />
                             <TextView
+                                android:layout_weight="1"
                                 android:id="@+id/item_total"
                                 android:background="@color/colorPrimary"
                                 android:gravity="end"
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:padding="16dp"
                                 android:text="00.00"
@@ -326,7 +373,7 @@
                         </TableRow>
 
                     </TableLayout>
-
+                        </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
 

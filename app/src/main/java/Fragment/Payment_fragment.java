@@ -71,13 +71,11 @@ public class Payment_fragment extends Fragment {
     TextView payble_ammount, my_wallet_ammount, used_wallet_ammount, used_coupon_ammount, order_ammount;
     private String getlocation_id = "";
     private String getstore_id = "";
-
     private String gettime = "";
     private String getdate = "";
     private String getuser_id = "";
     private Double rewards;
     RadioButton rb_Store, rb_Cod, rb_card, rb_Netbanking, rb_paytm;
-
     CheckBox checkBox_Wallet, checkBox_coupon;
     EditText et_Coupon;
     String getvalue,deli_charges;

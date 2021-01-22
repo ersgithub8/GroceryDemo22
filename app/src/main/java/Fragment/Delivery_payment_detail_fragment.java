@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSmoothScroller;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
@@ -31,10 +36,13 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import Adapter.Bill_adapter;
+import Adapter.Cart_adapter;
 import Adapter.Delivery_get_address_adapter;
 import Config.BaseURL;
 import Config.SharedPref;
@@ -75,6 +83,7 @@ public class Delivery_payment_detail_fragment extends Fragment {
     private Session_management sessionManagement;
     SharedPreferences sharedPreferences;
     String usrid;
+    RecyclerView recyclerView;
 
     TextView item_quantity,item_price,item_deliverycharges,item_tax,item_vip,item_firstorder,item_total,item_vip_text;
 
@@ -89,6 +98,7 @@ public class Delivery_payment_detail_fragment extends Fragment {
                 .setTitleText("Loading");
         progress_dialoge.setCancelable(false);
         progress_dialoge.show();
+        recyclerView = view.findViewById(R.id.recyler_id);
 
         item_vip_text=view.findViewById(R.id.item_vip_text);
         item_deliverycharges = view.findViewById(R.id.item_deliverycharges);
@@ -102,6 +112,13 @@ public class Delivery_payment_detail_fragment extends Fragment {
 
         db_cart = new DatabaseHandler(getActivity());
         sessionManagement = new Session_management(getActivity());
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        ArrayList<HashMap<String, String>> map = db_cart.getCartAll();
+        Bill_adapter adapter = new Bill_adapter(getActivity(), map);
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
 
         tv_timeslot = (TextView) view.findViewById(R.id.textTimeSlot);
         tv_address = (TextView) view.findViewById(R.id.txtAddress);
