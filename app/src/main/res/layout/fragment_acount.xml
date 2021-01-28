@@ -172,13 +172,21 @@
             android:layout_height="match_parent"
             >
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_rounded_button"
                 android:id="@+id/my_orders"
                 android:text="@string/nav_order"
-                android:layout_margin="12dp"
-                android:textSize="20sp"
+                android:textSize="22sp"
                 android:textColor="@color/white"
                 />
 

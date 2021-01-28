@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="canceled">Canceled</string>
 
     <string name="the_product">Product</string>
     <string name="quantity">Quantity</string>

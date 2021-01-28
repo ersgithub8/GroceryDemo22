@@ -124,14 +124,16 @@ public class My_Pending_Order_adapter extends RecyclerView.Adapter<My_Pending_Or
             holder.tv_status.setTextColor(context.getResources().getColor(R.color.green));
         } else if (mList.getStatus().equals("2")) {
             holder.view1.setBackgroundColor(context.getResources().getColor(R.color.green));
-            holder.relative_background.setBackgroundColor(context.getResources().getColor(R.color.purple));
+            holder.relative_background.setBackgroundColor(context.getResources().getColor(R.color.green));
             holder.view2.setBackgroundColor(context.getResources().getColor(R.color.green));
             holder.view3.setBackgroundColor(context.getResources().getColor(R.color.green));
             holder.view4.setBackgroundColor(context.getResources().getColor(R.color.green));
             holder.Confirm.setImageResource(R.color.green);
             holder.Out_For_Deliverde.setImageResource(R.color.green);
             String string=context.getResources().getString(R.string.outfordeliverd);
-            holder.tv_status.setText(string.substring(0,16));
+            holder.tv_status.setText(string
+            //        .substring(0,16)
+            );
             holder.relativetextstatus.setText(context.getResources().getString(R.string.outfordeliverd));
             holder.tv_status.setTextColor(context.getResources().getColor(R.color.green));
         }
@@ -186,7 +188,6 @@ public class My_Pending_Order_adapter extends RecyclerView.Adapter<My_Pending_Or
             String timefrom=mList.getDelivery_time_from();
             String timeto=mList.getDelivery_time_to();
             String time=timefrom + "-" + timeto;
-
             holder.tv_time.setText(time);
 
         }

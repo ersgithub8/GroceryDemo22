@@ -174,8 +174,8 @@ public class Delivery_payment_detail_fragment extends Fragment {
 //                getResources().getString(R.string.amount) + db_cart.getTotalAmount() + "\n" +
 //                getResources().getString(R.string.delivery_charge) + deli_charges);
 
-        item_deliverycharges.setText(String.valueOf(deli_charges));
-        item_price.setText(db_cart.getTotalAmount());
+        item_deliverycharges.setText(String.valueOf(deli_charges)+" "+getResources().getString(R.string.currency));
+        item_price.setText(db_cart.getTotalAmount()+" "+getResources().getString(R.string.currency));
         item_quantity.setText(getResources().getString(R.string.tv_cart_item) + db_cart.getCartCount());
 
         checkfirstorder(usrid, String.valueOf(total));
@@ -350,7 +350,7 @@ public class Delivery_payment_detail_fragment extends Fragment {
 
                         if (status) {
                             discount=(Double.parseDouble(total)*10)/100;
-                            item_firstorder.setText("-"+String.valueOf(discount));
+                            item_firstorder.setText("-"+String.valueOf(discount)+" "+getResources().getString(R.string.currency));
                             item_firstorder.setTextColor(getResources().getColor(R.color.red_btn_bg_color));
 
 //                            tv_total.setText(getResources().getString(R.string.tv_cart_item) + db_cart.getCartCount() + "\n" +
@@ -421,7 +421,7 @@ public class Delivery_payment_detail_fragment extends Fragment {
 
                         tv_dis.setText(getResources().getString(R.string.vip_dis) + " " +temp);
 
-                        item_vip.setText("-"+String.valueOf(amount*f1));
+                        item_vip.setText("-"+String.valueOf(amount*f1)+" "+getResources().getString(R.string.currency));
                         item_vip.setTextColor(getResources().getColor(R.color.red_btn_bg_color));
 
                         if (checkfo == 1){
@@ -430,13 +430,13 @@ public class Delivery_payment_detail_fragment extends Fragment {
                                     getResources().getString(R.string.total_amount) +
                                     String.valueOf(famount) + " + " + deli_charges + " - "+discount+ " = " + total+ getResources().getString(R.string.currency));
 
-                            item_total.setText(String.valueOf(total));
+                            item_total.setText(String.valueOf(total)+" "+getResources().getString(R.string.currency));
 
                         }
                         else {
                             tv_totalamount.setText(getResources().getString(R.string.total_amount) +
                                     String.valueOf(famount) + " + " + deli_charges + " = " + total + getResources().getString(R.string.currency));
-                            item_total.setText(String.valueOf(total));
+                            item_total.setText(String.valueOf(total)+" "+getResources().getString(R.string.currency));
 
                         }
                     }
@@ -452,14 +452,14 @@ public class Delivery_payment_detail_fragment extends Fragment {
                                     getResources().getString(R.string.total_amount) +
                                     db_cart.getTotalAmount() + " + " + deli_charges + " - "+discount+ " = " + total + getResources().getString(R.string.currency));
 
-                            item_total.setText(String.valueOf(total));
+                            item_total.setText(String.valueOf(total)+" "+getResources().getString(R.string.currency));
                         }
                         else {
 
                             tv_totalamount.setText(getResources().getString(R.string.total_amount) +
                                     db_cart.getTotalAmount() + " + " + deli_charges + " = " + total + getResources().getString(R.string.currency));
 
-                            item_total.setText(String.valueOf(total));
+                            item_total.setText(String.valueOf(total)+" "+getResources().getString(R.string.currency));
                         }
                     }
 
@@ -467,7 +467,7 @@ public class Delivery_payment_detail_fragment extends Fragment {
 
                 } catch (JSONException e) {
                     total = Double.parseDouble(db_cart.getTotalAmount()) + deli_charges;
-                    item_total.setText(String.valueOf(total));
+                    item_total.setText(String.valueOf(total)+" "+getResources().getString(R.string.currency));
                     tv_dis.setVisibility(View.GONE);
                     tv_totalamount.setText(getResources().getString(R.string.total_amount) +
                             db_cart.getTotalAmount() + " + " + deli_charges + " = " + total+ getResources().getString(R.string.currency));

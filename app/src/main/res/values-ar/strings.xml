@@ -103,6 +103,8 @@
     <string name="guest">زائر</string>
 
 
+    <string name="canceled">طلب ملغى</string>
+
     <string name="app_name">J6</string>
     <string name="nav_terms">الشروط والخصوصية</string>
     <string name="nav_user">"المستعمل "</string>
@@ -357,13 +359,11 @@
     <string name="hello_blank_fragment">جزء Hello على الأبيض</string>
     <string name="followed">يتبع</string>
 
-
-
     <string name="Coupons">كوبونات</string>
     <string name="VIP">الأعضاء الخاصون</string>
     <string name="FreeShipping">الشحن مجانا \n  ريال 500</string>
 
-    <string name="agree"> وافق على<u>الشروط والأحكام</u> الخاصة بنا </string>
+    <string name="agree"> أوافق    على    <u>الشروط والأحكام</u> الخاصة بنا </string>
 
     <string name="ToPay">للدفع</string>
     <string name="ToReview">للمراجعة</string>

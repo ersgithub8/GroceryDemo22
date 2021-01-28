@@ -60,7 +60,7 @@ public class Bill_adapter extends RecyclerView.Adapter<Bill_adapter.ProductHolde
         holder.tv_contetiy.setText(map.get("qty"));
         Double items = Double.parseDouble(dbHandler.getInCartItemQty(map.get(DatabaseHandler.COLUMN_Primary)));
         Double price = Double.parseDouble(map.get("price"));
-        holder.tv_total.setText("" + price * items);
+        holder.tv_total.setText("" + price * items +" "+activity.getResources().getString(R.string.currency));
     }
 
     @Override
