@@ -113,18 +113,18 @@ public class My_Pending_Order_adapter extends RecyclerView.Adapter<My_Pending_Or
         if (mList.getStatus().equals("0")) {
             holder.tv_status.setText(context.getResources().getString(R.string.pending));
             holder.relativetextstatus.setText(context.getResources().getString(R.string.pending));
-            holder.relative_background.setBackgroundColor(context.getResources().getColor(R.color.colorPrimary));
+            holder.relative_background.setBackgroundColor(context.getResources().getColor(R.color.orange));
         } else if (mList.getStatus().equals("1")) {
             holder.view1.setBackgroundColor(context.getResources().getColor(R.color.green));
             holder.view2.setBackgroundColor(context.getResources().getColor(R.color.green));
-            holder.relative_background.setBackgroundColor(context.getResources().getColor(R.color.orange));
+            holder.relative_background.setBackgroundColor(context.getResources().getColor(R.color.confirm));
             holder.Confirm.setImageResource(R.color.green);
             holder.tv_status.setText(context.getResources().getString(R.string.confirm));
             holder.relativetextstatus.setText(context.getResources().getString(R.string.confirm));
             holder.tv_status.setTextColor(context.getResources().getColor(R.color.green));
         } else if (mList.getStatus().equals("2")) {
             holder.view1.setBackgroundColor(context.getResources().getColor(R.color.green));
-            holder.relative_background.setBackgroundColor(context.getResources().getColor(R.color.green));
+            holder.relative_background.setBackgroundColor(context.getResources().getColor(R.color.delivery_out));
             holder.view2.setBackgroundColor(context.getResources().getColor(R.color.green));
             holder.view3.setBackgroundColor(context.getResources().getColor(R.color.green));
             holder.view4.setBackgroundColor(context.getResources().getColor(R.color.green));

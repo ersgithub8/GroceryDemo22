@@ -309,8 +309,6 @@ public class SplashActivity extends AppCompatActivity {
 
         FusedLocationProviderClient fusedLocationClient;
         LocationManager locationManager;
-
-
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(SplashActivity.this);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
@@ -330,16 +328,18 @@ public class SplashActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(android.location.Location location) {
 
-                            // Got last known location. In some rare situations this can be null.
                             if (location != null) {
-                                // Logic to handle location object
 
                                 Double latitude=location.getLatitude();
                                 Double longitude=location.getLongitude();
 
+//                                Toast.makeText(SplashActivity.this, latitude+" "+longitude, Toast.LENGTH_SHORT).show();
+
+                                leditor.putString("lat", String.valueOf(location.getLatitude()));
+                                leditor.putString("long", String.valueOf(location.getLongitude()));
+                                leditor.apply();
 
                                 Geocoder geocoder = new Geocoder(SplashActivity.this, Locale.ENGLISH);
-
                                 try {
                                     List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
 
@@ -347,15 +347,15 @@ public class SplashActivity extends AppCompatActivity {
                                         city = addresses.get(0).getSubAdminArea();
                                         getStore_ids(city);
                                         leditor.putString("city",city);
+                                        leditor.apply();
                                     }
-
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
+//                                leditor.putString("lat",latitude.toString());
+//                                leditor.putString("long",longitude.toString());
+//                                leditor.apply();
 
-                                leditor.putString("lat",latitude.toString());
-                                leditor.putString("long",longitude.toString());
-                                leditor.apply();
 
 //                                double laty = Double.parseDouble(lati);
 //                                double longy = Double.parseDouble(longi);
@@ -375,8 +375,8 @@ public class SplashActivity extends AppCompatActivity {
                                 location.reset();
 
                             }else{
-//                                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-//                                startActivity(intent);
+                                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                                startActivity(intent);
                             }
 
                         }

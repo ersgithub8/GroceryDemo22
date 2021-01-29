@@ -15,12 +15,14 @@
     <color name="yelow">#ffee05</color>
     <color name="purple">#ed0bc0</color>
 
+    <color name="red">#FF0000</color>
+    <color name="confirm">#008000</color>
     <color name="splash_pink">#ff69b4</color>
     <color name="green">#7DBCBC</color>
     <color name="light_gray">#faf5f5</color>
     <color name="contact_name">#333333</color>
     <color name="contact_number">#8c8c8c</color>
-
+    <color name="delivery_out">#9932CC</color>
 
     <color name="color1">#7DBCBC</color>
     <color name="color2">#7DBCBC</color>

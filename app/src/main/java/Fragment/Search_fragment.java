@@ -123,8 +123,8 @@ public class Search_fragment extends Fragment {
 
         SharedPreferences sharedPreferences=getActivity().getSharedPreferences("location", Context.MODE_PRIVATE);
         String lat, longi;
-        lat=sharedPreferences.getString("lat",null);
-        longi=sharedPreferences.getString("long",null);
+        lat=sharedPreferences.getString("lat", String.valueOf(0));
+        longi=sharedPreferences.getString("long", String.valueOf(0));
         double laty = Double.parseDouble(lat);
         double longy = Double.parseDouble(longi);
         Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
