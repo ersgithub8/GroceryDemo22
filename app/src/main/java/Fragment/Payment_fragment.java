@@ -63,7 +63,6 @@ import static Config.BaseURL.PREFS_NAME;
 import static Config.BaseURL.getallrating;
 import static com.android.volley.VolleyLog.TAG;
 
-
 public class Payment_fragment extends Fragment {
     RelativeLayout confirm;
     private DatabaseHandler db_cart;
@@ -75,8 +74,8 @@ public class Payment_fragment extends Fragment {
     private String getdate = "";
     private String getuser_id = "";
     private Double rewards;
-    RadioButton rb_Store, rb_Cod, rb_card, rb_Netbanking, rb_paytm;
-    CheckBox checkBox_Wallet, checkBox_coupon;
+    RadioButton rb_Store, rb_card, rb_Netbanking, rb_paytm;
+    CheckBox checkBox_Wallet, checkBox_coupon,rb_Cod;
     EditText et_Coupon;
     String getvalue,deli_charges;
     String text;
@@ -130,12 +129,12 @@ public class Payment_fragment extends Fragment {
 
         confirm = (RelativeLayout) view.findViewById(R.id.confirm_order);
 
-        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "Font/Bold.ttf");
+        final Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "Font/Bold.ttf");
         checkBox_Wallet = (CheckBox) view.findViewById(R.id.use_wallet);
         checkBox_Wallet.setTypeface(font);
         rb_Store = (RadioButton) view.findViewById(R.id.use_store_pickup);
         rb_Store.setTypeface(font);
-        rb_Cod = (RadioButton) view.findViewById(R.id.use_COD);
+        rb_Cod = (CheckBox) view.findViewById(R.id.use_COD);
         rb_Cod.setTypeface(font);
         rb_card = (RadioButton) view.findViewById(R.id.use_card);
         rb_card.setTypeface(font);
@@ -188,7 +187,6 @@ public class Payment_fragment extends Fragment {
 
         text=note.getText().toString();
 
-
         deli_charges = getArguments().getString("delivery_charges");
 
         total_amount = getArguments().getString("total");
@@ -204,68 +202,94 @@ public class Payment_fragment extends Fragment {
         payble_ammount.setText(total_amount+getActivity().getString(R.string.currency));
         order_ammount.setText(order_total_amount+getActivity().getString(R.string.currency));
 
-
-        checkBox_Wallet.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        rb_Cod.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if (isChecked) {
-                    Use_Wallet_Ammont();
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b){
+                    getvalue = rb_Cod.getText().toString();
 
-                    Coupon_and_wallet.setVisibility(View.VISIBLE);
-                    Relative_used_wallet.setVisibility(View.VISIBLE);
-                    if (rb_card.isChecked() || rb_Netbanking.isChecked() || rb_paytm.isChecked()) {
-                        rb_card.setChecked(false);
-                        rb_Netbanking.setChecked(false);
-                        rb_paytm.setChecked(false);
-                    }
-                } else {
-                    if (payble_ammount != null) {
-                        rb_Cod.setText(getResources().getString(R.string.cash));
-                        rb_card.setClickable(true);
-                        rb_card.setTextColor(getResources().getColor(R.color.dark_black));
-                        rb_Netbanking.setClickable(true);
-                        rb_Netbanking.setTextColor(getResources().getColor(R.color.dark_black));
-                        rb_paytm.setClickable(true);
-                        rb_paytm.setTextColor(getResources().getColor(R.color.dark_black));
-                        checkBox_coupon.setClickable(true);
-                        checkBox_coupon.setTextColor(getResources().getColor(R.color.dark_black));
-                    }
+                    checkBox_Wallet.setChecked(false);
                     final String Ammount = SharedPref.getString(getActivity(), BaseURL.TOTAL_AMOUNT);
                     final String WAmmount = SharedPref.getString(getActivity(), BaseURL.KEY_WALLET_Ammount);
-                    my_wallet_ammount.setText(WAmmount+getActivity().getResources().getString(R.string.currency));
-                    payble_ammount.setText(Ammount+getResources().getString(R.string.currency));
+                    my_wallet_ammount.setText(WAmmount + getActivity().getResources().getString(R.string.currency));
+                    payble_ammount.setText(Ammount + getResources().getString(R.string.currency));
                     used_wallet_ammount.setText("");
                     Relative_used_wallet.setVisibility(View.GONE);
-                    if (checkBox_coupon.isChecked()) {
-                        final String ammount = SharedPref.getString(getActivity(), BaseURL.COUPON_TOTAL_AMOUNT);
-                        payble_ammount.setText(ammount+getResources().getString(R.string.currency));
-                    }
-                }
-            }
-        });
-        checkBox_coupon.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
 
-        {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    Promo_code_layout.setVisibility(View.VISIBLE);
-                    Coupon_and_wallet.setVisibility(View.VISIBLE);
-                    Relative_used_coupon.setVisibility(View.VISIBLE);
-                    if (rb_Store.isChecked() || rb_Cod.isChecked() || rb_card.isChecked() || rb_Netbanking.isChecked() || rb_paytm.isChecked()) {
-//                        rb_Store.setChecked(false);
-//                        rb_Cod.setChecked(false);
-//                        rb_card.setChecked(false);
-//                        rb_Netbanking.setChecked(false);
-//                        rb_paytm.setChecked(false);
-                    }
-                } else {
-                    et_Coupon.setText("");
-                    Relative_used_coupon.setVisibility(View.GONE);
-                    Promo_code_layout.setVisibility(View.GONE);
+                }
+                else {
+                    getvalue = "";
+
                 }
             }
         });
+
+                checkBox_Wallet.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                        if (isChecked) {
+                            Use_Wallet_Ammont();
+
+                            Coupon_and_wallet.setVisibility(View.VISIBLE);
+                            Relative_used_wallet.setVisibility(View.VISIBLE);
+
+                            if (rb_card.isChecked() || rb_Netbanking.isChecked() || rb_paytm.isChecked() || rb_Cod.isChecked()) {
+                                rb_card.setChecked(false);
+                                rb_Netbanking.setChecked(false);
+                                rb_paytm.setChecked(false);
+                                rb_Cod.setChecked(false);
+                            }
+                        } else {
+
+                            if (payble_ammount != null) {
+                                rb_card.setClickable(true);
+                                rb_Cod.setClickable(true);
+                                rb_Cod.setTextColor(getResources().getColor(R.color.dark_black));
+                                rb_card.setTextColor(getResources().getColor(R.color.dark_black));
+                                rb_Netbanking.setClickable(true);
+                                rb_Netbanking.setTextColor(getResources().getColor(R.color.dark_black));
+                                rb_paytm.setClickable(true);
+                                rb_paytm.setTextColor(getResources().getColor(R.color.dark_black));
+                                checkBox_coupon.setClickable(true);
+                                checkBox_coupon.setTextColor(getResources().getColor(R.color.dark_black));
+                            }
+                            final String Ammount = SharedPref.getString(getActivity(), BaseURL.TOTAL_AMOUNT);
+                            final String WAmmount = SharedPref.getString(getActivity(), BaseURL.KEY_WALLET_Ammount);
+                            my_wallet_ammount.setText(WAmmount + getActivity().getResources().getString(R.string.currency));
+                            payble_ammount.setText(Ammount + getResources().getString(R.string.currency));
+                            used_wallet_ammount.setText("");
+                            Relative_used_wallet.setVisibility(View.GONE);
+                            if (checkBox_coupon.isChecked()) {
+                                final String ammount = SharedPref.getString(getActivity(), BaseURL.COUPON_TOTAL_AMOUNT);
+                                payble_ammount.setText(ammount + getResources().getString(R.string.currency));
+                            }
+                        }
+                    }
+                });
+
+//        checkBox_coupon.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+//
+//        {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if (isChecked) {
+//                    Promo_code_layout.setVisibility(View.VISIBLE);
+//                    Coupon_and_wallet.setVisibility(View.VISIBLE);
+//                    Relative_used_coupon.setVisibility(View.VISIBLE);
+//                    if (rb_Store.isChecked() || rb_Cod.isChecked() || rb_card.isChecked() || rb_Netbanking.isChecked() || rb_paytm.isChecked()) {
+////                        rb_Store.setChecked(false);
+////                        rb_Cod.setChecked(false);
+////                        rb_card.setChecked(false);
+////                        rb_Netbanking.setChecked(false);
+////                        rb_paytm.setChecked(false);
+//                    }
+//                } else {
+//                    et_Coupon.setText("");
+//                    Relative_used_coupon.setVisibility(View.GONE);
+//                    Promo_code_layout.setVisibility(View.GONE);
+//                }
+//            }
+//        });
 
         confirm.setOnClickListener(new View.OnClickListener()
 
@@ -457,8 +481,8 @@ public class Payment_fragment extends Fragment {
                                      Used_Wallet_amount = json_data.getString("used_wallet");
                                     total_amount = json_data.getString("total");
                                     if (total_amount.equals("0")) {
-                                        rb_Cod.setText("Home Delivery");
-                                        getvalue = rb_Cod.getText().toString();
+//                                        rb_Cod.setText("Home Delivery");
+                                        getvalue = "Home Delivery";
                                         rb_card.setClickable(false);
                                         rb_card.setTextColor(getResources().getColor(R.color.gray));
                                         rb_Netbanking.setClickable(false);
@@ -469,7 +493,8 @@ public class Payment_fragment extends Fragment {
                                         checkBox_coupon.setTextColor(getResources().getColor(R.color.gray));
                                     } else {
                                         if (total_amount != null) {
-                                            rb_Cod.setText("Cash On Delivery");
+                                            getvalue = "Cash On Delivery";
+                                            //rb_Cod.setText("Cash On Delivery");
                                             rb_card.setClickable(true);
                                             rb_card.setTextColor(getResources().getColor(R.color.dark_black));
                                             rb_Netbanking.setClickable(true);
@@ -585,12 +610,15 @@ public class Payment_fragment extends Fragment {
 
     private void checked() {
         if (checkBox_Wallet.isChecked()) {
-            if (rb_Store.isChecked() || rb_Cod.isChecked()) {
-                attemptOrder();
-            } else {
-                dialog.dismiss();
-                Toast.makeText(getActivity(), getResources().getString(R.string.select_one), Toast.LENGTH_SHORT).show();
-            }
+            attemptOrder();
+
+//            if (rb_Store.isChecked() || rb_Cod.isChecked()) {
+//                attemptOrder();
+//            } else {
+//                dialog.dismiss();
+//                Toast.makeText(getActivity(), getResources().getString(R.string.select_one), Toast.LENGTH_SHORT).show();
+//            }
+
         }
 //        if (rb_Store.isChecked()) {
 //            attemptOrder();

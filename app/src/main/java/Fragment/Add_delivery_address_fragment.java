@@ -226,7 +226,6 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
 //        tv_pin.setTextColor(getResources().getColor(R.color.dark_gray));
 //        tv_house.setTextColor(getResources().getColor(R.color.dark_gray));
 //        tv_socity.setTextColor(getResources().getColor(R.color.dark_gray));
-        p.show();
 
         String getphone = et_phone.getText().toString();
         String getname = et_name.getText().toString();
@@ -238,21 +237,20 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
 
         boolean cancel = false;
         View focusView = null;
-
-        if (TextUtils.isEmpty(getphone)) {
-            tv_phone.setTextColor(getResources().getColor(R.color.colorPrimary));
+        if (TextUtils.isEmpty(getname)) {
+            tv_name.setTextColor(getResources().getColor(R.color.red));
+            focusView = et_name;
+            cancel = true;
+        }
+        else if (TextUtils.isEmpty(getphone)) {
+            tv_phone.setTextColor(getResources().getColor(R.color.red));
             focusView = et_phone;
             cancel = true;
         } else if (!isPhoneValid(getphone)) {
-            tv_phone.setText(getResources().getString(R.string.phone_too_short));
-            tv_phone.setTextColor(getResources().getColor(R.color.colorPrimary));
+//            tv_phone.setText(getResources().getString(R.string.phone_too_short));
+            tv_phone.setTextColor(getResources().getColor(R.color.red));
             focusView = et_phone;
-            cancel = true;
-        }
-
-        if (TextUtils.isEmpty(getname)) {
-            tv_name.setTextColor(getResources().getColor(R.color.colorPrimary));
-            focusView = et_name;
+            Toast.makeText(getActivity(), ""+getResources().getString(R.string.phone_too_short), Toast.LENGTH_SHORT).show();
             cancel = true;
         }
 //        if (TextUtils.isEmpty(getpin)) {
@@ -266,34 +264,25 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
 //            focusView = et_house;
 //            cancel = true;
 //        }
-        if (TextUtils.isEmpty(getAdress)) {
-            tv_address.setTextColor(getResources().getColor(R.color.colorPrimary));
+        else if (TextUtils.isEmpty(getAdress)) {
+            tv_address.setTextColor(getResources().getColor(R.color.red));
             focusView = et_address;
             cancel = true;
         }
 
-        if (TextUtils.isEmpty(getsocity) && getsocity == null) {
-            tv_socity.setTextColor(getResources().getColor(R.color.colorPrimary));
+        else if (TextUtils.isEmpty(getsocity) && getsocity == null ) {
+            tv_socity.setTextColor(getResources().getColor(R.color.red));
             focusView = btn_socity;
             cancel = true;
-        }
-
-        if (cancel) {
-            if (focusView != null)
-                focusView.requestFocus();
         } else {
-
+            p.show();
             if (ConnectivityReceiver.isConnected()) {
-
                 String user_id = sessionManagement.getUserDetails().get(BaseURL.KEY_ID);
-                // check internet connection
-                if (ConnectivityReceiver.isConnected()) {
                     if (isEdit) {
                         makeEditAddressRequest(getlocation_id, getpin, getsocity, getAdress, getname, getphone);
                     } else {
                         makeAddAddressRequest(user_id, getpin, getsocity, getAdress, getname, getphone);
                     }
-                }
             } else {
                 p.dismiss();
             }
@@ -345,6 +334,7 @@ public class Add_delivery_address_fragment extends Fragment implements View.OnCl
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
+                p.dismiss();
                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
                     Activity activity=getActivity();
                     if(activity !=null)

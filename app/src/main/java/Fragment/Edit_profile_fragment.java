@@ -314,7 +314,6 @@ public class Edit_profile_fragment extends Fragment implements View.OnClickListe
                     //getting image from gallery
                     bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
 
-
                     File file = new File(imgDecodableString);
                     filePath = file.getAbsolutePath();
                     FileOutputStream fOut;
@@ -329,13 +328,8 @@ public class Edit_profile_fragment extends Fragment implements View.OnClickListe
                         e.printStackTrace();
                     }
 
-                    if (requestCode == GALLERY_REQUEST_CODE1) {
-
-                        // Set the Image in ImageView after decoding the String
-                        iv_profile.setImageBitmap(bitmap);
-                    }
-                } catch (NullPointerException e) {
-                    e.printStackTrace();
+                    // Set the Image in ImageView after decoding the String
+                    iv_profile.setImageBitmap(bitmap);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

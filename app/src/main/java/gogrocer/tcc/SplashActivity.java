@@ -356,7 +356,6 @@ public class SplashActivity extends AppCompatActivity {
 //                                leditor.putString("long",longitude.toString());
 //                                leditor.apply();
 
-
 //                                double laty = Double.parseDouble(lati);
 //                                double longy = Double.parseDouble(longi);
 //                                Geocoder geocoder = new Geocoder(SplashActivity.this, Locale.getDefault());

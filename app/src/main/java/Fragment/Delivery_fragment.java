@@ -320,18 +320,17 @@ public class Delivery_fragment extends Fragment implements View.OnClickListener 
 
             Bundle args = new Bundle();
             Fragment fm = new Delivery_payment_detail_fragment();
-            if (getdate.isEmpty()) {
+            //if (getdate.isEmpty()) {
                 DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
                 Date dateobj = new Date();
                 String newDateStr = df.format(dateobj);
                 args.putString("getdate", newDateStr);
-            }
-            else {
-                args.putString("getdate", getdate);
-            }
+//            }
+//            else {
+//                args.putString("getdate", getdate);
+//            }
 
-            if (gettime.isEmpty()){
-
+            //if (gettime.isEmpty()){
                 Calendar current_time = Calendar.getInstance ();
                 current_time.set(Calendar.HOUR_OF_DAY, current_time.get(Calendar.HOUR_OF_DAY)+1);
                 Date dateobj2 = current_time.getTime();
@@ -339,10 +338,13 @@ public class Delivery_fragment extends Fragment implements View.OnClickListener 
                 DateFormat df2 = new SimpleDateFormat("HH:mm a");
                 B_time = df2.format(dateobj3) +" - "+df2.format(dateobj2);
                 args.putString("time", B_time);
-            }
-            else {
-                args.putString("time", gettime);
-            }
+
+    //Toast.makeText(getActivity(), newDateStr+" - "+B_time, Toast.LENGTH_SHORT).show();
+
+//            }
+//            else {
+//                args.putString("time", gettime);
+//            }
 
             args.putString("location_id", location_id);
             args.putString("address", address);

@@ -297,11 +297,21 @@
                                 android:text="@string/store"
                                 android:textSize="16sp" />
 
-                            <RadioButton
+<!--                            <RadioButton-->
+<!--                                android:id="@+id/use_COD"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_margin="@dimen/space_4"-->
+<!--                                android:text="@string/cash"-->
+<!--                                android:textSize="16sp" />-->
+
+                            <CheckBox
                                 android:id="@+id/use_COD"
-                                android:layout_width="match_parent"
+                                style="@android:style/Widget.CompoundButton.RadioButton"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="@dimen/space_4"
+                                android:gravity="center"
                                 android:text="@string/cash"
                                 android:textSize="16sp" />
 
@@ -311,7 +321,7 @@
 
                                 <RadioButton
                                     android:visibility="gone"
-                                    android:id="@+id/use_COD_new"
+                                    android:id="@+id/use_CO"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="@dimen/space_4"
