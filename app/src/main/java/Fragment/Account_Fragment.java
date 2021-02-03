@@ -3,6 +3,7 @@ package Fragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -23,6 +24,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -39,6 +42,10 @@ import com.facebook.login.LoginManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import Adapter.Cart_adapter;
 import Config.BaseURL;
 import Config.SharedPref;
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -427,29 +434,53 @@ public class Account_Fragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                final SweetAlertDialog dialog = new SweetAlertDialog(getActivity(),SweetAlertDialog.WARNING_TYPE);
-                dialog.setCancelText(getResources().getString(R.string.no));
-                dialog.setConfirmText(getResources().getString(R.string.yes));
-                dialog.setTitle(getResources().getString(R.string.surety));
-                dialog.show();
-                dialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+                alertDialog.setMessage(getResources().getString(R.string.surety));
+                alertDialog.setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                alertDialog.setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
                         sessionManagement.logoutSession();
                         disconnectFromFacebook();
                         getActivity().finish();
                         new DatabaseHandler(getActivity()).clearCart();
-                        Intent i=new Intent(getActivity(),LoginActivity.class);
-                        startActivity(i);
-                        dialog.dismiss();
+                        Intent intent=new Intent(getActivity(),LoginActivity.class);
+                        startActivity(intent);
+                        dialogInterface.dismiss();
                     }
                 });
-                dialog.setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                    @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                        dialog.dismiss();
-                    }
-                });
+
+                alertDialog.show();
+
+//                final SweetAlertDialog dialog = new SweetAlertDialog(getActivity(),SweetAlertDialog.WARNING_TYPE);
+//                dialog.setCancelText(getResources().getString(R.string.no));
+//                dialog.setConfirmText(getResources().getString(R.string.yes));
+//                dialog.setTitle(getResources().getString(R.string.surety));
+//                dialog.show();
+//                dialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+//                    @Override
+//                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+//                        sessionManagement.logoutSession();
+//                        disconnectFromFacebook();
+//                        getActivity().finish();
+//                        new DatabaseHandler(getActivity()).clearCart();
+//                        Intent i=new Intent(getActivity(),LoginActivity.class);
+//                        startActivity(i);
+//                        dialog.dismiss();
+//                    }
+//                });
+//                dialog.setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+//                    @Override
+//                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+//                        dialog.dismiss();
+//                    }
+//                });
+
             }
         });
 

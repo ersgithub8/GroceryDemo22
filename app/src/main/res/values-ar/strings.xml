@@ -54,7 +54,7 @@
     <string name="ratiii">التقييم والمراجعات</string>
 
     <string name="wish">قائمة الرغبات</string>
-    <string name="vip_dis">الخصم VIP</string>
+    <string name="vip_dis">خصم VIP</string>
     <string name="maroof">معروف</string>
     <string name="wallet_ammount">مبلغ محفظتي : </string>
     <string name="j6_point">نقاط J6 : </string>
@@ -171,7 +171,7 @@
     <string name="btn_reg_update">تحديث الملف الشخصي</string>
     <string name="et_reg_search"> البحث في المناطق</string>
     <string name="et_sea">اكتب للبحث</string>
-    <string name="rate">قيم التطبيق</string>
+    <string name="rate">قيّم التطبيق</string>
     <string name="feedback" translatable="false">قيّم الخدمات</string>
     <string name="tv_reg_note">ملاحظة: الخدمة متاحة فقط لـ RAJKOT</string>
     <string name="tv_reg_address">العنوان (مطلوب)</string>
@@ -304,6 +304,8 @@
     <string name="confirm">تم التاكيد</string>
     <string name="confirm_order">تأكيد</string>
     <string name="delivered"> تم التسليم</string>
+
+    <string name="outfd" translatable="false">جاهز للتسليم</string>
     <string name="outfordeliverd">جاهز للتسليم</string>
     <string name="cancle">لا</string>
     <string name="date">تاريخ:\u0020</string>

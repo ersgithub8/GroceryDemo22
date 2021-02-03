@@ -238,6 +238,8 @@
     <string name="pending">Pendiente</string>
     <string name="confirm">Confirmar</string>
     <string name="delivered">Entregado</string>
+
+    <string name="outfd" translatable="false">جاهز للتسليم</string>
     <string name="outfordeliverd">Salida para entrega Listo para recoger</string>
     <string name="cancle">Cancle</string>
     <string name="date">Fecha:\u0020</string>

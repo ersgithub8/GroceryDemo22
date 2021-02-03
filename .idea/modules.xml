@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GroceryDemo22.iml" filepath="$PROJECT_DIR$/.idea/modules/GroceryDemo22.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/FORTSDKv1.5/GroceryDemo22.FORTSDKv1.5.iml" filepath="$PROJECT_DIR$/.idea/modules/FORTSDKv1.5/GroceryDemo22.FORTSDKv1.5.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/GroceryDemo22.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/GroceryDemo22.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Studio Projects.GroceryDemo22.iml" filepath="$PROJECT_DIR$/.idea/modules/Studio Projects.GroceryDemo22.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/FORTSDKv1.5/Studio Projects.GroceryDemo22.FORTSDKv1.5.iml" filepath="$PROJECT_DIR$/.idea/modules/FORTSDKv1.5/Studio Projects.GroceryDemo22.FORTSDKv1.5.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Studio Projects.GroceryDemo22.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Studio Projects.GroceryDemo22.app.iml" />
     </modules>
   </component>
 </project>

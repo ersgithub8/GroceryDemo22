@@ -310,6 +310,8 @@
     <string name="pending" translatable="false">Pending</string>
     <string name="confirm" translatable="false">Confirm</string>
     <string name="delivered" translatable="false">Delivered</string>
+    <string name="outfd" translatable="false">Out for Delivered</string>
+
     <string name="outfordeliverd" translatable="false">Out for Delivered\nReady to pickup</string>
     <string name="cancle" translatable="false">Cancel</string>
     <string name="date">Date:\u0020</string>

@@ -226,7 +226,7 @@
                     <Fonts.LatoBLack
                         android:id="@+id/status"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="@string/canceled"
                         android:textColor="#fff"
@@ -318,7 +318,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/space_4"
+                android:layout_marginStart="@dimen/space_4"
                 android:layout_weight=".9"
                 android:gravity="top"
                 android:orientation="vertical">
@@ -384,7 +384,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/space_6"
+                    android:layout_marginStart="@dimen/space_6"
                     android:layout_marginTop="@dimen/space_4"
                     android:text="@string/confirm"
                     android:textColor="#000"
@@ -394,7 +394,7 @@
                 <Fonts.LatoBLack
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/space_4"
+                    android:layout_marginEnd="@dimen/space_4"
                     android:text=""
                     android:textColor="#000"
                     android:textSize="@dimen/text_size_XX_small" />
@@ -435,7 +435,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-
                     <Fonts.LatoBLack
                         android:id="@+id/confirm_date"
                         android:layout_width="match_parent"
@@ -455,13 +454,20 @@
                 android:orientation="vertical">
 
                 <Fonts.LatoBLack
+                    android:layout_marginTop="@dimen/space_4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/space_4"
-                    android:text="@string/outfordeliverd"
+                    android:text="@string/outfd"
                     android:textColor="#000"
                     android:textSize="@dimen/text_size_XX_small"
                     android:textStyle="bold" />
+                <Fonts.LatoBLack
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/space_4"
+                    android:text=""
+                    android:textColor="#000"
+                    android:textSize="@dimen/text_size_XX_small" />
 
 
                 <LinearLayout
@@ -516,7 +522,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/space_8"
+                android:layout_marginEnd="@dimen/space_8"
                 android:layout_weight="1.2"
                 android:gravity="top|center"
                 android:orientation="vertical">
@@ -533,7 +539,7 @@
                 <Fonts.LatoBLack
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/space_2"
+                    android:layout_marginStart="@dimen/space_2"
                     android:text=""
                     android:textColor="#000"
                     android:textSize="@dimen/text_size_XX_small" />
@@ -567,7 +573,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-
 
                     <Fonts.LatoBLack
                         android:id="@+id/cancel_date"
