@@ -6,6 +6,9 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import android.os.Handler;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -54,6 +57,7 @@ public class My_Pending_Order extends Fragment {
     private List<My_Pending_order_model> my_order_modelList = new ArrayList<>();
     TabHost tHost;
     int i;
+    private SwipeRefreshLayout swipeContainer;
     public My_Pending_Order(int i) {
         this.i=i;
     }
@@ -88,21 +92,44 @@ public class My_Pending_Order extends Fragment {
                 return false;
             }
         });
+        Session_management sessionManagement = new Session_management(getActivity());
+        final String user_id = sessionManagement.getUserDetails().get(BaseURL.KEY_ID);
+
+        swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
+        // Setup refresh listener which triggers new data loading
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                my_order_modelList.clear();
+                if (ConnectivityReceiver.isConnected()) {
+                    makeGetOrderRequest(user_id);
+                } else {
+                    Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
+//            (getActivity()).onNetworkConnectionChanged(false);
+                }
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override public void run() {
+                        // Stop animation (This will be after 3 seconds)
+                        swipeContainer.setRefreshing(false);
+                    }
+                }, 700); // Delay in millis
+            }
+        });
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
 
         rv_myorder = (RecyclerView) view.findViewById(R.id.rv_myorder);
         rv_myorder.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        Session_management sessionManagement = new Session_management(getActivity());
-        String user_id = sessionManagement.getUserDetails().get(BaseURL.KEY_ID);
 
         // check internet connection
-        if (ConnectivityReceiver.isConnected())
-
-        {
+        if (ConnectivityReceiver.isConnected()) {
             makeGetOrderRequest(user_id);
-        } else
-
-        {
+        } else {
+            Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
 //            (getActivity()).onNetworkConnectionChanged(false);
         }
 

@@ -123,6 +123,10 @@ dependencies {
 //    implementation 'com.google.android.gms:play-services-appindexing:9.8.0'
     implementation files('libs/httpmime-4.2.5-sources.jar')
 
+
+    //pull refreash
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
+
 }
 // ADD THIS AT THE BOTTOM
 apply plugin: 'com.google.gms.google-services'
