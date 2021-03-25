@@ -333,8 +333,6 @@ public class SplashActivity extends AppCompatActivity {
                                 Double latitude=location.getLatitude();
                                 Double longitude=location.getLongitude();
 
-//                                Toast.makeText(SplashActivity.this, latitude+" "+longitude, Toast.LENGTH_SHORT).show();
-
                                 leditor.putString("lat", String.valueOf(location.getLatitude()));
                                 leditor.putString("long", String.valueOf(location.getLongitude()));
                                 leditor.apply();
@@ -374,8 +372,8 @@ public class SplashActivity extends AppCompatActivity {
                                 location.reset();
 
                             }else{
-                                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                                startActivity(intent);
+//                                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+//                                startActivity(intent);
                             }
 
                         }

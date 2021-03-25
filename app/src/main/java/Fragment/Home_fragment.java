@@ -294,7 +294,6 @@ public class Home_fragment extends Fragment {
                         .addToBackStack(null).commit();
 
             }
-
             @Override
             public void onLongItemClick(View view, int position) {
 
