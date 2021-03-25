@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -85,6 +86,7 @@ public class Delivery_payment_detail_fragment extends Fragment {
     String usrid;
     RecyclerView recyclerView;
 
+    TableRow fd_tablerow;
     TextView item_quantity,item_price,item_deliverycharges,item_tax,item_vip,item_firstorder,item_total,item_vip_text;
 
     public Delivery_payment_detail_fragment() { }
@@ -93,6 +95,8 @@ public class Delivery_payment_detail_fragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_confirm_bill, container, false);
         ((MainActivity) getActivity()).setTitle(getResources().getString(R.string.payment));
+
+        fd_tablerow= view.findViewById(R.id.fd_tablerow);
 
         progress_dialoge=new SweetAlertDialog(getActivity(),SweetAlertDialog.PROGRESS_TYPE)
                 .setTitleText("Loading");
@@ -328,7 +332,6 @@ public class Delivery_payment_detail_fragment extends Fragment {
 //        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 //    }
 
-
     public void checkfirstorder(String userid, final String total){
         final SweetAlertDialog alertDialog=new SweetAlertDialog(getActivity(),SweetAlertDialog.PROGRESS_TYPE).setTitleText("Loading");
         alertDialog.setCancelable(false);
@@ -353,6 +356,8 @@ public class Delivery_payment_detail_fragment extends Fragment {
                             item_firstorder.setText("-"+String.valueOf(discount)+" "+getResources().getString(R.string.currency));
                             item_firstorder.setTextColor(getResources().getColor(R.color.red_btn_bg_color));
 
+                            fd_tablerow.setVisibility(View.VISIBLE);
+
 //                            tv_total.setText(getResources().getString(R.string.tv_cart_item) + db_cart.getCartCount() + "\n" +
 //                                    getResources().getString(R.string.amount) + db_cart.getTotalAmount() + "\n" +
 //                                    getResources().getString(R.string.delivery_charge) + deli_charges + "\n" +
@@ -361,6 +366,7 @@ public class Delivery_payment_detail_fragment extends Fragment {
 //                                    db_cart.getTotalAmount() + " + " + deli_charges +"-"+discount+ " = " + (Double.parseDouble(total)-discount)+" "+ getResources().getString(R.string.currency));
                                     checkfo=1;
                         }else{
+                            fd_tablerow.setVisibility(View.GONE);
                                     checkfo=2;
                         }
                     }

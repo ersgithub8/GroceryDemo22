@@ -467,9 +467,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 //                    makeRegisterRequest(first_names+last_names,"",email,Baseurl.fixpassword);
 
-
-
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

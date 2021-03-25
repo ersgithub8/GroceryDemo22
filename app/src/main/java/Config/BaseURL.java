@@ -5,11 +5,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class BaseURL {
 
-    public static String BASE_URL = "https://project2.erstechno.online/";
-    public static String Share_URL = "https://project2.erstechno.online";
+    public static String BASE_URL = "https://admin.j6stores.com/";
+    public static String Share_URL = "https://admin.j6stores.com";
 
     public  static final String fixpass="Abvf435@ee";
-    static final String APP_NAME = "GoGrocer";
+    static final String APP_NAME = "J6 Stores";
     public static final String PREFS_NAME = "GroceryLoginPrefs";
     public static final String PREFS_NAME2 = "GroceryLoginPrefs2";
     public static final String IS_LOGIN = "isLogin";
