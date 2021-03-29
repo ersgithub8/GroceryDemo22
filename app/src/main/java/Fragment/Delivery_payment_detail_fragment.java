@@ -348,10 +348,12 @@ public class Delivery_payment_detail_fragment extends Fragment {
             public void onResponse(JSONObject response) {
                 try {
 //                    alertDialog.dismiss();
+
                     if (response != null && response.length() > 0) {
-                        Boolean status = response.getBoolean("responce");
+                        boolean status = response.getBoolean("responce");
 
                         if (status) {
+
                             discount=(Double.parseDouble(total)*10)/100;
                             item_firstorder.setText("-"+String.valueOf(discount)+" "+getResources().getString(R.string.currency));
                             item_firstorder.setTextColor(getResources().getColor(R.color.red_btn_bg_color));
@@ -366,8 +368,10 @@ public class Delivery_payment_detail_fragment extends Fragment {
 //                                    db_cart.getTotalAmount() + " + " + deli_charges +"-"+discount+ " = " + (Double.parseDouble(total)-discount)+" "+ getResources().getString(R.string.currency));
                                     checkfo=1;
                         }else{
+
                             fd_tablerow.setVisibility(View.GONE);
-                                    checkfo=2;
+                            checkfo=2;
+
                         }
                     }
                 } catch (JSONException e) {
