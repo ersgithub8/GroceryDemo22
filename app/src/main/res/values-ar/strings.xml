@@ -289,7 +289,7 @@
     <string name="please_select_date_time">يرجى تحديد التاريخ والوقت</string>
     <string name="profile_updated">تحديث الملف الشخصي</string>
     <string name="uploading_profile_data">تحميل بيانات الملف الشخصي</string>
-    <string name="cancle_order_note">هل أنت واثق! تريد النظام cancle؟</string>
+    <string name="cancle_order_note">هل أنت واثق من الغاء الطلب؟</string>
     <string name="no">لا</string>
     <string name="yes">نعم</string>
     <string name="thank_you">شكراً لك</string>

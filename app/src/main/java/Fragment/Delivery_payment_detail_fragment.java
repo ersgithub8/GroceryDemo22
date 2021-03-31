@@ -36,6 +36,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -442,12 +444,16 @@ public class Delivery_payment_detail_fragment extends Fragment {
                                     getResources().getString(R.string.total_amount) +
                                     String.valueOf(famount) + " + " + deli_charges + " - "+discount+ " = " + total+ getResources().getString(R.string.currency));
 
+                            total = new BigDecimal(total).setScale(2, RoundingMode.HALF_UP).doubleValue();
                             item_total.setText(String.valueOf(total)+" "+getResources().getString(R.string.currency));
 
                         }
                         else {
                             tv_totalamount.setText(getResources().getString(R.string.total_amount) +
                                     String.valueOf(famount) + " + " + deli_charges + " = " + total + getResources().getString(R.string.currency));
+
+                            total = new BigDecimal(total).setScale(2, RoundingMode.HALF_UP).doubleValue();
+
                             item_total.setText(String.valueOf(total)+" "+getResources().getString(R.string.currency));
 
                         }
@@ -462,10 +468,11 @@ public class Delivery_payment_detail_fragment extends Fragment {
 
                             total = total - discount;
 
-                            Toast.makeText(getActivity(), ""+total, Toast.LENGTH_SHORT).show();
                             tv_totalamount.setText(getResources().getString(R.string.Discount)+ discount+"\n"+
                                     getResources().getString(R.string.total_amount) +
                                     db_cart.getTotalAmount() + " + " + deli_charges + " - "+discount+ " = " + total + getResources().getString(R.string.currency));
+
+                            total = new BigDecimal(total).setScale(2, RoundingMode.HALF_UP).doubleValue();
 
                             item_total.setText(String.valueOf(total)+" "+getResources().getString(R.string.currency));
                         }
@@ -473,6 +480,8 @@ public class Delivery_payment_detail_fragment extends Fragment {
 
                             tv_totalamount.setText(getResources().getString(R.string.total_amount) +
                                     db_cart.getTotalAmount() + " + " + deli_charges + " = " + total + getResources().getString(R.string.currency));
+
+                            total = new BigDecimal(total).setScale(2, RoundingMode.HALF_UP).doubleValue();
 
                             item_total.setText(String.valueOf(total)+" "+getResources().getString(R.string.currency));
                         }
