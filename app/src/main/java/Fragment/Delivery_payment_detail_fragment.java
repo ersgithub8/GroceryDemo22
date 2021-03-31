@@ -184,7 +184,6 @@ public class Delivery_payment_detail_fragment extends Fragment {
 
         checkfirstorder(usrid, String.valueOf(total));
 
-        getdiscount(user_id);
 
         btn_order.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -332,7 +331,7 @@ public class Delivery_payment_detail_fragment extends Fragment {
 //        AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
 //    }
 
-    public void checkfirstorder(String userid, final String total){
+    public void checkfirstorder(final String userid, final String total){
         final SweetAlertDialog alertDialog=new SweetAlertDialog(getActivity(),SweetAlertDialog.PROGRESS_TYPE).setTitleText("Loading");
         alertDialog.setCancelable(false);
         //alertDialog.show();
@@ -367,11 +366,14 @@ public class Delivery_payment_detail_fragment extends Fragment {
 //                                    getResources().getString(R.string.total_amount) +
 //                                    db_cart.getTotalAmount() + " + " + deli_charges +"-"+discount+ " = " + (Double.parseDouble(total)-discount)+" "+ getResources().getString(R.string.currency));
                                     checkfo=1;
+
+                            getdiscount(userid);
                         }else{
 
                             fd_tablerow.setVisibility(View.GONE);
                             checkfo=2;
 
+                            getdiscount(userid);
                         }
                     }
                 } catch (JSONException e) {
@@ -460,6 +462,7 @@ public class Delivery_payment_detail_fragment extends Fragment {
 
                             total = total - discount;
 
+                            Toast.makeText(getActivity(), ""+total, Toast.LENGTH_SHORT).show();
                             tv_totalamount.setText(getResources().getString(R.string.Discount)+ discount+"\n"+
                                     getResources().getString(R.string.total_amount) +
                                     db_cart.getTotalAmount() + " + " + deli_charges + " - "+discount+ " = " + total + getResources().getString(R.string.currency));
