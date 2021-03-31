@@ -204,7 +204,7 @@
     <string name="tv_del_title">Delivery Date/Time</string>
     <string name="tv_del_address">Delivery Address</string>
     <string name="et_del_address_hint">Enter Delivery address..</string>
-    <string name="tv_del_continue">Continue With Time</string>
+    <string name="tv_del_continue">Continue</string>
     <string name="tv_del_date">Select delivery date</string>
     <string name="tv_del_time">Select delivery time</string>
     <string name="tv_del_date_time">Delivery Data/Time</string>

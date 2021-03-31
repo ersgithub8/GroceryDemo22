@@ -435,7 +435,7 @@ public class Delivery_payment_detail_fragment extends Fragment {
                         item_vip.setTextColor(getResources().getColor(R.color.red_btn_bg_color));
 
                         if (checkfo == 1){
-                            total = Double.parseDouble(df.format(total - discount));
+                            total = total - discount;
                             tv_totalamount.setText(getResources().getString(R.string.Discount)+ discount+"\n"+
                                     getResources().getString(R.string.total_amount) +
                                     String.valueOf(famount) + " + " + deli_charges + " - "+discount+ " = " + total+ getResources().getString(R.string.currency));
@@ -457,7 +457,9 @@ public class Delivery_payment_detail_fragment extends Fragment {
                         tv_dis.setVisibility(View.GONE);
 
                         if (checkfo == 1){
-                            total = Double.parseDouble(df.format(total - discount));
+
+                            total = total - discount;
+
                             tv_totalamount.setText(getResources().getString(R.string.Discount)+ discount+"\n"+
                                     getResources().getString(R.string.total_amount) +
                                     db_cart.getTotalAmount() + " + " + deli_charges + " - "+discount+ " = " + total + getResources().getString(R.string.currency));
