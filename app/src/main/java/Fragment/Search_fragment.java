@@ -153,10 +153,10 @@ public class Search_fragment extends Fragment {
                 stores.setVisibility(View.GONE);
 
                 Texty.setVisibility(View.GONE);
-//                shimmer_product.setVisibility(View.GONE);
-//                shimmer_product.stopShimmerAnimation();
-//                shimmer_store.setVisibility(View.GONE);
-//                shimmer_store.stopShimmerAnimation();
+                shimmer_product.setVisibility(View.GONE);
+                shimmer_product.stopShimmerAnimation();
+                shimmer_store.setVisibility(View.GONE);
+                shimmer_store.stopShimmerAnimation();
 
                 String get_search_txt ="%"+ acTextView.getText().toString() +"%";
                 if (TextUtils.isEmpty(get_search_txt)) {
@@ -376,15 +376,19 @@ public class Search_fragment extends Fragment {
                             stores.setVisibility(View.VISIBLE);
                             store_adapter.notifyDataSetChanged();
 
-                            if(store_models.size()==0){
-//                                new SweetAlertDialog(getActivity(),SweetAlertDialog.ERROR_TYPE).setTitleText("No data Found")
-//                                        .setConfirmButtonBackgroundColor(Color.RED).show();
-                                shimmer_store.setVisibility(View.GONE);
-                                shimmer_store.stopShimmerAnimation();
-                                stores.setVisibility(View.GONE);
-                                Texty.setVisibility(View.VISIBLE);
-                            }
+                                if (store_models.isEmpty()) {
+                                    Toast.makeText(getActivity(), getResources().getString(R.string.no_rcord_found), Toast.LENGTH_SHORT).show();
+                                    shimmer_store.setVisibility(View.GONE);
+                                    shimmer_store.stopShimmerAnimation();
+                                    stores.setVisibility(View.GONE);
+                                    Texty.setVisibility(View.VISIBLE);
+                                }
 
+                        }else {
+                            shimmer_store.setVisibility(View.GONE);
+                            shimmer_store.stopShimmerAnimation();
+                            stores.setVisibility(View.GONE);
+                            Texty.setVisibility(View.VISIBLE);
                         }
 
                     }
@@ -400,7 +404,7 @@ public class Search_fragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Toast.makeText(getActivity(), getResources().getString(R.string.connection_time_out), Toast.LENGTH_SHORT).show();
             }
         });
 
