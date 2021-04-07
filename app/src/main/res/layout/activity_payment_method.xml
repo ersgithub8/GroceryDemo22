@@ -436,24 +436,24 @@
 
 
                             <CheckBox
+                                android:fontFamily="serif"
                                 android:id="@+id/use_coupon"
                                 style="@android:style/Widget.CompoundButton.RadioButton"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:visibility="gone"
                                 android:layout_marginLeft="@dimen/space_4"
                                 android:layout_marginRight="@dimen/space_4"
                                 android:layout_marginTop="@dimen/space_4"
                                 android:gravity="center"
                                 android:text="@string/promo"
-                                android:textSize="@dimen/text_size_small" />
+                                android:textSize="16sp" />
 
                             <LinearLayout
+                                android:visibility="gone"
                                 android:id="@+id/prommocode_layout"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/apply_coupon_code_layout_height"
                                 android:orientation="horizontal"
-                                android:visibility="gone"
                                 android:weightSum="2">
 
                                 <LinearLayout
@@ -464,7 +464,7 @@
                                     <EditText
                                         android:id="@+id/et_coupon_code"
                                         android:layout_width="match_parent"
-                                        android:layout_height="30dp"
+                                        android:layout_height="35dp"
                                         android:layout_marginBottom="@dimen/space_12"
                                         android:layout_marginLeft="12dp"
                                         android:layout_marginRight="@dimen/space_12"
@@ -486,12 +486,12 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:layout_weight="1"
-                                    android:gravity="center">
+                                    >
 
                                     <RelativeLayout
                                         android:id="@+id/apply_coupoun_code"
                                         android:layout_width="85dp"
-                                        android:layout_height="30dp"
+                                        android:layout_height="35dp"
                                         android:layout_gravity="center_vertical"
                                         android:layout_marginBottom="@dimen/space_12"
                                         android:layout_marginLeft="12dp"

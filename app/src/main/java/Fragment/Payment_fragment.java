@@ -38,6 +38,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -90,6 +92,8 @@ public class Payment_fragment extends Fragment {
     LinearLayout Promo_code_layout, Coupon_and_wallet;
     RelativeLayout Apply_Coupon_Code, Relative_used_wallet, Relative_used_coupon;
     SweetAlertDialog dialog;
+
+    Double coupan_total=0.0;
 
     public Payment_fragment() {
 
@@ -208,11 +212,12 @@ public class Payment_fragment extends Fragment {
                 if (b){
                     getvalue = rb_Cod.getText().toString();
 
+                    checkBox_coupon.setChecked(false);
                     checkBox_Wallet.setChecked(false);
                     final String Ammount = SharedPref.getString(getActivity(), BaseURL.TOTAL_AMOUNT);
                     final String WAmmount = SharedPref.getString(getActivity(), BaseURL.KEY_WALLET_Ammount);
                     my_wallet_ammount.setText(WAmmount + getActivity().getResources().getString(R.string.currency));
-                    payble_ammount.setText(Ammount + getResources().getString(R.string.currency));
+                    //payble_ammount.setText(Ammount + getResources().getString(R.string.currency));
                     used_wallet_ammount.setText("");
                     Relative_used_wallet.setVisibility(View.GONE);
 
@@ -232,6 +237,7 @@ public class Payment_fragment extends Fragment {
 
                             Coupon_and_wallet.setVisibility(View.VISIBLE);
                             Relative_used_wallet.setVisibility(View.VISIBLE);
+                            checkBox_coupon.setChecked(false);
 
                             if (rb_card.isChecked() || rb_Netbanking.isChecked() || rb_paytm.isChecked() || rb_Cod.isChecked()) {
                                 rb_card.setChecked(false);
@@ -267,29 +273,27 @@ public class Payment_fragment extends Fragment {
                     }
                 });
 
-//        checkBox_coupon.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
-//
-//        {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                if (isChecked) {
-//                    Promo_code_layout.setVisibility(View.VISIBLE);
-//                    Coupon_and_wallet.setVisibility(View.VISIBLE);
-//                    Relative_used_coupon.setVisibility(View.VISIBLE);
-//                    if (rb_Store.isChecked() || rb_Cod.isChecked() || rb_card.isChecked() || rb_Netbanking.isChecked() || rb_paytm.isChecked()) {
-////                        rb_Store.setChecked(false);
-////                        rb_Cod.setChecked(false);
-////                        rb_card.setChecked(false);
-////                        rb_Netbanking.setChecked(false);
-////                        rb_paytm.setChecked(false);
-//                    }
-//                } else {
-//                    et_Coupon.setText("");
-//                    Relative_used_coupon.setVisibility(View.GONE);
-//                    Promo_code_layout.setVisibility(View.GONE);
-//                }
-//            }
-//        });
+        checkBox_coupon.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    Promo_code_layout.setVisibility(View.VISIBLE);
+                    Coupon_and_wallet.setVisibility(View.VISIBLE);
+                    Relative_used_coupon.setVisibility(View.VISIBLE);
+                    if (rb_Store.isChecked() || rb_Cod.isChecked() || rb_card.isChecked() || rb_Netbanking.isChecked() || rb_paytm.isChecked()) {
+                        rb_Store.setChecked(false);
+                        rb_Cod.setChecked(false);
+                        rb_card.setChecked(false);
+                        rb_Netbanking.setChecked(false);
+                        rb_paytm.setChecked(false);
+                    }
+                } else {
+                    et_Coupon.setText("");
+                    Relative_used_coupon.setVisibility(View.GONE);
+                    Promo_code_layout.setVisibility(View.GONE);
+                }
+            }
+        });
 
         confirm.setOnClickListener(new View.OnClickListener()
 
@@ -528,14 +532,14 @@ public class Payment_fragment extends Fragment {
                     if (checkBox_Wallet.isChecked()){
                         params.put("wallet_amount", Wallet_Ammount);
                     }else {
-                        params.put("total_amount", Ammount);
+                        params.put("total_amount", order_total_amount);
 
                     }
 
                     if (checkBox_coupon.isChecked()) {
                         params.put("total_amount", Coupon_Ammount);
                     } else {
-                        params.put("total_amount", Ammount);
+                        params.put("total_amount", order_total_amount);
 
                     }
                     return params;
@@ -549,6 +553,8 @@ public class Payment_fragment extends Fragment {
     }
 
     private void Coupon_code() {
+        dialog.show();
+
         final String Ammount = SharedPref.getString(getActivity(), BaseURL.TOTAL_AMOUNT);
         final String Wallet_Ammount = SharedPref.getString(getActivity(), BaseURL.WALLET_TOTAL_AMOUNT);
         final String Coupon_code = et_Coupon.getText().toString();
@@ -564,22 +570,26 @@ public class Payment_fragment extends Fragment {
                                 total_amount = obj.getString("Total_amount");
                                 String Used_coupon_amount = obj.getString("coupon_value");
                                 if (obj.optString("responce").equals("true")) {
+                                    Double total = new BigDecimal(Double.parseDouble(total_amount)).setScale(2, RoundingMode.HALF_UP).doubleValue();
+                                    total_amount = String.valueOf(total);
                                     payble_ammount.setText(total_amount+getResources().getString(R.string.currency));
                                     SharedPref.putString(getActivity(), BaseURL.COUPON_TOTAL_AMOUNT, total_amount);
                                     Toast.makeText(getActivity(), obj.getString("msg"), Toast.LENGTH_SHORT).show();
                                     used_coupon_ammount.setText("(" + getActivity().getResources().getString(R.string.currency) + Used_coupon_amount + ")");
                                     Promo_code_layout.setVisibility(View.GONE);
-
+                                    checkBox_coupon.setChecked(false);
                                 } else {
                                     Toast.makeText(getActivity(), obj.getString("msg"), Toast.LENGTH_SHORT).show();
                                     et_Coupon.setText("");
                                     used_coupon_ammount.setText("");
+                                    checkBox_coupon.setChecked(false);
                                     payble_ammount.setText(total_amount+getResources().getString(R.string.currency));
                                     Promo_code_layout.setVisibility(View.GONE);
                                 }
-
+                                dialog.dismiss();
                             } catch (JSONException e) {
                                 e.printStackTrace();
+                                dialog.dismiss();
                             }
                         }
                     }, new Response.ErrorListener() {
@@ -587,6 +597,7 @@ public class Payment_fragment extends Fragment {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     System.out.println("Error [" + error + "]");
+                    dialog.dismiss();
                 }
             }) {
 
@@ -597,13 +608,14 @@ public class Payment_fragment extends Fragment {
                     if (checkBox_Wallet.isChecked()) {
                         params.put("payable_amount", Wallet_Ammount);
                     } else {
-                        params.put("payable_amount", Ammount);
+                        params.put("payable_amount", order_total_amount);
                     }
                     return params;
                 }
             };
             rq.add(postReq);
         } else {
+            dialog.dismiss();
             Toast.makeText(getActivity(), "Somthing Went Wrong", Toast.LENGTH_SHORT).show();
         }
     }
