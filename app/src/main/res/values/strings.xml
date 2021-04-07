@@ -196,7 +196,7 @@
     <string name="tv_cart_checkout">Continue Checkout</string>
     <string name="tv_cart_total">Total\u0020</string>
     <string name="tv_cart_item">Items\u0020</string>
-    <string name="tv_cart_rs">\u0020Rs</string>
+    <string name="tv_cart_rs">\u0020SAR</string>
     <string name="coupon" translatable="false">Coupon</string>
     <string name="sure_del" translatable="false">Are you sure!
     you want to delete all cart product</string>
@@ -241,7 +241,7 @@
     <string name="tv_rech_wall" translatable="false">Recharge</string>
     <string name="tv_mywall" translatable="false">Recharge Wallet</string>
 
-    <string name="tv_pro_rs">\u0020Rs.\u0020</string>
+    <string name="tv_pro_rs">\u0020SAR.\u0020</string>
     <string name="tv_pro_total">Total: </string>
 
     <!-- fragment_confirm_order.xml -->
@@ -250,9 +250,9 @@
     <!-- fragment_my_order_detail.xml -->
     <string name="tv_order_cancle">Cancel Order</string>
     <string name="tv_order_summery">Summary</string>
-    <string name="tv_order_total">Total: Rs.</string>
+    <string name="tv_order_total">Total: SAR </string>
     <string name="tv_order_qty">Qty</string>
-    <string name="tv_order_rs">Rs.</string>
+    <string name="tv_order_rs">SAR </string>
     <!-- fragment_order_thanks.xml -->
     <string name="tv_thanks_title" translatable="false">Thank you for your order.</string>
     <string name="tv_thanks_home" translatable="false">Continue home</string>

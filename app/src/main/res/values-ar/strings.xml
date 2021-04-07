@@ -228,7 +228,7 @@
     <string name="tv_pro_add">أضف</string>
     <string name="tv_pro_update">تحديث</string>
     <string name="tv_pro_price">سعر ل\u0020</string>
-    <string name="tv_pro_rs">\u0020Rs.\u0020</string>
+    <string name="tv_pro_rs">\u0020ريال.\u0020</string>
     <string name="tv_pro_total">مجموع: </string>
 
     <!-- fragment_confirm_order.xml -->
@@ -237,9 +237,9 @@
     <!-- fragment_my_order_detail.xml -->
     <string name="tv_order_cancle">إلغاء الطلب</string>
     <string name="tv_order_summery">التقرير</string>
-    <string name="tv_order_total">المجموع : ر.س.</string>
+    <string name="tv_order_total">المجموع : ريال </string>
     <string name="tv_order_qty">الكمية</string>
-    <string name="tv_order_rs">ر.س.</string>
+    <string name="tv_order_rs">ريال</string>
 
     <!-- fragment_order_thanks.xml -->
     <string name="tv_thanks_title">شكراً على طلبك</string>
