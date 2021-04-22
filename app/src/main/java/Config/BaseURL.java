@@ -5,8 +5,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class BaseURL {
 
-    public static String BASE_URL = "https://admin.j6stores.com/";
+
     public static String Share_URL = "https://admin.j6stores.com";
+    public static String BASE_URL = Share_URL+"/";
+
+    public static String maroof = "https://maroof.sa/95194";
+
+
 
     public  static final String fixpass="Abvf435@ee";
     static final String APP_NAME = "J6 Stores";

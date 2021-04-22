@@ -38,7 +38,7 @@ public class Terms_and_Condition_fragment extends Fragment {
 
     private static String TAG = Terms_and_Condition_fragment.class.getSimpleName();
     private TextView tv_info;
-
+    String title;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -47,7 +47,7 @@ public class Terms_and_Condition_fragment extends Fragment {
         tv_info = (TextView) view.findViewById(R.id.tv_info);
 
         String geturl = getArguments().getString("url");
-        String title = getArguments().getString("title");
+        title = getArguments().getString("title");
         ((MainActivity) getActivity()).setTitle(title);
 
         if (ConnectivityReceiver.isConnected()) {
@@ -77,10 +77,14 @@ public class Terms_and_Condition_fragment extends Fragment {
                         }.getType();
                         support_info_modelList = gson.fromJson(response.getString("data"), listType);
 
-                        String desc = support_info_modelList.get(0).getPg_descri();
-                        String title = support_info_modelList.get(0).getPg_title();
+                        try {
+                            String desc = support_info_modelList.get(0).getPg_descri();
+                            //String title = support_info_modelList.get(0).getPg_title();
+                            tv_info.setText(Html.fromHtml(desc));
+                        }catch (Exception e){
+                            tv_info.setText(getResources().getString(R.string.no_record));
+                        }
 
-                        tv_info.setText(Html.fromHtml(desc));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

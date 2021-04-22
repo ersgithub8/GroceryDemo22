@@ -289,7 +289,7 @@ public class Account_Fragment extends Fragment {
         maroof.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Uri uri = Uri.parse("https://maroof.sa/95194");
+                Uri uri = Uri.parse(BaseURL.maroof);
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
             }
