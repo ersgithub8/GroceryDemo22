@@ -12,7 +12,9 @@ import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +47,9 @@ public class Terms_and_Condition_fragment extends Fragment {
     private static String TAG = Terms_and_Condition_fragment.class.getSimpleName();
     private TextView tv_info;
     String title;
+
+    ProgressBar progressBar;
+
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,39 +57,64 @@ public class Terms_and_Condition_fragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_terms_condition, container, false);
 
         tv_info = (TextView) view.findViewById(R.id.tv_info);
+        webView = view.findViewById(R.id.webView_id);
+        progressBar = (ProgressBar) view.findViewById(R.id.progress);
 
         String geturl = getArguments().getString("url");
         title = getArguments().getString("title");
         ((MainActivity) getActivity()).setTitle(title);
 
-        webView = view.findViewById(R.id.webView_id);
-        WebSettings webSettings = webView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
+        webView.setWebChromeClient( new MyWebChromeClient());
+        webView.setWebViewClient( new webClient());
+        webView.getSettings().setLoadWithOverviewMode(true);
+        webView.getSettings().setSupportZoom(true);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.loadUrl(geturl);
 
-        if (ConnectivityReceiver.isConnected()) {
-            webView.loadUrl(geturl);
-        } else {
-            ((MainActivity) getActivity()).onNetworkConnectionChanged(false);
-        }
-
-        webView.setWebViewClient(new WebViewClient(){
-            @Override
-            public boolean shouldOverrideUrlLoading(android.webkit.WebView view, WebResourceRequest request) {
-
-                return super.shouldOverrideUrlLoading(view, request);
-            }
-        });
-
-        webView.setWebChromeClient(new WebChromeClient()
-        {
-            @Override
-            public void onProgressChanged(android.webkit.WebView view, int newProgress) {
-                super.onProgressChanged(view, newProgress);
-
-            }
-        });
+//        if (ConnectivityReceiver.isConnected()) {
+//            webView.loadUrl(geturl);
+//        } else {
+//            ((MainActivity) getActivity()).onNetworkConnectionChanged(false);
+//        }
+//
+//        webView.setWebViewClient(new WebViewClient(){
+//            @Override
+//            public boolean shouldOverrideUrlLoading(android.webkit.WebView view, WebResourceRequest request) {
+//
+//                return super.shouldOverrideUrlLoading(view, request);
+//            }
+//        });
+//
+//        webView.setWebChromeClient(new WebChromeClient()
+//        {
+//            @Override
+//            public void onProgressChanged(android.webkit.WebView view, int newProgress) {
+//                super.onProgressChanged(view, newProgress);
+//
+//            }
+//        });
 
         return view;
+    }
+
+    public class MyWebChromeClient extends WebChromeClient {
+        public void onProgressChanged(WebView view, int newProgress) {
+            progressBar.setVisibility(View.VISIBLE);
+            progressBar.setProgress(newProgress);
+        }
+    }
+
+    public class webClient extends WebViewClient {
+        public boolean  shouldOverrideUrlLoading(WebView view, String url) {
+            view.loadUrl(url);
+            return true;
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            super.onPageFinished(view, url);
+            progressBar.setVisibility(View.GONE);
+        }
     }
 
 //    private void makeGetInfoRequest(String url) {
