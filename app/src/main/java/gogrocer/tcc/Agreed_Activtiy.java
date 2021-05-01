@@ -45,7 +45,6 @@ import java.util.List;
 import Adapter.SelectCityListViewAdapter;
 import Config.BaseURL;
 import Config.SharedPref;
-import Fragment.Terms_and_Condition_fragment;
 import Model.Support_info_model;
 import gogrocer.tcc.networkconnectivity.NetworkConnection;
 import util.ConnectivityReceiver;

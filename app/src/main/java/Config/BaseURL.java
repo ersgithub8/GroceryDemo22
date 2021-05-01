@@ -11,6 +11,12 @@ public class BaseURL {
 
     public static String maroof = "https://maroof.sa/95194";
 
+    // pages list
+    public static String termsandcondition = "https://www.j6stores.com/terms-and-conditions";
+    public static String privacypolicy = "https://www.j6stores.com/privacy-policy";
+    public static String contactus = "https://www.j6stores.com/contact-us";
+    public static String returnpolicy = "https://www.j6stores.com/return-and-exchange-policy";
+    public static String helpcentre = "https://www.j6stores.com/help-center";
 
 
     public  static final String fixpass="Abvf435@ee";
@@ -52,13 +58,6 @@ public class BaseURL {
     //City and Store Id
     public static final String CITY_ID = "CITY_ID";
     public static final String STORE_ID = "STORE_ID";
-
-    // pages list
-    public static String termsandcondition = BASE_URL + "index.php/Api/terms/terms-and-conditions";
-    public static String privacypolicy = BASE_URL + "index.php/Api/terms/privacy-policy";
-    public static String contactus = BASE_URL + "index.php/Api/terms/contact-us";
-    public static String returnpolicy = BASE_URL + "index.php/Api/terms/return-policy";
-    public static String helpcentre = BASE_URL + "index.php/Api/terms/help-center";
 
     //Images
     public static String IMG_SLIDER_URL = BASE_URL + "uploads/sliders/";

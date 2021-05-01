@@ -111,7 +111,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         String qry = "Select *  from " + CART_TABLE + " where " + COLUMN_Primary + " = " + id;
         Cursor cursor = db.rawQuery(qry, null);
         cursor.moveToFirst();
-        if (cursor.getCount() > 0) return true;
+        if (cursor.getCount() > 0)
+            return true;
 
         return false;
     }
