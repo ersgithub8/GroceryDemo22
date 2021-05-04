@@ -64,8 +64,8 @@
     <string name="fav_prod">المنتجات المفضلة</string>
 
     <string name="term_and_conditions">الشروط والأحكام</string>
-    <string name="privacy">الخصوصية</string>
-    <string name="return_p">سياسة الاسترجاع</string>
+    <string name="privacy"> سياسة الخصوصية</string>
+    <string name="return_p">سياسة الاسترجاع والاستبدال</string>
     <string name="help_centre">مركز المساعدة</string>
 
     <string name="VerificationCode">شيفرة التأكيد</string>
